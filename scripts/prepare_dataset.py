@@ -1,0 +1,25 @@
+"""Validate Clotho v2.1 and build the frozen evaluation and pilot manifests.
+
+Planned in E02-E03 (docs/experiment_plan.md).
+"""
+
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+from src.utils.cli import base_parser, init_run, not_implemented  # noqa: E402
+from src.utils.config import load_config  # noqa: E402
+
+
+def main() -> int:
+    parser = base_parser(__doc__.splitlines()[0])
+    args = parser.parse_args()
+    logger = init_run(Path(__file__).stem, args)
+    config = load_config("dataset", args.overrides)
+    logger.debug("Config: %s", config)
+    return not_implemented(logger, "E02-E03")
+
+
+if __name__ == "__main__":
+    sys.exit(main())

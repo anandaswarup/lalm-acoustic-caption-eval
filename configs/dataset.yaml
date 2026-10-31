@@ -1,0 +1,28 @@
+# Clotho v2.1 dataset configuration (E02, E03, E05).
+name: clotho
+version: "2.1"
+source: https://zenodo.org/records/4783391
+doi: 10.5281/zenodo.4783391
+license: Captions for non-commercial research use (dataset LICENSE); audio under per-file Freesound licenses
+
+# Local copy of the dataset. Set CLOTHO_ROOT in .env (see .env.example);
+# relative paths are resolved from the repository root.
+root: ${CLOTHO_ROOT:-data/clotho}
+
+# Main experiment: the complete evaluation split, no subsampling.
+evaluation:
+  split: evaluation
+  expected_recordings: 1045
+  captions_per_recording: 5
+  order_by: file_name
+  manifest: data/manifests/clotho_eval_manifest.jsonl
+  references: data/manifests/clotho_eval_references.json
+
+# Pilot (E05): technical validation only, disjoint from the evaluation split.
+pilot:
+  split: validation
+  num_recordings: 20
+  seed: 42
+  manifest: data/manifests/clotho_pilot_manifest.jsonl
+
+seed: 42

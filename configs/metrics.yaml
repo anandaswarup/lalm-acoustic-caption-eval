@@ -1,0 +1,34 @@
+# Caption-evaluation metrics (E11-E14). Implementations and versions are verified in E11.
+reference_based:
+  lexical:
+    - bleu_1
+    - bleu_2
+    - bleu_3
+    - bleu_4
+    - meteor
+    - cider_d
+  semantic:
+    - spice
+    - spider
+    - spider_fl
+    - bertscore
+    - fense
+
+# Reported separately from reference-based scores.
+audio_aware:
+  - clap_similarity
+  - mace  # retained only if four-reference evaluation is supported (checked in E11)
+
+leave_one_out:
+  num_positions: 5
+  references_per_subset: 4
+
+bootstrap:
+  num_resamples: 1000
+  confidence: 0.95
+  seed: 42
+
+# Light metrics run locally; model-based metrics on the full set may run on HF Jobs.
+compute:
+  default: local
+  heavy: hf_jobs

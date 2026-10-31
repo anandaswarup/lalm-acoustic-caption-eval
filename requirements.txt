@@ -1,0 +1,13 @@
+# Core dependencies (E01). Model, metric and plotting dependencies are added
+# and pinned in the experiments that introduce them (E04, E11, E12).
+# Install with: uv pip install -r requirements.txt
+numpy==2.5.4
+pandas==3.1.0
+python-dotenv==1.2.4
+pyyaml==6.0.3
+soundfile==0.14.0
+tqdm==4.70.1
+
+# Development
+pytest==9.2.0
+ruff==0.17.3
