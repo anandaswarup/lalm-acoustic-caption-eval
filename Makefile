@@ -70,10 +70,11 @@ stats: ## Bootstrap CIs and cross-metric comparisons (E16, E21)
 figures: ## Regenerate manuscript tables and figures
 	$(PYTHON) scripts/generate_figures.py
 
-all: prepare-data generate consolidate evaluate loo evaluate-four-ref lengths stats figures paper ## Full workflow
+all: prepare-data generate consolidate evaluate loo evaluate-four-ref lengths stats figures ## Full workflow
 
 # --- Manuscript (E24-E25) ----------------------------------------------------
-paper: ## Build the anonymized manuscript PDF
+paper: ## Build the manuscript PDF (once manuscript/main.tex exists)
+	@test -f manuscript/main.tex || { echo "manuscript/main.tex not found; add the template first."; exit 1; }
 	cd manuscript && latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
 paper-clean: ## Remove LaTeX build artifacts

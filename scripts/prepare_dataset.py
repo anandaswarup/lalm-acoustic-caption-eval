@@ -1,6 +1,6 @@
 """Validate Clotho v2.1 and build the frozen evaluation and pilot manifests.
 
-Planned in E02-E03 (docs/experiment_plan.md).
+Planned in E02-E03.
 """
 
 import sys

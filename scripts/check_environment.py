@@ -18,7 +18,7 @@ from src.utils.paths import CONFIG_DIR, resolve_path  # noqa: E402
 
 MIN_PYTHON = (3, 12)
 REQUIRED_MODULES = ["numpy", "pandas", "yaml", "dotenv", "soundfile", "tqdm"]
-OPTIONAL_TOOLS = {"java": "METEOR/SPICE (E11)", "latexmk": "manuscript build", "hf": "Hugging Face Jobs"}
+OPTIONAL_TOOLS = {"java": "METEOR/SPICE (E11)", "latexmk": "manuscript build (later)", "hf": "Hugging Face Jobs"}
 CREDENTIALS = ["OPENAI_API_KEY", "GEMINI_API_KEY", "HF_TOKEN"]
 
 

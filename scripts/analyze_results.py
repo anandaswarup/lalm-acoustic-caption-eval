@@ -1,6 +1,6 @@
 """Paired bootstrap confidence intervals and cross-metric comparisons.
 
-Planned in E16, E21 (docs/experiment_plan.md).
+Planned in E16, E21.
 """
 
 import sys

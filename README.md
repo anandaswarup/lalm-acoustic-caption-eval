@@ -2,7 +2,7 @@
 
 Evaluating Large Audio Language Model (LALM)-generated acoustic captions against human references on Clotho v2.1.
 
-> **Private repository.** It remains private through double-blind review and is released only after acceptance (see `docs/experiment_plan.md`, E26).
+> **Private repository.** It remains private through double-blind review and is released only after acceptance.
 
 ## Research questions
 
@@ -19,8 +19,6 @@ Evaluating Large Audio Language Model (LALM)-generated acoustic captions against
 | Models | GPT-Audio-1.5, Gemini 3.8 Flash, Qwen3-Omni-30B-A3B-Instruct, Audio Flamingo 3 |
 | Prompt | One fixed prompt for all models (`configs/generation.yaml`) |
 | Metrics | BLEU-1–4, METEOR, CIDEr, SPICE, SPIDEr, SPIDEr-FL, BERTScore, FENSE; CLAP and MACE reported separately |
-
-Full details: [`docs/proposal.md`](docs/proposal.md) and [`docs/experiment_plan.md`](docs/experiment_plan.md).
 
 ## Setup
 
@@ -40,7 +38,7 @@ make test
 Other requirements:
 
 - **Java** for METEOR, SPICE and the PTB tokenizer (E11).
-- **LaTeX** (`latexmk`, `pdflatex`) for `make paper`.
+- **LaTeX** (`latexmk`, `pdflatex`) for `make paper`, once the manuscript is added.
 - **Hugging Face CLI** (`hf`) and `HF_TOKEN` for HF Jobs.
 
 ### Dataset
@@ -73,7 +71,7 @@ Run `make help` for the full list. Main targets:
 | `make lengths` | E15: caption-length analysis |
 | `make stats` | E16, E21: bootstrap CIs and cross-metric comparison |
 | `make figures` | Tables and figures |
-| `make paper` | Build the anonymized manuscript |
+| `make paper` | Build the manuscript (once added) |
 | `make all` | Complete workflow |
 
 Every script accepts `--seed`, `--log-level`, `--no-log-file` and repeatable `--set key=value` config overrides. Run logs, including the git commit and environment details, go to `outputs/logs/`.
@@ -87,13 +85,8 @@ scripts/      standalone entry points, run from the repository root
 tests/        pytest suite
 data/         frozen manifests (no audio)
 outputs/      captions, scores, qualitative annotations, tables, figures
-manuscript/   ICASSP LaTeX source (spconf), double-blind by default
-docs/         proposal and experiment plan
+manuscript/   LaTeX manuscript (added when writing the paper)
 ```
-
-## Manuscript
-
-`manuscript/main.tex` uses the ICASSP `spconf.sty` / `IEEEbib.bst` template. `\blindtrue` (the default) produces the anonymized submission. Switch to `\blindfalse` only for the camera-ready version after acceptance.
 
 ## Status
 

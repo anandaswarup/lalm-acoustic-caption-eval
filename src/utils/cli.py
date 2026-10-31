@@ -38,5 +38,5 @@ def init_run(name: str, args: argparse.Namespace) -> logging.Logger:
 
 
 def not_implemented(logger: logging.Logger, experiment: str) -> int:
-    logger.error("Not implemented yet; scheduled for %s in docs/experiment_plan.md.", experiment)
+    logger.error("Not implemented yet; scheduled for %s.", experiment)
     return 2

@@ -1,6 +1,6 @@
 """Caption-length statistics for model and human captions.
 
-Planned in E15 (docs/experiment_plan.md).
+Planned in E15.
 """
 
 import sys

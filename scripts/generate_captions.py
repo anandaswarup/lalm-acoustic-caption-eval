@@ -1,6 +1,6 @@
 """Generate one caption per recording with a selected LALM.
 
-Planned in E04-E10 (docs/experiment_plan.md).
+Planned in E04-E10.
 """
 
 import sys

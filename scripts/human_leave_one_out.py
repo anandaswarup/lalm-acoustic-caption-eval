@@ -1,6 +1,6 @@
 """Human leave-one-out calibration: score each held-out caption against the other four.
 
-Planned in E13 (docs/experiment_plan.md).
+Planned in E13.
 """
 
 import sys

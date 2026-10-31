@@ -1,6 +1,6 @@
 """Score model captions against human references (five- and four-reference conditions).
 
-Planned in E11-E12, E14 (docs/experiment_plan.md).
+Planned in E11-E12, E14.
 """
 
 import sys

@@ -1,6 +1,6 @@
 """Regenerate manuscript tables and figures from frozen result artifacts.
 
-Planned in E12-E21 (docs/experiment_plan.md).
+Planned in E12-E21.
 """
 
 import sys
