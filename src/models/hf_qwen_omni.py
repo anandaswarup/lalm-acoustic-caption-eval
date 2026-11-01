@@ -20,7 +20,13 @@ class Qwen25OmniAdapter(HFAdapterBase):
         self.model.disable_talker()  # text only; saves ~2 GB
 
     def describe(self) -> dict[str, Any]:
-        return {**super().describe(), "attn_implementation": "sdpa", "talker": "disabled", "system_prompt": None}
+        return {
+            **super().describe(),
+            "attn_implementation": "sdpa",
+            "talker": "disabled",
+            "generate": "thinker.generate",
+            "system_prompt": None,
+        }
 
     def caption(self, request: CaptionRequest) -> CaptionResult:
         audio, rate, preprocessing = load_mono_float(request.audio_path, TARGET_SAMPLE_RATE)
@@ -38,9 +44,11 @@ class Qwen25OmniAdapter(HFAdapterBase):
         inputs = inputs.to(self.model.device).to(self.dtype)
         kwargs, deviations = self.generate_kwargs(request.decoding)
 
+        # The thinker is the text model. The combined model's generate() is not used: in transformers 5.22.1 it reads
+        # self.talker even for text-only output (so fails once the talker is disabled), and its own
+        # thinker_max_new_tokens=1024 default takes precedence over max_new_tokens.
         with self.torch.inference_mode():
-            output = self.model.generate(**inputs, return_audio=False, **kwargs)
-        sequences = output[0] if isinstance(output, tuple) else output
+            sequences = self.model.thinker.generate(**inputs, **kwargs)
         new_tokens = sequences[0, inputs["input_ids"].shape[1] :]
         caption = self.processor.batch_decode(
             new_tokens.unsqueeze(0), skip_special_tokens=True, clean_up_tokenization_spaces=False
@@ -53,7 +61,7 @@ class Qwen25OmniAdapter(HFAdapterBase):
             model_id=self.model_id,
             model_version=self.revision,
             raw_response={"text": caption, "prompt_text": text, "new_token_ids": new_tokens.tolist()},
-            request_params={**kwargs, "return_audio": False},
+            request_params=kwargs,
             deviations=deviations,
             audio_preprocessing=preprocessing,
             usage={

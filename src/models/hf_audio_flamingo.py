@@ -34,7 +34,7 @@ class AudioFlamingo3Adapter(HFAdapterBase):
         ]
         inputs = self.processor.apply_chat_template(
             conversation, tokenize=True, add_generation_prompt=True, return_dict=True, sampling_rate=rate
-        ).to(self.model.device)
+        ).to(self.model.device, dtype=self.dtype)  # casts the float32 audio features to bf16; ids stay integer
         kwargs, deviations = self.generate_kwargs(request.decoding)
         with self.torch.inference_mode():
             sequences = self.model.generate(**inputs, **kwargs)

@@ -394,7 +394,12 @@ class FakeTokens:
 
 
 class FakeInputs(dict):
-    def to(self, device):
+    def __init__(self, **tensors):
+        super().__init__(**tensors)
+        self.moves = []
+
+    def to(self, *args, **kwargs):
+        self.moves.append((args, kwargs))
         return self
 
 
@@ -405,7 +410,8 @@ class FakeAF3Processor:
 
     def apply_chat_template(self, conversation, **kwargs):
         self.calls.append((conversation, kwargs))
-        return FakeInputs(input_ids=FakeTokens([[5, 6, 7]]))
+        self.inputs = FakeInputs(input_ids=FakeTokens([[5, 6, 7]]))
+        return self.inputs
 
     def batch_decode(self, tokens, skip_special_tokens=True):
         return [" A fan whirs. "]
@@ -419,7 +425,7 @@ def test_audio_flamingo_passes_resampled_array(tmp_path):
 
     config = {"adapter": "audio_flamingo_3", "model_id": "nvidia/audio-flamingo-3-hf", "revision": "abc"}
     adapter = AudioFlamingo3Adapter("audio_flamingo_3", config, GENERATION)
-    adapter.revision, adapter.processor = "abc", FakeAF3Processor()
+    adapter.revision, adapter.processor, adapter.dtype = "abc", FakeAF3Processor(), "bf16"
     adapter.torch = SimpleNamespace(inference_mode=nullcontext, cuda=SimpleNamespace(is_available=lambda: False))
     adapter.model = SimpleNamespace(
         device="cpu",
@@ -434,9 +440,69 @@ def test_audio_flamingo_passes_resampled_array(tmp_path):
     assert isinstance(audio_item["audio"], np.ndarray) and audio_item["audio"].dtype == np.float32
     assert abs(audio_item["audio"].shape[0] - 3200) <= 1  # 0.2 s at 44.1 kHz, resampled once by soxr
     assert kwargs["sampling_rate"] == 16000 and kwargs["tokenize"] and kwargs["return_dict"]
+    assert adapter.processor.inputs.moves == [(("cpu",), {"dtype": "bf16"})]
     assert result.status == "ok" and result.caption == "A fan whirs." and result.finish_reason == "stop"
     assert result.usage["input_tokens"] == 3 and result.usage["output_tokens"] == 2
     assert result.audio_preprocessing["resample"]["from"] == 44100
+
+
+class FakeQwenProcessor:
+    def __init__(self):
+        self.tokenizer = SimpleNamespace(eos_token_id=2)
+
+    def apply_chat_template(self, conversation, **kwargs):
+        assert kwargs["tokenize"] is False
+        return "<prompt>"
+
+    def __call__(self, **kwargs):
+        self.kwargs = kwargs
+        self.inputs = FakeInputs(input_ids=FakeTokens([[5, 6, 7]]))
+        return self.inputs
+
+    def batch_decode(self, tokens, **kwargs):
+        return ["A fan whirs."]
+
+
+def test_qwen_calls_thinker_with_shared_decoding(tmp_path):
+    pytest.importorskip("soxr")
+    from contextlib import nullcontext
+
+    from src.models.hf_qwen_omni import Qwen25OmniAdapter
+
+    calls = []
+
+    def thinker_generate(**kwargs):
+        calls.append(kwargs)
+        return FakeTokens([[5, 6, 7, 11, 2]])
+
+    def combined_generate(**kwargs):
+        raise AssertionError("the combined generate() must not be used")
+
+    config = {"adapter": "qwen2_5_omni", "model_id": "Qwen/Qwen2.5-Omni-7B", "revision": "abc"}
+    adapter = Qwen25OmniAdapter("qwen2_5_omni", config, GENERATION)
+    adapter.revision, adapter.processor, adapter.dtype = "abc", FakeQwenProcessor(), "bf16"
+    adapter.torch = SimpleNamespace(inference_mode=nullcontext, cuda=SimpleNamespace(is_available=lambda: False))
+    adapter.model = SimpleNamespace(
+        device="cpu",
+        generation_config=SimpleNamespace(eos_token_id=2),
+        generate=combined_generate,
+        thinker=SimpleNamespace(generate=thinker_generate),
+    )
+    result = adapter.caption(wav_request(tmp_path, {**GENERATION["decoding"], "max_output_tokens": 2048}))
+
+    assert calls[0]["max_new_tokens"] == 2048 and calls[0]["do_sample"] is False
+    assert "return_audio" not in calls[0] and "thinker_max_new_tokens" not in calls[0]
+    assert adapter.processor.kwargs["sampling_rate"] == 16000
+    assert result.status == "ok" and result.request_params == {"max_new_tokens": 2048, "do_sample": False}
+
+
+def test_error_records_keep_a_traceback(samples, tmp_path):
+    sample_id = samples[0]["sample_id"]
+    output = tmp_path / "out.jsonl"
+    generate(mock_adapter({sample_id: "error"}), samples[:1], output)
+    record = latest_records(output)[sample_id]
+    assert record["status"] == "error" and "Traceback" in record["error_traceback"]
+    assert "mock.py" in record["error_traceback"] and "in caption" in record["error_traceback"]
 
 
 # --- hf_jobs.py -----------------------------------------------------------------

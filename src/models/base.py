@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib
+import traceback
 from abc import ABC, abstractmethod
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
@@ -47,6 +48,7 @@ class CaptionResult:
     usage: dict[str, Any] = field(default_factory=dict)
     finish_reason: str | None = None
     error: str | None = None
+    error_traceback: str | None = None  # last frames, for exceptions only
     # Filled in by the runner.
     model_key: str | None = None
     latency_s: float | None = None
@@ -95,12 +97,14 @@ class CaptionAdapter(ABC):
         return {"adapter": type(self).__name__, "model_id": self.model_id}
 
     def error_result(self, request: CaptionRequest, error: Exception | str) -> CaptionResult:
+        is_exception = isinstance(error, Exception)
         return CaptionResult(
             sample_id=request.sample_id,
             status="error",
             caption=None,
             model_id=self.model_id,
-            error=f"{type(error).__name__}: {error}" if isinstance(error, Exception) else error,
+            error=f"{type(error).__name__}: {error}" if is_exception else error,
+            error_traceback="".join(traceback.format_exception(error, limit=-8)) if is_exception else None,
         )
 
 

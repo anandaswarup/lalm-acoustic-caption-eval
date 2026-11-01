@@ -165,6 +165,8 @@ def run_generation(
             result.latency_s or 0.0,
             (result.caption or result.error or "")[:100],
         )
+        if result.error_traceback:
+            logger.warning("%s traceback:\n%s", sample["sample_id"], result.error_traceback.rstrip())
 
     summary = summarize(output, [sample["sample_id"] for sample in samples])
     write_meta(meta_path, {**meta, "finished_utc": _now(), "status": "finished", "summary": summary})
