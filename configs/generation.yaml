@@ -1,5 +1,5 @@
 # Caption-generation settings (E04-E09). Frozen at the end of the E05 pilot.
-frozen: false
+frozen: true   # frozen at the end of E05 (2026-11-01); do not change for E06-E09
 
 # Which manifest to caption; override with --run or --set run=pilot.
 run: evaluation
