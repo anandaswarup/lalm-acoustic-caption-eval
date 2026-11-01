@@ -41,7 +41,8 @@ class GeminiAdapter(CaptionAdapter):
     def caption(self, request: CaptionRequest) -> CaptionResult:
         audio, preprocessing = read_wav_bytes(request.audio_path)
         config, params = self.build_config(request.decoding)
-        contents = [request.prompt, self.types.Part.from_bytes(data=audio, mime_type="audio/wav")]
+        # Audio first, then the instruction (same order for every model).
+        contents = [self.types.Part.from_bytes(data=audio, mime_type="audio/wav"), request.prompt]
         try:
             response = self.client.models.generate_content(model=self.model_id, contents=contents, config=config)
         except self.errors.APIError as error:

@@ -29,7 +29,8 @@ class AudioFlamingo3Adapter(HFAdapterBase):
         conversation = [
             {
                 "role": "user",
-                "content": [{"type": "text", "text": request.prompt}, {"type": "audio", "audio": audio}],
+                # Audio first, then the instruction (same order for every model).
+                "content": [{"type": "audio", "audio": audio}, {"type": "text", "text": request.prompt}],
             }
         ]
         inputs = self.processor.apply_chat_template(

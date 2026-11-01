@@ -11,14 +11,17 @@ runs:
     manifest: data/manifests/clotho_pilot_manifest.jsonl
     output_dir: outputs/captions/pilot
 
-# v2 (E05) adds the last sentence: in the v1 pilot GPT-Audio-1.5 returned 17 of 20 captions as JSON.
+# E05 pilot history (GPT-Audio-1.5 returned JSON objects instead of a sentence):
+#   v1  JSON in 17/20 captions, often with the prompt's three items as keys
+#   v2  v1 plus the plain-text sentence: JSON in 10/20
+#   v3  the three items become a clause of the first sentence; every adapter sends the audio before the text
 prompt:
-  version: v2
+  version: v3
   text: >-
-    Describe the sounds heard in this audio recording in one clear sentence.
-    Include the main sound sources, audible events, and distinguishing acoustic
-    characteristics. Do not speculate about sources or events that are not
-    supported by the audio. Respond with the sentence only, as plain text,
+    Describe the sounds heard in this audio recording in one clear sentence
+    that mentions the main sound sources, audible events, and distinguishing
+    acoustic characteristics. Do not speculate about sources or events that are
+    not supported by the audio. Respond with the sentence only, as plain text,
     without JSON, lists, labels or other formatting.
 
 # Shared by all models. Deterministic decoding where the provider supports it;
@@ -36,7 +39,10 @@ audio:
   allow_resample: true
   allow_crop: false
 
+# concurrency: requests in flight at once (1 = sequential); API models raise it in models.yaml
+# requests_overrides. Requests are independent, so it changes run time only, never the captions.
 requests:
+  concurrency: 1
   timeout_seconds: 120
   max_retries: 5
   backoff_seconds: 2.0

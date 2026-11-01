@@ -6,7 +6,8 @@
 #   hf_jobs  - runs on Hugging Face Jobs (GPU / heavy CPU work)
 #
 # adapter selects the implementation in src/models (see src/models/base.py ADAPTERS).
-# decoding_overrides are merged over generation.yaml `decoding` for that model.
+# decoding_overrides are merged over generation.yaml `decoding` for that model, and requests_overrides over
+# generation.yaml `requests`.
 # Output file names are placed under the run's output_dir (generation.yaml `runs`).
 
 models:
@@ -20,6 +21,8 @@ models:
     compute: local
     decoding_overrides:
       seed: 42
+    requests_overrides:
+      concurrency: 8
     output: gpt_audio_1_5_captions.jsonl
 
   gemini_3_8_flash:
@@ -33,6 +36,8 @@ models:
     decoding_overrides:
       seed: 42
       thinking_level: low  # thinking cannot be disabled; low is the lowest supported level
+    requests_overrides:
+      concurrency: 8
     output: gemini_3_8_flash_captions.jsonl
 
   qwen2_5_omni:

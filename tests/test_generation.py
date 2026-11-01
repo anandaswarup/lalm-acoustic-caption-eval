@@ -8,6 +8,8 @@ import json
 import os
 import subprocess
 import sys
+import threading
+import time
 from types import SimpleNamespace
 
 import numpy as np
@@ -20,6 +22,7 @@ from src.generation.runner import latest_records, load_samples, run_generation
 from src.models.audio import load_mono_float, read_wav_bytes
 from src.models.base import CaptionRequest, TransientError, classify, load_adapter, merge_decoding
 from src.models.gemini import GeminiAdapter
+from src.models.mock import MockAdapter
 from src.models.openai_audio import OpenAIAudioAdapter
 from src.utils.paths import REPO_ROOT
 
@@ -122,6 +125,43 @@ def test_resume_ignores_records_from_another_prompt(samples, tmp_path):
     adapter = mock_adapter()
     run_generation(adapter, samples, output, "Describe again.", GENERATION["decoding"], GENERATION["requests"], {})
     assert adapter.calls == {}
+
+
+class SlowMockAdapter(MockAdapter):
+    """Records how many requests overlap."""
+
+    def __init__(self, *args):
+        super().__init__(*args)
+        self.lock, self.active, self.max_active = threading.Lock(), 0, 0
+
+    def caption(self, request):
+        with self.lock:
+            self.active += 1
+            self.max_active = max(self.max_active, self.active)
+        time.sleep(0.05)
+        with self.lock:
+            self.active -= 1
+        return super().caption(request)
+
+
+def test_concurrent_generation_matches_sequential(samples, tmp_path):
+    config = {"adapter": "mock", "model_id": "mock", "mock": {"clotho_eval_0001": "transient:2"}}
+    requests_config = {**GENERATION["requests"], "concurrency": 3}
+    adapter = SlowMockAdapter("mock_model", config, GENERATION)
+    output = tmp_path / "concurrent.jsonl"
+    summary = run_generation(
+        adapter, samples, output, "Describe.", GENERATION["decoding"], requests_config, {}, sleep=NO_SLEEP
+    )
+    assert adapter.max_active > 1 and summary["statuses"] == {"ok": 3}
+    assert adapter.calls == {"clotho_eval_0000": 1, "clotho_eval_0001": 3, "clotho_eval_0002": 1}
+    sequential = tmp_path / "sequential.jsonl"
+    generate(mock_adapter(), samples, sequential)
+    captions = {key: record["caption"] for key, record in latest_records(output).items()}
+    assert captions == {key: record["caption"] for key, record in latest_records(sequential).items()}
+    assert len(output.read_text(encoding="utf-8").splitlines()) == 3  # one complete line per sample
+    resumed = SlowMockAdapter("mock_model", config, GENERATION)
+    run_generation(resumed, samples, output, "Describe.", GENERATION["decoding"], requests_config, {})
+    assert resumed.calls == {}
 
 
 def test_run_generation_no_resume_recaptions_everything(samples, tmp_path):
@@ -280,7 +320,7 @@ def test_openai_request_format(tmp_path):
     call = adapter.client.calls[0]
     assert call["model"] == "gpt-audio-1.5" and call["modalities"] == ["text"] and call["store"] is False
     assert (call["temperature"], call["top_p"], call["seed"], call["max_completion_tokens"]) == (0.0, 1.0, 42, 2048)
-    text, audio = call["messages"][0]["content"]
+    audio, text = call["messages"][0]["content"]
     assert text == {"type": "text", "text": "Describe."}
     assert audio["input_audio"]["format"] == "wav"
     assert base64.b64decode(audio["input_audio"]["data"]) == request.audio_path.read_bytes()
@@ -362,7 +402,7 @@ def test_gemini_request_format(tmp_path):
     result = adapter.caption(request)
     call = calls[0]
     assert call["model"] == "gemini-3.8-flash"
-    prompt, audio = call["contents"]
+    audio, prompt = call["contents"]
     assert prompt == "Describe." and audio == {"data": request.audio_path.read_bytes(), "mime_type": "audio/wav"}
     config = call["config"]
     assert (config.temperature, config.top_p, config.seed, config.max_output_tokens) == (0.0, 1.0, 42, 2048)
@@ -448,7 +488,8 @@ def test_audio_flamingo_passes_resampled_array(tmp_path):
     result = adapter.caption(wav_request(tmp_path))
 
     conversation, kwargs = adapter.processor.calls[0]
-    audio_item = conversation[0]["content"][1]
+    audio_item, text_item = conversation[0]["content"]
+    assert text_item == {"type": "text", "text": "Describe."}
     assert audio_item["type"] == "audio" and "path" not in audio_item
     assert isinstance(audio_item["audio"], np.ndarray) and audio_item["audio"].dtype == np.float32
     assert abs(audio_item["audio"].shape[0] - 3200) <= 1  # 0.2 s at 44.1 kHz, resampled once by soxr

@@ -33,7 +33,7 @@ class Qwen25OmniAdapter(HFAdapterBase):
         conversation = [
             {
                 "role": "user",
-                "content": [
+                "content": [  # audio first, then the instruction (same order for every model)
                     {"type": "audio", "audio": request.audio_path.name},
                     {"type": "text", "text": request.prompt},
                 ],

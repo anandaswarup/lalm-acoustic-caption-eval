@@ -8,7 +8,8 @@ import logging
 import os
 import time
 from collections import Counter
-from collections.abc import Callable, Iterable
+from collections.abc import Callable, Iterable, Iterator
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -100,6 +101,54 @@ def caption_with_retries(
     return result
 
 
+def caption_sample(
+    adapter: CaptionAdapter,
+    sample: dict[str, Any],
+    prompt: str,
+    decoding: dict[str, Any],
+    requests_config: dict[str, Any],
+    sleep: Callable[[float], None] = time.sleep,
+) -> CaptionResult:
+    """Caption one manifest sample; audio that is missing or does not match the manifest is never sent."""
+    request = CaptionRequest(sample["sample_id"], sample["resolved_audio_path"], prompt, dict(decoding))
+    if not request.audio_path.is_file():
+        result = adapter.error_result(request, f"audio file not found: {request.audio_path}")
+    elif sha256sum(request.audio_path) != sample["audio_sha256"]:
+        result = adapter.error_result(request, "audio SHA-256 does not match the manifest")
+    else:
+        result = caption_with_retries(
+            adapter,
+            request,
+            requests_config.get("max_retries", 5),
+            requests_config.get("backoff_seconds", 2.0),
+            sleep,
+        )
+    result.model_key = adapter.model_key
+    result.prompt_sha256 = prompt_sha256(prompt)
+    result.timestamp_utc = result.timestamp_utc or _now()
+    return result
+
+
+def caption_all(
+    adapter: CaptionAdapter,
+    samples: list[dict[str, Any]],
+    concurrency: int,
+    *args: Any,
+) -> Iterator[tuple[dict[str, Any], CaptionResult]]:
+    """Yield (sample, result) as requests finish: in manifest order when sequential, else in completion order."""
+    if concurrency <= 1:
+        for sample in samples:
+            yield sample, caption_sample(adapter, sample, *args)
+        return
+    pool = ThreadPoolExecutor(max_workers=concurrency, thread_name_prefix="caption")
+    try:
+        futures = {pool.submit(caption_sample, adapter, sample, *args): sample for sample in samples}
+        for future in as_completed(futures):
+            yield futures[future], future.result()
+    finally:
+        pool.shutdown(wait=True, cancel_futures=True)  # on interrupt, queued requests are dropped
+
+
 def summarize(output: str | Path, sample_ids: list[str]) -> dict[str, Any]:
     """Status counts and latency over the latest record of each sample in `sample_ids`."""
     latest = latest_records(output)
@@ -135,14 +184,23 @@ def run_generation(
     resume: bool = True,
     sleep: Callable[[float], None] = time.sleep,
 ) -> dict[str, Any]:
-    """Caption every sample not already `ok` in `output`; return the summary over all `samples`."""
+    """Caption every sample not already `ok` in `output`; return the summary over all `samples`.
+
+    With `requests_config["concurrency"]` > 1, that many requests run at once in threads; records are still
+    appended one at a time from this thread, in completion order (records are keyed by sample_id).
+    """
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     meta_path = output.with_name(output.name.removesuffix(".jsonl") + ".meta.json")
     done = completed_ids(output, prompt) if resume else set()
     todo = [sample for sample in samples if sample["sample_id"] not in done]
     logger.info(
-        "%d samples, %d already ok, %d to caption -> %s", len(samples), len(samples) - len(todo), len(todo), output
+        "%d samples, %d already ok, %d to caption (concurrency %d) -> %s",
+        len(samples),
+        len(samples) - len(todo),
+        len(todo),
+        requests_config.get("concurrency", 1),
+        output,
     )
 
     adapter.setup()
@@ -150,23 +208,9 @@ def run_generation(
     meta = {**meta, "adapter": adapter.describe(), "output": str(output), "started_utc": started, "status": "running"}
     write_meta(meta_path, meta)
 
-    for index, sample in enumerate(todo, 1):
-        request = CaptionRequest(sample["sample_id"], sample["resolved_audio_path"], prompt, dict(decoding))
-        if not request.audio_path.is_file():
-            result = adapter.error_result(request, f"audio file not found: {request.audio_path}")
-        elif sha256sum(request.audio_path) != sample["audio_sha256"]:
-            result = adapter.error_result(request, "audio SHA-256 does not match the manifest")
-        else:
-            result = caption_with_retries(
-                adapter,
-                request,
-                requests_config.get("max_retries", 5),
-                requests_config.get("backoff_seconds", 2.0),
-                sleep,
-            )
-        result.model_key = adapter.model_key
-        result.prompt_sha256 = prompt_sha256(prompt)
-        result.timestamp_utc = result.timestamp_utc or _now()
+    concurrency = int(requests_config.get("concurrency", 1))
+    results = caption_all(adapter, todo, concurrency, prompt, decoding, requests_config, sleep)
+    for index, (sample, result) in enumerate(results, 1):
         append_record(output, result.to_dict())
         logger.info(
             "[%d/%d] %s %s (%.1fs) %s",

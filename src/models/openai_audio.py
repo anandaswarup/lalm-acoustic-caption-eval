@@ -52,9 +52,9 @@ class OpenAIAudioAdapter(CaptionAdapter):
         messages = [
             {
                 "role": "user",
-                "content": [
-                    {"type": "text", "text": request.prompt},
+                "content": [  # audio first, then the instruction (same order for every model)
                     {"type": "input_audio", "input_audio": {"data": base64.b64encode(audio).decode(), "format": "wav"}},
+                    {"type": "text", "text": request.prompt},
                 ],
             }
         ]

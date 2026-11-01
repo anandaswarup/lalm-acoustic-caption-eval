@@ -52,6 +52,7 @@ def main() -> int:
     clotho_root = resolve_path(dataset["root"])
     samples = load_samples(manifest, clotho_root, args.limit, args.sample_ids)
     decoding = merge_decoding(generation, model)
+    requests_config = {**generation["requests"], **(model.get("requests_overrides") or {})}
     if not generation.get("frozen"):
         logger.warning("generation.yaml is not frozen yet (frozen at the end of E05)")
 
@@ -64,7 +65,7 @@ def main() -> int:
         "selection": {"limit": args.limit, "sample_ids": args.sample_ids, "resume": not args.no_resume},
         "prompt": generation["prompt"],
         "decoding": decoding,
-        "requests": generation["requests"],
+        "requests": requests_config,
         "audio": generation["audio"],
         "generation_frozen": generation.get("frozen", False),
     }
@@ -75,7 +76,7 @@ def main() -> int:
         output,
         generation["prompt"]["text"],
         decoding,
-        generation["requests"],
+        requests_config,
         meta,
         resume=generation.get("resume", True) and not args.no_resume,
     )
