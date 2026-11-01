@@ -111,7 +111,7 @@ Experiments are numbered E01–E26. Configs, scripts, Makefile targets and commi
 | 1. Repository and dataset | E01 | Scaffold repository and execution environment | Done |
 | | E02 | Download, validate and index Clotho v2.1 | Done |
 | | E03 | Create and freeze the evaluation manifest | Done |
-| 2. Caption generation | E04 | Unified LALM inference interfaces | — |
+| 2. Caption generation | E04 | Unified LALM inference interfaces | Done |
 | | E05 | Pilot generation and configuration freeze | — |
 | | E06 | Captions: GPT-Audio-1.5 | — |
 | | E07 | Captions: Gemini 3.8 Flash | — |
