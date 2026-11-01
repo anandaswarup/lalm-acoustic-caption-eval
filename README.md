@@ -102,9 +102,9 @@ outputs/      captions, scores, qualitative annotations, tables, figures
 manuscript/   LaTeX manuscript (added when writing the paper)
 ```
 
-## Experiments
+## Tasks
 
-Experiments are numbered E01–E26. Configs, scripts, Makefile targets and commit messages refer to these numbers.
+Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit messages refer to these numbers.
 
 | Phase | ID | Experiment | Status |
 |---|---|---|---|
