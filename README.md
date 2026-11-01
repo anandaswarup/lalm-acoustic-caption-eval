@@ -70,7 +70,7 @@ The `compute` field for each model is set in `configs/models.yaml`.
 
 ## Running experiments
 
-Run `make help` for the full list. Main targets:
+Run `make help` for the full list. Main targets (experiment IDs are listed under [Experiments](#experiments)):
 
 | Target | Experiment |
 |---|---|
@@ -102,14 +102,35 @@ outputs/      captions, scores, qualitative annotations, tables, figures
 manuscript/   LaTeX manuscript (added when writing the paper)
 ```
 
-## Status
+## Experiments
 
-| Phase | Experiments | Status |
-|---|---|---|
-| 1. Repository and dataset | E01–E03 | Done |
-| 2. Caption generation | E04–E10 | — |
-| 3. Automatic evaluation | E11–E12 | — |
-| 4. Human calibration | E13–E16 | — |
-| 5. Qualitative analysis | E17–E20 | — |
-| 6. Synthesis and reproducibility | E21–E23 | — |
-| 7. Manuscript and release | E24–E26 | — |
+Experiments are numbered E01–E26. Configs, scripts, Makefile targets and commit messages refer to these numbers.
+
+| Phase | ID | Experiment | Status |
+|---|---|---|---|
+| 1. Repository and dataset | E01 | Scaffold repository and execution environment | Done |
+| | E02 | Download, validate and index Clotho v2.1 | Done |
+| | E03 | Create and freeze the evaluation manifest | Done |
+| 2. Caption generation | E04 | Unified LALM inference interfaces | — |
+| | E05 | Pilot generation and configuration freeze | — |
+| | E06 | Captions: GPT-Audio-1.5 | — |
+| | E07 | Captions: Gemini 3.8 Flash | — |
+| | E08 | Captions: Qwen3-Omni | — |
+| | E09 | Captions: Audio Flamingo 3 | — |
+| | E10 | Consolidate and freeze model captions | — |
+| 3. Automatic evaluation | E11 | Implement and validate caption metrics | — |
+| | E12 | Five-reference model evaluation | — |
+| 4. Human calibration | E13 | Human leave-one-out calibration | — |
+| | E14 | Matched four-reference model evaluation | — |
+| | E15 | Caption-length analysis | — |
+| | E16 | Statistical comparison and uncertainty | — |
+| 5. Qualitative analysis | E17 | Select qualitative review sample | — |
+| | E18 | Annotate model–reference agreement | — |
+| | E19 | Audio-grounded verification of selected cases | — |
+| | E20 | Representative caption comparisons | — |
+| 6. Synthesis and reproducibility | E21 | Cross-metric and model comparison | — |
+| | E22 | Reproduce results from frozen artifacts | — |
+| | E23 | Finalize research repository | — |
+| 7. Manuscript and release | E24 | Draft manuscript | — |
+| | E25 | Final validation and double-blind submission | — |
+| | E26 | Public release after acceptance | — |
