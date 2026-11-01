@@ -1,0 +1,150 @@
+{
+  "run": {
+    "experiment": "prepare_dataset",
+    "timestamp_utc": "2026-11-01T05:15:22+00:00",
+    "git_commit": "a64c54034b76acbec305f81794cb091587d89a0b",
+    "git_dirty": true,
+    "python": "3.13.12",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "seed": 42
+  },
+  "provenance": {
+    "name": "clotho",
+    "version": "2.1",
+    "doi": "10.5281/zenodo.4783391",
+    "source": "https://zenodo.org/records/4783391",
+    "zenodo_record_version": "2.1",
+    "zenodo_record_modified": "2021-05-30T02:20:54.275726+00:00",
+    "license": "Captions for non-commercial research use (dataset LICENSE); audio under per-file Freesound licenses",
+    "license_file_sha256": "4701019c81918fc205f6c675508efd4e4eff81339aa2660a632bd67fd0baffbf",
+    "zenodo_files": {
+      "clotho_audio_evaluation.7z": {
+        "size": 1249726503,
+        "md5": "4569624ccadf96223f19cb59fe4f849f"
+      },
+      "clotho_captions_development.csv": {
+        "size": 1336762,
+        "md5": "d4090b39ce9f2491908eebf4d5b09bae"
+      },
+      "clotho_metadata_validation.csv": {
+        "size": 224803,
+        "md5": "2e010427c56b1ce6008b0f03f41048ce"
+      },
+      "clotho_audio_validation.7z": {
+        "size": 1260701425,
+        "md5": "7dba730be08bada48bd15dc4e668df59"
+      },
+      "clotho_metadata_evaluation.csv": {
+        "size": 225311,
+        "md5": "13946f054d4e1bf48079813aac61bf77"
+      },
+      "LICENSE": {
+        "size": 1874,
+        "md5": "38d422ac8a2c9c35c288232576e2e810"
+      },
+      "clotho_audio_development.7z": {
+        "size": 4541582263,
+        "md5": "c8b05bc7acdb13895bb3c6a29608667e"
+      },
+      "clotho_metadata_development.csv": {
+        "size": 830797,
+        "md5": "170d20935ecfdf161ce1bb154118cda5"
+      },
+      "clotho_captions_validation.csv": {
+        "size": 367649,
+        "md5": "5879e023032b22a2c930aaa0528bead4"
+      },
+      "clotho_captions_evaluation.csv": {
+        "size": 361995,
+        "md5": "1b16b9e57cf7bdb7f13a13802aeb57e2"
+      }
+    }
+  },
+  "evaluation": {
+    "split": "evaluation",
+    "recordings": 1045,
+    "captions": 5225,
+    "decoded": 1045,
+    "duration_seconds": {
+      "min": 15.003174603174603,
+      "max": 30.0,
+      "total": 23416.309931972788
+    },
+    "csv_checksums": {
+      "clotho_captions_evaluation.csv": {
+        "md5": "1b16b9e57cf7bdb7f13a13802aeb57e2",
+        "zenodo_md5": "1b16b9e57cf7bdb7f13a13802aeb57e2",
+        "match": true
+      },
+      "clotho_metadata_evaluation.csv": {
+        "md5": "13946f054d4e1bf48079813aac61bf77",
+        "zenodo_md5": "13946f054d4e1bf48079813aac61bf77",
+        "match": true
+      }
+    },
+    "errors": [],
+    "ok": true
+  },
+  "pilot": {
+    "split": "validation",
+    "recordings": 1045,
+    "captions": 5225,
+    "decoded": 20,
+    "duration_seconds": {
+      "min": 15.3,
+      "max": 27.4,
+      "total": 421.55510204081634
+    },
+    "csv_checksums": {
+      "clotho_captions_validation.csv": {
+        "md5": "5879e023032b22a2c930aaa0528bead4",
+        "zenodo_md5": "5879e023032b22a2c930aaa0528bead4",
+        "match": true
+      },
+      "clotho_metadata_validation.csv": {
+        "md5": "2e010427c56b1ce6008b0f03f41048ce",
+        "zenodo_md5": "2e010427c56b1ce6008b0f03f41048ce",
+        "match": true
+      }
+    },
+    "errors": [],
+    "ok": true,
+    "pool": 1043,
+    "excluded_shared_with_evaluation": [
+      {
+        "file_name": "01 A pug struggles to breathe 1_14_2008.wav",
+        "sound_id": "66304"
+      },
+      {
+        "file_name": "Bus(Drive_Reverse)_1-2.wav",
+        "sound_id": "86161"
+      }
+    ],
+    "unknown_freesound_source": {
+      "evaluation": 5,
+      "pilot_pool": 6
+    },
+    "selected": [
+      "20060221.box.fan.fast.wav",
+      "20070418.hoverflies.wav",
+      "20081231.herd.night.wav",
+      "20090628.passing.car.wav",
+      "CARDBOARD_PRESS_DOWN_001.wav",
+      "Car Start.wav",
+      "Cityscape 01 090617.wav",
+      "Crowd, int, echoes.wav",
+      "Footsteps on a gravel road.wav",
+      "Moving paper.wav",
+      "Pelion fount.wav",
+      "Pickup_Ford_62_Start_Idle.wav",
+      "Plastic box being crumpled.wav",
+      "RG Dogs Ear.wav",
+      "RubbishCollection.wav",
+      "Steam Leaking Stereo.wav",
+      "last_call.wav",
+      "little buzz in the rain.wav",
+      "pedestrian_lights.wav",
+      "wine_glass_slowed_down.wav"
+    ]
+  }
+}
