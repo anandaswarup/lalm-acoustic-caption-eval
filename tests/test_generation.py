@@ -370,6 +370,75 @@ def test_gemini_transient_permanent_truncated(tmp_path):
     assert adapter.caption(wav_request(tmp_path)).status == "truncated"
 
 
+# --- Audio Flamingo 3 adapter (fake processor and model) ---------------------
+
+
+class FakeTokens:
+    """The slice of the torch.Tensor API the HF adapters use."""
+
+    def __init__(self, values):
+        self.values = np.asarray(values)
+        self.shape = self.values.shape
+
+    def __getitem__(self, index):
+        return FakeTokens(self.values[index])
+
+    def __len__(self):
+        return len(self.values)
+
+    def tolist(self):
+        return self.values.tolist()
+
+    def unsqueeze(self, dim):
+        return FakeTokens(np.expand_dims(self.values, dim))
+
+
+class FakeInputs(dict):
+    def to(self, device):
+        return self
+
+
+class FakeAF3Processor:
+    def __init__(self):
+        self.calls = []
+        self.tokenizer = SimpleNamespace(eos_token_id=2)
+
+    def apply_chat_template(self, conversation, **kwargs):
+        self.calls.append((conversation, kwargs))
+        return FakeInputs(input_ids=FakeTokens([[5, 6, 7]]))
+
+    def batch_decode(self, tokens, skip_special_tokens=True):
+        return [" A fan whirs. "]
+
+
+def test_audio_flamingo_passes_resampled_array(tmp_path):
+    pytest.importorskip("soxr")
+    from contextlib import nullcontext
+
+    from src.models.hf_audio_flamingo import AudioFlamingo3Adapter
+
+    config = {"adapter": "audio_flamingo_3", "model_id": "nvidia/audio-flamingo-3-hf", "revision": "abc"}
+    adapter = AudioFlamingo3Adapter("audio_flamingo_3", config, GENERATION)
+    adapter.revision, adapter.processor = "abc", FakeAF3Processor()
+    adapter.torch = SimpleNamespace(inference_mode=nullcontext, cuda=SimpleNamespace(is_available=lambda: False))
+    adapter.model = SimpleNamespace(
+        device="cpu",
+        generation_config=SimpleNamespace(eos_token_id=2),
+        generate=lambda **kwargs: FakeTokens([[5, 6, 7, 11, 2]]),
+    )
+    result = adapter.caption(wav_request(tmp_path))
+
+    conversation, kwargs = adapter.processor.calls[0]
+    audio_item = conversation[0]["content"][1]
+    assert audio_item["type"] == "audio" and "path" not in audio_item
+    assert isinstance(audio_item["audio"], np.ndarray) and audio_item["audio"].dtype == np.float32
+    assert abs(audio_item["audio"].shape[0] - 3200) <= 1  # 0.2 s at 44.1 kHz, resampled once by soxr
+    assert kwargs["sampling_rate"] == 16000 and kwargs["tokenize"] and kwargs["return_dict"]
+    assert result.status == "ok" and result.caption == "A fan whirs." and result.finish_reason == "stop"
+    assert result.usage["input_tokens"] == 3 and result.usage["output_tokens"] == 2
+    assert result.audio_preprocessing["resample"]["from"] == 44100
+
+
 # --- hf_jobs.py -----------------------------------------------------------------
 
 
