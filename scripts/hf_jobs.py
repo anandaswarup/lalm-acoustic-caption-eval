@@ -172,7 +172,8 @@ def main() -> int:
     if args.run not in generation["runs"]:
         logger.error("Unknown run %r; expected one of %s", args.run, sorted(generation["runs"]))
         return 1
-    if git("status", "--porcelain"):
+    # Untracked files (e.g. caption outputs) never reach the job: the snapshot is `git archive HEAD`.
+    if git("status", "--porcelain", "--untracked-files=no"):
         logger.error("Uncommitted changes: jobs run committed code only, so commit first")
         return 1
     commit = git("rev-parse", "HEAD")
