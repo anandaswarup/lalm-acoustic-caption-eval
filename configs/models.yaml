@@ -1,47 +1,69 @@
 # LALMs under evaluation (E04-E09).
-# Model identifiers and checkpoint revisions are verified and pinned in E04/E08/E09.
+# Model identifiers verified and checkpoint revisions pinned in E04; frozen in E05.
 #
 # compute:
 #   local    - runs on the laptop (API calls, light CPU work)
 #   hf_jobs  - runs on Hugging Face Jobs (GPU / heavy CPU work)
+#
+# adapter selects the implementation in src/models (see src/models/base.py ADAPTERS).
+# decoding_overrides are merged over generation.yaml `decoding` for that model.
+# Output file names are placed under the run's output_dir (generation.yaml `runs`).
 
 models:
   gpt_audio_1_5:
     display_name: GPT-Audio-1.5
     provider: openai
+    adapter: openai_audio
     access: api
     model_id: gpt-audio-1.5
     api_key_env: OPENAI_API_KEY
     compute: local
-    output: outputs/captions/gpt_audio_1_5_captions.jsonl
+    decoding_overrides:
+      seed: 42
+    output: gpt_audio_1_5_captions.jsonl
 
   gemini_3_8_flash:
     display_name: Gemini 3.8 Flash
     provider: google
+    adapter: gemini
     access: api
     model_id: gemini-3.8-flash
     api_key_env: GEMINI_API_KEY
     compute: local
-    output: outputs/captions/gemini_3_8_flash_captions.jsonl
+    decoding_overrides:
+      seed: 42
+      thinking_level: low  # thinking cannot be disabled; low is the lowest supported level
+    output: gemini_3_8_flash_captions.jsonl
 
-  qwen3_omni:
-    display_name: Qwen3-Omni
+  qwen2_5_omni:
+    display_name: Qwen2.5-Omni-7B
     provider: huggingface
     access: open_weights
-    model_id: Qwen/Qwen3-Omni-30B-A3B-Instruct
-    revision: null  # pinned to a commit hash in E08
+    model_id: Qwen/Qwen2.5-Omni-7B
+    adapter: qwen2_5_omni
+    revision: ae9e1690543ffd5c0221dc27f79834d0294cba00
+    license: Apache-2.0
     compute: hf_jobs
     hf_jobs:
-      flavor: null  # GPU flavor chosen in E05 pilot
-    output: outputs/captions/qwen3_omni_captions.jsonl
+      flavor: a100-large
+    output: qwen2_5_omni_captions.jsonl
 
   audio_flamingo_3:
     display_name: Audio Flamingo 3
     provider: huggingface
     access: open_weights
     model_id: nvidia/audio-flamingo-3-hf
-    revision: null  # pinned to a commit hash in E09
+    adapter: audio_flamingo_3
+    revision: 7d4bae64ee29878af6504ae6f6bb3e40492838ad
+    license: NVIDIA OneWay Noncommercial License
     compute: hf_jobs
     hf_jobs:
-      flavor: null  # GPU flavor chosen in E05 pilot
-    output: outputs/captions/audio_flamingo_3_captions.jsonl
+      flavor: a100-large
+    output: audio_flamingo_3_captions.jsonl
+
+# Shared Hugging Face Jobs settings (E08, E09).
+hf_jobs:
+  bucket: anandaswarup/lalm-acoustic-caption-eval  # private
+  mount: /mnt
+  image: astral/uv:0.9.30-python3.13-bookworm-slim  # Python 3.13 + uv; torch from requirements-hf.txt
+  timeout: 4h

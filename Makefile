@@ -4,11 +4,11 @@
 BASE_PYTHON ?= /opt/homebrew/Caskroom/miniforge/base/bin/python3
 VENV        ?= .venv
 PYTHON      ?= $(VENV)/bin/python
-MODELS      := gpt_audio_1_5 gemini_3_8_flash qwen3_omni audio_flamingo_3
+MODELS      := gpt_audio_1_5 gemini_3_8_flash qwen2_5_omni audio_flamingo_3
 
 .DEFAULT_GOAL := help
 .PHONY: help venv install check-env test lint format \
-        prepare-data pilot generate $(addprefix generate-,$(MODELS)) consolidate \
+        prepare-data pilot generate hf-upload-audio fetch-hf consolidate \
         evaluate loo evaluate-four-ref lengths stats figures all paper paper-clean clean
 
 help: ## List available targets
@@ -40,11 +40,27 @@ prepare-data: ## Validate Clotho and build frozen evaluation/pilot manifests
 	$(PYTHON) scripts/prepare_dataset.py
 
 # --- Phase 2: caption generation (E04-E10) -----------------------------------
-pilot: ## Pilot generation on 20 validation-split recordings (E05)
-	$(foreach m,$(MODELS),$(PYTHON) scripts/generate_captions.py --model $(m) --set run=pilot &&) true
+# Models with compute: hf_jobs are submitted to Hugging Face Jobs (fetch results with `make fetch-hf`);
+# the others run locally.
+define run_model
+if [ "$$($(PYTHON) scripts/hf_jobs.py compute $(1))" = hf_jobs ]; then \
+	$(PYTHON) scripts/hf_jobs.py submit --model $(1) --run $(2); \
+else \
+	$(PYTHON) scripts/generate_captions.py --model $(1) --run $(2); \
+fi
+endef
 
-generate-%: ## Generate captions for one model, e.g. make generate-qwen3_omni
-	$(PYTHON) scripts/generate_captions.py --model $*
+pilot: ## Pilot generation on 20 validation-split recordings (E05)
+	$(foreach m,$(MODELS),$(call run_model,$(m),pilot) &&) true
+
+generate-%: ## Generate captions for one model, e.g. make generate-qwen2_5_omni
+	$(call run_model,$*,evaluation)
+
+hf-upload-audio: ## Upload the manifest WAVs to the private HF bucket (once)
+	$(PYTHON) scripts/hf_jobs.py upload-audio
+
+fetch-hf: ## Pull Hugging Face Jobs caption outputs into outputs/captions/
+	$(PYTHON) scripts/hf_jobs.py fetch
 
 generate: $(addprefix generate-,$(MODELS)) ## Generate captions for all four models
 

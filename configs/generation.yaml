@@ -1,6 +1,16 @@
 # Caption-generation settings (E04-E09). Frozen at the end of the E05 pilot.
 frozen: false
 
+# Which manifest to caption; override with --run or --set run=pilot.
+run: evaluation
+runs:
+  evaluation:
+    manifest: data/manifests/clotho_eval_manifest.jsonl
+    output_dir: outputs/captions/evaluation
+  pilot:
+    manifest: data/manifests/clotho_pilot_manifest.jsonl
+    output_dir: outputs/captions/pilot
+
 prompt:
   version: v1
   text: >-
@@ -9,12 +19,14 @@ prompt:
     characteristics. Do not speculate about sources or events that are not
     supported by the audio.
 
-# Deterministic decoding where the provider supports it; per-model deviations
-# are recorded in the generation metadata rather than assumed equivalent.
+# Shared by all models. Deterministic decoding where the provider supports it;
+# max_output_tokens is a ceiling, not a length target (for Gemini it includes
+# thinking tokens). Per-model additions are in models.yaml (decoding_overrides)
+# and any deviation is recorded per request rather than assumed equivalent.
 decoding:
   temperature: 0.0
   top_p: 1.0
-  max_output_tokens: 256
+  max_output_tokens: 2048
 
 # Audio is never cropped or temporally modified; any resampling or channel
 # conversion required by a provider is recorded per request.

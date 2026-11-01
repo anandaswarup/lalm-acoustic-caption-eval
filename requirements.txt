@@ -1,5 +1,6 @@
-# Core dependencies (E01). Model, metric and plotting dependencies are added
+# Laptop and CI dependencies. Model, metric and plotting dependencies are added
 # and pinned in the experiments that introduce them (E04, E11, E12).
+# GPU inference dependencies for Hugging Face Jobs are in requirements-hf.txt.
 # Install with: uv pip install -r requirements.txt
 numpy==2.5.4
 pandas==3.1.0
@@ -7,6 +8,12 @@ python-dotenv==1.2.4
 pyyaml==6.0.3
 soundfile==0.14.0
 tqdm==4.70.1
+
+# Caption generation (E04)
+google-genai==2.34.0
+huggingface_hub==2.4.0
+openai==3.42.0
+soxr==1.1.0
 
 # Development
 pytest==9.2.0

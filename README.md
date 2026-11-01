@@ -16,7 +16,7 @@ Evaluating Large Audio Language Model (LALM)-generated acoustic captions against
 |---|---|
 | Dataset | Clotho v2.1, complete evaluation split: 1,045 recordings × 5 human captions |
 | Pilot | 20 recordings from the validation split (seed 42), excluding recordings that share a Freesound source with the evaluation split; technical validation only |
-| Models | GPT-Audio-1.5, Gemini 3.8 Flash, Qwen3-Omni-30B-A3B-Instruct, Audio Flamingo 3 |
+| Models | GPT-Audio-1.5, Gemini 3.8 Flash, Qwen2.5-Omni-7B, Audio Flamingo 3 |
 | Prompt | One fixed prompt for all models (`configs/generation.yaml`) |
 | Metrics | BLEU-1–4, METEOR, CIDEr, SPICE, SPIDEr, SPIDEr-FL, BERTScore, FENSE; CLAP and MACE reported separately |
 
@@ -64,7 +64,7 @@ Validation and manifest reports are in `outputs/reports/`. The script does not o
 | Workload | Where |
 |---|---|
 | API inference (GPT-Audio-1.5, Gemini 3.8 Flash), lexical metrics, analysis, figures | Local laptop |
-| Open-weight inference (Qwen3-Omni, Audio Flamingo 3), heavy model-based metrics | Hugging Face Jobs |
+| Open-weight inference (Qwen2.5-Omni-7B, Audio Flamingo 3), heavy model-based metrics | Hugging Face Jobs |
 
 The `compute` field for each model is set in `configs/models.yaml`.
 
@@ -115,7 +115,7 @@ Experiments are numbered E01–E26. Configs, scripts, Makefile targets and commi
 | | E05 | Pilot generation and configuration freeze | — |
 | | E06 | Captions: GPT-Audio-1.5 | — |
 | | E07 | Captions: Gemini 3.8 Flash | — |
-| | E08 | Captions: Qwen3-Omni | — |
+| | E08 | Captions: Qwen2.5-Omni-7B | — |
 | | E09 | Captions: Audio Flamingo 3 | — |
 | | E10 | Consolidate and freeze model captions | — |
 | 3. Automatic evaluation | E11 | Implement and validate caption metrics | — |
