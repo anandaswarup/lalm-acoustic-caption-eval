@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Secrets
+.env
+
+# Data: audio and raw dataset copies are never committed (licensing)
+data/clotho/
+data/raw/
+*.wav
+*.flac
+*.mp3
+*.ogg
+
+# Run logs and test (smoke) caption outputs
+outputs/logs/
+outputs/smoke/
+
+# LaTeX build artifacts (PDFs are committed)
+manuscript/*.aux
+manuscript/*.bbl
+manuscript/*.blg
+manuscript/*.fdb_latexmk
+manuscript/*.fls
+manuscript/*.log
+manuscript/*.out
+manuscript/*.synctex.gz
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+
+# Planning documents (kept locally, not pushed)
+docs/
