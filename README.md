@@ -15,7 +15,7 @@ Evaluating Large Audio Language Model (LALM)-generated acoustic captions against
 | Item | Setting |
 |---|---|
 | Dataset | Clotho v2.1, complete evaluation split: 1,045 recordings × 5 human captions |
-| Pilot | 20 recordings from the validation split (seed 42), technical validation only |
+| Pilot | 20 recordings from the validation split (seed 42), excluding recordings that share a Freesound source with the evaluation split; technical validation only |
 | Models | GPT-Audio-1.5, Gemini 3.8 Flash, Qwen3-Omni-30B-A3B-Instruct, Audio Flamingo 3 |
 | Prompt | One fixed prompt for all models (`configs/generation.yaml`) |
 | Metrics | BLEU-1–4, METEOR, CIDEr, SPICE, SPIDEr, SPIDEr-FL, BERTScore, FENSE; CLAP and MACE reported separately |
@@ -44,6 +44,20 @@ Other requirements:
 ### Dataset
 
 Clotho v2.1 ([Zenodo 4783391](https://zenodo.org/records/4783391)) must be available locally, with `CLOTHO_ROOT` in `.env` pointing to it. The expected layout is `audio/{split}/*.wav`, `captions/clotho_captions_{split}.csv`, `metadata/` and `manifests/`. Audio and raw dataset files are never committed.
+
+### Frozen manifests
+
+`make prepare-data` validates the local Clotho copy and writes the frozen manifests to `data/manifests/`:
+
+| File | Contents |
+|---|---|
+| `clotho_eval_manifest.jsonl` | 1,045 evaluation recordings sorted by file name (case-sensitive code-point order), with stable IDs `clotho_eval_0000`–`clotho_eval_1044`, audio properties, audio SHA-256 and Freesound licence |
+| `clotho_eval_references.json` | `sample_id` → five human captions, in their original order (5,225 in total) |
+| `clotho_pilot_manifest.jsonl` | 20 pilot recordings from the validation split, with captions |
+| `CLOTHO_LICENSE` | Clotho caption copyright notice, which must accompany every copy of the captions |
+| `SHA256SUMS` | Checksums of the files above |
+
+Validation and manifest reports are in `outputs/reports/`. The script does not overwrite existing manifests unless given `--force`, and `python scripts/prepare_dataset.py --check` checks them against `SHA256SUMS`.
 
 ### Compute placement
 
@@ -92,7 +106,7 @@ manuscript/   LaTeX manuscript (added when writing the paper)
 
 | Phase | Experiments | Status |
 |---|---|---|
-| 1. Repository and dataset | E01–E03 | E01 done |
+| 1. Repository and dataset | E01–E03 | Done |
 | 2. Caption generation | E04–E10 | — |
 | 3. Automatic evaluation | E11–E12 | — |
 | 4. Human calibration | E13–E16 | — |
