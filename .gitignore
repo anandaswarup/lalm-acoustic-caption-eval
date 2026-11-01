@@ -39,3 +39,8 @@ manuscript/*.synctex.gz
 
 # Planning documents (kept locally, not pushed)
 docs/
+# E05 prompt-development and repeatability runs (counts are reported in the E05 notes)
+outputs/captions/pilot_prompt_v1/
+outputs/captions/pilot_prompt_v2/
+outputs/captions/pilot_repeat/
+outputs/captions/repeat_hf/

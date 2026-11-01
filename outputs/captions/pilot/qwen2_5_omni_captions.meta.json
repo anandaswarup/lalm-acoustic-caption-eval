@@ -1,0 +1,93 @@
+{
+  "run_info": {
+    "experiment": "generate_captions",
+    "timestamp_utc": "2026-11-01T11:21:13+00:00",
+    "git_commit": "e0ac558ae2c40490f3719c04478600237858266f",
+    "git_dirty": false,
+    "python": "3.13.11",
+    "platform": "Linux-6.12.103-127.188.amzn2023.x86_64-x86_64-with-glibc2.36",
+    "seed": 42
+  },
+  "run": "pilot",
+  "model_key": "qwen2_5_omni",
+  "model": {
+    "display_name": "Qwen2.5-Omni-7B",
+    "provider": "huggingface",
+    "access": "open_weights",
+    "model_id": "Qwen/Qwen2.5-Omni-7B",
+    "adapter": "qwen2_5_omni",
+    "revision": "ae9e1690543ffd5c0221dc27f79834d0294cba00",
+    "license": "Apache-2.0",
+    "compute": "hf_jobs",
+    "hf_jobs": {
+      "flavor": "a100-large"
+    },
+    "output": "qwen2_5_omni_captions.jsonl"
+  },
+  "manifest": {
+    "path": "data/manifests/clotho_pilot_manifest.jsonl",
+    "sha256": "09e7b81e890d735312990c883b3b30d6cb49354f198d8aa2f5a9f0392fae12f4"
+  },
+  "selection": {
+    "limit": null,
+    "sample_ids": null,
+    "resume": true
+  },
+  "prompt": {
+    "version": "v3",
+    "text": "Describe the sounds heard in this audio recording in one clear sentence that mentions the main sound sources, audible events, and distinguishing acoustic characteristics. Do not speculate about sources or events that are not supported by the audio. Respond with the sentence only, as plain text, without JSON, lists, labels or other formatting."
+  },
+  "decoding": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_output_tokens": 2048
+  },
+  "requests": {
+    "concurrency": 1,
+    "timeout_seconds": 120,
+    "max_retries": 5,
+    "backoff_seconds": 2.0
+  },
+  "audio": {
+    "allow_resample": true,
+    "allow_crop": false
+  },
+  "generation_frozen": false,
+  "adapter": {
+    "adapter": "Qwen25OmniAdapter",
+    "model_id": "Qwen/Qwen2.5-Omni-7B",
+    "revision": "ae9e1690543ffd5c0221dc27f79834d0294cba00",
+    "library": "transformers",
+    "library_version": "5.22.1",
+    "torch_version": "2.14.1+cu126",
+    "dtype": "torch.bfloat16",
+    "cuda": "12.6",
+    "gpu": {
+      "name": "NVIDIA A100-SXM4-80GB",
+      "memory_gb": 85.1,
+      "count": 1
+    },
+    "attn_implementation": "sdpa",
+    "talker": "disabled",
+    "generate": "thinker.generate",
+    "system_prompt": null
+  },
+  "output": "/mnt/outputs/pilot/qwen2_5_omni_captions.jsonl",
+  "started_utc": "2026-11-01T11:21:56+00:00",
+  "status": "finished",
+  "finished_utc": "2026-11-01T11:22:25+00:00",
+  "summary": {
+    "samples": 20,
+    "with_record": 20,
+    "statuses": {
+      "ok": 20
+    },
+    "missing": [],
+    "failed": [],
+    "latency_s": {
+      "median": 0.753,
+      "max": 1.588,
+      "total": 15.656
+    }
+  }
+}
