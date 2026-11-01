@@ -14,7 +14,9 @@ runs:
 # E05 pilot history (GPT-Audio-1.5 returned JSON objects instead of a sentence):
 #   v1  JSON in 17/20 captions, often with the prompt's three items as keys
 #   v2  v1 plus the plain-text sentence: JSON in 10/20
-#   v3  the three items become a clause of the first sentence; every adapter sends the audio before the text
+#   v3  the three items become a clause of the first sentence; every adapter sends the audio before the text.
+#       Frozen. 2/20 GPT captions were still a plain sentence wrapped as {"..."}; E10 normalization unwraps
+#       exactly that form (raw text kept) and flags any other JSON-like output.
 prompt:
   version: v3
   text: >-
@@ -41,8 +43,14 @@ audio:
 
 # concurrency: requests in flight at once (1 = sequential); API models raise it in models.yaml
 # requests_overrides. Requests are independent, so it changes run time only, never the captions.
+# format_attempts: an ok caption that is JSON-like (starts with { or [) instead of a sentence is requested again,
+# up to this many requests in total, for every model; rejected responses are kept in the record (format_rejected).
+# Added in E05: GPT-Audio-1.5 output varies at temperature 0 and returned a multi-field JSON object for ~1 in 20
+# pilot recordings even with prompt v3. A plain sentence wrapped as {"..."} after the last attempt is handled by
+# the E10 normalization.
 requests:
   concurrency: 1
+  format_attempts: 3
   timeout_seconds: 120
   max_retries: 5
   backoff_seconds: 2.0

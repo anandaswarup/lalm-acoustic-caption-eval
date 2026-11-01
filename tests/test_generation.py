@@ -164,6 +164,22 @@ def test_concurrent_generation_matches_sequential(samples, tmp_path):
     assert resumed.calls == {}
 
 
+def test_json_output_is_requested_again(samples, tmp_path):
+    output = tmp_path / "captions.jsonl"
+    requests_config = {**GENERATION["requests"], "format_attempts": 3}
+    behaviour = {"clotho_eval_0000": "json:1", "clotho_eval_0001": "json:5"}
+    adapter = mock_adapter(behaviour)
+    run_generation(adapter, samples, output, "Describe.", GENERATION["decoding"], requests_config, {}, sleep=NO_SLEEP)
+    latest = latest_records(output)
+    fixed, stuck, clean = (latest[f"clotho_eval_000{i}"] for i in range(3))
+    assert adapter.calls == {"clotho_eval_0000": 2, "clotho_eval_0001": 3, "clotho_eval_0002": 1}
+    assert fixed["caption"] == "Mock caption for clotho_eval_0000." and len(fixed["format_rejected"]) == 1
+    assert fixed["format_rejected"][0]["caption"].startswith('{"main_sound_sources"')
+    assert stuck["status"] == "ok" and stuck["caption"].startswith("{") and len(stuck["format_rejected"]) == 2
+    assert clean["format_rejected"] == []
+    assert len(output.read_text(encoding="utf-8").splitlines()) == 3  # retries live inside one record
+
+
 def test_run_generation_no_resume_recaptions_everything(samples, tmp_path):
     output = tmp_path / "captions.jsonl"
     generate(mock_adapter(), samples, output)

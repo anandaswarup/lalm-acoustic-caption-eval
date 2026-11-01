@@ -49,6 +49,8 @@ class CaptionResult:
     finish_reason: str | None = None
     error: str | None = None
     error_traceback: str | None = None  # last frames, for exceptions only
+    # Earlier attempts whose caption was not plain text (see runner.caption_sample), oldest first.
+    format_rejected: list[dict[str, Any]] = field(default_factory=list)
     # Filled in by the runner.
     model_key: str | None = None
     prompt_sha256: str | None = None

@@ -13,6 +13,7 @@ class MockAdapter(CaptionAdapter):
     - "transient:N": raise TransientError on the first N calls, then succeed
     - "error": raise a permanent error
     - "empty" / "truncated": return that status
+    - "json:N": return a JSON object instead of a sentence on the first N calls
     """
 
     def __init__(self, model_key: str, model_config: dict[str, Any], generation_config: dict[str, Any]):
@@ -28,6 +29,8 @@ class MockAdapter(CaptionAdapter):
         if behaviour == "error":
             raise ValueError("simulated permanent failure")
         caption = "" if behaviour == "empty" else f"Mock caption for {request.sample_id}."
+        if behaviour.startswith("json:") and self.calls[request.sample_id] <= int(behaviour.split(":")[1]):
+            caption = '{"main_sound_sources": "a mock", "audible_events": "none"}'
         return CaptionResult(
             sample_id=request.sample_id,
             status=classify(caption, truncated=behaviour == "truncated"),

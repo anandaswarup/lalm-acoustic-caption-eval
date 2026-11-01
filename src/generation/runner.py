@@ -101,6 +101,11 @@ def caption_with_retries(
     return result
 
 
+def is_plain_text(caption: str | None) -> bool:
+    """False for JSON-like output (an object or array instead of a sentence)."""
+    return not (caption or "").lstrip().startswith(("{", "["))
+
+
 def caption_sample(
     adapter: CaptionAdapter,
     sample: dict[str, Any],
@@ -109,20 +114,36 @@ def caption_sample(
     requests_config: dict[str, Any],
     sleep: Callable[[float], None] = time.sleep,
 ) -> CaptionResult:
-    """Caption one manifest sample; audio that is missing or does not match the manifest is never sent."""
+    """Caption one manifest sample; audio that is missing or does not match the manifest is never sent.
+
+    An `ok` caption that is not plain text is requested again, up to `format_attempts` requests in total (the same
+    rule for every model). The last response is kept as the result; the rejected ones go to `format_rejected`.
+    """
     request = CaptionRequest(sample["sample_id"], sample["resolved_audio_path"], prompt, dict(decoding))
     if not request.audio_path.is_file():
         result = adapter.error_result(request, f"audio file not found: {request.audio_path}")
     elif sha256sum(request.audio_path) != sample["audio_sha256"]:
         result = adapter.error_result(request, "audio SHA-256 does not match the manifest")
     else:
-        result = caption_with_retries(
-            adapter,
-            request,
-            requests_config.get("max_retries", 5),
-            requests_config.get("backoff_seconds", 2.0),
-            sleep,
-        )
+        format_attempts = max(1, int(requests_config.get("format_attempts", 1)))
+        rejected = []
+        for attempt in range(1, format_attempts + 1):
+            result = caption_with_retries(
+                adapter,
+                request,
+                requests_config.get("max_retries", 5),
+                requests_config.get("backoff_seconds", 2.0),
+                sleep,
+            )
+            if result.status != "ok" or is_plain_text(result.caption) or attempt == format_attempts:
+                break
+            rejected.append(
+                {
+                    key: getattr(result, key)
+                    for key in ("caption", "raw_response", "usage", "finish_reason", "latency_s", "timestamp_utc")
+                }
+            )
+        result.format_rejected = rejected
     result.model_key = adapter.model_key
     result.prompt_sha256 = prompt_sha256(prompt)
     result.timestamp_utc = result.timestamp_utc or _now()

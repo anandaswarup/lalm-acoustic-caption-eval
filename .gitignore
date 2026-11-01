@@ -19,6 +19,8 @@ data/raw/
 # Run logs and test (smoke) caption outputs
 outputs/logs/
 outputs/smoke/
+# Pilot review: quotes Clotho captions and model outputs
+outputs/reports/pilot_review.md
 
 # LaTeX build artifacts (PDFs are committed)
 manuscript/*.aux
