@@ -2,6 +2,7 @@
 
 import argparse
 import base64
+import hashlib
 import importlib.util
 import json
 import os
@@ -109,6 +110,18 @@ def test_run_generation_resumes(samples, tmp_path):
     assert summary["statuses"] == {"ok": 3}
     assert len(output.read_text(encoding="utf-8").splitlines()) == 4  # earlier attempts are kept
     assert latest_records(output)["clotho_eval_0001"]["status"] == "ok"
+
+
+def test_resume_ignores_records_from_another_prompt(samples, tmp_path):
+    output = tmp_path / "captions.jsonl"
+    generate(mock_adapter(), samples, output)
+    assert latest_records(output)["clotho_eval_0000"]["prompt_sha256"] == hashlib.sha256(b"Describe.").hexdigest()
+    adapter = mock_adapter()
+    run_generation(adapter, samples, output, "Describe again.", GENERATION["decoding"], GENERATION["requests"], {})
+    assert sum(adapter.calls.values()) == 3  # a changed prompt means nothing is done yet
+    adapter = mock_adapter()
+    run_generation(adapter, samples, output, "Describe again.", GENERATION["decoding"], GENERATION["requests"], {})
+    assert adapter.calls == {}
 
 
 def test_run_generation_no_resume_recaptions_everything(samples, tmp_path):

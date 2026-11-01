@@ -11,13 +11,15 @@ runs:
     manifest: data/manifests/clotho_pilot_manifest.jsonl
     output_dir: outputs/captions/pilot
 
+# v2 (E05) adds the last sentence: in the v1 pilot GPT-Audio-1.5 returned 17 of 20 captions as JSON.
 prompt:
-  version: v1
+  version: v2
   text: >-
     Describe the sounds heard in this audio recording in one clear sentence.
     Include the main sound sources, audible events, and distinguishing acoustic
     characteristics. Do not speculate about sources or events that are not
-    supported by the audio.
+    supported by the audio. Respond with the sentence only, as plain text,
+    without JSON, lists, labels or other formatting.
 
 # Shared by all models. Deterministic decoding where the provider supports it;
 # max_output_tokens is a ceiling, not a length target (for Gemini it includes

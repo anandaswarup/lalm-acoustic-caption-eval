@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import os
@@ -44,8 +45,18 @@ def latest_records(output: str | Path) -> dict[str, dict[str, Any]]:
     return {record["sample_id"]: record for record in read_jsonl(path)} if path.exists() else {}
 
 
-def completed_ids(output: str | Path) -> set[str]:
-    return {sample_id for sample_id, record in latest_records(output).items() if record["status"] == "ok"}
+def prompt_sha256(prompt: str) -> str:
+    return hashlib.sha256(prompt.encode("utf-8")).hexdigest()
+
+
+def completed_ids(output: str | Path, prompt: str) -> set[str]:
+    """Samples whose latest record is `ok` and was produced with this exact prompt text."""
+    sha = prompt_sha256(prompt)
+    return {
+        sample_id
+        for sample_id, record in latest_records(output).items()
+        if record["status"] == "ok" and record.get("prompt_sha256") == sha
+    }
 
 
 def append_record(output: Path, record: dict[str, Any]) -> None:
@@ -128,7 +139,7 @@ def run_generation(
     output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     meta_path = output.with_name(output.name.removesuffix(".jsonl") + ".meta.json")
-    done = completed_ids(output) if resume else set()
+    done = completed_ids(output, prompt) if resume else set()
     todo = [sample for sample in samples if sample["sample_id"] not in done]
     logger.info(
         "%d samples, %d already ok, %d to caption -> %s", len(samples), len(samples) - len(todo), len(todo), output
@@ -154,6 +165,7 @@ def run_generation(
                 sleep,
             )
         result.model_key = adapter.model_key
+        result.prompt_sha256 = prompt_sha256(prompt)
         result.timestamp_utc = result.timestamp_utc or _now()
         append_record(output, result.to_dict())
         logger.info(

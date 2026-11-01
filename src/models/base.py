@@ -51,6 +51,7 @@ class CaptionResult:
     error_traceback: str | None = None  # last frames, for exceptions only
     # Filled in by the runner.
     model_key: str | None = None
+    prompt_sha256: str | None = None
     latency_s: float | None = None
     attempts: int | None = None
     timestamp_utc: str | None = None
