@@ -143,9 +143,13 @@ def write_json(value: Any, path: str | Path) -> Path:
 
 
 def write_checksums(paths: Iterable[str | Path], out: str | Path) -> Path:
-    """Write `<sha256>  <name>` lines (sha256sum format) for files in the same directory as `out`."""
+    """Write `<sha256>  <name>` lines (sha256sum format) for files in or below the directory of `out`.
+
+    Names are relative to that directory (`a.jsonl`, `sub/b.jsonl`), so `verify_checksums` finds them again.
+    """
     out = Path(out)
-    lines = [f"{sha256sum(path)}  {Path(path).name}\n" for path in sorted(paths, key=lambda path: Path(path).name)]
+    names = {Path(path).resolve().relative_to(out.parent.resolve()).as_posix(): path for path in paths}
+    lines = [f"{sha256sum(names[name])}  {name}\n" for name in sorted(names)]
     with out.open("w", encoding="utf-8", newline="\n") as stream:
         stream.writelines(lines)
     return out

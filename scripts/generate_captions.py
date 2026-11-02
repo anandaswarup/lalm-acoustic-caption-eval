@@ -35,7 +35,7 @@ def main() -> int:
     dataset = load_config("dataset")
     run = args.run or generation["run"]
     if run not in generation["runs"]:
-        hint = " (consolidation is E10, not part of caption generation)" if run == "consolidate" else ""
+        hint = " (consolidation is E10: scripts/consolidate_captions.py)" if run == "consolidate" else ""
         logger.error("Unknown run %r; expected one of %s%s", run, sorted(generation["runs"]), hint)
         return 1
     if args.model not in models:

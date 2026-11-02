@@ -117,7 +117,7 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | | E07 | Captions: Gemini 3.8 Flash | Done |
 | | E08 | Captions: Qwen2.5-Omni-7B | Done |
 | | E09 | Captions: Audio Flamingo 3 | Done |
-| | E10 | Consolidate and freeze model captions | — |
+| | E10 | Consolidate and freeze model captions | Done |
 | 3. Automatic evaluation | E11 | Implement and validate caption metrics | — |
 | | E12 | Five-reference model evaluation | — |
 | 4. Human calibration | E13 | Human leave-one-out calibration | — |

@@ -65,7 +65,7 @@ fetch-hf: ## Pull Hugging Face Jobs caption outputs into outputs/captions/
 generate: $(addprefix generate-,$(MODELS)) ## Generate captions for all four models
 
 consolidate: ## Merge and freeze model captions (E10)
-	$(PYTHON) scripts/generate_captions.py --set run=consolidate
+	$(PYTHON) scripts/consolidate_captions.py
 
 # --- Phases 3-4: evaluation (E11-E16) ----------------------------------------
 evaluate: ## Five-reference evaluation (E12)
