@@ -114,7 +114,7 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | 2. Caption generation | E04 | Unified LALM inference interfaces | Done |
 | | E05 | Pilot generation and configuration freeze | Done |
 | | E06 | Captions: GPT-Audio-1.5 | Done |
-| | E07 | Captions: Gemini 3.8 Flash | — |
+| | E07 | Captions: Gemini 3.8 Flash | Done |
 | | E08 | Captions: Qwen2.5-Omni-7B | Done |
 | | E09 | Captions: Audio Flamingo 3 | Done |
 | | E10 | Consolidate and freeze model captions | — |

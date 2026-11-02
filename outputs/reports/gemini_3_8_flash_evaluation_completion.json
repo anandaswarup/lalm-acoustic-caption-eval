@@ -1,0 +1,110 @@
+{
+  "run_info": {
+    "experiment": "caption_report",
+    "timestamp_utc": "2026-11-02T07:18:39+00:00",
+    "git_commit": "a4c33c40ac247f5fabcd5eb42375663ab0f2e5d3",
+    "git_dirty": true,
+    "python": "3.13.12",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "seed": 42
+  },
+  "model_key": "gemini_3_8_flash",
+  "output": {
+    "path": "outputs/captions/evaluation/gemini_3_8_flash_captions.jsonl",
+    "sha256": "2c020d6b6121156f0b6c3d0c968f970a8f62220bd4d15eee123f310df50e2c93"
+  },
+  "manifest": {
+    "path": "data/manifests/clotho_eval_manifest.jsonl",
+    "sha256": "7bb457b2999bc61bd1d8829071d0a8d62673edc59e2ee856ea3e4944e6047ac6",
+    "samples": 1045
+  },
+  "prompt_sha256": "6a50f6d3766d4d1bdfcbc16382d99f69e91158c2d1156cb9da03973293351cbb",
+  "complete": true,
+  "records": {
+    "lines": 1045,
+    "samples_with_record": 1045,
+    "not_in_manifest": 0
+  },
+  "statuses": {
+    "ok": 1045
+  },
+  "problems": {
+    "missing": [],
+    "not_ok": [],
+    "other_prompt": []
+  },
+  "format": {
+    "retried": 0,
+    "fixed_by_retry": 0,
+    "rejected_responses": 0,
+    "json_like": [],
+    "json_like_unwrappable": [],
+    "multiline": []
+  },
+  "transient_retries": {
+    "samples": 0,
+    "extra_attempts": 0
+  },
+  "finish_reasons": {
+    "STOP": 1045
+  },
+  "caption_words": {
+    "min": 8,
+    "mean": 16.36,
+    "median": 16,
+    "max": 36
+  },
+  "tokens": {
+    "input": 651751,
+    "input_audio": 585916,
+    "input_text": 65835,
+    "output": 21093,
+    "thinking": 39064
+  },
+  "peak_gpu_memory_gb": null,
+  "latency_s": {
+    "min": 3.086,
+    "mean": 6.58,
+    "median": 5.831,
+    "max": 68.116,
+    "total": 6875.636
+  },
+  "model_versions": {
+    "gemini-3.8-flash": 1045
+  },
+  "system_fingerprints": {},
+  "deviations": {
+    "max_output_tokens includes thinking tokens": 1045
+  },
+  "last_invocation": {
+    "status": "finished",
+    "started_utc": "2026-11-02T07:04:07+00:00",
+    "finished_utc": "2026-11-02T07:18:32+00:00",
+    "git_commit": "a4c33c40ac247f5fabcd5eb42375663ab0f2e5d3",
+    "git_dirty": false,
+    "generation_frozen": true,
+    "manifest_sha256_matches": true,
+    "prompt_version": "v3",
+    "prompt_matches": true,
+    "decoding": {
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "max_output_tokens": 2048,
+      "seed": 42,
+      "thinking_level": "low"
+    },
+    "requests": {
+      "concurrency": 8,
+      "format_attempts": 3,
+      "timeout_seconds": 120,
+      "max_retries": 5,
+      "backoff_seconds": 2.0
+    },
+    "adapter": {
+      "adapter": "GeminiAdapter",
+      "model_id": "gemini-3.8-flash",
+      "library": "google-genai",
+      "library_version": "2.34.0"
+    }
+  }
+}

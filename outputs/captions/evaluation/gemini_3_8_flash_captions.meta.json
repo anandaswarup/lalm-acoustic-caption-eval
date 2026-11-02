@@ -1,0 +1,86 @@
+{
+  "run_info": {
+    "experiment": "generate_captions",
+    "timestamp_utc": "2026-11-02T07:04:06+00:00",
+    "git_commit": "a4c33c40ac247f5fabcd5eb42375663ab0f2e5d3",
+    "git_dirty": false,
+    "python": "3.13.12",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "seed": 42
+  },
+  "run": "evaluation",
+  "model_key": "gemini_3_8_flash",
+  "model": {
+    "display_name": "Gemini 3.8 Flash",
+    "provider": "google",
+    "adapter": "gemini",
+    "access": "api",
+    "model_id": "gemini-3.8-flash",
+    "api_key_env": "GEMINI_API_KEY",
+    "compute": "local",
+    "decoding_overrides": {
+      "seed": 42,
+      "thinking_level": "low"
+    },
+    "requests_overrides": {
+      "concurrency": 8
+    },
+    "output": "gemini_3_8_flash_captions.jsonl"
+  },
+  "manifest": {
+    "path": "data/manifests/clotho_eval_manifest.jsonl",
+    "sha256": "7bb457b2999bc61bd1d8829071d0a8d62673edc59e2ee856ea3e4944e6047ac6"
+  },
+  "selection": {
+    "limit": null,
+    "sample_ids": null,
+    "resume": true
+  },
+  "prompt": {
+    "version": "v3",
+    "text": "Describe the sounds heard in this audio recording in one clear sentence that mentions the main sound sources, audible events, and distinguishing acoustic characteristics. Do not speculate about sources or events that are not supported by the audio. Respond with the sentence only, as plain text, without JSON, lists, labels or other formatting."
+  },
+  "decoding": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "max_output_tokens": 2048,
+    "seed": 42,
+    "thinking_level": "low"
+  },
+  "requests": {
+    "concurrency": 8,
+    "format_attempts": 3,
+    "timeout_seconds": 120,
+    "max_retries": 5,
+    "backoff_seconds": 2.0
+  },
+  "audio": {
+    "allow_resample": true,
+    "allow_crop": false
+  },
+  "generation_frozen": true,
+  "adapter": {
+    "adapter": "GeminiAdapter",
+    "model_id": "gemini-3.8-flash",
+    "library": "google-genai",
+    "library_version": "2.34.0"
+  },
+  "output": "/Users/anandaswarup/work/RESEARCH/lalm-acoustic-caption-eval/outputs/captions/evaluation/gemini_3_8_flash_captions.jsonl",
+  "started_utc": "2026-11-02T07:04:07+00:00",
+  "status": "finished",
+  "finished_utc": "2026-11-02T07:18:32+00:00",
+  "summary": {
+    "samples": 1045,
+    "with_record": 1045,
+    "statuses": {
+      "ok": 1045
+    },
+    "missing": [],
+    "failed": [],
+    "latency_s": {
+      "median": 5.831,
+      "max": 68.116,
+      "total": 6875.636
+    }
+  }
+}
