@@ -68,11 +68,11 @@ Validation and manifest reports are in `outputs/reports/`. The script does not o
 
 The `compute` field for each model is set in `configs/models.yaml`.
 
-## Running experiments
+## Running tasks
 
-Run `make help` for the full list. Main targets (experiment IDs are listed under [Experiments](#experiments)):
+Run `make help` for the full list. Main targets (task IDs are listed under [Tasks](#tasks)):
 
-| Target | Experiment |
+| Target | Task |
 |---|---|
 | `make check-env` | Environment validation |
 | `make prepare-data` | E02–E03: validate Clotho, build frozen manifests |
@@ -106,7 +106,7 @@ manuscript/   LaTeX manuscript (added when writing the paper)
 
 Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit messages refer to these numbers.
 
-| Phase | ID | Experiment | Status |
+| Phase | ID | Task | Status |
 |---|---|---|---|
 | 1. Repository and dataset | E01 | Scaffold repository and execution environment | Done |
 | | E02 | Download, validate and index Clotho v2.1 | Done |
