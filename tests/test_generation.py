@@ -239,7 +239,7 @@ def test_generate_script_end_to_end(clotho, manifest, tmp_path):
     result = run_script(clotho, manifest, tmp_path, "--limit", "2")
     assert result.returncode == 0, result.stderr
     output = tmp_path / "out" / "gpt_audio_1_5_captions.jsonl"
-    assert list(latest_records(output)) == ["clotho_eval_0000", "clotho_eval_0001"]
+    assert sorted(latest_records(output)) == ["clotho_eval_0000", "clotho_eval_0001"]  # concurrency 8: completion order
     meta = json.loads((tmp_path / "out" / "gpt_audio_1_5_captions.meta.json").read_text(encoding="utf-8"))
     assert meta["run"] == "evaluation" and meta["decoding"]["seed"] == 42 and len(meta["manifest"]["sha256"]) == 64
     assert meta["selection"] == {"limit": 2, "sample_ids": None, "resume": True}
