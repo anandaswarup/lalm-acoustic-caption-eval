@@ -1,0 +1,117 @@
+{
+  "run_info": {
+    "experiment": "caption_report",
+    "timestamp_utc": "2026-11-02T06:23:33+00:00",
+    "git_commit": "bd4db4727659eacf0ec579990e88aa070bd60859",
+    "git_dirty": true,
+    "python": "3.13.12",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "seed": 42
+  },
+  "model_key": "audio_flamingo_3",
+  "output": {
+    "path": "outputs/captions/evaluation/audio_flamingo_3_captions.jsonl",
+    "sha256": "eaa018aecf42b4f052ce94924004c9f44108dafd3178209bb441c61090796e0a"
+  },
+  "manifest": {
+    "path": "data/manifests/clotho_eval_manifest.jsonl",
+    "sha256": "7bb457b2999bc61bd1d8829071d0a8d62673edc59e2ee856ea3e4944e6047ac6",
+    "samples": 1045
+  },
+  "prompt_sha256": "6a50f6d3766d4d1bdfcbc16382d99f69e91158c2d1156cb9da03973293351cbb",
+  "complete": true,
+  "records": {
+    "lines": 1045,
+    "samples_with_record": 1045,
+    "not_in_manifest": 0
+  },
+  "statuses": {
+    "ok": 1045
+  },
+  "problems": {
+    "missing": [],
+    "not_ok": [],
+    "other_prompt": []
+  },
+  "format": {
+    "retried": 0,
+    "fixed_by_retry": 0,
+    "rejected_responses": 0,
+    "json_like": [],
+    "json_like_unwrappable": [],
+    "multiline": []
+  },
+  "transient_retries": {
+    "samples": 0,
+    "extra_attempts": 0
+  },
+  "finish_reasons": {
+    "stop": 1045
+  },
+  "caption_words": {
+    "min": 4,
+    "mean": 18.96,
+    "median": 18,
+    "max": 44
+  },
+  "tokens": {
+    "input": 670051,
+    "input_audio": null,
+    "input_text": null,
+    "output": 25496,
+    "thinking": null
+  },
+  "peak_gpu_memory_gb": 16.72,
+  "latency_s": {
+    "min": 0.21,
+    "mean": 0.69,
+    "median": 0.669,
+    "max": 1.534,
+    "total": 722.024
+  },
+  "model_versions": {
+    "7d4bae64ee29878af6504ae6f6bb3e40492838ad": 1045
+  },
+  "system_fingerprints": {},
+  "deviations": {},
+  "last_invocation": {
+    "status": "finished",
+    "started_utc": "2026-11-02T06:01:58+00:00",
+    "finished_utc": "2026-11-02T06:22:12+00:00",
+    "git_commit": "bd4db4727659eacf0ec579990e88aa070bd60859",
+    "git_dirty": false,
+    "generation_frozen": true,
+    "manifest_sha256_matches": true,
+    "prompt_version": "v3",
+    "prompt_matches": true,
+    "decoding": {
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "max_output_tokens": 2048
+    },
+    "requests": {
+      "concurrency": 1,
+      "format_attempts": 3,
+      "timeout_seconds": 120,
+      "max_retries": 5,
+      "backoff_seconds": 2.0
+    },
+    "adapter": {
+      "adapter": "AudioFlamingo3Adapter",
+      "model_id": "nvidia/audio-flamingo-3-hf",
+      "revision": "7d4bae64ee29878af6504ae6f6bb3e40492838ad",
+      "library": "transformers",
+      "library_version": "5.22.1",
+      "torch_version": "2.14.1+cu126",
+      "dtype": "torch.bfloat16",
+      "cuda": "12.6",
+      "gpu": {
+        "name": "NVIDIA A100-SXM4-80GB",
+        "memory_gb": 85.1,
+        "count": 1
+      },
+      "system_prompt": null,
+      "repetition_penalty": null
+    }
+  }
+}

@@ -115,8 +115,8 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | | E05 | Pilot generation and configuration freeze | Done |
 | | E06 | Captions: GPT-Audio-1.5 | — |
 | | E07 | Captions: Gemini 3.8 Flash | — |
-| | E08 | Captions: Qwen2.5-Omni-7B | — |
-| | E09 | Captions: Audio Flamingo 3 | — |
+| | E08 | Captions: Qwen2.5-Omni-7B | Done |
+| | E09 | Captions: Audio Flamingo 3 | Done |
 | | E10 | Consolidate and freeze model captions | — |
 | 3. Automatic evaluation | E11 | Implement and validate caption metrics | — |
 | | E12 | Five-reference model evaluation | — |

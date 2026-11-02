@@ -1,0 +1,119 @@
+{
+  "run_info": {
+    "experiment": "caption_report",
+    "timestamp_utc": "2026-11-02T06:23:33+00:00",
+    "git_commit": "bd4db4727659eacf0ec579990e88aa070bd60859",
+    "git_dirty": true,
+    "python": "3.13.12",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "seed": 42
+  },
+  "model_key": "qwen2_5_omni",
+  "output": {
+    "path": "outputs/captions/evaluation/qwen2_5_omni_captions.jsonl",
+    "sha256": "cd64fef2ce242a96774bd09bd5471d12d98adbbe5a3c1e047744daf0a5749552"
+  },
+  "manifest": {
+    "path": "data/manifests/clotho_eval_manifest.jsonl",
+    "sha256": "7bb457b2999bc61bd1d8829071d0a8d62673edc59e2ee856ea3e4944e6047ac6",
+    "samples": 1045
+  },
+  "prompt_sha256": "6a50f6d3766d4d1bdfcbc16382d99f69e91158c2d1156cb9da03973293351cbb",
+  "complete": true,
+  "records": {
+    "lines": 1045,
+    "samples_with_record": 1045,
+    "not_in_manifest": 0
+  },
+  "statuses": {
+    "ok": 1045
+  },
+  "problems": {
+    "missing": [],
+    "not_ok": [],
+    "other_prompt": []
+  },
+  "format": {
+    "retried": 0,
+    "fixed_by_retry": 0,
+    "rejected_responses": 0,
+    "json_like": [],
+    "json_like_unwrappable": [],
+    "multiline": []
+  },
+  "transient_retries": {
+    "samples": 0,
+    "extra_attempts": 0
+  },
+  "finish_reasons": {
+    "stop": 1045
+  },
+  "caption_words": {
+    "min": 4,
+    "mean": 16.96,
+    "median": 17,
+    "max": 33
+  },
+  "tokens": {
+    "input": 672141,
+    "input_audio": null,
+    "input_text": null,
+    "output": 22816,
+    "thinking": null
+  },
+  "peak_gpu_memory_gb": 22.37,
+  "latency_s": {
+    "min": 0.278,
+    "mean": 0.68,
+    "median": 0.682,
+    "max": 1.318,
+    "total": 714.211
+  },
+  "model_versions": {
+    "ae9e1690543ffd5c0221dc27f79834d0294cba00": 1045
+  },
+  "system_fingerprints": {},
+  "deviations": {},
+  "last_invocation": {
+    "status": "finished",
+    "started_utc": "2026-11-02T06:01:51+00:00",
+    "finished_utc": "2026-11-02T06:22:12+00:00",
+    "git_commit": "bd4db4727659eacf0ec579990e88aa070bd60859",
+    "git_dirty": false,
+    "generation_frozen": true,
+    "manifest_sha256_matches": true,
+    "prompt_version": "v3",
+    "prompt_matches": true,
+    "decoding": {
+      "temperature": 0.0,
+      "top_p": 1.0,
+      "max_output_tokens": 2048
+    },
+    "requests": {
+      "concurrency": 1,
+      "format_attempts": 3,
+      "timeout_seconds": 120,
+      "max_retries": 5,
+      "backoff_seconds": 2.0
+    },
+    "adapter": {
+      "adapter": "Qwen25OmniAdapter",
+      "model_id": "Qwen/Qwen2.5-Omni-7B",
+      "revision": "ae9e1690543ffd5c0221dc27f79834d0294cba00",
+      "library": "transformers",
+      "library_version": "5.22.1",
+      "torch_version": "2.14.1+cu126",
+      "dtype": "torch.bfloat16",
+      "cuda": "12.6",
+      "gpu": {
+        "name": "NVIDIA A100-SXM4-80GB",
+        "memory_gb": 85.1,
+        "count": 1
+      },
+      "attn_implementation": "sdpa",
+      "talker": "disabled",
+      "generate": "thinker.generate",
+      "system_prompt": null
+    }
+  }
+}
