@@ -18,7 +18,7 @@ Evaluating Large Audio Language Model (LALM)-generated acoustic captions against
 | Pilot | 20 recordings from the validation split (seed 42), excluding recordings that share a Freesound source with the evaluation split; technical validation only |
 | Models | GPT-Audio-1.5, Gemini 3.8 Flash, Qwen2.5-Omni-7B, Audio Flamingo 3 |
 | Prompt | One fixed prompt for all models (`configs/generation.yaml`) |
-| Metrics | BLEU-1–4, METEOR, CIDEr, SPICE, SPIDEr, SPIDEr-FL, BERTScore, FENSE; CLAP and MACE reported separately |
+| Metrics | BLEU-1–4, METEOR, CIDEr-D, SPICE, SPIDEr, SPIDEr-FL, FENSE, BERTScore-F1 (raw and rescaled); CLAP similarity and MACE reported separately |
 
 ## Setup
 
@@ -37,7 +37,7 @@ make test
 
 Other requirements:
 
-- **Java** for METEOR, SPICE and the PTB tokenizer (E11).
+- A separate metrics environment and pinned tools (JDK 11, jars, checkpoints) for the caption metrics; see [Metrics](#metrics).
 - **LaTeX** (`latexmk`, `pdflatex`) for `make paper`, once the manuscript is added.
 - **Hugging Face CLI** (`hf`) and `HF_TOKEN` for HF Jobs.
 
@@ -63,10 +63,31 @@ Validation and manifest reports are in `outputs/reports/`. The script does not o
 
 | Workload | Where |
 |---|---|
-| API inference (GPT-Audio-1.5, Gemini 3.8 Flash), lexical metrics, analysis, figures | Local laptop |
-| Open-weight inference (Qwen2.5-Omni-7B, Audio Flamingo 3), heavy model-based metrics | Hugging Face Jobs |
+| API inference (GPT-Audio-1.5, Gemini 3.8 Flash), all caption metrics (CPU), analysis, figures | Local laptop |
+| Open-weight inference (Qwen2.5-Omni-7B, Audio Flamingo 3) | Hugging Face Jobs |
 
-The `compute` field for each model is set in `configs/models.yaml`.
+The `compute` field for each model is set in `configs/models.yaml`. The E11 validation estimates about 2 hours of CPU time for all metrics on all evaluation conditions (E12–E14), so the metrics run on the laptop.
+
+### Metrics
+
+The caption metrics run in their own environment, `.venv-metrics` (`requirements-metrics.txt`), because MS-CLAP (used for CLAP similarity and MACE) needs older numpy, pandas and transformers than the rest of the project. METEOR, SPICE and the PTB tokenizer need **Java 11–13**: aac-metrics rejects newer versions and SPICE needs the Nashorn engine, removed in Java 15. The metrics therefore use their own JDK 11, downloaded into `tools/`, not the system Java.
+
+```sh
+make venv-metrics install-metrics   # .venv-metrics from requirements-metrics.txt
+make metric-tools       # JDK 11, metric jars and model checkpoints into tools/ (about 4.5 GB, git-ignored)
+make test-metrics       # integration tests with the real jars and checkpoints
+make validate-metrics   # pilot validation; writes outputs/reports/metric_implementation.{json,md}
+```
+
+- `make metric-tools` checks every download against the SHA-256 or commit pinned in `configs/metrics.yaml` (`tools:`) and records the SHA-256 of every file in `tools/MANIFEST.json`; `python scripts/setup_metric_tools.py --check` verifies them again. CoreNLP 3.6.0 (for SPICE) comes from Stanford's mirror `downloads.cs.stanford.edu`, because the URL aac-metrics uses is unreachable.
+- Scoring runs offline: models load only from `tools/` at the pinned revisions.
+- Every text metric scores PTB-tokenized text (lowercased, punctuation removed), as in aac-metrics and DCASE. Each scoring call covers a whole condition at once, because CIDEr-D and the BLEU and METEOR corpus statistics depend on every reference in the call.
+- Metric parameters are in `configs/metrics.yaml` (`settings:`). Implementation notes:
+  - BLEU, METEOR, CIDEr-D, SBERT similarity, the fluency-error detector and BERTScore come from aac-metrics 0.5.5.
+  - SPICE runs without its parse cache, whose native library is x86-only; scores are unchanged.
+  - BERTScore uses roberta-large's last layer (24), as aac-metrics does, with `max_length` 128. The rescaled F1 uses the layer-24 baseline.
+  - CLAP similarity and MACE use MS-CLAP 2023 on the whole clip (7 s chunks, duration-weighted), and MACE combines audio–text and text–text similarity, as in the MACE paper.
+- The implementation report covers versions, pins, determinism, truncation, timings, and the interpretation and limitations of each metric.
 
 ## Running tasks
 
@@ -79,6 +100,7 @@ Run `make help` for the full list. Main targets (task IDs are listed under [Task
 | `make pilot` | E05: pilot generation |
 | `make generate` / `make generate-<model>` | E06–E09: caption generation |
 | `make consolidate` | E10: merge and freeze captions |
+| `make metric-tools` / `make test-metrics` / `make validate-metrics` | E11: metric tools, integration tests, validation report |
 | `make evaluate` | E12: five-reference evaluation |
 | `make loo` | E13: human leave-one-out calibration |
 | `make evaluate-four-ref` | E14: matched four-reference evaluation |
@@ -118,7 +140,7 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | | E08 | Captions: Qwen2.5-Omni-7B | Done |
 | | E09 | Captions: Audio Flamingo 3 | Done |
 | | E10 | Consolidate and freeze model captions | Done |
-| 3. Automatic evaluation | E11 | Implement and validate caption metrics | — |
+| 3. Automatic evaluation | E11 | Implement and validate caption metrics | Done |
 | | E12 | Five-reference model evaluation | — |
 | 4. Human calibration | E13 | Human leave-one-out calibration | — |
 | | E14 | Matched four-reference model evaluation | — |
