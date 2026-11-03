@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 .venv/
+.venv-metrics/
 .pytest_cache/
 .ruff_cache/
 
@@ -44,3 +45,5 @@ outputs/captions/pilot_prompt_v1/
 outputs/captions/pilot_prompt_v2/
 outputs/captions/pilot_repeat/
 outputs/captions/repeat_hf/
+# Metric tools (JDK 11, jars, checkpoints): downloaded and verified by `make metric-tools`
+tools/

@@ -32,3 +32,53 @@ bootstrap:
 compute:
   default: local
   heavy: hf_jobs
+
+# External tools, downloaded and verified by `make metric-tools` into `dir` (git-ignored). tools/MANIFEST.json records
+# the SHA-256 of every file used. The metrics run in .venv-metrics (requirements-metrics.txt).
+tools:
+  dir: tools
+  # aac-metrics accepts Java 8-13 and SPICE needs Nashorn (removed in Java 15), so the metrics use their own JDK 11,
+  # not the system Java. A non-empty METRICS_JAVA overrides it (major version must be 11-13).
+  java_path: ${METRICS_JAVA:-}
+  jdk:
+    release: jdk-11.0.32.1+1
+    builds:  # keyed by <platform.system()>-<platform.machine()>, lowercased
+      darwin-arm64:
+        url: https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.32.1%2B1/OpenJDK11U-jdk_aarch64_mac_hotspot_11.0.32.1_1.tar.gz
+        sha256: c487a1c3a56588b3a32d0d07cdd526bf3d401c4b8422be772ca178bfcd647f3f
+        java_bin: Contents/Home/bin/java
+      linux-x86_64:
+        url: https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.32.1%2B1/OpenJDK11U-jdk_x64_linux_hotspot_11.0.32.1_1.tar.gz
+        sha256: 5c3f68887c325d36d852ba534303e1f5f1f5cae7d6cc1e951d73e0d8e98a058d
+        java_bin: bin/java
+  # CoreNLP 3.6.0 for SPICE. aac-metrics fetches it from nlp.stanford.edu, which is unreachable; same file, Stanford
+  # mirror. It is placed where aac-metrics looks for it, so aac-metrics skips its own download.
+  corenlp:
+    url: https://downloads.cs.stanford.edu/nlp/software/stanford-corenlp-full-2015-12-09.zip
+    sha256: c3e8f129d56cbcd9747ee6615736fb4bc023c5ea550e50465fdf3138fdb9a187
+  # Files fetched by aac-metrics 0.5.5 (paths relative to `dir`), checked after download.
+  files:
+    aac-metrics/stanford_nlp/stanford-corenlp-3.4.1.jar: 2fcb91bb7a111f93d71e264f4ee0e3afd19ba0dde6d21b38605088df9e940399
+    aac-metrics/meteor/meteor-1.5.jar: 1e57b4c72c0830ebe68558f1c799a624e96cbc1b6045c9f6330e26dcff6eafc2
+    aac-metrics/meteor/data/paraphrase-en.gz: c147ac7d2c91f2fbb3ad31e4b352235061eb83145e0434daf217ee9ca5975f48
+    aac-metrics/spice/spice-1.0.jar: 4cfa4c1e24cd579b54d48a73eb100d3c22e3653dcdb3a6ebbe337bf149691ca6
+    aac-metrics/spice/lib/stanford-corenlp-3.6.0.jar: d341d5863276f55782c5ef73212222d6b3b48e02ae1951ab6de7618d28b12742
+    aac-metrics/spice/lib/stanford-corenlp-3.6.0-models.jar: d285157bd7887ee3018094b5dbae092e49088b023361ccdb550ee1daf9b2c9bd
+    aac-metrics/spice/lib/SceneGraphParser-1.0.jar: 83a1b7c3f896dd135f9539ba41d65b155827dfc312893bfd5bb835c9f9ae310a
+    torch/hub/fense_data/echecker_clotho_audiocaps_base.ckpt: 1a719f090af70614bbdb9f9437530b7e133c48cfa4a58d964de0d47fc974a2fa
+  # Hugging Face checkpoints (HF_HOME=<dir>/hf), pinned by commit; the cached `main` ref must match.
+  hf_models:
+    roberta-large: 722cf37b1afa9454edce342e7895e588b6ff1d59  # BERTScore
+    sentence-transformers/paraphrase-TinyBERT-L6-v2: 68ed8e61dc7009b863c86c2ea2f748e864cd6b34  # FENSE SBERT-sim
+    bert-base-uncased: 86b5e0934494bd15c9632b12f734a8a67f723594  # FENSE fluency-error detector
+    gpt2: 607a30d783dfa663caf39e06633721c8d4cfcd7e  # MS-CLAP 2023 text encoder
+    microsoft/msclap: c47d441165daa21986ead0850660917636a81775  # MS-CLAP 2023 weights
+  clap:
+    repo: microsoft/msclap
+    filename: CLAP_weights_2023.pth
+    sha256: 2cef4016d47d00eb28d153d522f397222057f95000e9bad6b9583c631284a1e6
+  # Rescaled BERTScore (secondary column): bert_score's roberta-large baseline, pinned to a commit.
+  bertscore_baseline:
+    url: https://raw.githubusercontent.com/Tiiiger/bert_score/19e7f551fe4fa43fdd07b8129ae947015b902b2d/bert_score/rescale_baseline/en/roberta-large.tsv
+    sha256: 08e2248310d0c25d8e22ef65e0a6be15060269f1a9084e560c258f09a9e122ae
+    path: bert_score/roberta-large.tsv

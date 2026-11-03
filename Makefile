@@ -1,13 +1,16 @@
 # Run every target from the repository root. Python comes from the uv-managed
 # .venv (built on the Miniforge interpreter); override with `make PYTHON=...`.
+# The caption metrics (E11-E14) run in a separate .venv-metrics (see requirements-metrics.txt).
 
 BASE_PYTHON ?= /opt/homebrew/Caskroom/miniforge/base/bin/python3
 VENV        ?= .venv
 PYTHON      ?= $(VENV)/bin/python
+METRICS_VENV   ?= .venv-metrics
+METRICS_PYTHON ?= $(METRICS_VENV)/bin/python
 MODELS      := gpt_audio_1_5 gemini_3_8_flash qwen2_5_omni audio_flamingo_3
 
 .DEFAULT_GOAL := help
-.PHONY: help venv install check-env test lint format \
+.PHONY: help venv install check-env test lint format venv-metrics install-metrics metric-tools \
         prepare-data pilot generate hf-upload-audio fetch-hf consolidate \
         evaluate loo evaluate-four-ref lengths stats figures all paper paper-clean clean
 
@@ -34,6 +37,15 @@ lint: ## Lint and check formatting
 format: ## Apply formatting and safe lint fixes
 	$(PYTHON) -m ruff check --fix .
 	$(PYTHON) -m ruff format .
+
+venv-metrics: ## Create .venv-metrics for the caption metrics (E11)
+	uv venv --python $(BASE_PYTHON) $(METRICS_VENV)
+
+install-metrics: ## Install pinned metric dependencies into .venv-metrics
+	uv pip install --python $(METRICS_PYTHON) -r requirements-metrics.txt
+
+metric-tools: ## Download and verify the JDK 11, metric jars and checkpoints into tools/ (E11)
+	$(METRICS_PYTHON) scripts/setup_metric_tools.py
 
 # --- Phase 1: dataset (E02-E03) ----------------------------------------------
 prepare-data: ## Validate Clotho and build frozen evaluation/pilot manifests
@@ -69,13 +81,13 @@ consolidate: ## Merge and freeze model captions (E10)
 
 # --- Phases 3-4: evaluation (E11-E16) ----------------------------------------
 evaluate: ## Five-reference evaluation (E12)
-	$(PYTHON) scripts/evaluate_captions.py --set condition=five_reference
+	$(METRICS_PYTHON) scripts/evaluate_captions.py --set condition=five_reference
 
 loo: ## Human leave-one-out calibration (E13)
-	$(PYTHON) scripts/human_leave_one_out.py
+	$(METRICS_PYTHON) scripts/human_leave_one_out.py
 
 evaluate-four-ref: ## Matched four-reference model evaluation (E14)
-	$(PYTHON) scripts/evaluate_captions.py --set condition=four_reference
+	$(METRICS_PYTHON) scripts/evaluate_captions.py --set condition=four_reference
 
 lengths: ## Caption-length analysis (E15)
 	$(PYTHON) scripts/analyze_lengths.py
@@ -98,4 +110,4 @@ paper-clean: ## Remove LaTeX build artifacts
 
 clean: ## Remove caches and logs (keeps outputs and manuscript PDF)
 	rm -rf .pytest_cache .ruff_cache outputs/logs
-	find . -name __pycache__ -type d -prune -not -path './$(VENV)/*' -exec rm -rf {} +
+	find . -name __pycache__ -type d -prune -not -path './$(VENV)/*' -not -path './$(METRICS_VENV)/*' -not -path './tools/*' -exec rm -rf {} +
