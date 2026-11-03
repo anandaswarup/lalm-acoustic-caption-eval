@@ -43,12 +43,25 @@ def tool_paths(tools: dict[str, Any]) -> dict[str, Path]:
     }
 
 
-def activate(tools: dict[str, Any]) -> dict[str, Path]:
-    """Point the Hugging Face and torch hub caches at `tools/`. Call before importing aac_metrics or msclap."""
+def activate(tools: dict[str, Any], offline: bool = False) -> dict[str, Path]:
+    """Point the Hugging Face and torch hub caches at `tools/`. Call before importing aac_metrics or msclap.
+
+    With `offline`, Hugging Face models load only from the cache (the pinned revisions); nothing is downloaded.
+    """
     paths = tool_paths(tools)
     os.environ["HF_HOME"] = str(paths["hf_home"])
     os.environ["TORCH_HOME"] = str(paths["torch_home"])
+    if offline:
+        os.environ["HF_HUB_OFFLINE"] = "1"
+        os.environ["TRANSFORMERS_OFFLINE"] = "1"
     return paths
+
+
+def clap_weights_path(tools: dict[str, Any]) -> Path:
+    clap = tools["clap"]
+    revision = tools["hf_models"][clap["repo"]]
+    cache = tool_paths(tools)["hf_home"] / "hub" / f"models--{clap['repo'].replace('/', '--')}"
+    return cache / "snapshots" / revision / clap["filename"]
 
 
 def jdk_build(tools: dict[str, Any]) -> dict[str, str]:
