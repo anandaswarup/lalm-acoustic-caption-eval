@@ -30,12 +30,14 @@ settings:
   cider_d: {n: 4, sigma: 6.0, scale: 10.0}
   spice: {java_max_memory: 8G, threads: null}  # run without SPICE's parse cache (its native library is x86-only)
   # Fluency-error detector shared by FENSE, SPIDEr-FL and MACE; a caption is flagged when P(error) > threshold.
-  fluency_error: {model: echecker_clotho_audiocaps_base}
+  # Its input length is fixed at 64 subwords by aac-metrics (its training length); longer inputs are counted, not changed.
+  fluency_error: {model: echecker_clotho_audiocaps_base, max_length: 64}
   fense: {sbert_model: paraphrase-TinyBERT-L6-v2, error_threshold: 0.9, penalty: 0.9}
   spider_fl: {error_threshold: 0.9, penalty: 0.9}
   # aac-metrics BERTScore: last layer (24) of roberta-large, no IDF, max over references. The rescaled F1 (secondary)
-  # uses the layer-24 row of the pinned bert_score baseline.
-  bertscore: {model: roberta-large, baseline_layer: 24, idf: false, reduction: max, max_length: 64}
+  # uses the layer-24 row of the pinned bert_score baseline. max_length is 128, not aac-metrics' 64: two GPT captions
+  # (malformed three-field JSON) are 65-72 subwords after PTB tokenization (E11 measurement).
+  bertscore: {model: roberta-large, baseline_layer: 24, idf: false, reduction: max, max_length: 128}
   # MS-CLAP 2023 (44.1 kHz, 7 s input): the whole clip is embedded in 7 s chunks, averaged weighted by duration.
   clap: {version: "2023", sample_rate: 44100, chunk_seconds: 7}
   # MACE as in the paper (arXiv 2411.00321): 0.5 * (audio-text + mean text-text CLAP cosine) * (1 - penalty * error).

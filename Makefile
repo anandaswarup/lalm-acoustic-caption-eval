@@ -10,7 +10,7 @@ METRICS_PYTHON ?= $(METRICS_VENV)/bin/python
 MODELS      := gpt_audio_1_5 gemini_3_8_flash qwen2_5_omni audio_flamingo_3
 
 .DEFAULT_GOAL := help
-.PHONY: help venv install check-env test lint format venv-metrics install-metrics metric-tools \
+.PHONY: help venv install check-env test test-metrics lint format venv-metrics install-metrics metric-tools \
         prepare-data pilot generate hf-upload-audio fetch-hf consolidate \
         evaluate loo evaluate-four-ref lengths stats figures all paper paper-clean clean
 
@@ -29,6 +29,9 @@ check-env: ## Validate Python, dependencies, configs, tools, dataset and credent
 
 test: ## Run the test suite
 	$(PYTHON) -m pytest
+
+test-metrics: ## Metric integration tests with the real jars and checkpoints (E11; needs make metric-tools)
+	$(METRICS_PYTHON) -m pytest -m metrics tests/test_metrics_integration.py
 
 lint: ## Lint and check formatting
 	$(PYTHON) -m ruff check .

@@ -1,6 +1,8 @@
 """Metric tool helpers (E11): Java checks, pinned revisions and the tools manifest. No JDK or downloads needed."""
 
 import json
+import os
+import sys
 
 import pytest
 
@@ -93,3 +95,25 @@ def test_manifest_round_trip(tmp_path):
 
 def test_verify_manifest_without_manifest(tmp_path):
     assert "make metric-tools" in metric_tools.verify_manifest(tmp_path)[0]
+
+
+def test_activate_refuses_an_earlier_huggingface_hub_import(tmp_path, monkeypatch):
+    import types
+
+    tools = {**load_config("metrics")["tools"], "dir": str(tmp_path)}
+    for name in ("HF_HOME", "TORCH_HOME", "HF_HUB_OFFLINE", "TRANSFORMERS_OFFLINE"):
+        monkeypatch.delenv(name, raising=False)
+
+    def fake_hub(hf_home, offline):
+        constants = types.SimpleNamespace(HF_HOME=str(hf_home), HF_HUB_OFFLINE=offline)
+        monkeypatch.setitem(sys.modules, "huggingface_hub", types.SimpleNamespace(constants=constants))
+
+    fake_hub(tmp_path / "elsewhere", True)
+    with pytest.raises(RuntimeError, match="imported before activate"):
+        metric_tools.activate(tools, offline=True)
+    fake_hub(tmp_path / "hf", False)
+    with pytest.raises(RuntimeError, match="imported before activate"):
+        metric_tools.activate(tools, offline=True)
+    fake_hub(tmp_path / "hf", True)
+    paths = metric_tools.activate(tools, offline=True)
+    assert os.environ["HF_HOME"] == str(paths["hf_home"]) and os.environ["HF_HUB_OFFLINE"] == "1"

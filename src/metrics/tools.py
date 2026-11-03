@@ -11,6 +11,7 @@ import os
 import platform
 import re
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -47,8 +48,15 @@ def activate(tools: dict[str, Any], offline: bool = False) -> dict[str, Path]:
     """Point the Hugging Face and torch hub caches at `tools/`. Call before importing aac_metrics or msclap.
 
     With `offline`, Hugging Face models load only from the cache (the pinned revisions); nothing is downloaded.
+    huggingface_hub reads these variables once, at import: if it was imported earlier with another cache, the settings
+    would be silently ignored (and models fetched into the home cache), so that raises instead.
     """
     paths = tool_paths(tools)
+    if "huggingface_hub" in sys.modules:
+        constants = sys.modules["huggingface_hub"].constants
+        other_cache = Path(constants.HF_HOME).resolve() != paths["hf_home"].resolve()
+        if other_cache or (offline and not constants.HF_HUB_OFFLINE):
+            raise RuntimeError("huggingface_hub was imported before activate(); activate the metric tools first")
     os.environ["HF_HOME"] = str(paths["hf_home"])
     os.environ["TORCH_HOME"] = str(paths["torch_home"])
     if offline:

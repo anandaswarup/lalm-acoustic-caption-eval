@@ -23,6 +23,19 @@ def check_texts(texts: Sequence[str], what: str) -> list[str]:
     return errors
 
 
+def subword_lengths(texts: Sequence[str], tokenizer_name: str, suffix: str = "") -> list[int]:
+    """Subword count of each text (special tokens included) under a Hugging Face tokenizer, as a model would see it."""
+    from transformers import AutoTokenizer
+
+    tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
+    return [len(tokenizer(text + suffix, add_special_tokens=True)["input_ids"]) for text in texts]
+
+
+def truncation_summary(lengths: Sequence[int], limit: int) -> dict[str, int]:
+    """How many inputs exceed a model's maximum length (they would be truncated or rejected)."""
+    return {"limit": limit, "max_length": max(lengths), "num_over_limit": sum(n > limit for n in lengths)}
+
+
 def ptb_tokenize(texts: Sequence[str], *, java: str | Path, cache_path: str | Path, tmp_path: str | Path) -> list[str]:
     """PTB-tokenize `texts` with one Java call; raise if any input or output is invalid."""
     from aac_metrics.utils.tokenization import preprocess_mono_sents

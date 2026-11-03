@@ -142,3 +142,9 @@ def test_registry():
     }
     primary = {metric.name for metric in METRICS if metric.family != "auxiliary"}
     assert {"spider_fl", "fense", "bertscore_f1", "clap_similarity", "mace"} <= primary
+
+
+def test_truncation_summary():
+    from src.metrics.preprocess import truncation_summary
+
+    assert truncation_summary([10, 64, 65, 72], 64) == {"limit": 64, "max_length": 72, "num_over_limit": 2}
