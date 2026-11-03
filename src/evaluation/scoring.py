@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from src.evaluation.inputs import check_condition_inputs
-from src.metrics.registry import METRICS, Score
+from src.metrics.registry import METRICS, Score, Timer
 
 SCORE_COLUMNS = ("system", "condition", "subset", "sample_id", "metric", "score")
 CORPUS_COLUMNS = ("system", "condition", "subset", "metric", "corpus", "item_mean", "num_items")
@@ -39,8 +39,15 @@ class Evaluator:
         self.paths = tool_paths(tools)
         self.java = java_path(tools)
         (self.paths["root"] / "tmp").mkdir(parents=True, exist_ok=True)
-        self.reference = ReferenceScorer(settings, tools)
+        self.timer = Timer()
+        self.reference = ReferenceScorer(settings, tools, self.timer)
         self._clap = None
+
+    def load_models(self, audio: bool = True) -> None:
+        """Load every model up front, so that per-metric timings exclude loading."""
+        self.reference.load_models()
+        if audio:
+            _ = self.clap
 
     @property
     def clap(self):
@@ -48,7 +55,9 @@ class Evaluator:
             from src.metrics.clap import ClapEmbedder
             from src.metrics.tools import clap_weights_path
 
-            self._clap = ClapEmbedder(clap_weights_path(self.tools), self.settings["clap"], self.settings["batch_size"])
+            with self.timer("load_models"):
+                weights, settings = clap_weights_path(self.tools), self.settings["clap"]
+                self._clap = ClapEmbedder(weights, settings, self.settings["batch_size"])
         return self._clap
 
     def score(
@@ -71,7 +80,8 @@ class Evaluator:
         raw_references = [references[sid] for sid in sample_ids]
         flat = raw_candidates + [ref for refs in raw_references for ref in refs]
         root = self.paths["root"]
-        tokenized = ptb_tokenize(flat, java=self.java, cache_path=root, tmp_path=root / "tmp")
+        with self.timer("ptb_tokenize"):
+            tokenized = ptb_tokenize(flat, java=self.java, cache_path=root, tmp_path=root / "tmp")
         cands = tokenized[: len(sample_ids)]
         refs = [
             tokenized[len(sample_ids) + i * num_references : len(sample_ids) + (i + 1) * num_references]
@@ -81,11 +91,14 @@ class Evaluator:
         scores = self.reference.score(cands, refs)
         if audio is not None:
             clap = self.clap
-            clap.text(cands + [ref for item in refs for ref in item])  # embed all distinct texts in batches
+            with self.timer("clap_text"):
+                clap.text(cands + [ref for item in refs for ref in item])  # embed all distinct texts in batches
+            with self.timer("clap_audio"):
+                audio_embeddings = clap.audio([audio[sid] for sid in sample_ids])
             scores |= audio_aware_scores(
                 clap.text(cands),
                 [clap.text(item) for item in refs],
-                clap.audio([audio[sid] for sid in sample_ids]),
+                audio_embeddings,
                 self.reference.error_probabilities(cands),
                 self.settings["mace"],
             )

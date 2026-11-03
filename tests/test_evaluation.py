@@ -126,3 +126,32 @@ def test_score_tables(tmp_path):
     with corpus.open(encoding="utf-8") as stream:
         (row,) = list(csv.DictReader(stream))
     assert (float(row["corpus"]), float(row["item_mean"]), row["num_items"]) == (0.55, 0.375, "2")
+
+
+def test_compare_runs_and_extrapolation():
+    from src.evaluation.validation import compare_runs, corpus_table, extrapolate
+
+    def run(value):
+        return [ScoreSet("m", "five_reference", "all", ["s0", "s1"], {"spice": Score(value, np.array([0.1, value]))})]
+
+    same = compare_runs(run(0.5), run(0.5))
+    assert same == {"identical": True, "values_compared": 3, "max_abs_difference": 0.0, "differing": []}
+    different = compare_runs(run(0.5), run(0.5 + 1e-12))
+    assert not different["identical"] and different["differing"] == ["m/five_reference/all/spice"]
+    assert different["max_abs_difference"] == pytest.approx(1e-12)
+    assert corpus_table(run(0.5) + run(0.7), "five_reference") == {"m": {"spice": pytest.approx(0.6)}}
+
+    estimate = extrapolate({"spice": 10.0, "bleu": 2.0, "load_models": 30.0}, 20, 1045)
+    assert estimate["estimated_seconds"] == {"spice": 522.5, "bleu": 104.5}
+    assert estimate["estimated_total_hours"] == pytest.approx(0.17)
+
+
+def test_two_point_estimate():
+    from src.evaluation.validation import two_point_estimate
+
+    # 5 s fixed + 0.1 s per item: 7 s at 20 items, 13 s at 80 items.
+    estimate = two_point_estimate({"spice": 7.0, "load_models": 3.0}, 20, {"spice": 13.0}, 80, 1045, 29)
+    assert estimate["steps"] == {
+        "spice": {"fixed_seconds": 5.0, "seconds_per_item": 0.1, "estimated_seconds": pytest.approx(29 * 109.5)}
+    }
+    assert estimate["estimated_hours"] == pytest.approx(29 * 109.5 / 3600, abs=0.01)

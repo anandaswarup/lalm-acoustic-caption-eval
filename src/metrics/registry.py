@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+import time
+from collections import defaultdict
+from collections.abc import Iterator
+from contextlib import contextmanager
 from dataclasses import dataclass
 from typing import NamedTuple
 
@@ -13,6 +17,23 @@ class Score(NamedTuple):
 
     corpus: float
     items: np.ndarray
+
+
+class Timer:
+    """Wall-clock seconds and call counts per named step, accumulated across calls (for the implementation report)."""
+
+    def __init__(self) -> None:
+        self.seconds: dict[str, float] = defaultdict(float)
+        self.calls: dict[str, int] = defaultdict(int)
+
+    @contextmanager
+    def __call__(self, name: str) -> Iterator[None]:
+        start = time.perf_counter()
+        try:
+            yield
+        finally:
+            self.seconds[name] += time.perf_counter() - start
+            self.calls[name] += 1
 
 
 def check_scores(scores: dict[str, Score], num_items: int) -> list[str]:
