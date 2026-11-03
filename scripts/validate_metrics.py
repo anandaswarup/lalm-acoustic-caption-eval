@@ -122,6 +122,7 @@ def main() -> int:
     parser.add_argument("--skip-tests", action="store_true", help="do not run the integration tests")
     args = parser.parse_args()
     logger = init_run(Path(__file__).stem, args)
+    run_info = collect_run_info(Path(__file__).stem, seed=args.seed)  # before this run writes any output
     metrics_config = load_config("metrics", args.overrides)
     tools, settings = metrics_config["tools"], metrics_config["settings"]
     paths = activate(tools, offline=True)  # before anything imports huggingface_hub
@@ -203,7 +204,7 @@ def main() -> int:
     manifest_json = json.loads(paths["manifest"].read_text(encoding="utf-8"))
     passed = determinism.get("identical", True) and tests["returncode"] in (0, None)
     report = {
-        "run_info": collect_run_info(Path(__file__).stem, seed=args.seed),
+        "run_info": run_info,
         "passed": passed,
         "tools": {
             "platform": manifest_json["platform"],
