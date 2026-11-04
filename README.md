@@ -118,6 +118,21 @@ Clotho's five captions of a recording often include near-paraphrase pairs, so a 
 
 The report is `outputs/reports/human_loo_evaluation.{json,md}`.
 
+#### Matched four-reference evaluation (E14)
+
+`make evaluate-four-ref` scores every model caption against each subset `drop_k`, the same four references as the held-out human captions of E13, with audio, on all 1,045 recordings (20 scoring calls, about 72 minutes with the audio cache), and averages the five subsets as E13 does. The human baseline is read from E13's tables, not rescored; the script checks that they reproduce E13's report exactly. Model and human scores share references, metrics, aggregation and bootstrap resamples, so their differences are paired. Two sensitivity checks recompute the comparison without rescoring: on the 1,024 recordings where every model's caption is valid, and with E13's near-paraphrase masks (0.6 and 0.8) applied to model and human scores alike.
+
+| File | Contents |
+|---|---|
+| `four_reference_scores.csv.gz` | Per-recording score for every model, subset and metric (gzip) |
+| `four_reference_corpus.csv` | Corpus value and item mean per model and subset, and for the five-subset mean |
+| `four_reference_summary.csv` | Corpus value, item mean and 95% CI per model and subset, and for the five-subset mean of models and human on every sensitivity sample |
+| `four_reference_differences.csv` | Paired differences for every model pair on the five-subset mean, per sample |
+| `matched_human_model_comparison.csv` | Paired model-minus-human differences on the five-subset mean, per sample |
+| `four_reference_sensitivity.csv` | Whether the order (human included) or a pairwise CI changes on each sensitivity sample |
+
+The report, including the model-minus-human calibration table, is `outputs/reports/four_reference_evaluation.{json,md}`.
+
 ## Running tasks
 
 Run `make help` for the full list. Main targets (task IDs are listed under [Tasks](#tasks)):
@@ -172,7 +187,7 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | 3. Automatic evaluation | E11 | Implement and validate caption metrics | Done |
 | | E12 | Five-reference model evaluation | Done |
 | 4. Human calibration | E13 | Human leave-one-out calibration | Done |
-| | E14 | Matched four-reference model evaluation | — |
+| | E14 | Matched four-reference model evaluation | Done |
 | | E15 | Caption-length analysis | — |
 | | E16 | Statistical comparison and uncertainty | — |
 | 5. Qualitative analysis | E17 | Select qualitative review sample | — |
