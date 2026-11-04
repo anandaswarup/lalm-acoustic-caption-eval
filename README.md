@@ -103,6 +103,21 @@ make validate-metrics   # pilot validation; writes outputs/reports/metric_implem
 
 The report is `outputs/reports/five_reference_evaluation.{json,md}`. CLAP audio embeddings are cached in `outputs/cache/clap_audio.npz` (git-ignored) and reused by later tasks.
 
+#### Human leave-one-out calibration (E13)
+
+`make loo` holds out the human caption at each CSV position k = 1–5 and scores it against the other four references (subset `drop_k`, the same reference sets the models are scored against in E14), with audio, on all 1,045 recordings (about 16 minutes with the audio cache). Before scoring it checks, by position, that no held-out caption is in its own reference set and that the five held-out captions of each recording are exactly its references. The baseline averages the five positions: per recording, the mean of its position scores; the corpus value, the mean of the five per-position corpus values. Bootstrap resamples are the same as in E12 and E14.
+
+Clotho's five captions of a recording often include near-paraphrase pairs, so a held-out caption can have a near-copy among its references, which a model caption never has. For each held-out caption the script records the word-set Jaccard (PTB tokens) with its closest other reference, and also reports the baseline on the held-out captions whose closest reference is below 0.6 and below 0.8 (`leave_one_out.overlap_thresholds` in `configs/metrics.yaml`), from the per-item scores without rescoring.
+
+| File | Contents |
+|---|---|
+| `human_loo_scores.csv` | Per-recording score for every position and metric |
+| `human_loo_corpus.csv` | Corpus value and item mean per position, and for the five-position mean |
+| `human_loo_summary.csv` | Corpus value, item mean and 95% CI per position, for the five-position mean, and for the near-paraphrase sensitivity samples |
+| `human_loo_overlap.csv` | Closest-reference word Jaccard of every held-out caption |
+
+The report is `outputs/reports/human_loo_evaluation.{json,md}`.
+
 ## Running tasks
 
 Run `make help` for the full list. Main targets (task IDs are listed under [Tasks](#tasks)):
@@ -156,7 +171,7 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | | E10 | Consolidate and freeze model captions | Done |
 | 3. Automatic evaluation | E11 | Implement and validate caption metrics | Done |
 | | E12 | Five-reference model evaluation | Done |
-| 4. Human calibration | E13 | Human leave-one-out calibration | — |
+| 4. Human calibration | E13 | Human leave-one-out calibration | Done |
 | | E14 | Matched four-reference model evaluation | — |
 | | E15 | Caption-length analysis | — |
 | | E16 | Statistical comparison and uncertainty | — |
