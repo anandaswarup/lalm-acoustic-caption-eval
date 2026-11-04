@@ -21,6 +21,7 @@ from src.metrics.registry import BY_NAME, METRICS, Score
 
 ALL_RECORDINGS = "all"
 VALID_FOR_ALL = "valid_for_all_models"
+POSITION_MEAN = "mean_drop_1_5"  # the five drop_k subsets averaged (E13-E14)
 
 SUMMARY_COLUMNS = (
     "system", "condition", "subset", "sample", "num_items", "metric", "corpus", "item_mean", "ci_low", "ci_high"
@@ -50,6 +51,57 @@ def _check_aligned(score_sets: list[ScoreSet]) -> list[str]:
         if list(score_set.scores) != list(first.scores):
             raise ValueError(f"{score_set.system} has different metrics from {first.system}")
     return first.sample_ids
+
+
+def average_subsets(score_sets: list[ScoreSet], subset: str = POSITION_MEAN) -> ScoreSet:
+    """One system's per-subset score sets averaged (proposal §5.2): per recording, the mean of its subset scores; the
+    corpus value, the mean of the per-subset corpus values (so corpus BLEU and METEOR stay corpus statistics)."""
+    if not score_sets:
+        raise ValueError("No score sets")
+    first = score_sets[0]
+    for score_set in score_sets[1:]:
+        if (score_set.system, score_set.condition, score_set.sample_ids) != (
+            first.system,
+            first.condition,
+            first.sample_ids,
+        ):
+            raise ValueError(f"{score_set.subset} is not the same system, condition and recordings as {first.subset}")
+        if list(score_set.scores) != list(first.scores):
+            raise ValueError(f"{score_set.subset} has different metrics from {first.subset}")
+    if len({score_set.subset for score_set in score_sets}) != len(score_sets):
+        raise ValueError("Duplicate subsets")
+    scores = {
+        name: Score(
+            float(np.mean([score_set.scores[name].corpus for score_set in score_sets])),
+            np.mean([score_set.scores[name].items for score_set in score_sets], axis=0),
+        )
+        for name in first.scores
+    }
+    return ScoreSet(first.system, first.condition, subset, list(first.sample_ids), scores)
+
+
+def masked_average(score_sets: list[ScoreSet], keep: dict[str, np.ndarray], subset: str = POSITION_MEAN) -> ScoreSet:
+    """`average_subsets` over the kept (recording, subset) scores only (E13-E14 near-paraphrase sensitivity).
+
+    `keep[subset]` is a boolean array over the recordings. Each recording's score is the mean of its kept subsets;
+    recordings with none kept are dropped. Corpus-statistic metrics (BLEU, METEOR) get no corpus value, as in
+    `restrict`.
+    """
+    averaged = average_subsets(score_sets, subset)  # checks alignment
+    mask = np.stack([np.asarray(keep[score_set.subset], dtype=bool) for score_set in score_sets])
+    if mask.shape != (len(score_sets), len(averaged.sample_ids)):
+        expected = (len(score_sets), len(averaged.sample_ids))
+        raise ValueError(f"Mask shape {mask.shape} does not match {expected} (subsets x recordings)")
+    counts = mask.sum(axis=0)
+    rows = counts > 0
+    scores = {}
+    for name in averaged.scores:
+        values = np.stack([score_set.scores[name].items for score_set in score_sets])
+        items = (np.where(mask, values, 0.0).sum(axis=0)[rows]) / counts[rows]
+        corpus = float(items.mean()) if BY_NAME[name].corpus_is_item_mean and items.size else math.nan
+        scores[name] = Score(corpus, items)
+    ids = [sid for sid, kept in zip(averaged.sample_ids, rows, strict=True) if kept]
+    return ScoreSet(averaged.system, averaged.condition, subset, ids, scores)
 
 
 def restrict(score_sets: list[ScoreSet], sample_ids: list[str]) -> list[ScoreSet]:

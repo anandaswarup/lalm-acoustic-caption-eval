@@ -50,6 +50,10 @@ condition: five_reference
 leave_one_out:
   num_positions: 5
   references_per_subset: 4
+  # Near-paraphrase sensitivity (E13-E14, decided 2026-11-04): Clotho references often come in near-paraphrase pairs.
+  # For each held-out caption, the word-set Jaccard with its closest reference (PTB tokens); the baseline is also
+  # reported on the held-out captions whose closest reference is below each threshold, without rescoring.
+  overlap_thresholds: [0.6, 0.8]
 
 bootstrap:
   num_resamples: 1000

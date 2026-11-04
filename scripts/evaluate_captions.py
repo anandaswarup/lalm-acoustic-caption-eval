@@ -10,17 +10,17 @@ outputs/cache/ (git-ignored) for E13-E14. four_reference (E14) is not implemente
 
 import json
 import sys
-from importlib import metadata
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src.data.clotho import read_jsonl, sha256sum  # noqa: E402
-from src.data.manifest import verify_checksums, write_json  # noqa: E402
-from src.metrics.tools import activate, check_java, java_path, verify_manifest  # noqa: E402
+from src.data.clotho import sha256sum  # noqa: E402
+from src.data.manifest import write_json  # noqa: E402
+from src.evaluation.pipeline import add_run_arguments, output_dirs, relative  # noqa: E402
+from src.metrics.tools import activate, check_java, java_path  # noqa: E402
 from src.utils.cli import base_parser, init_run, not_implemented  # noqa: E402
 from src.utils.config import load_config  # noqa: E402
-from src.utils.paths import MANIFEST_DIR, OUTPUT_DIR, REPO_ROOT, resolve_path  # noqa: E402
+from src.utils.paths import OUTPUT_DIR, resolve_path  # noqa: E402
 from src.utils.run_info import collect_run_info  # noqa: E402
 
 TASKS = {"five_reference": "E12"}
@@ -29,25 +29,9 @@ CAPTION_REPORT = OUTPUT_DIR / "reports" / "caption_validation.json"
 SMOKE_DIR = OUTPUT_DIR / "smoke" / "evaluation"
 
 
-def relative(path: Path) -> str:
-    return str(path.relative_to(REPO_ROOT) if path.is_relative_to(REPO_ROOT) else path)
-
-
-def clap_cache_key(settings: dict, tools: dict) -> str:
-    """What the cached audio embeddings depend on: CLAP settings, weights and msclap version."""
-    key = {"clap": settings["clap"], "weights_sha256": tools["clap"]["sha256"], "msclap": metadata.version("msclap")}
-    return json.dumps(key, sort_keys=True)
-
-
 def main() -> int:
     parser = base_parser(__doc__.splitlines()[0])
-    smoke = f"{relative(SMOKE_DIR)} with --limit"
-    parser.add_argument("--scores-dir", help=f"default: {relative(OUTPUT_DIR / 'scores')} ({smoke})")
-    parser.add_argument("--report-dir", help=f"default: {relative(OUTPUT_DIR / 'reports')} ({smoke})")
-    cache = relative(OUTPUT_DIR / "cache" / "clap_audio.npz")
-    parser.add_argument("--cache", default=cache, help="CLAP audio cache, 'none' to disable (default: %(default)s)")
-    parser.add_argument("--limit", type=int, help="score the first N recordings only (smoke test)")
-    parser.add_argument("--force", action="store_true", help="overwrite existing outputs")
+    add_run_arguments(parser, SMOKE_DIR)
     args = parser.parse_args()
     logger = init_run(Path(__file__).stem, args)
     run_info = collect_run_info(Path(__file__).stem, seed=args.seed)  # before this run writes any output
@@ -62,7 +46,15 @@ def main() -> int:
     paths = activate(tools, offline=True)  # before anything imports huggingface_hub
 
     from src.evaluation import references as conditions
-    from src.evaluation.inputs import audio_paths, load_model_captions, load_references
+    from src.evaluation.inputs import load_model_captions
+    from src.evaluation.pipeline import (
+        AudioCache,
+        clap_cache_key,
+        evaluation_inputs,
+        existing_outputs,
+        timing_block,
+        verify_inputs,
+    )
     from src.evaluation.scoring import CORPUS_COLUMNS, SCORE_COLUMNS, Evaluator, corpus_rows, score_rows, write_csv
     from src.evaluation.summary import (
         ALL_RECORDINGS,
@@ -77,12 +69,9 @@ def main() -> int:
         summary_rows,
     )
     from src.evaluation.validation import LIMITATIONS, package_versions
-    from src.metrics.clap import load_audio_cache, save_audio_cache
     from src.metrics.registry import check_scores
 
-    out_default = SMOKE_DIR if args.limit else None
-    scores_dir = resolve_path(args.scores_dir or out_default or OUTPUT_DIR / "scores")
-    report_dir = resolve_path(args.report_dir or out_default or OUTPUT_DIR / "reports")
+    scores_dir, report_dir = output_dirs(args, SMOKE_DIR)
     outputs = {
         "scores": scores_dir / f"{condition}_scores.csv",
         "corpus": scores_dir / f"{condition}_corpus.csv",
@@ -92,24 +81,17 @@ def main() -> int:
         "report_json": report_dir / f"{condition}_evaluation.json",
         "report_md": report_dir / f"{condition}_evaluation.md",
     }
-    if not args.force and (existing := [relative(p) for p in outputs.values() if p.exists()]):
+    if not args.force and (existing := existing_outputs(outputs)):
         logger.error("Outputs exist (use --force to overwrite): %s", existing)
         return 1
 
-    problems = verify_manifest(paths["root"])
-    problems += [f"manifests: {e}" for e in verify_checksums(MANIFEST_DIR / "SHA256SUMS")]
-    problems += [f"captions: {e}" for e in verify_checksums(OUTPUT_DIR / "captions" / "SHA256SUMS")]
-    if problems:
+    if problems := verify_inputs(paths["root"]):
         for problem in problems:
             logger.error("%s", problem)
         return 1
     java_version = check_java(java_path(tools))
 
     dataset, models = load_config("dataset", args.overrides), load_config("models", args.overrides)["models"]
-    evaluation = dataset["evaluation"]
-    manifest = read_jsonl(resolve_path(evaluation["manifest"]))
-    references_path = resolve_path(evaluation["references"])
-    references = load_references(references_path)
     captions = load_model_captions(CAPTIONS)
     if set(captions) != set(models):
         logger.error("Caption models %s do not match models.yaml %s", sorted(captions), sorted(models))
@@ -119,23 +101,18 @@ def main() -> int:
         logger.error("%s describes a different caption file", relative(CAPTION_REPORT))
         return 1
     valid_ids = caption_report["valid_for_all_models"]["sample_ids"]
+    manifest, references_path, references, audio = evaluation_inputs(dataset, args.limit)
     if args.limit:
-        manifest = manifest[: args.limit]
         logger.warning("Smoke test: first %d recordings only", len(manifest))
     sample_ids = [record["sample_id"] for record in manifest]
-    references = {sid: references[sid] for sid in sample_ids}
     valid_ids = [sid for sid in valid_ids if sid in set(sample_ids)]
-    audio = audio_paths(manifest, resolve_path(dataset["root"]))
     logger.info("%d recordings x %d models; %d with every caption valid", len(sample_ids), len(models), len(valid_ids))
 
     evaluator = Evaluator(settings, tools)
     evaluator.load_models(audio=True)
-    cache_path = None if args.cache == "none" else resolve_path(args.cache)
-    cache_key = clap_cache_key(settings, tools)
-    cached = load_audio_cache(cache_path, cache_key) if cache_path else {}
-    hits = {str(audio[r["sample_id"]]): cached[r["audio_sha256"]] for r in manifest if r["audio_sha256"] in cached}
-    evaluator.clap.preload_audio(hits)
-    logger.info("CLAP audio embeddings from the cache: %d of %d", len(hits), len(manifest))
+    cache = AudioCache(None if args.cache == "none" else resolve_path(args.cache), clap_cache_key(settings, tools))
+    hits = cache.preload(evaluator.clap, manifest, audio)
+    logger.info("CLAP audio embeddings from the cache: %d of %d", hits, len(manifest))
 
     score_sets = []
     for model in models:
@@ -146,11 +123,9 @@ def main() -> int:
             logger.error("%s: invalid scores: %s", model, errors)
             return 1
         score_sets.append(score_set)
-    if cache_path:
-        by_path = evaluator.clap.audio_embeddings()
-        computed = {r["audio_sha256"]: by_path[str(audio[r["sample_id"]])] for r in manifest}
-        save_audio_cache(cache_path, cache_key, cached | computed)
-        logger.info("CLAP audio cache: %d recordings in %s", len(cached | computed), relative(cache_path))
+    if cache.path:
+        total = cache.save(evaluator.clap, manifest, audio)
+        logger.info("CLAP audio cache: %d recordings in %s", total, relative(cache.path))
 
     boot = (bootstrap["num_resamples"], bootstrap["confidence"], bootstrap["seed"])
     valid_sets = restrict(score_sets, valid_ids)
@@ -170,7 +145,6 @@ def main() -> int:
     write_csv(differences, outputs["differences"], DIFFERENCE_COLUMNS)
     write_csv(sensitivity, outputs["sensitivity"], SENSITIVITY_COLUMNS)
 
-    timer = evaluator.timer
     per_model = caption_report["per_model"]
     report = {
         "run_info": run_info,
@@ -194,13 +168,7 @@ def main() -> int:
         "summary": full + [r for r in summary if r["sample"] == VALID_FOR_ALL],
         "differences": differences,
         "sensitivity": {"num_items": len(valid_ids), "excluded": len(sample_ids) - len(valid_ids), "rows": sensitivity},
-        "timing": {
-            "seconds": {name: round(value, 2) for name, value in timer.seconds.items() if name != "load_models"},
-            "calls": dict(timer.calls),
-            "load_models_seconds": round(timer.seconds["load_models"], 1),
-            "scoring_seconds": round(sum(v for name, v in timer.seconds.items() if name != "load_models"), 1),
-            "clap_cache_hits": len(hits),
-        },
+        "timing": timing_block(evaluator.timer, hits),
         "outputs": {name: relative(path) for name, path in outputs.items()},
         "limitations": LIMITATIONS,
     }
