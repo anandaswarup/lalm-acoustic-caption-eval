@@ -96,3 +96,30 @@ class ClapEmbedder:
     def preload_audio(self, embeddings: dict[str, np.ndarray]) -> None:
         """Reuse audio embeddings computed earlier (e.g. from a cache file), keyed by path."""
         self._audio.update(embeddings)
+
+    def audio_embeddings(self) -> dict[str, np.ndarray]:
+        """Every audio embedding computed or preloaded so far, keyed by path."""
+        return dict(self._audio)
+
+
+def load_audio_cache(path: str | Path, key: str) -> dict[str, np.ndarray]:
+    """Audio embeddings keyed by audio SHA-256, or {} if the file is missing or was written with a different `key`."""
+    path = Path(path)
+    if not path.is_file():
+        return {}
+    with np.load(path, allow_pickle=False) as data:
+        if str(data["key"]) != key:
+            return {}
+        return dict(zip(data["sha256"].tolist(), data["embeddings"], strict=True))
+
+
+def save_audio_cache(path: str | Path, key: str, embeddings: dict[str, np.ndarray]) -> Path:
+    """Write the cache in one step (temporary file, then rename). `key` names the settings the embeddings depend on."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    shas = sorted(embeddings)
+    tmp = path.with_name(path.name + ".tmp")
+    with tmp.open("wb") as stream:
+        np.savez(stream, key=np.array(key), sha256=np.array(shas), embeddings=np.stack([embeddings[s] for s in shas]))
+    tmp.replace(path)
+    return path

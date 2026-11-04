@@ -43,6 +43,10 @@ settings:
   # MACE as in the paper (arXiv 2411.00321): 0.5 * (audio-text + mean text-text CLAP cosine) * (1 - penalty * error).
   mace: {error_threshold: 0.97, penalty: 0.3}
 
+# Reference condition scored by scripts/evaluate_captions.py; the Makefile sets it per task (E12 five_reference, E14
+# four_reference).
+condition: five_reference
+
 leave_one_out:
   num_positions: 5
   references_per_subset: 4

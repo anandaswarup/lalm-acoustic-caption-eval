@@ -47,3 +47,5 @@ outputs/captions/pilot_repeat/
 outputs/captions/repeat_hf/
 # Metric tools (JDK 11, jars, checkpoints): downloaded and verified by `make metric-tools`
 tools/
+# CLAP audio embeddings reused across E12-E14 (keyed by audio SHA-256 and CLAP settings)
+outputs/cache/
