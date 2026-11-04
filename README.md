@@ -2,7 +2,7 @@
 
 Evaluating Large Audio Language Model (LALM)-generated acoustic captions against human references on Clotho v2.1.
 
-> **Private repository.** It remains private through double-blind review and is released only after acceptance.
+> **Private repository.** It remains private until the paper is submitted. It is then made public and linked from the paper, so that reviewers can inspect the code, experiments and artifacts.
 
 ## Research questions
 
@@ -183,5 +183,5 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | | E22 | Reproduce results from frozen artifacts | — |
 | | E23 | Finalize research repository | — |
 | 7. Manuscript and release | E24 | Draft manuscript | — |
-| | E25 | Final validation and double-blind submission | — |
-| | E26 | Public release after acceptance | — |
+| | E25 | Final validation, public release and submission | — |
+| | E26 | Camera-ready and versioned release after acceptance | — |
