@@ -89,6 +89,20 @@ make validate-metrics   # pilot validation; writes outputs/reports/metric_implem
   - CLAP similarity and MACE use MS-CLAP 2023 on the whole clip (7 s chunks, duration-weighted), and MACE combines audio–text and text–text similarity, as in the MACE paper.
 - The implementation report covers versions, pins, determinism, truncation, timings, and the interpretation and limitations of each metric.
 
+#### Five-reference evaluation (E12)
+
+`make evaluate` scores every model caption against all five references, with audio, on all 1,045 evaluation recordings (about 25 minutes on a laptop CPU). Malformed captions are scored as returned. It writes to `outputs/scores/`:
+
+| File | Contents |
+|---|---|
+| `five_reference_scores.csv` | Per-recording score for every model and metric |
+| `five_reference_corpus.csv` | Corpus value and item mean per model and metric |
+| `five_reference_summary.csv` | Corpus value, item mean and 95% paired-bootstrap CI (1,000 resamples, seed 42), on all recordings and on the 1,024 where every model's caption is valid |
+| `five_reference_differences.csv` | Paired item-mean differences for every model pair, with bootstrap CIs (uncorrected) |
+| `five_reference_sensitivity.csv` | Whether the model order or a pairwise CI changes on the 1,024 valid recordings |
+
+The report is `outputs/reports/five_reference_evaluation.{json,md}`. CLAP audio embeddings are cached in `outputs/cache/clap_audio.npz` (git-ignored) and reused by later tasks.
+
 ## Running tasks
 
 Run `make help` for the full list. Main targets (task IDs are listed under [Tasks](#tasks)):
@@ -141,7 +155,7 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | | E09 | Captions: Audio Flamingo 3 | Done |
 | | E10 | Consolidate and freeze model captions | Done |
 | 3. Automatic evaluation | E11 | Implement and validate caption metrics | Done |
-| | E12 | Five-reference model evaluation | — |
+| | E12 | Five-reference model evaluation | Done |
 | 4. Human calibration | E13 | Human leave-one-out calibration | — |
 | | E14 | Matched four-reference model evaluation | — |
 | | E15 | Caption-length analysis | — |

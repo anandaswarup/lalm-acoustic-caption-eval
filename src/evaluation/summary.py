@@ -230,7 +230,8 @@ def report_markdown(report: dict[str, Any]) -> str:
         "",
         "## Paired differences between models",
         "",
-        "Item-mean difference (row model minus column model, in model order); `*` marks a 95% CI that excludes 0.",
+        "Item-mean difference (row model minus column model, in model order); `*` marks a 95% CI that excludes 0 "
+        "(per comparison, uncorrected for multiple comparisons).",
         "",
         "| Metric | " + " | ".join(f"{names[a]} - {names[b]}" for a, b in pairs) + " |",
         "|---|" + "---|" * len(pairs),

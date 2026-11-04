@@ -1,0 +1,21 @@
+condition,subset,metric,order_all,order_sample,order_changed,max_abs_mean_change,significance_changes
+five_reference,all,bleu_1,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,False,0.0018007368330729134,
+five_reference,all,bleu_2,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,False,0.0011032448344034107,
+five_reference,all,bleu_3,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,False,0.0004570133183167263,
+five_reference,all,bleu_4,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,False,0.00048328394051528126,
+five_reference,all,meteor,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,False,0.0005925168085544191,
+five_reference,all,cider_d,audio_flamingo_3 > qwen2_5_omni > gemini_3_8_flash > gpt_audio_1_5,audio_flamingo_3 > qwen2_5_omni > gemini_3_8_flash > gpt_audio_1_5,False,0.0016742635680867257,
+five_reference,all,spice,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,False,0.000695694100346117,
+five_reference,all,spider,audio_flamingo_3 > qwen2_5_omni > gemini_3_8_flash > gpt_audio_1_5,audio_flamingo_3 > qwen2_5_omni > gemini_3_8_flash > gpt_audio_1_5,False,0.0007976746461347828,
+five_reference,all,spider_fl,audio_flamingo_3 > qwen2_5_omni > gemini_3_8_flash > gpt_audio_1_5,audio_flamingo_3 > qwen2_5_omni > gemini_3_8_flash > gpt_audio_1_5,False,0.000774753336171552,
+five_reference,all,fense,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,False,0.001687193829719269,
+five_reference,all,bertscore_f1,audio_flamingo_3 > qwen2_5_omni > gemini_3_8_flash > gpt_audio_1_5,audio_flamingo_3 > qwen2_5_omni > gemini_3_8_flash > gpt_audio_1_5,False,1.2921480379568528e-05,
+five_reference,all,bertscore_f1_rescaled,audio_flamingo_3 > qwen2_5_omni > gemini_3_8_flash > gpt_audio_1_5,audio_flamingo_3 > qwen2_5_omni > gemini_3_8_flash > gpt_audio_1_5,False,0.0003243994873347311,
+five_reference,all,clap_similarity,audio_flamingo_3 > gpt_audio_1_5 > qwen2_5_omni > gemini_3_8_flash,audio_flamingo_3 > gpt_audio_1_5 > qwen2_5_omni > gemini_3_8_flash,False,0.0005035514278286524,
+five_reference,all,mace,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,False,0.001850545700131212,
+five_reference,all,mace_text,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,False,0.0031975399724338827,gpt_audio_1_5-qwen2_5_omni: excludes 0->includes 0
+five_reference,all,mace_audio,audio_flamingo_3 > gpt_audio_1_5 > qwen2_5_omni > gemini_3_8_flash,audio_flamingo_3 > gpt_audio_1_5 > qwen2_5_omni > gemini_3_8_flash,False,0.0005035514278286524,
+five_reference,all,clap_text_similarity,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,False,0.0031975399724338827,gpt_audio_1_5-qwen2_5_omni: excludes 0->includes 0
+five_reference,all,sbert_similarity,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,False,0.0016840476970522156,
+five_reference,all,fluency_error,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash,False,0.0001373729066985645,
+five_reference,all,fluency_error_mace,audio_flamingo_3 > gemini_3_8_flash > gpt_audio_1_5 > qwen2_5_omni,audio_flamingo_3 > gemini_3_8_flash > gpt_audio_1_5 > qwen2_5_omni,False,5.887410287081342e-05,
