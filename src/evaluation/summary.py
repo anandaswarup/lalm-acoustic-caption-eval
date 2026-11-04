@@ -1,5 +1,5 @@
-"""Model-level summaries of one reference condition (E12, reused in E14): bootstrap CIs, paired model differences and
-the sensitivity check on a subset of recordings.
+"""Model-level summaries of one reference condition (E12, reused in E13-E14): bootstrap CIs, paired model differences
+(and differences from a baseline scored on the same references) and the sensitivity check on a subset of recordings.
 
 Everything works on per-item scores that are already computed, so a subset of recordings needs no rescoring. On a
 subset, metrics whose corpus value comes from corpus statistics (BLEU, METEOR) have no corpus value, and CIDEr-D keeps
@@ -167,6 +167,43 @@ def difference_rows(
                     "metric": name,
                     "system_a": a.system,
                     "system_b": b.system,
+                    "difference": _num(diff["mean"]),
+                    "ci_low": _num(diff["ci_low"]),
+                    "ci_high": _num(diff["ci_high"]),
+                    "excludes_zero": diff["ci_low"] > 0 or diff["ci_high"] < 0,
+                }
+            )
+    return rows
+
+
+def matched_difference_rows(
+    score_sets: list[ScoreSet], baseline: ScoreSet, sample: str, num_resamples: int, confidence: float, seed: int
+) -> list[dict[str, Any]]:
+    """Paired item-mean differences of every system minus `baseline`, with the summary's resamples (E14).
+
+    The baseline may come from another condition (the human leave-one-out captions) but must be on the same subset,
+    recordings and metrics, so both sides are scored against the same references.
+    """
+    ids = _check_aligned(score_sets)
+    first = score_sets[0]
+    if (baseline.subset, baseline.sample_ids) != (first.subset, ids):
+        raise ValueError(f"{baseline.system} is not on the same subset and recordings as {first.system}")
+    if list(baseline.scores) != list(first.scores):
+        raise ValueError(f"{baseline.system} has different metrics from {first.system}")
+    indices = bootstrap_indices(len(ids), num_resamples, seed)
+    rows = []
+    for name in first.scores:
+        for score_set in score_sets:
+            diff = bootstrap_difference(score_set.scores[name].items, baseline.scores[name].items, indices, confidence)
+            rows.append(
+                {
+                    "condition": score_set.condition,
+                    "subset": score_set.subset,
+                    "sample": sample,
+                    "num_items": len(ids),
+                    "metric": name,
+                    "system_a": score_set.system,
+                    "system_b": baseline.system,
                     "difference": _num(diff["mean"]),
                     "ci_low": _num(diff["ci_low"]),
                     "ci_high": _num(diff["ci_high"]),

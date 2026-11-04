@@ -4,8 +4,13 @@ E12 (`condition: five_reference` in configs/metrics.yaml): every model caption a
 on every evaluation recording; malformed captions are scored as returned. Writes per-recording and corpus scores,
 bootstrap CIs, paired differences between models and the sensitivity check (the recordings where every model's caption
 is valid) to outputs/scores/, and outputs/reports/<condition>_evaluation.{json,md}. CLAP audio embeddings are cached in
-outputs/cache/ (git-ignored) for E13-E14. four_reference (E14) is not implemented yet. Run with .venv-metrics
-(make evaluate).
+outputs/cache/ (git-ignored) for E13-E14. Run with .venv-metrics (make evaluate).
+
+E14 (`condition: four_reference`, make evaluate-four-ref): every model caption against each subset drop_k (k = 1..5),
+the same four references as the held-out human captions of E13, averaged over the five subsets. The human baseline is
+read from E13's tables (outputs/scores/human_loo_*.csv), checked against E13's report. Adds paired model-minus-human
+differences (matched_human_model_comparison.csv) and two sensitivity checks: the recordings where every model's caption
+is valid, and E13's near-paraphrase masks applied to model and human scores alike. Per-recording scores are gzipped.
 """
 
 import json
@@ -18,15 +23,35 @@ from src.data.clotho import sha256sum  # noqa: E402
 from src.data.manifest import write_json  # noqa: E402
 from src.evaluation.pipeline import add_run_arguments, output_dirs, relative  # noqa: E402
 from src.metrics.tools import activate, check_java, java_path  # noqa: E402
-from src.utils.cli import base_parser, init_run, not_implemented  # noqa: E402
+from src.utils.cli import base_parser, init_run  # noqa: E402
 from src.utils.config import load_config  # noqa: E402
 from src.utils.paths import OUTPUT_DIR, resolve_path  # noqa: E402
 from src.utils.run_info import collect_run_info  # noqa: E402
 
-TASKS = {"five_reference": "E12"}
+TASKS = {"five_reference": "E12", "four_reference": "E14"}
 CAPTIONS = OUTPUT_DIR / "captions" / "all_model_captions.jsonl"
 CAPTION_REPORT = OUTPUT_DIR / "reports" / "caption_validation.json"
+HUMAN_LOO = {
+    "scores": OUTPUT_DIR / "scores" / "human_loo_scores.csv",
+    "corpus": OUTPUT_DIR / "scores" / "human_loo_corpus.csv",
+    "overlap": OUTPUT_DIR / "scores" / "human_loo_overlap.csv",
+    "report": OUTPUT_DIR / "reports" / "human_loo_evaluation.json",
+}
 SMOKE_DIR = OUTPUT_DIR / "smoke" / "evaluation"
+
+
+def read_overlaps(path: Path, sample_ids: list[str], num_positions: int) -> dict[str, list[float]]:
+    """E13's closest-reference Jaccard per recording and position, for the near-paraphrase masks."""
+    from src.evaluation.scoring import read_csv
+
+    overlaps: dict[str, list[float]] = {}
+    for row in read_csv(path):
+        overlaps.setdefault(row["sample_id"], []).append(float(row["closest_reference_jaccard"]))
+    if wrong := [sid for sid in sample_ids if len(overlaps.get(sid, [])) != num_positions]:
+        raise ValueError(
+            f"{relative(path)}: {len(wrong)} recordings without {num_positions} positions, e.g. {wrong[:3]}"
+        )
+    return {sid: overlaps[sid] for sid in sample_ids}
 
 
 def main() -> int:
@@ -37,16 +62,16 @@ def main() -> int:
     run_info = collect_run_info(Path(__file__).stem, seed=args.seed)  # before this run writes any output
     config = load_config("metrics", args.overrides)
     condition = config["condition"]
-    if condition == "four_reference":
-        return not_implemented(logger, "E14")
     if condition not in TASKS:
         logger.error("Unknown condition %r (expected five_reference or four_reference)", condition)
         return 1
-    tools, settings, bootstrap = config["tools"], config["settings"], config["bootstrap"]
+    tools, settings, bootstrap, loo = config["tools"], config["settings"], config["bootstrap"], config["leave_one_out"]
     paths = activate(tools, offline=True)  # before anything imports huggingface_hub
 
     from src.evaluation import references as conditions
     from src.evaluation.inputs import load_model_captions
+    from src.evaluation.matched import COMPARABILITY, MATCHED_SENSITIVITY_COLUMNS, matched_tables
+    from src.evaluation.matched import report_markdown as matched_report_markdown
     from src.evaluation.pipeline import (
         AudioCache,
         clap_cache_key,
@@ -71,12 +96,14 @@ def main() -> int:
     from src.evaluation.validation import LIMITATIONS, package_versions
     from src.metrics.registry import check_scores
 
+    four = condition == conditions.FOUR_REFERENCE
     scores_dir, report_dir = output_dirs(args, SMOKE_DIR)
     outputs = {
-        "scores": scores_dir / f"{condition}_scores.csv",
+        "scores": scores_dir / f"{condition}_scores.csv{'.gz' if four else ''}",
         "corpus": scores_dir / f"{condition}_corpus.csv",
         "summary": scores_dir / f"{condition}_summary.csv",
         "differences": scores_dir / f"{condition}_differences.csv",
+        **({"matched": scores_dir / "matched_human_model_comparison.csv"} if four else {}),
         "sensitivity": scores_dir / f"{condition}_sensitivity.csv",
         "report_json": report_dir / f"{condition}_evaluation.json",
         "report_md": report_dir / f"{condition}_evaluation.md",
@@ -107,6 +134,19 @@ def main() -> int:
     sample_ids = [record["sample_id"] for record in manifest]
     valid_ids = [sid for sid in valid_ids if sid in set(sample_ids)]
     logger.info("%d recordings x %d models; %d with every caption valid", len(sample_ids), len(models), len(valid_ids))
+    subsets = conditions.subsets(condition, loo["num_positions"])
+    if four:
+        from src.evaluation.matched import load_human_baseline
+
+        try:
+            human_sets = load_human_baseline(
+                HUMAN_LOO["scores"], HUMAN_LOO["corpus"], HUMAN_LOO["report"], subsets, sample_ids
+            )
+            overlaps = read_overlaps(HUMAN_LOO["overlap"], sample_ids, loo["num_positions"])
+        except ValueError as error:
+            logger.error("Human baseline: %s", error)
+            return 1
+        logger.info("Human baseline: %d subsets from %s", len(human_sets), relative(HUMAN_LOO["scores"]))
 
     evaluator = Evaluator(settings, tools)
     evaluator.load_models(audio=True)
@@ -116,18 +156,80 @@ def main() -> int:
 
     score_sets = []
     for model in models:
-        logger.info("Scoring %s", model)
         candidates = {sid: captions[model][sid] for sid in sample_ids}
-        score_set = evaluator.score(model, condition, conditions.ALL, sample_ids, candidates, references, audio)
-        if errors := check_scores(score_set.scores, len(sample_ids)):
-            logger.error("%s: invalid scores: %s", model, errors)
-            return 1
-        score_sets.append(score_set)
+        for subset in subsets:
+            refs = conditions.subset_references(references, subset)
+            if four and (wrong := [sid for sid in sample_ids if len(refs[sid]) != loo["references_per_subset"]]):
+                logger.error(
+                    "%s: %d recordings without %d references", subset, len(wrong), loo["references_per_subset"]
+                )
+                return 1
+            logger.info("Scoring %s %s", model, subset)
+            score_set = evaluator.score(model, condition, subset, sample_ids, candidates, refs, audio)
+            if errors := check_scores(score_set.scores, len(sample_ids)):
+                logger.error("%s %s: invalid scores: %s", model, subset, errors)
+                return 1
+            score_sets.append(score_set)
     if cache.path:
         total = cache.save(evaluator.clap, manifest, audio)
         logger.info("CLAP audio cache: %d recordings in %s", total, relative(cache.path))
 
     boot = (bootstrap["num_resamples"], bootstrap["confidence"], bootstrap["seed"])
+    write_csv([row for s in score_sets for row in score_rows(s)], outputs["scores"], SCORE_COLUMNS)
+    common = {
+        "run_info": run_info,
+        "task": TASKS[condition],
+        "condition": condition,
+        "smoke_test_limit": args.limit,
+        "display_names": {key: model["display_name"] for key, model in models.items()},
+        "metrics": list(score_sets[0].scores),
+    }
+    inputs = {
+        "recordings": len(sample_ids),
+        "captions": {"path": relative(CAPTIONS), "sha256": sha256sum(CAPTIONS)},
+        "references": {"path": relative(references_path), "sha256": sha256sum(references_path)},
+        "normalization": {key: caption_report["per_model"][key]["normalization"] for key in models},
+    }
+    run = {
+        "bootstrap": bootstrap,
+        "settings": settings,
+        "java_version": java_version,
+        "packages": package_versions(),
+    }
+    if four:
+        sections = matched_tables(score_sets, human_sets, valid_ids, overlaps, loo["overlap_thresholds"], boot)
+        write_csv([row for s in score_sets for row in corpus_rows(s)], outputs["corpus"], CORPUS_COLUMNS)
+        write_csv(sections["summary"], outputs["summary"], SUMMARY_COLUMNS)
+        write_csv(sections["differences"], outputs["differences"], DIFFERENCE_COLUMNS)
+        write_csv(sections["matched"], outputs["matched"], DIFFERENCE_COLUMNS)
+        write_csv(sections["sensitivity"]["rows"], outputs["sensitivity"], MATCHED_SENSITIVITY_COLUMNS)
+        human_report = json.loads(HUMAN_LOO["report"].read_text(encoding="utf-8"))
+        inputs |= {
+            "references_per_subset": loo["references_per_subset"],
+            "human_baseline": {
+                **{
+                    key: {"path": relative(HUMAN_LOO[key]), "sha256": sha256sum(HUMAN_LOO[key])}
+                    for key in ("scores", "corpus", "overlap")
+                },
+                "report": relative(HUMAN_LOO["report"]),
+                "git_commit": human_report["run_info"]["git_commit"],
+            },
+        }
+        report = {
+            **common,
+            "subsets": subsets,
+            "inputs": inputs,
+            **run,
+            **sections,
+            "timing": timing_block(evaluator.timer, hits),
+            "outputs": {name: relative(path) for name, path in outputs.items()},
+            "limitations": COMPARABILITY + LIMITATIONS,
+        }
+        write_json(report, outputs["report_json"])
+        outputs["report_md"].write_text(matched_report_markdown(report), encoding="utf-8")
+        logger.info("Wrote %s", sorted(report["outputs"].values()))
+        return 0
+
     valid_sets = restrict(score_sets, valid_ids)
     summary = summary_rows(score_sets, ALL_RECORDINGS, *boot) + summary_rows(valid_sets, VALID_FOR_ALL, *boot)
     differences = difference_rows(score_sets, ALL_RECORDINGS, *boot) + difference_rows(valid_sets, VALID_FOR_ALL, *boot)
@@ -139,32 +241,21 @@ def main() -> int:
         [r for r in differences if r["sample"] == VALID_FOR_ALL],
     )
 
-    write_csv([row for s in score_sets for row in score_rows(s)], outputs["scores"], SCORE_COLUMNS)
     write_csv([row for s in score_sets for row in corpus_rows(s)], outputs["corpus"], CORPUS_COLUMNS)
     write_csv(summary, outputs["summary"], SUMMARY_COLUMNS)
     write_csv(differences, outputs["differences"], DIFFERENCE_COLUMNS)
     write_csv(sensitivity, outputs["sensitivity"], SENSITIVITY_COLUMNS)
 
-    per_model = caption_report["per_model"]
     report = {
-        "run_info": run_info,
-        "task": TASKS[condition],
-        "condition": condition,
+        **{k: common[k] for k in ("run_info", "task", "condition")},
         "subset": conditions.ALL,
-        "smoke_test_limit": args.limit,
-        "display_names": {key: model["display_name"] for key, model in models.items()},
-        "metrics": list(score_sets[0].scores),
+        **{k: common[k] for k in ("smoke_test_limit", "display_names", "metrics")},
         "inputs": {
-            "recordings": len(sample_ids),
+            "recordings": inputs["recordings"],
             "references_per_recording": len(references[sample_ids[0]]),
-            "captions": {"path": relative(CAPTIONS), "sha256": sha256sum(CAPTIONS)},
-            "references": {"path": relative(references_path), "sha256": sha256sum(references_path)},
-            "normalization": {key: per_model[key]["normalization"] for key in models},
+            **{k: inputs[k] for k in ("captions", "references", "normalization")},
         },
-        "bootstrap": bootstrap,
-        "settings": settings,
-        "java_version": java_version,
-        "packages": package_versions(),
+        **run,
         "summary": full + [r for r in summary if r["sample"] == VALID_FOR_ALL],
         "differences": differences,
         "sensitivity": {"num_items": len(valid_ids), "excluded": len(sample_ids) - len(valid_ids), "rows": sensitivity},

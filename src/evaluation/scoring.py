@@ -1,15 +1,22 @@
-"""Score one system under one reference subset, and write long-format score tables (E11-E14).
+"""Score one system under one reference subset, and write and read long-format score tables (E11-E14).
 
 A scoring call covers every recording of the condition at once (see `src.metrics.reference_based`). Candidates and
 references are PTB-tokenized together in one Java call; audio-aware metrics are added when audio paths are given.
+Tables ending in `.gz` are gzip-compressed, with no timestamp in the header so that equal tables give equal files.
 """
 
 from __future__ import annotations
 
 import csv
+import gzip
+import io
+from collections.abc import Iterator
+from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, TextIO
+
+import numpy as np
 
 from src.evaluation.inputs import check_condition_inputs
 from src.metrics.registry import METRICS, Score, Timer
@@ -138,11 +145,61 @@ def corpus_rows(score_set: ScoreSet) -> list[dict[str, Any]]:
     ]
 
 
+@contextmanager
+def _open_text(path: Path, mode: str) -> Iterator[TextIO]:
+    """A CSV text stream, gzip-compressed when `path` ends in `.gz` (mode "r" or "w")."""
+    if path.suffix != ".gz":
+        with path.open(mode, encoding="utf-8", newline="") as stream:
+            yield stream
+        return
+    with path.open(mode + "b") as raw, gzip.GzipFile(filename="", mode=mode + "b", fileobj=raw, mtime=0) as packed:
+        with io.TextIOWrapper(packed, encoding="utf-8", newline="") as stream:
+            yield stream
+
+
 def write_csv(rows: list[dict[str, Any]], path: str | Path, columns: tuple[str, ...]) -> Path:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="") as stream:
+    with _open_text(path, "w") as stream:
         writer = csv.DictWriter(stream, fieldnames=columns, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
     return path
+
+
+def read_csv(path: str | Path) -> list[dict[str, str]]:
+    with _open_text(Path(path), "r") as stream:
+        return list(csv.DictReader(stream))
+
+
+def read_score_sets(scores_path: str | Path, corpus_path: str | Path) -> list[ScoreSet]:
+    """Score sets back from a per-item table and its corpus table (the inverse of `score_rows` and `corpus_rows`).
+
+    One set per (system, condition, subset) of the per-item table, in table order; the corpus table may hold more
+    (e.g. averaged subsets), which are ignored. Values round-trip exactly (they are written with `repr`).
+    """
+    corpus = {
+        (r["system"], r["condition"], r["subset"], r["metric"]): float(r["corpus"]) for r in read_csv(corpus_path)
+    }
+    groups: dict[tuple[str, str, str], dict[str, dict[str, float]]] = {}
+    for row in read_csv(scores_path):
+        metric = groups.setdefault((row["system"], row["condition"], row["subset"]), {}).setdefault(row["metric"], {})
+        if row["sample_id"] in metric:
+            raise ValueError(f"{scores_path}: duplicate score {row['system']} {row['subset']} {row['sample_id']}")
+        metric[row["sample_id"]] = float(row["score"])
+    order = {metric.name: index for index, metric in enumerate(METRICS)}
+    score_sets = []
+    for (system, condition, subset), by_metric in groups.items():
+        if unknown := sorted(set(by_metric) - set(order)):
+            raise ValueError(f"{scores_path}: unknown metrics {unknown}")
+        names = sorted(by_metric, key=order.__getitem__)
+        sample_ids = list(by_metric[names[0]])
+        scores = {}
+        for name in names:
+            if list(by_metric[name]) != sample_ids:
+                raise ValueError(f"{scores_path}: {system} {subset} {name} scores different recordings")
+            if (key := (system, condition, subset, name)) not in corpus:
+                raise ValueError(f"{corpus_path}: no corpus value for {' '.join(key)}")
+            scores[name] = Score(corpus[key], np.array(list(by_metric[name].values()), dtype=np.float64))
+        score_sets.append(ScoreSet(system, condition, subset, sample_ids, scores))
+    return score_sets
