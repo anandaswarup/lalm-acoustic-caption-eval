@@ -1,8 +1,8 @@
 {
   "run_info": {
     "experiment": "prepare_qualitative",
-    "timestamp_utc": "2026-11-05T07:38:12+00:00",
-    "git_commit": "7319b2205923d1ea5bc9e3e8dbbbc740f03af196",
+    "timestamp_utc": "2026-11-05T07:59:41+00:00",
+    "git_commit": "7be0c75c3bee30d4512a3e943efca672f5511d22",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
@@ -346,6 +346,7 @@
   "outputs": {
     "manifest": "outputs/qualitative/sample_manifest.json",
     "review": "outputs/qualitative/review_items.csv",
+    "review_sheet": "outputs/qualitative/review_sheet.md",
     "categories": "outputs/qualitative/categories.csv",
     "template_1": "outputs/qualitative/annotations_reviewer_1.csv",
     "key": "outputs/qualitative/blinding_key.csv",

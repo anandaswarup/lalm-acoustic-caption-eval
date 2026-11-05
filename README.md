@@ -166,11 +166,25 @@ The report is `outputs/reports/statistical_analysis.{json,md}`.
 |---|---|
 | `sample_manifest.json` | Seed, sampled recording IDs, reviewer templates, input checksums and the blinding key's SHA-256 |
 | `review_items.csv` | One row per model caption: item ID, recording code, label, the five references and the caption |
-| `annotations_reviewer_<n>.csv` | Blank annotation template for the reviewer (agreement category and notes); one reviewer, more are left for future work |
+| `review_sheet.md` | Reading view of the review items, one section per recording |
+| `annotations_reviewer_1.csv` | Annotation template: agreement category, disputed caption phrases and notes (one reviewer; more are left for future work). `prepare_qualitative.py` never overwrites a template that holds labels |
 | `categories.csv` | The six agreement categories |
 | `blinding_key.csv` | Item to recording and model (git-ignored until the E18 labels are final) |
 
 The report, with a descriptive comparison of the sample with all recordings, is `outputs/reports/qualitative_sample.{json,md}`.
+
+#### Qualitative annotation (E18)
+
+One reviewer labels each of the 200 captions with one of six agreement categories, following `outputs/qualitative/annotation_guidelines.md`: the caption is compared with the five references only, without audio, and principal content is what at least two references mention. Caption phrases that no reference supports are listed in `disputed_details` for audio verification in E19. Once the labels are final, `make annotations` checks the template (every item labelled, review columns unchanged), verifies the blinding key against the SHA-256 in the sample manifest, unblinds the labels and writes:
+
+| File (`outputs/qualitative/`) | Contents |
+|---|---|
+| `qualitative_annotations.csv` | Unblinded labels: item, recording, model, category, disputed details and notes |
+| `category_summary.csv` | Count and share of each category per model, with Wilson 95% intervals |
+| `disputed_summary.csv` | Captions with disputed details and number of disputed phrases per model |
+| `scores_by_category.csv` | Mean five-reference item score per category (descriptive) |
+
+The report is `outputs/reports/qualitative_annotation.{json,md}`.
 
 ## Running tasks
 
@@ -190,6 +204,7 @@ Run `make help` for the full list. Main targets (task IDs are listed under [Task
 | `make lengths` | E15: caption-length analysis |
 | `make stats` | E16, E21: bootstrap CIs and cross-metric comparison |
 | `make qualitative-sample` | E17: blinded qualitative review sample |
+| `make annotations` | E18: check, unblind and summarize the annotations |
 | `make figures` | Tables and figures |
 | `make paper` | Build the manuscript (once added) |
 | `make all` | Complete workflow |
