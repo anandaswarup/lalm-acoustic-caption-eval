@@ -55,6 +55,11 @@ leave_one_out:
   # reported on the held-out captions whose closest reference is below each threshold, without rescoring.
   overlap_thresholds: [0.6, 0.8]
 
+# Caption-length analysis (E15, decided 2026-11-05): words = whitespace tokens of the scored caption. Length-score
+# Spearman correlations use the five-reference model scores (E12) and the human leave-one-out scores (E13).
+lengths:
+  association_metrics: [cider_d, spice, spider, fense, bertscore_f1_rescaled, clap_similarity, mace]
+
 bootstrap:
   num_resamples: 1000
   confidence: 0.95
