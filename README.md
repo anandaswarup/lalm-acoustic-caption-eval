@@ -158,6 +158,20 @@ The report is `outputs/reports/caption_length_analysis.{json,md}`.
 
 The report is `outputs/reports/statistical_analysis.{json,md}`.
 
+#### Qualitative review sample (E17)
+
+`make qualitative-sample` draws 50 evaluation recordings at random (seed 42, `configs/qualitative.yaml`), independently of model scores, and prepares blinded review material for the 200 model captions. Each recording has its own random order of the four models behind the labels A–D, and the recordings are presented in random order under anonymous codes. The review sheets show the five references and each caption as scored, without file names (Clotho file names describe the content), model names or scores. The blinding key is not committed until the annotations are adjudicated (E18); its SHA-256 is recorded in the sample manifest so it can be checked when it is added.
+
+| File (`outputs/qualitative/`) | Contents |
+|---|---|
+| `sample_manifest.json` | Seed, sampled recording IDs, reviewer templates, input checksums and the blinding key's SHA-256 |
+| `review_items.csv` | One row per model caption: item ID, recording code, label, the five references and the caption |
+| `annotations_reviewer_<n>.csv` | Blank annotation template per reviewer (agreement category and notes) |
+| `categories.csv` | The six agreement categories |
+| `blinding_key.csv` | Item to recording and model (git-ignored until E18 adjudication) |
+
+The report, with a descriptive comparison of the sample with all recordings, is `outputs/reports/qualitative_sample.{json,md}`.
+
 ## Running tasks
 
 Run `make help` for the full list. Main targets (task IDs are listed under [Tasks](#tasks)):
@@ -175,6 +189,7 @@ Run `make help` for the full list. Main targets (task IDs are listed under [Task
 | `make evaluate-four-ref` | E14: matched four-reference evaluation |
 | `make lengths` | E15: caption-length analysis |
 | `make stats` | E16, E21: bootstrap CIs and cross-metric comparison |
+| `make qualitative-sample` | E17: blinded qualitative review sample |
 | `make figures` | Tables and figures |
 | `make paper` | Build the manuscript (once added) |
 | `make all` | Complete workflow |
@@ -215,7 +230,7 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | | E14 | Matched four-reference model evaluation | Done |
 | | E15 | Caption-length analysis | Done |
 | | E16 | Statistical comparison and uncertainty | Done |
-| 5. Qualitative analysis | E17 | Select qualitative review sample | — |
+| 5. Qualitative analysis | E17 | Select qualitative review sample | Done |
 | | E18 | Annotate model–reference agreement | — |
 | | E19 | Audio-grounded verification of selected cases | — |
 | | E20 | Representative caption comparisons | — |
