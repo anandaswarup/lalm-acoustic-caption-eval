@@ -1,9 +1,9 @@
 {
   "run_info": {
     "experiment": "prepare_qualitative",
-    "timestamp_utc": "2026-11-05T07:37:32+00:00",
-    "git_commit": "940994c5aaf75167c8e452028b455e638d878e24",
-    "git_dirty": true,
+    "timestamp_utc": "2026-11-05T07:38:12+00:00",
+    "git_commit": "7319b2205923d1ea5bc9e3e8dbbbc740f03af196",
+    "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
