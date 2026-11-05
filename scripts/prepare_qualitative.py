@@ -3,8 +3,9 @@
 E17: draws `sample.num_recordings` evaluation recordings at random (configs/qualitative.yaml, independent of model
 scores), then writes to `output_dir` the blinded review sheet (one row per model caption: recording code, label A-D,
 the five references and the caption as scored), one blank annotation template per reviewer, the category list, the
-sample manifest and the blinding key (git-ignored until E18 adjudication; its SHA-256 is in the manifest). Also writes
-outputs/reports/qualitative_sample.{json,md} with a descriptive comparison of the sample with all recordings.
+sample manifest and the blinding key (git-ignored until the E18 labels are final; its SHA-256 is in the manifest).
+Also writes outputs/reports/qualitative_sample.{json,md} with a descriptive comparison of the sample with all
+recordings.
 """
 
 import sys

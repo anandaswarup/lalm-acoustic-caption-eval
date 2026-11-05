@@ -139,7 +139,7 @@ def report_markdown(report: dict[str, Any]) -> str:
         f"{manifest['num_items']} model captions ({len(report['models'])} per recording).",
         "- Each recording has its own random model order behind the labels A-D, and recordings are presented in "
         "random order (codes R01...). Review sheets contain no file names, model names or scores.",
-        f"- Blinding key: `{manifest['key']['path']}` (not committed until E18 adjudication), "
+        f"- Blinding key: `{manifest['key']['path']}` (not committed until the E18 labels are final), "
         f"sha256 `{manifest['key']['sha256']}`.",
         f"- Captions as scored, by normalization: {report['normalization']}.",
         f"- Annotation templates: {', '.join(f'`{p}`' for p in manifest['templates'])}.",
@@ -174,6 +174,8 @@ def report_markdown(report: dict[str, Any]) -> str:
 LIMITATIONS = [
     "Blinding is imperfect: style can reveal a model (GPT's JSON-like captions are shown as scored, many Qwen captions "
     "begin with 'The audio', and the models differ in typical length; see E06-E10 and E15).",
+    "One reviewer annotates the sample, so inter-annotator agreement cannot be estimated and every label reflects a "
+    "single judgement; more reviewers are left for future work.",
     "50 recordings give coarse category proportions per model (one caption is 2 percentage points); the review is "
     "exploratory and not used to estimate dataset-wide rates.",
 ]

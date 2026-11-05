@@ -1,7 +1,7 @@
 # Qualitative review (E17-E20, RQ3). E17 draws a simple random sample of evaluation recordings, independent of model
 # scores (proposal 5.4), and writes blinded review sheets: each recording gets its own random order of the four models
 # (labels A-D) and the recordings are presented in random order. Reviewers see the five references and each caption as
-# scored, never file names, model names or metric scores. The blinding key stays out of git until E18 adjudication;
+# scored, never file names, model names or metric scores. The blinding key stays out of git until the E18 labels are final;
 # its SHA-256 is recorded in the sample manifest.
 sample:
   num_recordings: 50
