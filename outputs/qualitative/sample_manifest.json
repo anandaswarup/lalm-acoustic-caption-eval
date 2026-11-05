@@ -1,0 +1,78 @@
+{
+  "task": "E17",
+  "seed": 42,
+  "population": 1045,
+  "num_recordings": 50,
+  "num_items": 200,
+  "sample_ids": [
+    "clotho_eval_0013",
+    "clotho_eval_0051",
+    "clotho_eval_0054",
+    "clotho_eval_0061",
+    "clotho_eval_0065",
+    "clotho_eval_0088",
+    "clotho_eval_0093",
+    "clotho_eval_0142",
+    "clotho_eval_0161",
+    "clotho_eval_0163",
+    "clotho_eval_0178",
+    "clotho_eval_0189",
+    "clotho_eval_0191",
+    "clotho_eval_0198",
+    "clotho_eval_0206",
+    "clotho_eval_0209",
+    "clotho_eval_0228",
+    "clotho_eval_0255",
+    "clotho_eval_0285",
+    "clotho_eval_0318",
+    "clotho_eval_0326",
+    "clotho_eval_0393",
+    "clotho_eval_0407",
+    "clotho_eval_0440",
+    "clotho_eval_0447",
+    "clotho_eval_0451",
+    "clotho_eval_0457",
+    "clotho_eval_0466",
+    "clotho_eval_0476",
+    "clotho_eval_0501",
+    "clotho_eval_0541",
+    "clotho_eval_0563",
+    "clotho_eval_0569",
+    "clotho_eval_0592",
+    "clotho_eval_0600",
+    "clotho_eval_0689",
+    "clotho_eval_0696",
+    "clotho_eval_0704",
+    "clotho_eval_0735",
+    "clotho_eval_0740",
+    "clotho_eval_0747",
+    "clotho_eval_0775",
+    "clotho_eval_0778",
+    "clotho_eval_0859",
+    "clotho_eval_0864",
+    "clotho_eval_0865",
+    "clotho_eval_0919",
+    "clotho_eval_0928",
+    "clotho_eval_0940",
+    "clotho_eval_1034"
+  ],
+  "reviewers": 2,
+  "templates": [
+    "outputs/qualitative/annotations_reviewer_1.csv",
+    "outputs/qualitative/annotations_reviewer_2.csv"
+  ],
+  "key": {
+    "path": "outputs/qualitative/blinding_key.csv",
+    "sha256": "f173edd52b8bd09a3dfc0e68b700041fa5b621abc38a00b727daf627609b2a2a"
+  },
+  "inputs": {
+    "captions": {
+      "path": "outputs/captions/all_model_captions.jsonl",
+      "sha256": "10ef8b655f3941911c2834d41ab0a0622c8f894d4520132df95439dd0beb3b02"
+    },
+    "references": {
+      "path": "data/manifests/clotho_eval_references.json",
+      "sha256": "1d2fe5f6f83cced6fb714f7684ace0611b03f9f4a0a521a429f68f4d8779dcb7"
+    }
+  }
+}

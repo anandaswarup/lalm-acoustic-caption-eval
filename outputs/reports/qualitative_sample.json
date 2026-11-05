@@ -1,0 +1,356 @@
+{
+  "run_info": {
+    "experiment": "prepare_qualitative",
+    "timestamp_utc": "2026-11-05T07:18:43+00:00",
+    "git_commit": "a3cab81686003426782c6b69a608ad90504df03d",
+    "git_dirty": false,
+    "python": "3.13.12",
+    "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+    "seed": 42
+  },
+  "task": "E17",
+  "models": [
+    "gpt_audio_1_5",
+    "gemini_3_8_flash",
+    "qwen2_5_omni",
+    "audio_flamingo_3"
+  ],
+  "manifest": {
+    "task": "E17",
+    "seed": 42,
+    "population": 1045,
+    "num_recordings": 50,
+    "num_items": 200,
+    "sample_ids": [
+      "clotho_eval_0013",
+      "clotho_eval_0051",
+      "clotho_eval_0054",
+      "clotho_eval_0061",
+      "clotho_eval_0065",
+      "clotho_eval_0088",
+      "clotho_eval_0093",
+      "clotho_eval_0142",
+      "clotho_eval_0161",
+      "clotho_eval_0163",
+      "clotho_eval_0178",
+      "clotho_eval_0189",
+      "clotho_eval_0191",
+      "clotho_eval_0198",
+      "clotho_eval_0206",
+      "clotho_eval_0209",
+      "clotho_eval_0228",
+      "clotho_eval_0255",
+      "clotho_eval_0285",
+      "clotho_eval_0318",
+      "clotho_eval_0326",
+      "clotho_eval_0393",
+      "clotho_eval_0407",
+      "clotho_eval_0440",
+      "clotho_eval_0447",
+      "clotho_eval_0451",
+      "clotho_eval_0457",
+      "clotho_eval_0466",
+      "clotho_eval_0476",
+      "clotho_eval_0501",
+      "clotho_eval_0541",
+      "clotho_eval_0563",
+      "clotho_eval_0569",
+      "clotho_eval_0592",
+      "clotho_eval_0600",
+      "clotho_eval_0689",
+      "clotho_eval_0696",
+      "clotho_eval_0704",
+      "clotho_eval_0735",
+      "clotho_eval_0740",
+      "clotho_eval_0747",
+      "clotho_eval_0775",
+      "clotho_eval_0778",
+      "clotho_eval_0859",
+      "clotho_eval_0864",
+      "clotho_eval_0865",
+      "clotho_eval_0919",
+      "clotho_eval_0928",
+      "clotho_eval_0940",
+      "clotho_eval_1034"
+    ],
+    "reviewers": 2,
+    "templates": [
+      "outputs/qualitative/annotations_reviewer_1.csv",
+      "outputs/qualitative/annotations_reviewer_2.csv"
+    ],
+    "key": {
+      "path": "outputs/qualitative/blinding_key.csv",
+      "sha256": "f173edd52b8bd09a3dfc0e68b700041fa5b621abc38a00b727daf627609b2a2a"
+    },
+    "inputs": {
+      "captions": {
+        "path": "outputs/captions/all_model_captions.jsonl",
+        "sha256": "10ef8b655f3941911c2834d41ab0a0622c8f894d4520132df95439dd0beb3b02"
+      },
+      "references": {
+        "path": "data/manifests/clotho_eval_references.json",
+        "sha256": "1d2fe5f6f83cced6fb714f7684ace0611b03f9f4a0a521a429f68f4d8779dcb7"
+      }
+    }
+  },
+  "normalization": {
+    "none": 196,
+    "unwrapped": 4
+  },
+  "comparison": [
+    {
+      "group": "Recording",
+      "quantity": "duration (s)",
+      "sample_mean": 23.994522448979588,
+      "population_mean": 22.40795208801224,
+      "population_sd": 4.346262503428923,
+      "standardized_difference": 0.36504246112968197
+    },
+    {
+      "group": "Human",
+      "quantity": "words (mean of 5)",
+      "sample_mean": 11.296000000000001,
+      "population_mean": 11.319043062200956,
+      "population_sd": 1.685522942335713,
+      "standardized_difference": -0.013671164967367967
+    },
+    {
+      "group": "GPT-Audio-1.5",
+      "quantity": "words",
+      "sample_mean": 21.08,
+      "population_mean": 20.978947368421053,
+      "population_sd": 3.818127868926403,
+      "standardized_difference": 0.026466539374271725
+    },
+    {
+      "group": "GPT-Audio-1.5",
+      "quantity": "cider_d",
+      "sample_mean": 0.05483587019128116,
+      "population_mean": 0.04787530130041854,
+      "population_sd": 0.10033352312562789,
+      "standardized_difference": 0.06937430954305543
+    },
+    {
+      "group": "GPT-Audio-1.5",
+      "quantity": "spice",
+      "sample_mean": 0.06910881279845708,
+      "population_mean": 0.06656150595840296,
+      "population_sd": 0.06635921666863263,
+      "standardized_difference": 0.03838663215049991
+    },
+    {
+      "group": "GPT-Audio-1.5",
+      "quantity": "fense",
+      "sample_mean": 0.3955655608326197,
+      "population_mean": 0.40059686722902305,
+      "population_sd": 0.15841878354881447,
+      "standardized_difference": -0.0317595318162069
+    },
+    {
+      "group": "GPT-Audio-1.5",
+      "quantity": "bertscore_f1_rescaled",
+      "sample_mean": 0.22188745969077775,
+      "population_mean": 0.2275595775754656,
+      "population_sd": 0.08085196467682507,
+      "standardized_difference": -0.07015436059420431
+    },
+    {
+      "group": "GPT-Audio-1.5",
+      "quantity": "clap_similarity",
+      "sample_mean": 0.4660903910561589,
+      "population_mean": 0.46640355204764467,
+      "population_sd": 0.1052019562109973,
+      "standardized_difference": -0.002976760155083742
+    },
+    {
+      "group": "GPT-Audio-1.5",
+      "quantity": "mace",
+      "sample_mean": 0.5685423517002467,
+      "population_mean": 0.5729423804790881,
+      "population_sd": 0.10116220052289594,
+      "standardized_difference": -0.0434947910988307
+    },
+    {
+      "group": "Gemini 3.8 Flash",
+      "quantity": "words",
+      "sample_mean": 15.3,
+      "population_mean": 16.360765550239236,
+      "population_sd": 3.7537964674604547,
+      "standardized_difference": -0.2825847270714899
+    },
+    {
+      "group": "Gemini 3.8 Flash",
+      "quantity": "cider_d",
+      "sample_mean": 0.0668635263535446,
+      "population_mean": 0.06410855454804125,
+      "population_sd": 0.1116666640562009,
+      "standardized_difference": 0.02467138987976572
+    },
+    {
+      "group": "Gemini 3.8 Flash",
+      "quantity": "spice",
+      "sample_mean": 0.04470205622136054,
+      "population_mean": 0.05090645199126072,
+      "population_sd": 0.06280047969447182,
+      "standardized_difference": -0.09879535634257804
+    },
+    {
+      "group": "Gemini 3.8 Flash",
+      "quantity": "fense",
+      "sample_mean": 0.3658437606692314,
+      "population_mean": 0.38739748928482026,
+      "population_sd": 0.1752859355412414,
+      "standardized_difference": -0.12296325172373956
+    },
+    {
+      "group": "Gemini 3.8 Flash",
+      "quantity": "bertscore_f1_rescaled",
+      "sample_mean": 0.22548579532809426,
+      "population_mean": 0.22924001728699342,
+      "population_sd": 0.08102163664458037,
+      "standardized_difference": -0.046336042005271944
+    },
+    {
+      "group": "Gemini 3.8 Flash",
+      "quantity": "clap_similarity",
+      "sample_mean": 0.38932716826768027,
+      "population_mean": 0.3811172001369427,
+      "population_sd": 0.13315057338503028,
+      "standardized_difference": 0.061659277328058176
+    },
+    {
+      "group": "Gemini 3.8 Flash",
+      "quantity": "mace",
+      "sample_mean": 0.4853464654380461,
+      "population_mean": 0.4887915999712067,
+      "population_sd": 0.12725498707690924,
+      "standardized_difference": -0.027072687776695522
+    },
+    {
+      "group": "Qwen2.5-Omni-7B",
+      "quantity": "words",
+      "sample_mean": 17.54,
+      "population_mean": 16.960765550239234,
+      "population_sd": 4.771542336772148,
+      "standardized_difference": 0.12139354717590235
+    },
+    {
+      "group": "Qwen2.5-Omni-7B",
+      "quantity": "cider_d",
+      "sample_mean": 0.127983642212892,
+      "population_mean": 0.16374225448229981,
+      "population_sd": 0.24134780622741922,
+      "standardized_difference": -0.14816215994817414
+    },
+    {
+      "group": "Qwen2.5-Omni-7B",
+      "quantity": "spice",
+      "sample_mean": 0.08122376347081266,
+      "population_mean": 0.09058890615739013,
+      "population_sd": 0.07944160869822346,
+      "standardized_difference": -0.11788712288233029
+    },
+    {
+      "group": "Qwen2.5-Omni-7B",
+      "quantity": "fense",
+      "sample_mean": 0.4493476980924606,
+      "population_mean": 0.47364975485148614,
+      "population_sd": 0.16620584890695927,
+      "standardized_difference": -0.14621661583419743
+    },
+    {
+      "group": "Qwen2.5-Omni-7B",
+      "quantity": "bertscore_f1_rescaled",
+      "sample_mean": 0.2704015284279879,
+      "population_mean": 0.27506747128972453,
+      "population_sd": 0.08616440434532488,
+      "standardized_difference": -0.05415162905364842
+    },
+    {
+      "group": "Qwen2.5-Omni-7B",
+      "quantity": "clap_similarity",
+      "sample_mean": 0.46846909837618766,
+      "population_mean": 0.46233271439069923,
+      "population_sd": 0.10082075143777991,
+      "standardized_difference": 0.06086429527630944
+    },
+    {
+      "group": "Qwen2.5-Omni-7B",
+      "quantity": "mace",
+      "sample_mean": 0.5731805602740455,
+      "population_mean": 0.5748340224790035,
+      "population_sd": 0.09829096333595251,
+      "standardized_difference": -0.016822118217587882
+    },
+    {
+      "group": "Audio Flamingo 3",
+      "quantity": "words",
+      "sample_mean": 18.08,
+      "population_mean": 18.95598086124402,
+      "population_sd": 6.575378951218233,
+      "standardized_difference": -0.13322135009142336
+    },
+    {
+      "group": "Audio Flamingo 3",
+      "quantity": "cider_d",
+      "sample_mean": 0.1612848751633665,
+      "population_mean": 0.1911791630413964,
+      "population_sd": 0.30971028815944845,
+      "standardized_difference": -0.09652339305770619
+    },
+    {
+      "group": "Audio Flamingo 3",
+      "quantity": "spice",
+      "sample_mean": 0.11201577880642416,
+      "population_mean": 0.11652216289891876,
+      "population_sd": 0.08733427922536512,
+      "standardized_difference": -0.05159925899045808
+    },
+    {
+      "group": "Audio Flamingo 3",
+      "quantity": "fense",
+      "sample_mean": 0.4998178344666958,
+      "population_mean": 0.509626601935859,
+      "population_sd": 0.16839211434785892,
+      "standardized_difference": -0.05824956535019519
+    },
+    {
+      "group": "Audio Flamingo 3",
+      "quantity": "bertscore_f1_rescaled",
+      "sample_mean": 0.2981387276466551,
+      "population_mean": 0.2793311530656362,
+      "population_sd": 0.10145439320146361,
+      "standardized_difference": 0.185379597546571
+    },
+    {
+      "group": "Audio Flamingo 3",
+      "quantity": "clap_similarity",
+      "sample_mean": 0.5203457520376138,
+      "population_mean": 0.508762275396887,
+      "population_sd": 0.09897971156971588,
+      "standardized_difference": 0.1170287976902016
+    },
+    {
+      "group": "Audio Flamingo 3",
+      "quantity": "mace",
+      "sample_mean": 0.6222876923603995,
+      "population_mean": 0.6078394327505624,
+      "population_sd": 0.09676708329903425,
+      "standardized_difference": 0.14930965279989258
+    }
+  ],
+  "limitations": [
+    "Blinding is imperfect: style can reveal a model (GPT's JSON-like captions are shown as scored, many Qwen captions begin with 'The audio', and the models differ in typical length; see E06-E10 and E15).",
+    "50 recordings give coarse category proportions per model (one caption is 2 percentage points); the review is exploratory and not used to estimate dataset-wide rates."
+  ],
+  "outputs": {
+    "manifest": "outputs/qualitative/sample_manifest.json",
+    "review": "outputs/qualitative/review_items.csv",
+    "categories": "outputs/qualitative/categories.csv",
+    "template_1": "outputs/qualitative/annotations_reviewer_1.csv",
+    "template_2": "outputs/qualitative/annotations_reviewer_2.csv",
+    "key": "outputs/qualitative/blinding_key.csv",
+    "report_json": "outputs/reports/qualitative_sample.json",
+    "report_md": "outputs/reports/qualitative_sample.md"
+  }
+}

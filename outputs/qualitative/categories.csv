@@ -1,0 +1,7 @@
+code,name,description
+1,Strong agreement,"Closely matches the principal sound sources, events and characteristics in the references."
+2,Mostly aligned,"Agrees with the main content of the references, with minor differences in wording or emphasis."
+3,Mostly aligned with additional details,"The main description agrees, but the caption adds acoustic details absent from the references."
+4,Partially aligned with missing details,"Captures some referenced content but omits important sound sources, events or characteristics."
+5,Partially aligned with additional details,"Captures some referenced content but introduces sources, events or descriptions not in the references."
+6,Weak agreement or sound-source/event mismatch,Differs substantially from the references or appears to describe a different source or event.
