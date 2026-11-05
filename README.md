@@ -175,7 +175,7 @@ The report, with a descriptive comparison of the sample with all recordings, is 
 
 #### Qualitative annotation (E18)
 
-One reviewer labels each of the 200 captions with one of six agreement categories, following `outputs/qualitative/annotation_guidelines.md`: the caption is compared with the five references only, without audio, and principal content is what at least two references mention. Caption phrases that no reference supports are listed in `disputed_details` for audio verification in E19. Once the labels are final, `make annotations` checks the template (every item labelled, review columns unchanged), verifies the blinding key against the SHA-256 in the sample manifest, unblinds the labels and writes:
+One reviewer labels each of the 200 captions with one of six agreement categories, following `outputs/qualitative/annotation_guidelines.md`: the caption is compared with the five references only, without audio, and principal content is what at least two references mention. Caption phrases that no reference supports are listed in `disputed_details`; after the labels are final, every caption is also rated against the audio in E19. Once the labels are final, `make annotations` checks the template (every item labelled, review columns unchanged), verifies the blinding key against the SHA-256 in the sample manifest, unblinds the labels and writes:
 
 | File (`outputs/qualitative/`) | Contents |
 |---|---|
@@ -247,7 +247,7 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | | E16 | Statistical comparison and uncertainty | Done |
 | 5. Qualitative analysis | E17 | Select qualitative review sample | Done |
 | | E18 | Annotate model–reference agreement | — |
-| | E19 | Audio-grounded verification of selected cases | — |
+| | E19 | Audio-grounded review of the qualitative sample | — |
 | | E20 | Representative caption comparisons | — |
 | 6. Synthesis and reproducibility | E21 | Cross-metric and model comparison | — |
 | | E22 | Reproduce results from frozen artifacts | — |
