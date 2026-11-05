@@ -133,6 +133,18 @@ The report is `outputs/reports/human_loo_evaluation.{json,md}`.
 
 The report, including the model-minus-human calibration table, is `outputs/reports/four_reference_evaluation.{json,md}`.
 
+#### Caption-length analysis (E15)
+
+`make lengths` counts the words (whitespace tokens) of every scored model caption and human reference and reports, per system, the mean, SD, quartiles and range. For each model it gives the ratio of its mean length to the human mean and the per-recording difference from the mean length of the recording's five references, with bootstrap CIs over recordings (the same resamples as E12–E14), and the share of captions longer than the reference mean and than every reference. It also reports Spearman correlations between caption length and per-item score, using the five-reference model scores (E12) and the held-out human scores (E13, all five positions pooled, resampled by recording), for the metrics in `lengths.association_metrics` (`configs/metrics.yaml`). Everything is repeated on the 1,024 recordings where every model's caption is valid. It reads frozen files only and runs in seconds in `.venv`. Figures are drawn in E21 from the per-caption table.
+
+| File | Contents |
+|---|---|
+| `caption_lengths_per_caption.csv` | Word count of every model and human caption, with the mean and maximum length of the references it is compared with |
+| `caption_lengths_summary.csv` | Length statistics per system, ratio to human and difference from the reference mean with 95% CIs, per sample |
+| `caption_lengths_associations.csv` | Spearman correlation between length (or length minus the reference mean) and score, with 95% CIs (uncorrected), per system, metric and sample |
+
+The report is `outputs/reports/caption_length_analysis.{json,md}`.
+
 ## Running tasks
 
 Run `make help` for the full list. Main targets (task IDs are listed under [Tasks](#tasks)):
@@ -188,7 +200,7 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | | E12 | Five-reference model evaluation | Done |
 | 4. Human calibration | E13 | Human leave-one-out calibration | Done |
 | | E14 | Matched four-reference model evaluation | Done |
-| | E15 | Caption-length analysis | — |
+| | E15 | Caption-length analysis | Done |
 | | E16 | Statistical comparison and uncertainty | — |
 | 5. Qualitative analysis | E17 | Select qualitative review sample | — |
 | | E18 | Annotate model–reference agreement | — |
