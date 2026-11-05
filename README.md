@@ -145,6 +145,19 @@ The report, including the model-minus-human calibration table, is `outputs/repor
 
 The report is `outputs/reports/caption_length_analysis.{json,md}`.
 
+#### Statistical comparison (E16)
+
+`make stats` adds formal tests to the comparisons of E12–E15, from the committed per-item tables (no rescoring; about 7 minutes in `.venv`). Each comparison is paired over recordings and tested with a two-sided sign-flip permutation test of the mean difference (10,000 permutations), with a 95% bootstrap CI (10,000 resamples) and a paired effect size (d_z). Holm–Bonferroni correction is applied within four families fixed in `statistics` (`configs/metrics.yaml`), on all recordings: model pairs on the 14 main metrics (E12, 84 tests), models minus human on the matched four-reference scores (E14, 56 tests), model minus reference caption length (E15, 4 tests), and length–score Spearman correlations (E15, 35 tests, permutation over recordings). The E12–E14 sensitivity samples are reported uncorrected. Ranking stability is the share of bootstrap resamples in which each system takes each rank. The report documents the statistical assumptions and lists every decision that differs from the uncorrected marks of E12 and E14.
+
+| File | Contents |
+|---|---|
+| `statistics_tests.csv` | Every paired test: difference, CI, d_z, p-value, Holm-adjusted p-value and decision, per family and sample |
+| `statistics_correlations.csv` | Length–score Spearman correlations with CIs, permutation p-values and Holm decisions |
+| `statistics_ranks.csv` | Share of bootstrap resamples at each rank, per system, metric and sample |
+| `statistics_orders.csv` | Observed order per metric and the share of resamples that reproduce it |
+
+The report is `outputs/reports/statistical_analysis.{json,md}`.
+
 ## Running tasks
 
 Run `make help` for the full list. Main targets (task IDs are listed under [Tasks](#tasks)):
@@ -201,7 +214,7 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | 4. Human calibration | E13 | Human leave-one-out calibration | Done |
 | | E14 | Matched four-reference model evaluation | Done |
 | | E15 | Caption-length analysis | Done |
-| | E16 | Statistical comparison and uncertainty | — |
+| | E16 | Statistical comparison and uncertainty | Done |
 | 5. Qualitative analysis | E17 | Select qualitative review sample | — |
 | | E18 | Annotate model–reference agreement | — |
 | | E19 | Audio-grounded verification of selected cases | — |
