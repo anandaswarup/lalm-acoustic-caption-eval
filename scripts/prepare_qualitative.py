@@ -2,7 +2,8 @@
 
 E17: draws `sample.num_recordings` evaluation recordings at random (configs/qualitative.yaml, independent of model
 scores), then writes to `output_dir` the blinded review sheet (one row per model caption: recording code, label A-D,
-the five references and the caption as scored), one blank annotation template per reviewer, the category list, the
+the five references and the caption as scored) and a Markdown reading view of it, one blank annotation template per
+reviewer, the category list, the
 sample manifest and the blinding key (git-ignored until the E18 labels are final; its SHA-256 is in the manifest).
 Also writes outputs/reports/qualitative_sample.{json,md} with a descriptive comparison of the sample with all
 recordings.
@@ -16,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import numpy as np  # noqa: E402
 
+from src.analysis.annotations import read_table  # noqa: E402
 from src.analysis.lengths import word_count  # noqa: E402
 from src.analysis.qualitative import (  # noqa: E402
     ANNOTATION_COLUMNS,
@@ -26,8 +28,10 @@ from src.analysis.qualitative import (  # noqa: E402
     annotation_template,
     blind,
     blinding_problems,
+    has_annotations,
     report_markdown,
     review_rows,
+    review_sheet_markdown,
     sample_comparison,
     select_sample,
 )
@@ -63,6 +67,7 @@ def main() -> int:
     outputs = {
         "manifest": out_dir / "sample_manifest.json",
         "review": out_dir / "review_items.csv",
+        "review_sheet": out_dir / "review_sheet.md",
         "categories": out_dir / "categories.csv",
         **{f"template_{n}": path for n, path in templates.items()},
         "key": out_dir / "blinding_key.csv",
@@ -71,6 +76,9 @@ def main() -> int:
     }
     if not args.force and (existing := existing_outputs(outputs)):
         logger.error("Outputs exist (use --force to overwrite): %s", existing)
+        return 1
+    if annotated := [relative(p) for p in templates.values() if p.is_file() and has_annotations(read_table(p))]:
+        logger.error("Annotation templates already hold labels and are never overwritten: %s", annotated)
         return 1
     problems = [f"manifests: {e}" for e in verify_checksums(MANIFEST_DIR / "SHA256SUMS")]
     problems += [f"captions: {e}" for e in verify_checksums(OUTPUT_DIR / "captions" / "SHA256SUMS")]
@@ -103,6 +111,7 @@ def main() -> int:
     logger.info("%d recordings, %d review items, %d reviewer templates", len(sample), len(review), len(templates))
 
     write_csv(review, outputs["review"], REVIEW_COLUMNS)
+    outputs["review_sheet"].write_text(review_sheet_markdown(review), encoding="utf-8")
     for path in templates.values():
         write_csv(annotation_template(review), path, ANNOTATION_COLUMNS)
     write_csv(config["categories"], outputs["categories"], CATEGORY_COLUMNS)

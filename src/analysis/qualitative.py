@@ -19,9 +19,10 @@ from src.data.manifest import select_pilot
 
 REFERENCE_COLUMNS = tuple(f"reference_{k}" for k in range(1, 6))
 REVIEW_COLUMNS = ("item_id", "recording_code", "caption_label", *REFERENCE_COLUMNS, "caption")
-ANNOTATION_COLUMNS = (
-    *REVIEW_COLUMNS, "category", "notes_sources", "notes_attributes", "notes_temporal", "notes_other",
+ANNOTATION_FIELDS = (
+    "category", "disputed_details", "notes_sources", "notes_attributes", "notes_temporal", "notes_other",
 )  # fmt: skip
+ANNOTATION_COLUMNS = (*REVIEW_COLUMNS, *ANNOTATION_FIELDS)
 KEY_COLUMNS = ("item_id", "recording_code", "caption_label", "sample_id", "model_key", "normalization")
 CATEGORY_COLUMNS = ("code", "name", "description")
 
@@ -81,8 +82,35 @@ def review_rows(
 
 
 def annotation_template(review: list[dict[str, str]]) -> list[dict[str, str]]:
-    blank = dict.fromkeys(ANNOTATION_COLUMNS[len(REVIEW_COLUMNS) :], "")
+    blank = dict.fromkeys(ANNOTATION_FIELDS, "")
     return [{**row, **blank} for row in review]
+
+
+def has_annotations(rows: list[dict[str, str]]) -> bool:
+    """Whether any annotation field of a template is filled in (such a template is never overwritten)."""
+    return any(row.get(field, "").strip() for row in rows for field in ANNOTATION_FIELDS)
+
+
+def review_sheet_markdown(review: list[dict[str, str]]) -> str:
+    """A reading view of the review rows: per recording code, its references and the labelled captions. Labels are
+    entered in the annotation template, not here."""
+    lines = [
+        "# Qualitative review sheet (E17-E18)",
+        "",
+        "Reading view of `review_items.csv`. Enter labels in the annotation template (`annotations_reviewer_1.csv`), "
+        "following `annotation_guidelines.md`.",
+        "",
+    ]
+    by_code: dict[str, list[dict[str, str]]] = {}
+    for row in review:
+        by_code.setdefault(row["recording_code"], []).append(row)
+    for code, rows in by_code.items():
+        lines += [f"## {code}", "", "References:", ""]
+        lines += [f"{k}. {rows[0][column]}" for k, column in enumerate(REFERENCE_COLUMNS, start=1)]
+        lines += ["", "Captions:", ""]
+        lines += [f"- **{row['item_id']}**: {row['caption']}" for row in rows]
+        lines.append("")
+    return "\n".join(lines)
 
 
 def blinding_problems(review: list[dict[str, str]], model_terms: list[str], file_names: list[str]) -> list[str]:

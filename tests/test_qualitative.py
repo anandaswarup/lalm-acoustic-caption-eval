@@ -9,6 +9,7 @@ from src.analysis.qualitative import (
     annotation_template,
     blind,
     blinding_problems,
+    has_annotations,
     review_rows,
     sample_comparison,
     select_sample,
@@ -61,6 +62,9 @@ def test_review_rows_hold_no_identifying_fields():
     assert len(blinding_problems(review, MODELS, ["dog.wav"])) == 8  # 4 items x 2 terms
     template = annotation_template(review)
     assert all(tuple(row) == ANNOTATION_COLUMNS and row["category"] == "" for row in template)
+    assert not has_annotations(template)
+    template[5]["notes_other"] = " unsure "
+    assert has_annotations(template)
 
 
 def test_sample_comparison():

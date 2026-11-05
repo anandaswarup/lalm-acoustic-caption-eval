@@ -30,3 +30,9 @@ categories:
   - code: 6
     name: Weak agreement or sound-source/event mismatch
     description: Differs substantially from the references or appears to describe a different source or event.
+
+# Annotation analysis (E18): category shares per model with Wilson intervals, and the mean five-reference item score
+# (E12) of each category, pooled over models (descriptive).
+annotation:
+  confidence: 0.95
+  score_metrics: [cider_d, spice, fense, bertscore_f1_rescaled, clap_similarity, mace]
