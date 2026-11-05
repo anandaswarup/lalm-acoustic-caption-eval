@@ -1,9 +1,9 @@
 {
   "run_info": {
     "experiment": "prepare_qualitative",
-    "timestamp_utc": "2026-11-05T07:18:43+00:00",
-    "git_commit": "a3cab81686003426782c6b69a608ad90504df03d",
-    "git_dirty": false,
+    "timestamp_utc": "2026-11-05T07:37:32+00:00",
+    "git_commit": "940994c5aaf75167c8e452028b455e638d878e24",
+    "git_dirty": true,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
@@ -73,10 +73,9 @@
       "clotho_eval_0940",
       "clotho_eval_1034"
     ],
-    "reviewers": 2,
+    "reviewers": 1,
     "templates": [
-      "outputs/qualitative/annotations_reviewer_1.csv",
-      "outputs/qualitative/annotations_reviewer_2.csv"
+      "outputs/qualitative/annotations_reviewer_1.csv"
     ],
     "key": {
       "path": "outputs/qualitative/blinding_key.csv",
@@ -341,6 +340,7 @@
   ],
   "limitations": [
     "Blinding is imperfect: style can reveal a model (GPT's JSON-like captions are shown as scored, many Qwen captions begin with 'The audio', and the models differ in typical length; see E06-E10 and E15).",
+    "One reviewer annotates the sample, so inter-annotator agreement cannot be estimated and every label reflects a single judgement; more reviewers are left for future work.",
     "50 recordings give coarse category proportions per model (one caption is 2 percentage points); the review is exploratory and not used to estimate dataset-wide rates."
   ],
   "outputs": {
@@ -348,7 +348,6 @@
     "review": "outputs/qualitative/review_items.csv",
     "categories": "outputs/qualitative/categories.csv",
     "template_1": "outputs/qualitative/annotations_reviewer_1.csv",
-    "template_2": "outputs/qualitative/annotations_reviewer_2.csv",
     "key": "outputs/qualitative/blinding_key.csv",
     "report_json": "outputs/reports/qualitative_sample.json",
     "report_md": "outputs/reports/qualitative_sample.md"

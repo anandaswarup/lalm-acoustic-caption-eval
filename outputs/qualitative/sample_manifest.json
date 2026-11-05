@@ -56,10 +56,9 @@
     "clotho_eval_0940",
     "clotho_eval_1034"
   ],
-  "reviewers": 2,
+  "reviewers": 1,
   "templates": [
-    "outputs/qualitative/annotations_reviewer_1.csv",
-    "outputs/qualitative/annotations_reviewer_2.csv"
+    "outputs/qualitative/annotations_reviewer_1.csv"
   ],
   "key": {
     "path": "outputs/qualitative/blinding_key.csv",
