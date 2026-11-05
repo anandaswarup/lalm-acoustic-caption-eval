@@ -6,7 +6,7 @@
 sample:
   num_recordings: 50
   seed: 42
-reviewers: 2
+reviewers: 1  # one reviewer (decided 2026-11-05); more reviewers are left for future work
 output_dir: outputs/qualitative
 
 # Primary agreement category per generated caption (E18). Reviewers compare the caption with the references only,
