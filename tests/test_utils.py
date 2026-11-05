@@ -7,7 +7,7 @@ from src.utils.config import apply_overrides, load_config, load_yaml
 from src.utils.paths import CONFIG_DIR, REPO_ROOT, resolve_path
 from src.utils.seed import set_seed
 
-CONFIG_NAMES = ["dataset", "models", "generation", "metrics"]
+CONFIG_NAMES = ["dataset", "models", "generation", "metrics", "qualitative"]
 
 
 def test_repo_root_contains_project_files():

@@ -1,0 +1,32 @@
+# Qualitative review (E17-E20, RQ3). E17 draws a simple random sample of evaluation recordings, independent of model
+# scores (proposal 5.4), and writes blinded review sheets: each recording gets its own random order of the four models
+# (labels A-D) and the recordings are presented in random order. Reviewers see the five references and each caption as
+# scored, never file names, model names or metric scores. The blinding key stays out of git until E18 adjudication;
+# its SHA-256 is recorded in the sample manifest.
+sample:
+  num_recordings: 50
+  seed: 42
+reviewers: 2
+output_dir: outputs/qualitative
+
+# Primary agreement category per generated caption (E18). Reviewers compare the caption with the references only,
+# without the audio.
+categories:
+  - code: 1
+    name: Strong agreement
+    description: Closely matches the principal sound sources, events and characteristics in the references.
+  - code: 2
+    name: Mostly aligned
+    description: Agrees with the main content of the references, with minor differences in wording or emphasis.
+  - code: 3
+    name: Mostly aligned with additional details
+    description: The main description agrees, but the caption adds acoustic details absent from the references.
+  - code: 4
+    name: Partially aligned with missing details
+    description: Captures some referenced content but omits important sound sources, events or characteristics.
+  - code: 5
+    name: Partially aligned with additional details
+    description: Captures some referenced content but introduces sources, events or descriptions not in the references.
+  - code: 6
+    name: Weak agreement or sound-source/event mismatch
+    description: Differs substantially from the references or appears to describe a different source or event.
