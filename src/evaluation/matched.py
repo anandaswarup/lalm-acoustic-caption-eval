@@ -15,7 +15,7 @@ from typing import Any
 
 from src.evaluation import references as conditions
 from src.evaluation.calibration import overlap_keep_masks, overlap_sample
-from src.evaluation.scoring import ScoreSet, read_score_sets
+from src.evaluation.scoring import ScoreSet, read_csv, read_score_sets
 from src.evaluation.summary import (
     ALL_RECORDINGS,
     POSITION_MEAN,
@@ -84,6 +84,16 @@ def load_human_baseline(
     return [restrict([s], sample_ids)[0] for s in sets]
 
 
+def read_overlaps(path: Path, sample_ids: list[str], num_positions: int) -> dict[str, list[float]]:
+    """E13's closest-reference Jaccard per recording and position, for the near-paraphrase masks."""
+    overlaps: dict[str, list[float]] = {}
+    for row in read_csv(path):
+        overlaps.setdefault(row["sample_id"], []).append(float(row["closest_reference_jaccard"]))
+    if wrong := [sid for sid in sample_ids if len(overlaps.get(sid, [])) != num_positions]:
+        raise ValueError(f"{path}: {len(wrong)} recordings without {num_positions} positions, e.g. {wrong[:3]}")
+    return {sid: overlaps[sid] for sid in sample_ids}
+
+
 def verdict(row: dict[str, Any]) -> str:
     """A model-minus-human difference row as higher, not_different or lower (95% CI, uncorrected)."""
     if not row["excludes_zero"]:
@@ -110,20 +120,18 @@ def verdict_rows(matched: list[dict[str, Any]]) -> list[dict[str, Any]]:
     ]
 
 
-def matched_tables(
+def matched_samples(
     score_sets: list[ScoreSet],
     human_sets: list[ScoreSet],
     valid_ids: list[str],
     overlaps: dict[str, list[float]],
     thresholds: list[float],
-    boot: tuple[int, float, int],
-) -> dict[str, Any]:
-    """E14 report sections from the per-subset model score sets (models in input order) and E13's human sets.
+) -> list[tuple[str, str, list[ScoreSet], ScoreSet]]:
+    """(name, description, averaged model sets, averaged human set) per sample, from the per-subset model score sets
+    (models in input order) and E13's human sets.
 
     Samples: every recording; the recordings where every model's caption is valid; and, per overlap threshold, the
-    (recording, subset) pairs whose held-out human caption is below it, for models and human alike. Per sample:
-    model and human summaries, paired differences between models and model-minus-human differences, all on the same
-    resamples. The sensitivity rows compare each other sample with every recording, human included.
+    (recording, subset) pairs whose held-out human caption is below it, for models and human alike.
     """
     subsets = [s.subset for s in human_sets]
     models = list(dict.fromkeys(s.system for s in score_sets))
@@ -151,6 +159,25 @@ def matched_tables(
                 masked_average(human_sets, keep),
             )
         )
+    return samples
+
+
+def matched_tables(
+    score_sets: list[ScoreSet],
+    human_sets: list[ScoreSet],
+    valid_ids: list[str],
+    overlaps: dict[str, list[float]],
+    thresholds: list[float],
+    boot: tuple[int, float, int],
+) -> dict[str, Any]:
+    """E14 report sections on the `matched_samples`. Per sample: model and human summaries, paired differences between
+    models and model-minus-human differences, all on the same resamples. The sensitivity rows compare each other
+    sample with every recording, human included.
+    """
+    samples = matched_samples(score_sets, human_sets, valid_ids, overlaps, thresholds)
+    subsets = [s.subset for s in human_sets]
+    models = list(dict.fromkeys(s.system for s in score_sets))
+    by_model = {model: [s for s in score_sets if s.system == model] for model in models}
     summary = []
     for index in range(len(subsets)):
         summary += summary_rows([by_model[model][index] for model in models], ALL_RECORDINGS, *boot)

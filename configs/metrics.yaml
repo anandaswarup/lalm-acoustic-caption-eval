@@ -60,6 +60,17 @@ leave_one_out:
 lengths:
   association_metrics: [cider_d, spice, spider, fense, bertscore_f1_rescaled, clap_similarity, mace]
 
+# Statistical tests (E16, decided 2026-11-05): paired sign-flip permutation tests (two-sided) and bootstrap CIs with
+# 10,000 resamples each, Holm-Bonferroni within each family below on the full-recording sample; sensitivity samples are
+# reported uncorrected. Families: rq1_model_pairs (E12, 6 model pairs x main metrics), rq2_model_vs_human (E14
+# five-subset mean, 4 models x main metrics), length_vs_human (E15, 4 models), length_score_correlation (E15, 5 systems x
+# lengths.association_metrics, raw length).
+statistics:
+  num_resamples: 10000
+  num_permutations: 10000
+  seed: 42
+  alpha: 0.05
+
 bootstrap:
   num_resamples: 1000
   confidence: 0.95

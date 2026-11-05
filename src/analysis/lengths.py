@@ -166,6 +166,18 @@ def spearman_rows(x: np.ndarray, y: np.ndarray) -> np.ndarray:
         return (rx * ry).sum(axis=1) / np.sqrt((rx**2).sum(axis=1) * (ry**2).sum(axis=1))
 
 
+def resampled_spearman(x: np.ndarray, y: np.ndarray, indices: np.ndarray, chunk: int = 1000) -> np.ndarray:
+    """Spearman's rho on each resample of recordings (rows of x and y, each with all its captions); finite values
+    only. Resamples are processed in chunks to bound memory."""
+    num_resamples = len(indices)
+    values = [
+        spearman_rows(x[part].reshape(len(part), -1), y[part].reshape(len(part), -1))
+        for part in (indices[start : start + chunk] for start in range(0, num_resamples, chunk))
+    ]
+    resampled = np.concatenate(values)
+    return resampled[np.isfinite(resampled)]
+
+
 def association_rows(
     lengths: Lengths, scores: dict[str, np.ndarray], sample: str, num_resamples: int, confidence: float, seed: int
 ) -> list[dict[str, Any]]:
@@ -181,8 +193,7 @@ def association_rows(
             raise ValueError(f"{lengths.system} {metric}: scores {values.shape} vs lengths {lengths.words.shape}")
         for predictor, x in predictors.items():
             rho = float(spearman_rows(x.ravel(), values.ravel())[0])
-            resampled = spearman_rows(x[indices].reshape(num_resamples, -1), values[indices].reshape(num_resamples, -1))
-            resampled = resampled[np.isfinite(resampled)]
+            resampled = resampled_spearman(x, values, indices)
             low, high = percentile_interval(resampled, confidence) if len(resampled) else (math.nan, math.nan)
             rows.append(
                 {

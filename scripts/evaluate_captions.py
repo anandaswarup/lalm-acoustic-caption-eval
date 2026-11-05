@@ -40,20 +40,6 @@ HUMAN_LOO = {
 SMOKE_DIR = OUTPUT_DIR / "smoke" / "evaluation"
 
 
-def read_overlaps(path: Path, sample_ids: list[str], num_positions: int) -> dict[str, list[float]]:
-    """E13's closest-reference Jaccard per recording and position, for the near-paraphrase masks."""
-    from src.evaluation.scoring import read_csv
-
-    overlaps: dict[str, list[float]] = {}
-    for row in read_csv(path):
-        overlaps.setdefault(row["sample_id"], []).append(float(row["closest_reference_jaccard"]))
-    if wrong := [sid for sid in sample_ids if len(overlaps.get(sid, [])) != num_positions]:
-        raise ValueError(
-            f"{relative(path)}: {len(wrong)} recordings without {num_positions} positions, e.g. {wrong[:3]}"
-        )
-    return {sid: overlaps[sid] for sid in sample_ids}
-
-
 def main() -> int:
     parser = base_parser(__doc__.splitlines()[0])
     add_run_arguments(parser, SMOKE_DIR)
@@ -136,7 +122,7 @@ def main() -> int:
     logger.info("%d recordings x %d models; %d with every caption valid", len(sample_ids), len(models), len(valid_ids))
     subsets = conditions.subsets(condition, loo["num_positions"])
     if four:
-        from src.evaluation.matched import load_human_baseline
+        from src.evaluation.matched import load_human_baseline, read_overlaps
 
         try:
             human_sets = load_human_baseline(
