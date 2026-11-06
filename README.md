@@ -186,6 +186,20 @@ One reviewer labels each of the 200 captions with one of six agreement categorie
 
 The report is `outputs/reports/qualitative_annotation.{json,md}`.
 
+#### Audio-grounded review (E19)
+
+After the E18 labels are final, the same reviewer listens to each of the 50 recordings and judges every caption against the audio, following `outputs/qualitative/audio_review_guidelines.md`. Each caption gets one rating: 1 accurate, 2 minor errors (principal source and event right), or 3 major error or wrong sound source (principal source or event wrong, invented, or the dominant sound omitted). Each E18 disputed phrase is marked supported, unsupported, or ambiguous/unverifiable. The material keeps the E17 recording codes and caption labels and shows no references, E18 categories, model names, file names or scores. `make audio-review-sheet` verifies the blinding key and the E18 template, copies the recordings (checked against their manifest SHA-256) under code names, and writes:
+
+| File (`outputs/qualitative/`) | Contents |
+|---|---|
+| `audio_review_sheet.md` | Text of the review: per recording code, captions A–D and their disputed phrases |
+| `audio_annotations_reviewer_1.csv` | One row per caption: audio rating and notes |
+| `disputed_verification_reviewer_1.csv` | One row per E18 disputed phrase: verdict and note |
+| `audio_review_manifest.json` | Counts, templates and input checksums |
+| `audio/`, `audio_review.html` | Audio copies named by recording code and the local listening page (git-ignored, never committed) |
+
+`prepare_audio_review.py` never overwrites a template that holds labels.
+
 ## Running tasks
 
 Run `make help` for the full list. Main targets (task IDs are listed under [Tasks](#tasks)):
@@ -205,6 +219,7 @@ Run `make help` for the full list. Main targets (task IDs are listed under [Task
 | `make stats` | E16, E21: bootstrap CIs and cross-metric comparison |
 | `make qualitative-sample` | E17: blinded qualitative review sample |
 | `make annotations` | E18: check, unblind and summarize the annotations |
+| `make audio-review-sheet` | E19: blinded audio-review material and templates |
 | `make figures` | Tables and figures |
 | `make paper` | Build the manuscript (once added) |
 | `make all` | Complete workflow |

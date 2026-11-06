@@ -36,3 +36,31 @@ categories:
 annotation:
   confidence: 0.95
   score_metrics: [cider_d, spice, fense, bertscore_f1_rescaled, clap_similarity, mace]
+
+# Audio-grounded review (E19): after the E18 labels are final, the reviewer listens to each recording and rates every
+# caption against the audio, and checks each E18 disputed phrase. References, E18 categories, model names, file names
+# and scores are not shown. Category 6 is not asked directly: a category-6 caption rated 3 is a real mismatch, one
+# rated 1 or 2 means the references are incomplete.
+audio_review:
+  ratings:
+    - code: 1
+      name: Accurate
+      description: Every sound source and event in the caption is audible, and the described attributes and order match the recording. Omitting secondary sounds is acceptable.
+    - code: 2
+      name: Minor errors
+      description: The principal sound source and event are correct, but the caption has a wrong attribute or order, an unsupported secondary detail, or omits a secondary sound.
+    - code: 3
+      name: Major error or wrong sound source
+      description: The principal sound source or event is wrong, a principal source is invented, or the dominant sound is omitted.
+  verdicts:
+    - code: S
+      name: Supported
+      description: The recording contains what the phrase describes.
+    - code: U
+      name: Unsupported
+      description: The recording does not contain what the phrase describes, or contradicts it.
+    - code: A
+      name: Ambiguous or unverifiable
+      description: Listening can neither confirm nor rule it out (masked, too faint, or not decidable from sound alone).
+  confidence: 0.95
+  score_metrics: [cider_d, spice, fense, bertscore_f1_rescaled, clap_similarity, mace]
