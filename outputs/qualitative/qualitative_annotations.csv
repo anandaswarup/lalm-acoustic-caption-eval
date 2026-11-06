@@ -1,0 +1,201 @@
+item_id,recording_code,caption_label,sample_id,model_key,normalization,category,disputed_details,notes_sources,notes_attributes,notes_temporal,notes_other
+R01A,R01,A,clotho_eval_0191,audio_flamingo_3,none,1,,Covers coins shaken in a container.,,,
+R01B,R01,B,clotho_eval_0191,gpt_audio_1_5,none,3,poured,Metal objects generalizes coins; shaking agrees.,,,Pouring is an additional event; metallic clinking is consistent with coins.
+R01C,R01,C,clotho_eval_0191,qwen2_5_omni,none,6,pills,Replaces the principal coins with pills.,,,
+R01D,R01,D,clotho_eval_0191,gemini_3_8_flash,none,6,"Playing cards; shuffled, rifled, and bent",Replaces shaking coins with manipulating cards.,,,
+R02A,R02,A,clotho_eval_0198,audio_flamingo_3,none,2,distant,"Covers wind, creaking and impacts; birds are supported by reference 5.",,,Distance is a minor addition; omits the wind's increasing strength.
+R02B,R02,B,clotho_eval_0198,gpt_audio_1_5,none,6,rain falling; water hitting surfaces,Rain replaces the principal wind and creaking/impacts.,,,
+R02C,R02,C,clotho_eval_0198,qwen2_5_omni,none,6,A motor is running,Motor replaces wind; generic clacking does not recover the principal scene.,,,
+R02D,R02,D,clotho_eval_0198,gemini_3_8_flash,none,6,heavy rain; thunder rumbles; metal door shutting,"Replaces wind-driven creaking and impacts with rain, thunder and door closure.",,,
+R03A,R03,A,clotho_eval_0088,qwen2_5_omni,none,1,,Covers flowing water and birds.,,,
+R03B,R03,B,clotho_eval_0088,gpt_audio_1_5,none,6,heavy rainfall; raindrops,Rain replaces the flowing creek; birds are absent.,,,
+R03C,R03,C,clotho_eval_0088,audio_flamingo_3,none,3,rapidly; rushing and splashing,Covers flowing water and birds.,,,Adds several attributes of forceful water movement; river is an accepted generalization of creek.
+R03D,R03,D,clotho_eval_0088,gemini_3_8_flash,none,4,bubbling,Covers water but omits birds.,,,Water elaboration is outweighed by omission of a principal source.
+R04A,R04,A,clotho_eval_0206,audio_flamingo_3,none,4,both men and women,Covers crowd conversation but omits clinking tableware.,,,Omission dominates the unsupported gender specification.
+R04B,R04,B,clotho_eval_0206,gemini_3_8_flash,none,5,laughter; female speech closer to the microphone,Covers conversation; omits tableware and adds laughter and prominent female speech.,,,
+R04C,R04,C,clotho_eval_0206,gpt_audio_1_5,none,5,occasional louder voices; bursts of laughter,Covers crowd conversation; omits tableware and adds laughter.,,,
+R04D,R04,D,clotho_eval_0206,qwen2_5_omni,none,5,reverberant space; a woman speaking prominently at the end,Covers conversation; omits tableware and adds a prominent final speaker.,,,
+R05A,R05,A,clotho_eval_0013,gemini_3_8_flash,none,5,ocean waves crash and rumble against the shoreline,"Covers birds, omits insects, adds crashing surf.",,,References disagree about setting; surf is not supported by the boat mention.
+R05B,R05,B,clotho_eval_0013,gpt_audio_1_5,none,5,gentle wind or rustling leaves,"Covers birds, omits insects, adds wind/leaves.",,,
+R05C,R05,C,clotho_eval_0013,qwen2_5_omni,none,2,intermittently,Covers insects and birds; traffic/boat noise supports an engine.,,,Mosquito and crickets are allowed specific insect terms; intermittency is minor.
+R05D,R05,D,clotho_eval_0013,audio_flamingo_3,none,2,single,Covers insects and birds.,,,Singular insect differs from the gathered insects in reference 5; insect subtype is allowed specificity.
+R06A,R06,A,clotho_eval_0501,gemini_3_8_flash,none,6,Footsteps; walking cane,Replaces dice rolling with walking and cane tapping.,,,
+R06B,R06,B,clotho_eval_0501,gpt_audio_1_5,none,6,wooden tapping and knocking,Does not identify shaking or rolling objects; wooden knocks give weak agreement.,,,
+R06C,R06,C,clotho_eval_0501,qwen2_5_omni,none,6,cracking of bones or breaking of twigs; electronic beep,Neither dice shaking nor rolling is covered.,,,
+R06D,R06,D,clotho_eval_0501,audio_flamingo_3,none,4,,Covers dice landing as small objects dropped; omits shaking in a cup.,,,"Generalized objects are permitted, but preparatory shaking is principal in references 3 and 5."
+R07A,R07,A,clotho_eval_0326,audio_flamingo_3,none,6,mechanical fan,Covers shower but substitutes a fan for the principal pipe/engine sound.,,,Fan is an unsupported identity for the second principal source.
+R07B,R07,B,clotho_eval_0326,gpt_audio_1_5,none,5,drilling; high-pitched whirring,Covers mechanical grinding but omits water; adds drilling/whirring description.,,,
+R07C,R07,C,clotho_eval_0326,qwen2_5_omni,none,5,large motor vehicle; hissing; high-pitched whine,Covers engine but omits falling water; adds vehicle and acoustic details.,,,"Vehicle is a permissible specific engine context, but the added attributes materially enrich it."
+R07D,R07,D,clotho_eval_0326,gemini_3_8_flash,none,5,"metallic rattling, scraping, and squeaking; faint clicking",Covers a hum but omits falling water and adds multiple mechanical events.,,,
+R08A,R08,A,clotho_eval_0051,audio_flamingo_3,none,6,sawing a piece of wood; striking the wood with a hammer,Replaces potato preparation and cabinet knocks with woodworking.,,,
+R08B,R08,B,clotho_eval_0051,gpt_audio_1_5,none,6,stapler,Replaces potato preparation with stapling.,,,
+R08C,R08,C,clotho_eval_0051,qwen2_5_omni,none,6,paper being crumpled; a ball being dropped,Principal potato preparation is absent.,,,
+R08D,R08,D,clotho_eval_0051,gemini_3_8_flash,none,6,footsteps on gravel,Principal potato preparation is absent.,,,
+R09A,R09,A,clotho_eval_0451,gemini_3_8_flash,none,5,laughing; voices echo; followed by clacking sounds,Covers speech but omits music and traffic; adds laughter and clacking.,,,
+R09B,R09,B,clotho_eval_0451,audio_flamingo_3,none,5,neutral tones and moderate pace; contacting someone; 'motorzinho'; Portuguese,Covers male/female conversation but omits music and traffic.,,,Language and speech content are unsupported substantive claims.
+R09C,R09,C,clotho_eval_0451,qwen2_5_omni,none,4,,Covers speech and vehicle engine but omits music.,,,Bus/traffic supports the engine; omission dominates minor emphasis changes.
+R09D,R09,D,clotho_eval_0451,gpt_audio_1_5,none,5,Portuguese,Covers conversation but omits music and traffic; adds a language claim.,,,
+R10A,R10,A,clotho_eval_0447,gpt_audio_1_5,none,6,handling of a flexible material,Neither rocky walking nor shovelling grain is identified.,,,
+R10B,R10,B,clotho_eval_0447,gemini_3_8_flash,none,6,brushing sounds scrape continuously back and forth,Does not cover either principal action: walking or shovelling.,,,Generic friction alone gives little semantic agreement.
+R10C,R10,C,clotho_eval_0447,audio_flamingo_3,none,3,dragging a heavy object,Covers rocky walking and adds dragging an object.,,,"References offer competing walking/shovelling interpretations; majority walking interpretation used, as for R10D. Dragging feet does not support dragging an object."
+R10D,R10,D,clotho_eval_0447,qwen2_5_omni,none,3,distant hum of a boat engine,Covers rocky walking; adds boat engine.,,,"Walking and shovelling are conflicting interpretations, not necessarily simultaneous events; majority walking interpretation used."
+R11A,R11,A,clotho_eval_0541,audio_flamingo_3,none,3,rhythmic and consistent; faint hum,Covers water dripping; adds hum and an unchanging pattern.,,,References repeatedly describe slowing/stopping. This temporal contradiction is not a source/event identity mismatch.
+R11B,R11,B,clotho_eval_0541,qwen2_5_omni,none,3,faucet being turned off,Covers tap water dripping and ending; adds a faucet-operation event.,,,"Stopping is supported, but a separate audible faucet action is not; slowing is omitted."
+R11C,R11,C,clotho_eval_0541,gpt_audio_1_5,none,6,drumming; percussive strikes,Interprets the water's drumming comparison as actual drumming.,,,
+R11D,R11,D,clotho_eval_0541,gemini_3_8_flash,none,6,Plastic clatters,Replaces dripping water with plastic impacts.,,,
+R12A,R12,A,clotho_eval_0778,audio_flamingo_3,none,5,distant waterfall,Covers walking; rain is supported; omits jingling and adds waterfall.,,,
+R12B,R12,B,clotho_eval_0778,gemini_3_8_flash,none,6,rushing stream,Omits walking and metal jingling; describes a stream.,,,
+R12C,R12,C,clotho_eval_0778,qwen2_5_omni,none,4,continuous and heavy,Covers footsteps and supported rain but omits metal jingling.,,,Omission dominates the added rain intensity/duration.
+R12D,R12,D,clotho_eval_0778,gpt_audio_1_5,none,4,,Covers footsteps and supported rain but omits metal jingling.,,,
+R13A,R13,A,clotho_eval_0865,gemini_3_8_flash,none,6,acoustic feedback tone; high-frequency white noise,Neither sanding machinery nor a vibrating instrument is identified.,,,
+R13B,R13,B,clotho_eval_0865,gpt_audio_1_5,none,3,steady pitch; no other distinct events or variations,Covers generalized machinery; adds acoustic constancy and absence of other events.,,,References disagree on machine versus instrument; machine is supported by three references.
+R13C,R13,C,clotho_eval_0865,audio_flamingo_3,none,3,"high-pitched; steady, unchanging tone; no background noise",Covers generalized machinery; adds several acoustic and absence claims.,,,References disagree on exact source; generic machinery is accepted.
+R13D,R13,D,clotho_eval_0865,qwen2_5_omni,none,4,high-pitched,Describes a continuous sound but omits the machine/instrument source.,,,"Acoustic overlap is substantial, but source/action information is missing."
+R14A,R14,A,clotho_eval_0569,qwen2_5_omni,none,6,train; wheels squealing,Replaces principal traffic and music with a train.,,,
+R14B,R14,B,clotho_eval_0569,gemini_3_8_flash,none,6,train; blasts of its horn,Replaces traffic and music with a train and horn.,,,
+R14C,R14,C,clotho_eval_0569,audio_flamingo_3,none,6,train; wheels squealing,Replaces traffic and music with a train.,,,
+R14D,R14,D,clotho_eval_0569,gpt_audio_1_5,none,6,machinery or engines; intermittent beeping tones; metallic clatter,Does not cover music or passing traffic as described.,,,
+R15A,R15,A,clotho_eval_0209,gpt_audio_1_5,none,5,ocean waves; no distinct interruptions or additional sounds,Covers wind but omits rain; adds an ocean interpretation.,,,Hedged ocean claim counts as a claim; references have competing scenes but wind/rain recur.
+R15B,R15,B,clotho_eval_0209,audio_flamingo_3,none,6,machine or vehicle,"Only matches isolated alternatives, not shared wind/rain.",,,
+R15C,R15,C,clotho_eval_0209,qwen2_5_omni,none,6,large waterfall,Waterfall replaces windblown rain; a passing vehicle has isolated support.,,,
+R15D,R15,D,clotho_eval_0209,gemini_3_8_flash,none,5,revs with an intermittent squeak before idling; water splashes against a shore,Covers wind and a supported vehicle; omits rain and adds shore and engine sequence.,,,
+R16A,R16,A,clotho_eval_0228,audio_flamingo_3,none,2,,Covers door opening/closing; wind is supported by reference 4.,,,Omits unlatching/creaking detail without changing the central door event.
+R16B,R16,B,clotho_eval_0228,gpt_audio_1_5,none,5,mechanical whirring sound; soft hiss,Covers door opening but omits closing and adds whirring/hissing.,,,Snap/click can represent the supported latch; the added sequence is unsupported.
+R16C,R16,C,clotho_eval_0228,qwen2_5_omni,none,2,into a microphone,Covers door creaking open/shut and supported wind.,,,Microphone attribution is a minor recording detail.
+R16D,R16,D,clotho_eval_0228,gemini_3_8_flash,none,6,Plastic crates; hums and rubbing noises,Replaces principal door events with crate handling.,,,
+R17A,R17,A,clotho_eval_1034,audio_flamingo_3,none,2,no other discernible sounds or events,"White noise covers static, but omits radio/television identity.",,,Static is the common principal event across conflicting device descriptions; absence claim is minor here.
+R17B,R17,B,clotho_eval_1034,gpt_audio_1_5,none,6,high-pitched mechanical whirring,Replaces broadband radio/TV static with a tonal mechanical sound.,,,
+R17C,R17,C,clotho_eval_1034,gemini_3_8_flash,none,6,rain; windshield wipers,Replaces radio/TV static with rain and wipers.,,,
+R17D,R17,D,clotho_eval_1034,qwen2_5_omni,none,6,jet engine running at idle,Replaces radio/TV static with a jet engine.,,,
+R18A,R18,A,clotho_eval_0163,qwen2_5_omni,none,3,door opening and closing,Covers dish clanking and conversation; adds door events.,,,
+R18B,R18,B,clotho_eval_0163,gemini_3_8_flash,none,3,footsteps; echoing in a large space,Covers generalized metal clanking and voices; adds footsteps and spatial attributes.,,,
+R18C,R18,C,clotho_eval_0163,audio_flamingo_3,none,3,young; neutrally and at a moderate pace; 'Thank you'; bustling restaurant,"Covers dishes and conversation; adds speech content, age and setting.",,,
+R18D,R18,D,clotho_eval_0163,gpt_audio_1_5,none,2,echoing,Covers metallic dish sounds and conversation.,,,Echoing is a single minor acoustic addition.
+R19A,R19,A,clotho_eval_0940,qwen2_5_omni,none,2,distant,Covers waves and water sounds; omits specific boat/rock setting.,,,Boat and beach are competing interpretations; shared wave/water content governs this uncertain decision.
+R19B,R19,B,clotho_eval_0940,audio_flamingo_3,none,6,river,River substitutes for the recurring boat/waves and rocky beach scene.,,,Generic water overlap alone does not recover wave action.
+R19C,R19,C,clotho_eval_0940,gpt_audio_1_5,none,2,rhythmic; occasional louder splashes,Covers wave/water movement.,,,"References disagree on boat versus beach; shared wave action covered, with minor intensity variation."
+R19D,R19,D,clotho_eval_0940,gemini_3_8_flash,none,5,echoes inside a hollow enclosure,Covers splashing water but omits waves and adds an enclosed setting.,,,
+R20A,R20,A,clotho_eval_0393,gpt_audio_1_5,none,4,,Covers conversation/crowd but omits motorcycle passing.,,,
+R20B,R20,B,clotho_eval_0393,audio_flamingo_3,none,2,neutral tone; moderate pace,"Covers conversation, crowd and passing motorcycle.",,,Minor speech attributes; omits motorcycle briefly masking voices.
+R20C,R20,C,clotho_eval_0393,qwen2_5_omni,none,5,footsteps; distant train horn,Covers crowd speech; omits motorcycle and adds footsteps/horn.,,,
+R20D,R20,D,clotho_eval_0393,gemini_3_8_flash,none,5,reverberant; laughter; a man shouting,Covers speech; omits motorcycle and adds vocal events and reverberation.,,,
+R21A,R21,A,clotho_eval_0285,audio_flamingo_3,none,3,gravel,Covers the supported walking-on-leaves interpretation; adds gravel.,,,References split between paper ripping and footsteps. Treat these as alternatives; omits increasing footstep loudness.
+R21B,R21,B,clotho_eval_0285,gpt_audio_1_5,none,4,,Covers leaf movement/crunching but omits walking and growing loudness.,,,Leaf movement is shared with the sweeping alternative; principal action is underspecified.
+R21C,R21,C,clotho_eval_0285,qwen2_5_omni,none,6,gravel; small stones,Replaces leaf walking with stone crunching and omits paper ripping.,,,The principal surface is changed; only generic walking remains.
+R21D,R21,D,clotho_eval_0285,gemini_3_8_flash,none,6,slicing and scraping,Neither paper ripping nor leaf walking is covered.,,,
+R22A,R22,A,clotho_eval_0704,audio_flamingo_3,none,5,low; vacuum cleaner or a distant engine,Covers hum but omits synthesizer effect and adds unsupported source identities.,,,"References specify high pitch; low pitch contradicts an attribute, not a principal source identity."
+R22B,R22,B,clotho_eval_0704,gpt_audio_1_5,unwrapped,4,low-frequency; no other distinct sounds or events,Covers hum but omits synthesizer effect.,,,Low versus high pitch is disputed; missing source content dominates.
+R22C,R22,C,clotho_eval_0704,gemini_3_8_flash,none,4,,Covers hum and supported metal clicks but omits synthesizer effect.,,,Clicking is covered by reference 5; high pitch is also omitted.
+R22D,R22,D,clotho_eval_0704,qwen2_5_omni,none,5,"intermittent, brief, high-pitched beeps",Covers high sustained tone; omits synthesizer effect and adds beeps.,,,
+R23A,R23,A,clotho_eval_0440,audio_flamingo_3,none,2,,Covers sheet shaking; paper is explicitly supported.,,,Omits acceleration from slow to fast; central action remains complete.
+R23B,R23,B,clotho_eval_0440,gpt_audio_1_5,none,3,soft thuds and scraping sounds,Covers paper manipulation; adds impacts and scraping.,,,Flipping accepted as general sheet movement; acceleration omitted.
+R23C,R23,C,clotho_eval_0440,gemini_3_8_flash,none,2,Pages,Covers paper manipulation with a minor sheet/pages distinction.,,,Omits acceleration; paper versus plastic is an explicitly supported alternative.
+R23D,R23,D,clotho_eval_0440,qwen2_5_omni,none,6,scratching sounds; brief periods of silence,Does not identify sheet shaking; substitutes scratching.,,,
+R24A,R24,A,clotho_eval_0061,gpt_audio_1_5,none,2,background hiss,Covers flowing water; minor hiss addition.,,,References differ between dripping and pouring; generalized water flow accepted.
+R24B,R24,B,clotho_eval_0061,audio_flamingo_3,none,3,into a container,Covers dripping water; adds a receiving container.,,,Container is an unsupported object rather than a specified water source subtype.
+R24C,R24,C,clotho_eval_0061,qwen2_5_omni,none,3,gurgling; faint background hum,Covers water movement; adds gurgling and another background sound.,,,
+R24D,R24,D,clotho_eval_0061,gemini_3_8_flash,none,2,moist surface,Covers flowing and dripping water.,,,Moist surface is a minor elaboration of water contact.
+R25A,R25,A,clotho_eval_0689,qwen2_5_omni,none,5,distant hum of a motor vehicle engine,Covers walking and floor creaks; omits moving objects and adds engine.,,,
+R25B,R25,B,clotho_eval_0689,gpt_audio_1_5,none,5,zipper,Covers walking and a supported door creak; omits moving objects/floor creaks and adds zipper.,,,
+R25C,R25,C,clotho_eval_0689,gemini_3_8_flash,none,4,"briefly interrupted by a long, deep creaking sound",Covers walking and creaks but omits moving objects.,,,Omission dominates the unsupported interruption sequence.
+R25D,R25,D,clotho_eval_0689,audio_flamingo_3,none,5,A male voice says 'Thank you',"Covers footsteps/floor creaks, omits moving objects and adds speech.",,,
+R26A,R26,A,clotho_eval_0747,qwen2_5_omni,none,3,large motor vehicle engine; train horn,Covers train movement; adds another vehicle and horn.,,,Train and airplane references are competing interpretations; train is the majority interpretation.
+R26B,R26,B,clotho_eval_0747,gpt_audio_1_5,none,3,wind,Generalized passing vehicle covers shared transport event; adds wind.,,,References split between trains and aircraft; generic vehicle is allowed. The hedged wind interpretation still counts as an added claim.
+R26C,R26,C,clotho_eval_0747,gemini_3_8_flash,none,6,running water; rustling and shuffling,Replaces passing transport with water.,,,
+R26D,R26,D,clotho_eval_0747,audio_flamingo_3,none,1,,Covers approaching/passing train and track sounds.,,,"Train is the majority interpretation; airplanes are a conflicting alternative, not an extra required event."
+R27A,R27,A,clotho_eval_0318,audio_flamingo_3,none,3,A male voice sings a thank you message in English,Covers racing cars; adds singing and its content.,,,
+R27B,R27,B,clotho_eval_0318,qwen2_5_omni,none,3,skidding,Covers racing/acceleration; adds skidding.,,,Singular car is a minor generalization; skidding is a new event.
+R27C,R27,C,clotho_eval_0318,gemini_3_8_flash,none,6,squeaking sounds caused by friction against a smooth surface,Does not cover racing cars or engine revving.,,,
+R27D,R27,D,clotho_eval_0318,gpt_audio_1_5,none,3,screeching of tires,Covers revving and passing race cars; adds tire screeching.,,,"Pitch change/Doppler is consistent with passing, but tire screech is an additional event."
+R28A,R28,A,clotho_eval_0142,gemini_3_8_flash,none,6,cannon or artillery fire,Replaces operating machinery with explosions.,,,
+R28B,R28,B,clotho_eval_0142,qwen2_5_omni,none,5,truck; idles; revving intermittently; distant voice speaks briefly,"Covers an engine, omits lifting objects and adds speech/engine operation details.",,,
+R28C,R28,C,clotho_eval_0142,audio_flamingo_3,none,5,heavy object is repeatedly dropped onto a hard surface,Covers engine and handling objects; replaces lifting with unsupported repeated dropping.,,,"Lifting and dropping could coexist, so treated as omission plus addition rather than an incompatible source identity."
+R28D,R28,D,clotho_eval_0142,gpt_audio_1_5,unwrapped,5,revving and gear shifts; bursts of acceleration,Covers engine but omits lifting objects and adds gear changes/acceleration.,,,
+R29A,R29,A,clotho_eval_0189,gpt_audio_1_5,none,6,air or steam being released,Replaces powered appliance/tool operation with hissing air/steam.,,,
+R29B,R29,B,clotho_eval_0189,audio_flamingo_3,none,2,high-pitched; no other distinguishable sounds present,Small motor generalizes the shared powered appliance/tool.,,,Conflicting blender/tool interpretations share motor operation; pitch/absence claims are minor.
+R29C,R29,C,clotho_eval_0189,gemini_3_8_flash,none,6,cicadas; outdoor atmosphere,Replaces appliance/tool with insects.,,,
+R29D,R29,D,clotho_eval_0189,qwen2_5_omni,none,3,high-pitched whine; rhythmic whirring,Covers the supported power tool interpretation; adds acoustic attributes.,,,Blender and tools are competing source interpretations; power tool is supported by three references.
+R30A,R30,A,clotho_eval_0178,audio_flamingo_3,none,5,young male; cutting meat,Covers vegetable preparation; omits scraping aside and adds meat cutting.,,,
+R30B,R30,B,clotho_eval_0178,qwen2_5_omni,none,1,,Covers chopping and scraping during food preparation.,,,Food is a permitted generalization of vegetables.
+R30C,R30,C,clotho_eval_0178,gpt_audio_1_5,none,4,consistent tempo,Covers chopping but omits scraping aside.,,,Omission dominates the minor rhythm claim.
+R30D,R30,D,clotho_eval_0178,gemini_3_8_flash,none,6,"claps, slaps, and taps",Replaces chopping and scraping with body/surface percussion.,,,
+R31A,R31,A,clotho_eval_0859,qwen2_5_omni,none,1,,Covers rain and thunder.,,,Distant thunder is consistent with the approaching storm reference.
+R31B,R31,B,clotho_eval_0859,gemini_3_8_flash,none,6,ocean waves; wind hiss,Replaces rain/thunder with surf.,,,
+R31C,R31,C,clotho_eval_0859,gpt_audio_1_5,none,1,,Covers rain and repeated thunder.,,,
+R31D,R31,D,clotho_eval_0859,audio_flamingo_3,none,1,,Covers rain and thunder.,,,Distant thunder is consistent with the approaching storm reference.
+R32A,R32,A,clotho_eval_0740,qwen2_5_omni,none,3,footsteps,Covers conversation and traffic; adds walking.,,,
+R32B,R32,B,clotho_eval_0740,audio_flamingo_3,none,5,Russian; varying pitch and speed; a man speaks over a loudspeaker,Covers conversation but omits traffic and adds language/amplified speech.,,,
+R32C,R32,C,clotho_eval_0740,gemini_3_8_flash,none,5,metallic rattling; footsteps; echoing indoor space,Covers conversation but omits traffic and adds events and a conflicting indoor setting.,,,Indoor contradicts an attribute; no principal conversational source is misidentified.
+R32D,R32,D,clotho_eval_0740,gpt_audio_1_5,none,4,,Covers outdoor conversation but omits vehicles.,,,
+R33A,R33,A,clotho_eval_0735,audio_flamingo_3,none,2,louder and more frequently,Covers varied birds and supported forest setting.,,,Minor relative loudness/rate elaboration of a varied chorus.
+R33B,R33,B,clotho_eval_0735,qwen2_5_omni,none,1,,Covers birds chirping and singing.,,,
+R33C,R33,C,clotho_eval_0735,gemini_3_8_flash,none,3,High-pitched; steady background hiss,Covers birds; adds an independent background hiss and pitch detail.,,,
+R33D,R33,D,clotho_eval_0735,gpt_audio_1_5,unwrapped,1,,Covers varied birdsong outdoors.,,,Pitch/rhythm variety is consistent with multiple species singing.
+R34A,R34,A,clotho_eval_0775,gemini_3_8_flash,none,6,Adhesive tape; pulled and dispensed,Replaces creaky chair motion with tape dispensing.,,,
+R34B,R34,B,clotho_eval_0775,gpt_audio_1_5,none,6,tapping or clicking; static-like crackling,Does not cover creaky chair or supported door motion.,,,
+R34C,R34,C,clotho_eval_0775,audio_flamingo_3,none,6,gradually increasing in volume and intensity,Door has single-reference support but misses the principal chair interpretation.,,,"Four references agree on chair movement; door itself is covered, not an unsupported disputed phrase."
+R34D,R34,D,clotho_eval_0775,qwen2_5_omni,none,6,,Door has single-reference support but misses the principal chair interpretation.,,,Four references agree on chair movement; door itself is not an unsupported addition.
+R35A,R35,A,clotho_eval_0864,audio_flamingo_3,none,2,,Covers birds and supported river.,,,Omits the recurring nest/baby-bird specificity; generalized birds accepted.
+R35B,R35,B,clotho_eval_0864,gpt_audio_1_5,none,4,,Covers water but identifies birds only as unspecified squeaks.,,,Bird source remains missing despite compatible sound quality.
+R35C,R35,C,clotho_eval_0864,gemini_3_8_flash,none,1,,Covers birds and flowing water.,,,References vary on water source; shared bird/water content is covered.
+R35D,R35,D,clotho_eval_0864,qwen2_5_omni,none,3,wind is blowing,Covers birds and water; adds wind.,,,
+R36A,R36,A,clotho_eval_0563,qwen2_5_omni,none,1,,Covers birds and engine explicitly supported by reference 2.,,,
+R36B,R36,B,clotho_eval_0563,gpt_audio_1_5,none,1,,Covers outdoor birdsong.,,,
+R36C,R36,C,clotho_eval_0563,gemini_3_8_flash,none,3,cricket chirps,Covers birds; adds crickets.,,,
+R36D,R36,D,clotho_eval_0563,audio_flamingo_3,none,2,louder than others,Covers birds and forest; minor relative loudness addition.,,,
+R37A,R37,A,clotho_eval_0600,qwen2_5_omni,none,3,distant chirping of birds,Covers metal impacts; adds birds.,,,
+R37B,R37,B,clotho_eval_0600,gpt_audio_1_5,none,2,regular intervals,Covers metal strikes and resonance.,,,Hammering generalizes supported rod strikes; regularity is minor.
+R37C,R37,C,clotho_eval_0600,audio_flamingo_3,none,3,birds chirping,Covers metal clanging; adds birds.,,,
+R37D,R37,D,clotho_eval_0600,gemini_3_8_flash,none,4,hollow; steady tempo,Covers supported wood impacts but omits metal clangs.,,,Omission dominates minor acoustic/rhythm additions; wood is supported by reference 5.
+R38A,R38,A,clotho_eval_0919,audio_flamingo_3,none,6,cutting paper with scissors,Replaces spray-bottle use with cutting paper.,,,
+R38B,R38,B,clotho_eval_0919,gpt_audio_1_5,none,6,small metal objects are being handled or dropped,Replaces spraying with metal handling.,,,
+R38C,R38,C,clotho_eval_0919,gemini_3_8_flash,none,6,hand clapping; playing cards being riffled and shuffled,Replaces spraying with clapping/card handling.,,,
+R38D,R38,D,clotho_eval_0919,qwen2_5_omni,none,6,camera; crinkling of plastic,Replaces spraying with camera use/plastic handling.,,,
+R39A,R39,A,clotho_eval_0407,audio_flamingo_3,none,5,neutral tone and moderate pace; English; encouraging them to contribute to a collection,Covers address to audience but omits applause; adds language and speech content.,,,
+R39B,R39,B,clotho_eval_0407,gpt_audio_1_5,none,5,microphone; outdoor setting,Covers audience address but omits applause; adds amplification/outdoor possibility.,,,Hedged outdoor setting counts as a claim.
+R39C,R39,C,clotho_eval_0407,qwen2_5_omni,none,4,,Covers man speaking and audience but omits applause.,,,
+R39D,R39,D,clotho_eval_0407,gemini_3_8_flash,none,5,groans; amplifier,Covers male speech but omits applause; adds groaning/amplification.,,,
+R40A,R40,A,clotho_eval_0928,audio_flamingo_3,none,4,,Covers passing traffic but omits the separate idling/running engine.,,,
+R40B,R40,B,clotho_eval_0928,qwen2_5_omni,none,6,power tool,Replaces road vehicles/engine with a tool motor.,,,
+R40C,R40,C,clotho_eval_0928,gpt_audio_1_5,none,6,power tool or saw; cuts through material,Replaces road traffic/engine with cutting machinery.,,,
+R40D,R40,D,clotho_eval_0928,gemini_3_8_flash,none,5,Water droplets splatter continuously; wet surface,Covers passing car but omits stationary engine; adds water/wet road.,,,
+R41A,R41,A,clotho_eval_0065,audio_flamingo_3,none,2,gurgles,"Covers dog, water and male voice.",,,Gurgling is a single minor water attribute.
+R41B,R41,B,clotho_eval_0065,qwen2_5_omni,none,5,wind blows,Covers dog and water but omits speech; adds wind.,,,
+R41C,R41,C,clotho_eval_0065,gpt_audio_1_5,none,2,gently; softly,"Covers dog, water and speech.",,,Minor intensity additions do not change the scene.
+R41D,R41,D,clotho_eval_0065,gemini_3_8_flash,none,5,reverberate; background hiss and rumble,"Covers dogs and conversation, omits water and adds acoustic/background detail.",,,
+R42A,R42,A,clotho_eval_0457,audio_flamingo_3,none,6,metal object,Matches isolated impact reference but misses principal popcorn popping.,,,Reference 5 supports impacts; material specificity is unsupported. Four references agree on popcorn.
+R42B,R42,B,clotho_eval_0457,gpt_audio_1_5,none,6,metal objects,Matches isolated impact interpretation but omits principal popcorn popping.,,,Metal material is unsupported; four references agree on popcorn.
+R42C,R42,C,clotho_eval_0457,gemini_3_8_flash,none,6,Wood blocks; soft speech; high-frequency hiss,Replaces principal popcorn event with blocks and speech.,,,
+R42D,R42,D,clotho_eval_0457,qwen2_5_omni,none,6,metal object; ticking clock,Omits principal popcorn and adds clock.,,,Generic impacts have support only in reference 5.
+R43A,R43,A,clotho_eval_0476,audio_flamingo_3,none,4,,Covers birds but leaves flowing water unidentified as generic noise.,,,
+R43B,R43,B,clotho_eval_0476,gpt_audio_1_5,none,6,mechanical whirring; background hum,Replaces water and birds with mechanical sound.,,,
+R43C,R43,C,clotho_eval_0476,qwen2_5_omni,none,1,,Covers birds and flowing water.,,,
+R43D,R43,D,clotho_eval_0476,gemini_3_8_flash,none,1,,Covers birds and flowing water.,,,
+R44A,R44,A,clotho_eval_0161,gemini_3_8_flash,none,3,in an accent; wind blows,Covers man and sea waves; adds wind and vocal attribute.,,,
+R44B,R44,B,clotho_eval_0161,gpt_audio_1_5,none,5,gusts of wind,Covers sea waves but omits speech; adds wind.,,,
+R44C,R44,C,clotho_eval_0161,audio_flamingo_3,none,3,"neutral tone and moderate pace; introduces a West Bay, Dorset, UK sea cliff ambience recording; wind blowing","Covers male speech and waves; adds location, speech content and wind.",,,
+R44D,R44,D,clotho_eval_0161,qwen2_5_omni,none,3,wind,Covers waves and man speaking; adds wind.,,,
+R45A,R45,A,clotho_eval_0093,qwen2_5_omni,none,4,,"Covers birds and generalized traffic engine; omits door, footsteps and insects.",,,Impacts are compatible with supported footsteps/door; omissions dominate.
+R45B,R45,B,clotho_eval_0093,gpt_audio_1_5,unwrapped,4,,"Covers birds and traffic engine but omits explicit door opening, footsteps and insects.",,,Rustling/tapping is compatible with leaf footsteps; omissions dominate.
+R45C,R45,C,clotho_eval_0093,audio_flamingo_3,none,5,A male voice sings a thank you message,"Covers birds, traffic and footsteps; omits door/insects and adds singing.",,,
+R45D,R45,D,clotho_eval_0093,gemini_3_8_flash,none,4,,"Covers traffic engine and footsteps; omits birds, insects and door.",,,
+R46A,R46,A,clotho_eval_0696,audio_flamingo_3,none,4,"single; echoes; quiet, open space",Covers metal impact but omits flag rustling in wind.,,,Omission dominates added spatial attributes and single-impact restriction.
+R46B,R46,B,clotho_eval_0696,gpt_audio_1_5,none,4,echoing; regular intervals,Covers metal impacts but omits flag rustling/wind.,,,Omission dominates minor resonance/rhythm additions.
+R46C,R46,C,clotho_eval_0696,gemini_3_8_flash,none,4,echoes steadily,Covers metallic impacts but omits flag rustling/wind.,,,
+R46D,R46,D,clotho_eval_0696,qwen2_5_omni,none,5,footsteps,Covers metal impacts; omits flag rustling/wind and adds footsteps.,,,
+R47A,R47,A,clotho_eval_0592,audio_flamingo_3,none,2,hitting the ground,Covers heavy rain and strong wind.,,,Ground is a minor unsupported receiving-surface detail; does not negate supported roof rain.
+R47B,R47,B,clotho_eval_0592,gemini_3_8_flash,none,6,rushing stream; bird chirps,Replaces rainstorm with flowing stream and birds.,,,
+R47C,R47,C,clotho_eval_0592,gpt_audio_1_5,none,4,,Covers rain but omits wind.,,,
+R47D,R47,D,clotho_eval_0592,qwen2_5_omni,none,5,"distant, indistinct voices",Covers rain but omits wind; adds voices.,,,"People are mentioned, but speech is not stated in any reference."
+R48A,R48,A,clotho_eval_0466,gpt_audio_1_5,none,3,wind rustling,Covers birds and passing traffic; adds wind.,,,
+R48B,R48,B,clotho_eval_0466,qwen2_5_omni,none,2,accelerates,Covers birds and passing vehicle.,,,Acceleration is a minor elaboration of passing engine movement.
+R48C,R48,C,clotho_eval_0466,audio_flamingo_3,none,1,,Covers passing car and birds.,,,
+R48D,R48,D,clotho_eval_0466,gemini_3_8_flash,none,5,wind buffeting,Covers vehicle engine but omits birds and adds wind.,,,
+R49A,R49,A,clotho_eval_0054,gpt_audio_1_5,none,2,high-powered,"Covers engine operation, revving and pauses.",,,Generic engine covers competing lawnmower/chainsaw identities; power is a minor addition.
+R49B,R49,B,clotho_eval_0054,gemini_3_8_flash,none,6,drone; maneuvers in flight,Replaces garden-tool engine with flying drone.,,,
+R49C,R49,C,clotho_eval_0054,qwen2_5_omni,none,6,motorcycle,Replaces lawnmower/chainsaw with motorcycle.,,,
+R49D,R49,D,clotho_eval_0054,audio_flamingo_3,none,6,motorcycle; accelerates,Replaces lawnmower/chainsaw with motorcycle.,,,
+R50A,R50,A,clotho_eval_0255,qwen2_5_omni,none,6,walking on dry leaves; vehicle passing by,Covers whistling but substitutes walking for principal yard-work action and adds traffic.,,,
+R50B,R50,B,clotho_eval_0255,audio_flamingo_3,none,6,walking through leaves,Covers whistling but substitutes walking for sweeping/digging.,,,
+R50C,R50,C,clotho_eval_0255,gemini_3_8_flash,none,6,Plastic items; mechanical hum,Omits whistling and replaces yard work with plastic handling.,,,
+R50D,R50,D,clotho_eval_0255,gpt_audio_1_5,none,6,paper or plastic is being crinkled and rustled,Covers whistling but replaces yard-work sound with paper/plastic handling.,,,

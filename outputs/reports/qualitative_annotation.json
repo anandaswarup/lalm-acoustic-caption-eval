@@ -1,0 +1,605 @@
+{
+  "run_info": {
+    "experiment": "analyze_annotations",
+    "timestamp_utc": "2026-11-06T15:44:00+00:00",
+    "git_commit": "2acfd51ca4213355b87f71564a69c1f17842f7d0",
+    "git_dirty": false,
+    "python": "3.13.12",
+    "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+    "seed": 42
+  },
+  "task": "E18",
+  "display_names": {
+    "gpt_audio_1_5": "GPT-Audio-1.5",
+    "gemini_3_8_flash": "Gemini 3.8 Flash",
+    "qwen2_5_omni": "Qwen2.5-Omni-7B",
+    "audio_flamingo_3": "Audio Flamingo 3"
+  },
+  "categories": [
+    {
+      "code": 1,
+      "name": "Strong agreement",
+      "description": "Closely matches the principal sound sources, events and characteristics in the references."
+    },
+    {
+      "code": 2,
+      "name": "Mostly aligned",
+      "description": "Agrees with the main content of the references, with minor differences in wording or emphasis."
+    },
+    {
+      "code": 3,
+      "name": "Mostly aligned with additional details",
+      "description": "The main description agrees, but the caption adds acoustic details absent from the references."
+    },
+    {
+      "code": 4,
+      "name": "Partially aligned with missing details",
+      "description": "Captures some referenced content but omits important sound sources, events or characteristics."
+    },
+    {
+      "code": 5,
+      "name": "Partially aligned with additional details",
+      "description": "Captures some referenced content but introduces sources, events or descriptions not in the references."
+    },
+    {
+      "code": 6,
+      "name": "Weak agreement or sound-source/event mismatch",
+      "description": "Differs substantially from the references or appears to describe a different source or event."
+    }
+  ],
+  "confidence": 0.95,
+  "metrics": [
+    "cider_d",
+    "spice",
+    "fense",
+    "bertscore_f1_rescaled",
+    "clap_similarity",
+    "mace"
+  ],
+  "metric_labels": {
+    "cider_d": "CIDEr-D",
+    "spice": "SPICE",
+    "fense": "FENSE",
+    "bertscore_f1_rescaled": "BERTScore-F1 (rescaled)",
+    "clap_similarity": "CLAP similarity",
+    "mace": "MACE"
+  },
+  "num_items": 200,
+  "num_recordings": 50,
+  "items_per_model": 50,
+  "key_verified": true,
+  "inputs": {
+    "annotations": {
+      "path": "outputs/qualitative/annotations_reviewer_1.csv",
+      "sha256": "7bab15af12162fb9221b7346f937c2d14faf4d25b2b5b44775ad596395b252ee"
+    },
+    "review": {
+      "path": "outputs/qualitative/review_items.csv",
+      "sha256": "fa4daa5af2dea529a306a9cd8eb2507fe2574cffa0fa053f97239786da269f24"
+    },
+    "manifest": {
+      "path": "outputs/qualitative/sample_manifest.json",
+      "sha256": "8d71514231d629630b8402130f86c6031beb35ee07e6f0f1ca0edc4ed9ecb3df"
+    },
+    "guidelines": {
+      "path": "outputs/qualitative/annotation_guidelines.md",
+      "sha256": "dfca7e00dde7e28a55c1af0c8f2f4c6b401ae273200bc40d3b021c3b585969de"
+    },
+    "key": {
+      "path": "outputs/qualitative/blinding_key.csv",
+      "sha256": "f173edd52b8bd09a3dfc0e68b700041fa5b621abc38a00b727daf627609b2a2a"
+    }
+  },
+  "summary": [
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 1,
+      "count": 3,
+      "total": 50,
+      "share": 0.06,
+      "ci_low": 0.02061497034897397,
+      "ci_high": 0.16217091688838167
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 2,
+      "count": 6,
+      "total": 50,
+      "share": 0.12,
+      "ci_low": 0.05617600150932277,
+      "ci_high": 0.2380481738320298
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 3,
+      "count": 6,
+      "total": 50,
+      "share": 0.12,
+      "ci_low": 0.05617600150932277,
+      "ci_high": 0.2380481738320298
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 4,
+      "count": 10,
+      "total": 50,
+      "share": 0.2,
+      "ci_low": 0.1124375001577611,
+      "ci_high": 0.3303710593222541
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 5,
+      "count": 10,
+      "total": 50,
+      "share": 0.2,
+      "ci_low": 0.1124375001577611,
+      "ci_high": 0.3303710593222541
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 6,
+      "count": 15,
+      "total": 50,
+      "share": 0.3,
+      "ci_low": 0.1910355350088095,
+      "ci_high": 0.43750350464453397
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 1,
+      "count": 2,
+      "total": 50,
+      "share": 0.04,
+      "ci_low": 0.011038884327619805,
+      "ci_high": 0.13460090687507015
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 2,
+      "count": 2,
+      "total": 50,
+      "share": 0.04,
+      "ci_low": 0.011038884327619805,
+      "ci_high": 0.13460090687507015
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 3,
+      "count": 4,
+      "total": 50,
+      "share": 0.08,
+      "ci_low": 0.03154951408859298,
+      "ci_high": 0.18838246918342832
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 4,
+      "count": 6,
+      "total": 50,
+      "share": 0.12,
+      "ci_low": 0.05617600150932277,
+      "ci_high": 0.2380481738320298
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 5,
+      "count": 12,
+      "total": 50,
+      "share": 0.24,
+      "ci_low": 0.14297391396991727,
+      "ci_high": 0.37412683757942916
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 6,
+      "count": 24,
+      "total": 50,
+      "share": 0.48,
+      "ci_low": 0.3479713528657805,
+      "ci_high": 0.6148825510995538
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 1,
+      "count": 6,
+      "total": 50,
+      "share": 0.12,
+      "ci_low": 0.05617600150932277,
+      "ci_high": 0.2380481738320298
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 2,
+      "count": 4,
+      "total": 50,
+      "share": 0.08,
+      "ci_low": 0.03154951408859298,
+      "ci_high": 0.18838246918342832
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 3,
+      "count": 11,
+      "total": 50,
+      "share": 0.22,
+      "ci_low": 0.12753915970214422,
+      "ci_high": 0.3524154958125367
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 4,
+      "count": 5,
+      "total": 50,
+      "share": 0.1,
+      "ci_low": 0.04347576493189044,
+      "ci_high": 0.21360231437479654
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 5,
+      "count": 9,
+      "total": 50,
+      "share": 0.18,
+      "ci_low": 0.09770192670234176,
+      "ci_high": 0.3079605367430077
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 6,
+      "count": 15,
+      "total": 50,
+      "share": 0.3,
+      "ci_low": 0.1910355350088095,
+      "ci_high": 0.43750350464453397
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 1,
+      "count": 4,
+      "total": 50,
+      "share": 0.08,
+      "ci_low": 0.03154951408859298,
+      "ci_high": 0.18838246918342832
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 2,
+      "count": 12,
+      "total": 50,
+      "share": 0.24,
+      "ci_low": 0.14297391396991727,
+      "ci_high": 0.37412683757942916
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 3,
+      "count": 10,
+      "total": 50,
+      "share": 0.2,
+      "ci_low": 0.1124375001577611,
+      "ci_high": 0.3303710593222541
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 4,
+      "count": 5,
+      "total": 50,
+      "share": 0.1,
+      "ci_low": 0.04347576493189044,
+      "ci_high": 0.21360231437479654
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 5,
+      "count": 9,
+      "total": 50,
+      "share": 0.18,
+      "ci_low": 0.09770192670234176,
+      "ci_high": 0.3079605367430077
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 6,
+      "count": 10,
+      "total": 50,
+      "share": 0.2,
+      "ci_low": 0.1124375001577611,
+      "ci_high": 0.3303710593222541
+    }
+  ],
+  "disputed": [
+    {
+      "model_key": "gpt_audio_1_5",
+      "items_with_disputed_details": 40,
+      "disputed_phrases": 59,
+      "total": 50
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "items_with_disputed_details": 46,
+      "disputed_phrases": 80,
+      "total": 50
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "items_with_disputed_details": 40,
+      "disputed_phrases": 58,
+      "total": 50
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "items_with_disputed_details": 40,
+      "disputed_phrases": 65,
+      "total": 50
+    }
+  ],
+  "scores_by_category": [
+    {
+      "category": 1,
+      "metric": "cider_d",
+      "num_items": 15,
+      "mean": 0.3364458777119478,
+      "sd": 0.3079907816196016
+    },
+    {
+      "category": 1,
+      "metric": "spice",
+      "num_items": 15,
+      "mean": 0.1489785852985828,
+      "sd": 0.07461998876269614
+    },
+    {
+      "category": 1,
+      "metric": "fense",
+      "num_items": 15,
+      "mean": 0.6793825109799703,
+      "sd": 0.12059457458347245
+    },
+    {
+      "category": 1,
+      "metric": "bertscore_f1_rescaled",
+      "num_items": 15,
+      "mean": 0.2657489483556152,
+      "sd": 0.08592353421978513
+    },
+    {
+      "category": 1,
+      "metric": "clap_similarity",
+      "num_items": 15,
+      "mean": 0.5246113862243826,
+      "sd": 0.05988927555385882
+    },
+    {
+      "category": 1,
+      "metric": "mace",
+      "num_items": 15,
+      "mean": 0.6803389461596314,
+      "sd": 0.0561251345169374
+    },
+    {
+      "category": 2,
+      "metric": "cider_d",
+      "num_items": 24,
+      "mean": 0.17578100880918313,
+      "sd": 0.17732090527993782
+    },
+    {
+      "category": 2,
+      "metric": "spice",
+      "num_items": 24,
+      "mean": 0.11962385842772634,
+      "sd": 0.08971489967490881
+    },
+    {
+      "category": 2,
+      "metric": "fense",
+      "num_items": 24,
+      "mean": 0.5749349668622017,
+      "sd": 0.14705020889201492
+    },
+    {
+      "category": 2,
+      "metric": "bertscore_f1_rescaled",
+      "num_items": 24,
+      "mean": 0.2778696094346488,
+      "sd": 0.10022852558838391
+    },
+    {
+      "category": 2,
+      "metric": "clap_similarity",
+      "num_items": 24,
+      "mean": 0.5399336133123515,
+      "sd": 0.07472791592286164
+    },
+    {
+      "category": 2,
+      "metric": "mace",
+      "num_items": 24,
+      "mean": 0.6423361378530302,
+      "sd": 0.06253923535903462
+    },
+    {
+      "category": 3,
+      "metric": "cider_d",
+      "num_items": 31,
+      "mean": 0.11000866886678225,
+      "sd": 0.12147548376313555
+    },
+    {
+      "category": 3,
+      "metric": "spice",
+      "num_items": 31,
+      "mean": 0.07576114108397905,
+      "sd": 0.06409933088611157
+    },
+    {
+      "category": 3,
+      "metric": "fense",
+      "num_items": 31,
+      "mean": 0.477317821114294,
+      "sd": 0.16086111036074724
+    },
+    {
+      "category": 3,
+      "metric": "bertscore_f1_rescaled",
+      "num_items": 31,
+      "mean": 0.2572857387182553,
+      "sd": 0.1306211577213205
+    },
+    {
+      "category": 3,
+      "metric": "clap_similarity",
+      "num_items": 31,
+      "mean": 0.4892801413445014,
+      "sd": 0.09110907822335529
+    },
+    {
+      "category": 3,
+      "metric": "mace",
+      "num_items": 31,
+      "mean": 0.6063327027325867,
+      "sd": 0.06904407770340436
+    },
+    {
+      "category": 4,
+      "metric": "cider_d",
+      "num_items": 26,
+      "mean": 0.08433717025895675,
+      "sd": 0.10029298996417312
+    },
+    {
+      "category": 4,
+      "metric": "spice",
+      "num_items": 26,
+      "mean": 0.09896219346876486,
+      "sd": 0.07230497859339977
+    },
+    {
+      "category": 4,
+      "metric": "fense",
+      "num_items": 26,
+      "mean": 0.4362737020620933,
+      "sd": 0.09600338389737717
+    },
+    {
+      "category": 4,
+      "metric": "bertscore_f1_rescaled",
+      "num_items": 26,
+      "mean": 0.21825956898256244,
+      "sd": 0.07453890061126461
+    },
+    {
+      "category": 4,
+      "metric": "clap_similarity",
+      "num_items": 26,
+      "mean": 0.4965115007147259,
+      "sd": 0.08156328379448421
+    },
+    {
+      "category": 4,
+      "metric": "mace",
+      "num_items": 26,
+      "mean": 0.5935370755516092,
+      "sd": 0.07185562311226974
+    },
+    {
+      "category": 5,
+      "metric": "cider_d",
+      "num_items": 40,
+      "mean": 0.08043040466999016,
+      "sd": 0.17009231908067948
+    },
+    {
+      "category": 5,
+      "metric": "spice",
+      "num_items": 40,
+      "mean": 0.07284587927989176,
+      "sd": 0.05343556236342679
+    },
+    {
+      "category": 5,
+      "metric": "fense",
+      "num_items": 40,
+      "mean": 0.4309872896969319,
+      "sd": 0.12881505156031603
+    },
+    {
+      "category": 5,
+      "metric": "bertscore_f1_rescaled",
+      "num_items": 40,
+      "mean": 0.26383946585497153,
+      "sd": 0.11112302739637892
+    },
+    {
+      "category": 5,
+      "metric": "clap_similarity",
+      "num_items": 40,
+      "mean": 0.4408779584948762,
+      "sd": 0.09653120652823076
+    },
+    {
+      "category": 5,
+      "metric": "mace",
+      "num_items": 40,
+      "mean": 0.5429356175675629,
+      "sd": 0.09346215766189353
+    },
+    {
+      "category": 6,
+      "metric": "cider_d",
+      "num_items": 64,
+      "mean": 0.038479874539872984,
+      "sd": 0.07759264677167682
+    },
+    {
+      "category": 6,
+      "metric": "spice",
+      "num_items": 64,
+      "mean": 0.03767846262690064,
+      "sd": 0.04804651393845499
+    },
+    {
+      "category": 6,
+      "metric": "fense",
+      "num_items": 64,
+      "mean": 0.283751649025362,
+      "sd": 0.13048320272736452
+    },
+    {
+      "category": 6,
+      "metric": "bertscore_f1_rescaled",
+      "num_items": 64,
+      "mean": 0.24900602148278989,
+      "sd": 0.08353813278758998
+    },
+    {
+      "category": 6,
+      "metric": "clap_similarity",
+      "num_items": 64,
+      "mean": 0.4011240817806626,
+      "sd": 0.12770869271388
+    },
+    {
+      "category": 6,
+      "metric": "mace",
+      "num_items": 64,
+      "mean": 0.4828281177502366,
+      "sd": 0.10540254883326976
+    }
+  ],
+  "limitations": [
+    "One reviewer labelled every item, so inter-annotator agreement cannot be estimated and each label is a single judgement; more reviewers are left for future work.",
+    "The reviewer had seen pilot captions (E05) and knows the models' styles, so blinding is weaker than for a new reviewer; captions also carry style cues (E17).",
+    "Categories describe agreement with the references, not correctness about the audio; disputed details are checked against the audio in E19.",
+    "With 50 items per model, proportions are coarse (one item is 2 percentage points) and the Wilson intervals wide; the summary is descriptive and the four captions of a recording are not independent."
+  ],
+  "outputs": {
+    "annotated": "outputs/qualitative/qualitative_annotations.csv",
+    "summary": "outputs/qualitative/category_summary.csv",
+    "disputed": "outputs/qualitative/disputed_summary.csv",
+    "scores_by_category": "outputs/qualitative/scores_by_category.csv",
+    "report_json": "outputs/reports/qualitative_annotation.json",
+    "report_md": "outputs/reports/qualitative_annotation.md"
+  }
+}

@@ -169,7 +169,7 @@ The report is `outputs/reports/statistical_analysis.{json,md}`.
 | `review_sheet.md` | Reading view of the review items, one section per recording |
 | `annotations_reviewer_1.csv` | Annotation template: agreement category, disputed caption phrases and notes (one reviewer; more are left for future work). `prepare_qualitative.py` never overwrites a template that holds labels |
 | `categories.csv` | The six agreement categories |
-| `blinding_key.csv` | Item to recording and model (git-ignored until the E18 labels are final) |
+| `blinding_key.csv` | Item to recording and model (git-ignored; force-added with the final E18 labels) |
 
 The report, with a descriptive comparison of the sample with all recordings, is `outputs/reports/qualitative_sample.{json,md}`.
 
@@ -246,7 +246,7 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | | E15 | Caption-length analysis | Done |
 | | E16 | Statistical comparison and uncertainty | Done |
 | 5. Qualitative analysis | E17 | Select qualitative review sample | Done |
-| | E18 | Annotate model–reference agreement | — |
+| | E18 | Annotate model–reference agreement | Done |
 | | E19 | Audio-grounded review of the qualitative sample | — |
 | | E20 | Representative caption comparisons | — |
 | 6. Synthesis and reproducibility | E21 | Cross-metric and model comparison | — |
