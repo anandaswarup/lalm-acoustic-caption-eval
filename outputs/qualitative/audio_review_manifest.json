@@ -1,0 +1,33 @@
+{
+  "task": "E19",
+  "num_recordings": 50,
+  "num_items": 200,
+  "num_phrases": 262,
+  "reviewers": 1,
+  "templates": [
+    "outputs/qualitative/audio_annotations_reviewer_1.csv",
+    "outputs/qualitative/disputed_verification_reviewer_1.csv"
+  ],
+  "inputs": {
+    "review": {
+      "path": "outputs/qualitative/review_items.csv",
+      "sha256": "fa4daa5af2dea529a306a9cd8eb2507fe2574cffa0fa053f97239786da269f24"
+    },
+    "annotations": {
+      "path": "outputs/qualitative/annotations_reviewer_1.csv",
+      "sha256": "7bab15af12162fb9221b7346f937c2d14faf4d25b2b5b44775ad596395b252ee"
+    },
+    "sample_manifest": {
+      "path": "outputs/qualitative/sample_manifest.json",
+      "sha256": "8d71514231d629630b8402130f86c6031beb35ee07e6f0f1ca0edc4ed9ecb3df"
+    },
+    "key": {
+      "path": "outputs/qualitative/blinding_key.csv",
+      "sha256": "f173edd52b8bd09a3dfc0e68b700041fa5b621abc38a00b727daf627609b2a2a"
+    }
+  },
+  "local_only": [
+    "outputs/qualitative/audio",
+    "outputs/qualitative/audio_review.html"
+  ]
+}
