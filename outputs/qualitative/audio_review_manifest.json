@@ -1,5 +1,5 @@
 {
-  "task": "E19",
+  "task": "E18",
   "num_recordings": 50,
   "num_items": 200,
   "num_phrases": 262,
@@ -19,7 +19,7 @@
     },
     "sample_manifest": {
       "path": "outputs/qualitative/sample_manifest.json",
-      "sha256": "8d71514231d629630b8402130f86c6031beb35ee07e6f0f1ca0edc4ed9ecb3df"
+      "sha256": "3a580c7f05660249e6fffd31d4b651720f51cc785430b98d06c1ce72a4a763cb"
     },
     "key": {
       "path": "outputs/qualitative/blinding_key.csv",
