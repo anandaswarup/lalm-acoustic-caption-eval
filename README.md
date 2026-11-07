@@ -38,12 +38,28 @@ make test
 Other requirements:
 
 - A separate metrics environment and pinned tools (JDK 11, jars, checkpoints) for the caption metrics; see [Metrics](#metrics).
+- `curl` and `bsdtar` for `make download-data`.
 - **LaTeX** (`latexmk`, `pdflatex`) for `make paper`, once the manuscript is added.
 - **Hugging Face CLI** (`hf`) and `HF_TOKEN` for HF Jobs.
 
+Credentials go in `.env` (git-ignored; see `.env.example`). Only caption generation needs them; everything from consolidation onwards runs from the committed captions without any key. `make check-env` warns about missing credentials (`--strict` makes them errors).
+
+| Variable | Needed for |
+|---|---|
+| `CLOTHO_ROOT` | Every step that reads the dataset: download, manifests, generation, audio-aware metrics, E19 audio review |
+| `OPENAI_API_KEY` | GPT-Audio-1.5 captions (E05, E06) |
+| `GEMINI_API_KEY` | Gemini 3.8 Flash captions (E05, E07) |
+| `HF_TOKEN` | Hugging Face Jobs and the private bucket for Qwen2.5-Omni-7B and Audio Flamingo 3 captions (E05, E08, E09) |
+
 ### Dataset
 
-Clotho v2.1 ([Zenodo 4783391](https://zenodo.org/records/4783391)) must be available locally, with `CLOTHO_ROOT` in `.env` pointing to it. The expected layout is `audio/{split}/*.wav`, `captions/clotho_captions_{split}.csv`, `metadata/` and `manifests/`. Audio and raw dataset files are never committed.
+Clotho v2.1 ([Zenodo 4783391](https://zenodo.org/records/4783391)) is kept outside the repository, in the folder `CLOTHO_ROOT` (set in `.env`) points to. `make download-data` builds that folder:
+
+1. It saves a snapshot of the Zenodo record (file list, sizes, MD5) to `provenance/zenodo-record-4783391.json`, or reuses the snapshot already there, and checks that the record is version 2.1.
+2. It downloads every caption and metadata CSV, the licence and the audio archives of the evaluation and validation splits (about 2.5 GB; `python scripts/download_clotho.py --splits evaluation validation development` adds the 4.5 GB development split). Downloads resume after interruption and every file is checked against the record's size and MD5.
+3. It extracts the archives with `bsdtar` into `audio/{split}/` and writes `manifests/{split}.jsonl` (one record per recording: the five captions, audio properties and metadata row, after checking that captions, metadata and audio files align and that no WAV is truncated) and `provenance/validation.json`.
+
+`python scripts/download_clotho.py --check` rebuilds the manifests from the files present and compares them with the existing ones. The resulting layout is `audio/{split}/*.wav`, `captions/clotho_captions_{split}.csv`, `metadata/clotho_metadata_{split}.csv`, `manifests/{split}.jsonl`, `provenance/` and `LICENSE`. Audio and raw dataset files are never committed.
 
 ### Frozen manifests
 
@@ -67,6 +83,24 @@ Validation and manifest reports are in `outputs/reports/`. The script does not o
 | Open-weight inference (Qwen2.5-Omni-7B, Audio Flamingo 3) | Hugging Face Jobs |
 
 The `compute` field for each model is set in `configs/models.yaml`. The E11 validation estimates about 2 hours of CPU time for all metrics on all evaluation conditions (E12–E14), so the metrics run on the laptop.
+
+### Caption generation (E04–E10)
+
+One fixed prompt (`configs/generation.yaml`, version v3, frozen after the E05 pilot) is sent with each recording, audio before text, with deterministic decoding where the provider supports it (temperature 0, top-p 1; seed 42 for the two API models). Audio is never cropped; any resampling or channel conversion a provider needs is recorded per request.
+
+| Model | Identifier (`configs/models.yaml`) | Access | Runs on | Licence |
+|---|---|---|---|---|
+| GPT-Audio-1.5 | `gpt-audio-1.5` | OpenAI API | Laptop | Provider terms |
+| Gemini 3.8 Flash | `gemini-3.8-flash` (thinking level low, the lowest available) | Gemini API | Laptop | Provider terms |
+| Qwen2.5-Omni-7B | `Qwen/Qwen2.5-Omni-7B` @ `ae9e1690543ffd5c0221dc27f79834d0294cba00` | Open weights | Hugging Face Jobs (A100) | Apache-2.0 |
+| Audio Flamingo 3 | `nvidia/audio-flamingo-3-hf` @ `7d4bae64ee29878af6504ae6f6bb3e40492838ad` | Open weights | Hugging Face Jobs (A100) | NVIDIA OneWay Noncommercial |
+
+- `make pilot` captions the 20 pilot recordings with every model (E05); `make generate` (or `make generate-<model>`) captions the 1,045 evaluation recordings (E06–E09). Runs are resumable: a rerun requests only recordings without an `ok` record made with the current prompt. A JSON-like answer instead of a sentence is requested again, up to three requests in total, for every model; rejected answers are kept in the record.
+- The open-weight models run on Hugging Face Jobs: upload the manifest WAVs once with `make hf-upload-audio`, and each `make generate-<model>` then snapshots the committed code and submits a detached job (`hf_jobs:` in `configs/models.yaml`: private bucket, `a100-large`, 4 h timeout). When the jobs finish, `make fetch-hf` copies their captions into `outputs/captions/`. A collaborator needs their own bucket, set in `hf_jobs.bucket`.
+- `python scripts/caption_report.py --model <key>` writes a completion report per model and run (`outputs/reports/<model>_evaluation_completion.{json,md}`).
+- `make consolidate` (E10) checks that every model has one `ok` caption per evaluation recording, produced with the frozen prompt, normalizes the captions (a plain sentence wrapped as `{"..."}` is unwrapped; any other JSON-like answer is flagged as malformed and scored as returned) and freezes them in `outputs/captions/all_model_captions.jsonl`, with `outputs/captions/SHA256SUMS` covering it and the per-model files. The report is `outputs/reports/caption_validation.{json,md}`; `python scripts/consolidate_captions.py --check` verifies the frozen files.
+
+The API models are not reproducible at temperature 0, so the reported results rest on the committed caption files, not on regenerating them.
 
 ### Metrics
 
@@ -135,7 +169,7 @@ The report, including the model-minus-human calibration table, is `outputs/repor
 
 #### Caption-length analysis (E15)
 
-`make lengths` counts the words (whitespace tokens) of every scored model caption and human reference and reports, per system, the mean, SD, quartiles and range. For each model it gives the ratio of its mean length to the human mean and the per-recording difference from the mean length of the recording's five references, with bootstrap CIs over recordings (the same resamples as E12–E14), and the share of captions longer than the reference mean and than every reference. It also reports Spearman correlations between caption length and per-item score, using the five-reference model scores (E12) and the held-out human scores (E13, all five positions pooled, resampled by recording), for the metrics in `lengths.association_metrics` (`configs/metrics.yaml`). Everything is repeated on the 1,024 recordings where every model's caption is valid. It reads frozen files only and runs in seconds in `.venv`. Figures are drawn in E21 from the per-caption table.
+`make lengths` counts the words (whitespace tokens) of every scored model caption and human reference and reports, per system, the mean, SD, quartiles and range. For each model it gives the ratio of its mean length to the human mean and the per-recording difference from the mean length of the recording's five references, with bootstrap CIs over recordings (the same resamples as E12–E14), and the share of captions longer than the reference mean and than every reference. It also reports Spearman correlations between caption length and per-item score, using the five-reference model scores (E12) and the held-out human scores (E13, all five positions pooled, resampled by recording), for the metrics in `lengths.association_metrics` (`configs/metrics.yaml`). Everything is repeated on the 1,024 recordings where every model's caption is valid. It reads frozen files only and runs in seconds in `.venv`.
 
 | File | Contents |
 |---|---|
@@ -160,7 +194,7 @@ The report is `outputs/reports/statistical_analysis.{json,md}`.
 
 #### Qualitative review sample (E17)
 
-`make qualitative-sample` draws 50 evaluation recordings at random (seed 42, `configs/qualitative.yaml`), independently of model scores, and prepares blinded review material for the 200 model captions. Each recording has its own random order of the four models behind the labels A–D, and the recordings are presented in random order under anonymous codes. The review sheets show the five references and each caption as scored, without file names (Clotho file names describe the content), model names or scores. The blinding key is not committed until the annotation labels are final (E18); its SHA-256 is recorded in the sample manifest so it can be checked when it is added.
+`make qualitative-sample` draws 50 evaluation recordings at random (seed 42, `configs/qualitative.yaml`), independently of model scores, and prepares blinded review material for the 200 model captions. Each recording has its own random order of the four models behind the labels A–D, and the recordings are presented in random order under anonymous codes. The review sheets show the five references and each caption as scored, without file names (Clotho file names describe the content), model names or scores. The blinding key was committed only with the final E18 labels; its SHA-256, recorded in the sample manifest when the sample was drawn, is checked before every unblinding.
 
 | File (`outputs/qualitative/`) | Contents |
 |---|---|
@@ -240,6 +274,21 @@ The LaTeX tables need `\usepackage{booktabs,tabularx}`. Figures are saved withou
 
 The report is `outputs/reports/cross_metric_comparison.{json,md}`. `make figures` draws the E12 scores by model and the E14 model − human differences (one panel per metric, 95% CIs) to `outputs/figures/e12_scores_by_model` and `e14_model_minus_human` (`.pdf`, `.png`).
 
+## Complete workflow
+
+`make all` runs stages 1 and 2 and then prints the remaining commands. The stages pause twice: the Hugging Face jobs run detached, and the qualitative review needs a person to label captions.
+
+| Stage | Target | Steps |
+|---|---|---|
+| 1 | `make data` | `download-data`, `prepare-data` (E02–E03) |
+| 2 | `make captions` | `pilot`, `generate` (E05–E09). Local API models finish in the run; the two open-weight models are submitted to Hugging Face Jobs |
+| | (pause) | Wait for the jobs, then `make fetch-hf` |
+| 3 | `make scores` | `consolidate`, `validate-metrics`, `evaluate`, `loo`, `evaluate-four-ref`, `lengths`, `stats`, `figures` (E10–E16, E21 figures; about 2 hours on a laptop CPU, needs the metric tools) |
+| | (pause) | `make qualitative-sample` (E17); label `outputs/qualitative/annotations_reviewer_1.csv` following `annotation_guidelines.md` (E18); `make audio-review-sheet`; listen and label `audio_annotations_reviewer_1.csv` and `disputed_verification_reviewer_1.csv` following `audio_review_guidelines.md` (E19) |
+| 4 | `make qualitative` | `annotations`, `audio-review`, `examples`, `compare` (E18–E21 analyses) |
+
+This is the order for a fresh project. In this repository every step has already been run and its outputs are committed: the scripts refuse to overwrite frozen manifests, captions, scores and labelled templates unless given `--force` (labelled templates are never overwritten). The frozen experimental results are tagged `results-frozen-2026-11-07`.
+
 ## Running tasks
 
 Run `make help` for the full list. Main targets (task IDs are listed under [Tasks](#tasks)):
@@ -247,25 +296,27 @@ Run `make help` for the full list. Main targets (task IDs are listed under [Task
 | Target | Task |
 |---|---|
 | `make check-env` | Environment validation |
+| `make test` / `make test-metrics` / `make lint` | Test suite, metric integration tests, lint and format check |
+| `make download-data` | Download, verify and index Clotho v2.1 |
 | `make prepare-data` | E02–E03: validate Clotho, build frozen manifests |
 | `make pilot` | E05: pilot generation |
 | `make generate` / `make generate-<model>` | E06–E09: caption generation |
+| `make hf-upload-audio` / `make fetch-hf` | E08–E09: audio upload to, and captions from, Hugging Face Jobs |
 | `make consolidate` | E10: merge and freeze captions |
-| `make metric-tools` / `make test-metrics` / `make validate-metrics` | E11: metric tools, integration tests, validation report |
+| `make metric-tools` / `make validate-metrics` | E11: metric tools and validation report |
 | `make evaluate` | E12: five-reference evaluation |
 | `make loo` | E13: human leave-one-out calibration |
 | `make evaluate-four-ref` | E14: matched four-reference evaluation |
 | `make lengths` | E15: caption-length analysis |
 | `make stats` | E16: formal tests, bootstrap CIs and ranking stability |
-| `make compare` | E21: metric correlations, model rankings and concordance with the audio ratings |
 | `make qualitative-sample` | E17: blinded qualitative review sample |
 | `make annotations` | E18: check, unblind and summarize the annotations |
-| `make audio-review-sheet` | E19: blinded audio-review material and templates |
-| `make audio-review` | E19: check, unblind and summarize the audio review |
+| `make audio-review-sheet` / `make audio-review` | E19: audio-review material; check, unblind and summarize the audio review |
 | `make examples` | E20: representative caption comparisons, tables and qualitative figures |
-| `make figures` | E21: E12 and E14 result figures |
+| `make compare` / `make figures` | E21: metric correlations, rankings and concordance; E12 and E14 figures |
+| `make data` / `make captions` / `make scores` / `make qualitative` | Workflow stages 1–4 |
+| `make all` | Stages 1–2, then the remaining commands |
 | `make paper` | Build the manuscript (once added) |
-| `make all` | Complete workflow |
 
 Every script accepts `--seed`, `--log-level`, `--no-log-file` and repeatable `--set key=value` config overrides. Run logs, including the git commit and environment details, go to `outputs/logs/`.
 
@@ -276,7 +327,7 @@ configs/      dataset, model, generation and metric configurations
 src/          library code (data, models, generation, metrics, evaluation, analysis, utils)
 scripts/      standalone entry points, run from the repository root
 tests/        pytest suite
-data/         frozen manifests (no audio)
+data/         frozen manifests (no audio); the dataset itself lives in CLOTHO_ROOT
 outputs/      captions, scores, qualitative annotations, tables, figures
 manuscript/   LaTeX manuscript (added when writing the paper)
 ```
@@ -308,7 +359,7 @@ Tasks are numbered E01–E25. Configs, scripts, Makefile targets and commit mess
 | | E19 | Audio-grounded review of the qualitative sample | Done |
 | | E20 | Representative caption comparisons | Done |
 | 6. Synthesis and repository | E21 | Cross-metric and model comparison | Done |
-| | E22 | Finalize research repository | — |
+| | E22 | Finalize research repository | Done |
 | 7. Manuscript and release | E23 | Draft manuscript | — |
 | | E24 | Final validation, public release and submission | — |
 | | E25 | Camera-ready and versioned release after acceptance | — |

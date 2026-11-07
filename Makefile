@@ -11,8 +11,8 @@ MODELS      := gpt_audio_1_5 gemini_3_8_flash qwen2_5_omni audio_flamingo_3
 
 .DEFAULT_GOAL := help
 .PHONY: help venv install check-env test test-metrics validate-metrics lint format venv-metrics install-metrics metric-tools \
-        prepare-data pilot generate hf-upload-audio fetch-hf consolidate \
-        evaluate loo evaluate-four-ref lengths stats qualitative-sample annotations audio-review-sheet audio-review examples compare figures all paper paper-clean clean
+        download-data prepare-data pilot generate hf-upload-audio fetch-hf consolidate \
+        evaluate loo evaluate-four-ref lengths stats qualitative-sample annotations audio-review-sheet audio-review examples compare figures data captions scores qualitative all paper paper-clean clean
 
 help: ## List available targets
 	@grep -E '^[a-zA-Z0-9_%-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-24s\033[0m %s\n", $$1, $$2}'
@@ -54,6 +54,9 @@ metric-tools: ## Download and verify the JDK 11, metric jars and checkpoints int
 	$(METRICS_PYTHON) scripts/setup_metric_tools.py
 
 # --- Phase 1: dataset (E02-E03) ----------------------------------------------
+download-data: ## Download, verify, extract and index Clotho v2.1 into CLOTHO_ROOT (evaluation and validation audio)
+	$(PYTHON) scripts/download_clotho.py
+
 prepare-data: ## Validate Clotho and build frozen evaluation/pilot manifests
 	$(PYTHON) scripts/prepare_dataset.py
 
@@ -98,7 +101,7 @@ evaluate-four-ref: ## Matched four-reference model evaluation (E14)
 lengths: ## Caption-length analysis (E15)
 	$(PYTHON) scripts/analyze_lengths.py
 
-stats: ## Bootstrap CIs and cross-metric comparisons (E16, E21)
+stats: ## Formal tests, bootstrap CIs and ranking stability (E16)
 	$(PYTHON) scripts/analyze_results.py
 
 qualitative-sample: ## Blinded qualitative review sample and annotation templates (E17)
@@ -119,10 +122,27 @@ examples: ## Representative caption comparisons, tables and qualitative figures 
 compare: ## Cross-metric correlations, model rankings and audio-rating concordance (E21)
 	$(PYTHON) scripts/compare_metrics.py
 
-figures: ## Regenerate manuscript tables and figures
+figures: ## E12 scores and E14 model - human figures (E21)
 	$(PYTHON) scripts/generate_figures.py
 
-all: prepare-data generate consolidate evaluate loo evaluate-four-ref lengths stats figures ## Full workflow
+# --- Complete workflow (E22) -------------------------------------------------
+# Four stages with two pauses: Hugging Face Jobs run detached (wait for them, then `make fetch-hf`), and the
+# qualitative review needs human labels (E18, E19). Each stage runs its steps in the order listed.
+data: download-data prepare-data ## Stage 1: Clotho download and frozen manifests (E02-E03)
+
+captions: pilot generate ## Stage 2: pilot and evaluation captions (E05-E09); HF Jobs are detached, then make fetch-hf
+
+scores: consolidate validate-metrics evaluate loo evaluate-four-ref lengths stats figures ## Stage 3: E10-E16, E21 figures
+
+qualitative: annotations audio-review examples compare ## Stage 4: E18-E21 analyses, once the review labels exist
+
+all: data captions ## Stages 1-2, then lists the remaining steps
+	@echo ""
+	@echo "Stages 1-2 done. The Qwen2.5-Omni and Audio Flamingo 3 captions are being generated on Hugging Face Jobs."
+	@echo "When the jobs have finished:   make fetch-hf scores"
+	@echo "Qualitative review:            make qualitative-sample, label outputs/qualitative/annotations_reviewer_1.csv (E18),"
+	@echo "                               make audio-review-sheet, label the two audio-review templates (E19),"
+	@echo "                               make qualitative"
 
 # --- Manuscript (E23-E24) ----------------------------------------------------
 paper: ## Build the manuscript PDF (once manuscript/main.tex exists)
