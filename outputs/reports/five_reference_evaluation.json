@@ -1,8 +1,8 @@
 {
   "run_info": {
     "experiment": "evaluate_captions",
-    "timestamp_utc": "2026-11-04T07:08:16+00:00",
-    "git_commit": "16e5605f96821a58b8a0536a46c111784e195ec3",
+    "timestamp_utc": "2026-11-07T08:07:34+00:00",
+    "git_commit": "7b6a3711041c9bb7dca22ec4139ef32fd23a931c",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
@@ -271,10 +271,10 @@
       "sample": "all",
       "num_items": 1045,
       "metric": "bertscore_f1",
-      "corpus": "0.9692321530939859",
-      "item_mean": "0.9692321530939859",
-      "ci_low": "0.9690415152265694",
-      "ci_high": "0.9694355065614413"
+      "corpus": "0.9702834307291861",
+      "item_mean": "0.9702834307291861",
+      "ci_low": "0.970045973674247",
+      "ci_high": "0.9705156656429528"
     },
     {
       "system": "gpt_audio_1_5",
@@ -283,10 +283,10 @@
       "sample": "all",
       "num_items": 1045,
       "metric": "bertscore_f1_rescaled",
-      "corpus": "0.2275595775754656",
-      "item_mean": "0.2275595775754656",
-      "ci_low": "0.22277352948808635",
-      "ci_high": "0.23266485643305052"
+      "corpus": "0.2539523681759922",
+      "item_mean": "0.2539523681759922",
+      "ci_low": "0.24799090365151447",
+      "ci_high": "0.2597827285336612"
     },
     {
       "system": "gpt_audio_1_5",
@@ -511,10 +511,10 @@
       "sample": "all",
       "num_items": 1045,
       "metric": "bertscore_f1",
-      "corpus": "0.9692990883685756",
-      "item_mean": "0.9692990883685756",
-      "ci_low": "0.9690944590152166",
-      "ci_high": "0.9694999939745123"
+      "corpus": "0.9696321372210124",
+      "item_mean": "0.9696321372210124",
+      "ci_low": "0.9693596806680187",
+      "ci_high": "0.9699041574337837"
     },
     {
       "system": "gemini_3_8_flash",
@@ -523,10 +523,10 @@
       "sample": "all",
       "num_items": 1045,
       "metric": "bertscore_f1_rescaled",
-      "corpus": "0.22924001728699342",
-      "item_mean": "0.22924001728699342",
-      "ci_low": "0.22410270674875818",
-      "ci_high": "0.23428384149709422"
+      "corpus": "0.23760135622143938",
+      "item_mean": "0.23760135622143938",
+      "ci_low": "0.2307612137984192",
+      "ci_high": "0.24443054412993553"
     },
     {
       "system": "gemini_3_8_flash",
@@ -751,10 +751,10 @@
       "sample": "all",
       "num_items": 1045,
       "metric": "bertscore_f1",
-      "corpus": "0.9711244875164123",
-      "item_mean": "0.9711244875164123",
-      "ci_low": "0.9709267110359725",
-      "ci_high": "0.9713414937870924"
+      "corpus": "0.9733550907322094",
+      "item_mean": "0.9733550907322094",
+      "ci_low": "0.9730445662839562",
+      "ci_high": "0.9736465692719775"
     },
     {
       "system": "qwen2_5_omni",
@@ -763,10 +763,10 @@
       "sample": "all",
       "num_items": 1045,
       "metric": "bertscore_f1_rescaled",
-      "corpus": "0.27506747128972453",
-      "item_mean": "0.27506747128972453",
-      "ci_low": "0.2701022051609902",
-      "ci_high": "0.2805155098185489"
+      "corpus": "0.3310677528672777",
+      "item_mean": "0.3310677528672777",
+      "ci_low": "0.3232718990750172",
+      "ci_high": "0.3383854506923435"
     },
     {
       "system": "qwen2_5_omni",
@@ -991,10 +991,10 @@
       "sample": "all",
       "num_items": 1045,
       "metric": "bertscore_f1",
-      "corpus": "0.9712943184889105",
-      "item_mean": "0.9712943184889105",
-      "ci_low": "0.9710406272633794",
-      "ci_high": "0.9715266157508466"
+      "corpus": "0.9742070070294102",
+      "item_mean": "0.9742070070294102",
+      "ci_low": "0.973872468474379",
+      "ci_high": "0.9745322704357964"
     },
     {
       "system": "audio_flamingo_3",
@@ -1003,10 +1003,10 @@
       "sample": "all",
       "num_items": 1045,
       "metric": "bertscore_f1_rescaled",
-      "corpus": "0.2793311530656362",
-      "item_mean": "0.2793311530656362",
-      "ci_low": "0.27296212249898133",
-      "ci_high": "0.2851630787017138"
+      "corpus": "0.3524554887881646",
+      "item_mean": "0.3524554887881646",
+      "ci_low": "0.34405675021035803",
+      "ci_high": "0.36062137065164657"
     },
     {
       "system": "audio_flamingo_3",
@@ -1231,10 +1231,10 @@
       "sample": "valid_for_all_models",
       "num_items": 1024,
       "metric": "bertscore_f1",
-      "corpus": "0.9692272413522005",
-      "item_mean": "0.9692272413522005",
-      "ci_low": "0.9690326612762874",
-      "ci_high": "0.9694235985953128"
+      "corpus": "0.9704374716384336",
+      "item_mean": "0.9704374716384336",
+      "ci_low": "0.9701905948750209",
+      "ci_high": "0.970684070365678"
     },
     {
       "system": "gpt_audio_1_5",
@@ -1243,10 +1243,10 @@
       "sample": "valid_for_all_models",
       "num_items": 1024,
       "metric": "bertscore_f1_rescaled",
-      "corpus": "0.22743626612272774",
-      "item_mean": "0.22743626612272774",
-      "ci_low": "0.22255124714519434",
-      "ci_high": "0.2323659016698328"
+      "corpus": "0.25781963342120956",
+      "item_mean": "0.25781963342120956",
+      "ci_low": "0.2516216829438866",
+      "ci_high": "0.264010603677396"
     },
     {
       "system": "gpt_audio_1_5",
@@ -1471,10 +1471,10 @@
       "sample": "valid_for_all_models",
       "num_items": 1024,
       "metric": "bertscore_f1",
-      "corpus": "0.969286166888196",
-      "item_mean": "0.969286166888196",
-      "ci_low": "0.9691016584896716",
-      "ci_high": "0.9694983104302082"
+      "corpus": "0.9695977596566081",
+      "item_mean": "0.9695977596566081",
+      "ci_low": "0.9693051905895118",
+      "ci_high": "0.9698652459250298"
     },
     {
       "system": "gemini_3_8_flash",
@@ -1483,10 +1483,10 @@
       "sample": "valid_for_all_models",
       "num_items": 1024,
       "metric": "bertscore_f1_rescaled",
-      "corpus": "0.2289156177996587",
-      "item_mean": "0.2289156177996587",
-      "ci_low": "0.22428345274330988",
-      "ci_high": "0.23424157537176657"
+      "corpus": "0.23673829224262122",
+      "item_mean": "0.23673829224262122",
+      "ci_low": "0.22939321624602707",
+      "ci_high": "0.24345365347031842"
     },
     {
       "system": "gemini_3_8_flash",
@@ -1711,10 +1711,10 @@
       "sample": "valid_for_all_models",
       "num_items": 1024,
       "metric": "bertscore_f1",
-      "corpus": "0.9711182701867074",
-      "item_mean": "0.9711182701867074",
-      "ci_low": "0.970910018630093",
-      "ci_high": "0.9713379846638418"
+      "corpus": "0.9733336213394068",
+      "item_mean": "0.9733336213394068",
+      "ci_low": "0.9730418339939206",
+      "ci_high": "0.9736312702210853"
     },
     {
       "system": "qwen2_5_omni",
@@ -1723,10 +1723,10 @@
       "sample": "valid_for_all_models",
       "num_items": 1024,
       "metric": "bertscore_f1_rescaled",
-      "corpus": "0.27491138247407515",
-      "item_mean": "0.27491138247407515",
-      "ci_low": "0.2696831349189834",
-      "ci_high": "0.28042741172529034"
+      "corpus": "0.33052875425303285",
+      "item_mean": "0.33052875425303285",
+      "ci_low": "0.3232033037236538",
+      "ci_high": "0.3380013612443581"
     },
     {
       "system": "qwen2_5_omni",
@@ -1951,10 +1951,10 @@
       "sample": "valid_for_all_models",
       "num_items": 1024,
       "metric": "bertscore_f1",
-      "corpus": "0.9712930915993638",
-      "item_mean": "0.9712930915993638",
-      "ci_low": "0.9710421336494619",
-      "ci_high": "0.9715295543399407"
+      "corpus": "0.9741939235827886",
+      "item_mean": "0.9741939235827886",
+      "ci_low": "0.9738376248074928",
+      "ci_high": "0.9745256617388804"
     },
     {
       "system": "audio_flamingo_3",
@@ -1963,10 +1963,10 @@
       "sample": "valid_for_all_models",
       "num_items": 1024,
       "metric": "bertscore_f1_rescaled",
-      "corpus": "0.2793003514602284",
-      "item_mean": "0.2793003514602284",
-      "ci_low": "0.27299994098869973",
-      "ci_high": "0.2852368532823018"
+      "corpus": "0.35212702306659327",
+      "item_mean": "0.35212702306659327",
+      "ci_low": "0.34318198452231413",
+      "ci_high": "0.36045545638884396"
     },
     {
       "system": "audio_flamingo_3",
@@ -2854,10 +2854,10 @@
       "metric": "bertscore_f1",
       "system_a": "gpt_audio_1_5",
       "system_b": "gemini_3_8_flash",
-      "difference": "-6.693527458957507e-05",
-      "ci_low": "-0.0003175553023529965",
-      "ci_high": "0.0001871852812014127",
-      "excludes_zero": false
+      "difference": "0.0006512935081737463",
+      "ci_low": "0.0003266712737996042",
+      "ci_high": "0.0009519290653142061",
+      "excludes_zero": true
     },
     {
       "condition": "five_reference",
@@ -2867,9 +2867,9 @@
       "metric": "bertscore_f1",
       "system_a": "gpt_audio_1_5",
       "system_b": "qwen2_5_omni",
-      "difference": "-0.0018923344224263607",
-      "ci_low": "-0.0021391584000519017",
-      "ci_high": "-0.0016297077476693112",
+      "difference": "-0.0030716600030232847",
+      "ci_low": "-0.003378796667288365",
+      "ci_high": "-0.0027668536693285528",
       "excludes_zero": true
     },
     {
@@ -2880,9 +2880,9 @@
       "metric": "bertscore_f1",
       "system_a": "gpt_audio_1_5",
       "system_b": "audio_flamingo_3",
-      "difference": "-0.002062165394924474",
-      "ci_low": "-0.0023362820228321132",
-      "ci_high": "-0.001765350973206844",
+      "difference": "-0.0039235763002240485",
+      "ci_low": "-0.004318759441375732",
+      "ci_high": "-0.0035313154493222397",
       "excludes_zero": true
     },
     {
@@ -2893,9 +2893,9 @@
       "metric": "bertscore_f1",
       "system_a": "gemini_3_8_flash",
       "system_b": "qwen2_5_omni",
-      "difference": "-0.0018253991478367855",
-      "ci_low": "-0.0020835831176721307",
-      "ci_high": "-0.0015658718589960673",
+      "difference": "-0.0037229535111970307",
+      "ci_low": "-0.004079527981828845",
+      "ci_high": "-0.0033800367661640405",
       "excludes_zero": true
     },
     {
@@ -2906,9 +2906,9 @@
       "metric": "bertscore_f1",
       "system_a": "gemini_3_8_flash",
       "system_b": "audio_flamingo_3",
-      "difference": "-0.001995230120334899",
-      "ci_low": "-0.002297925700981651",
-      "ci_high": "-0.0017282794679751238",
+      "difference": "-0.004574869808397795",
+      "ci_low": "-0.004982997615371594",
+      "ci_high": "-0.004164584106520603",
       "excludes_zero": true
     },
     {
@@ -2919,10 +2919,10 @@
       "metric": "bertscore_f1",
       "system_a": "qwen2_5_omni",
       "system_b": "audio_flamingo_3",
-      "difference": "-0.00016983097249811347",
-      "ci_low": "-0.0004479904394400747",
-      "ci_high": "0.0001223766461513826",
-      "excludes_zero": false
+      "difference": "-0.0008519162972007642",
+      "ci_low": "-0.0012491144018880488",
+      "ci_high": "-0.0004950048207666316",
+      "excludes_zero": true
     },
     {
       "condition": "five_reference",
@@ -2932,10 +2932,10 @@
       "metric": "bertscore_f1_rescaled",
       "system_a": "gpt_audio_1_5",
       "system_b": "gemini_3_8_flash",
-      "difference": "-0.0016804397115277943",
-      "ci_low": "-0.007972366498117008",
-      "ci_high": "0.004699369381437357",
-      "excludes_zero": false
+      "difference": "0.01635101195455279",
+      "ci_low": "0.008201226998383321",
+      "ci_high": "0.02389860075603049",
+      "excludes_zero": true
     },
     {
       "condition": "five_reference",
@@ -2945,9 +2945,9 @@
       "metric": "bertscore_f1_rescaled",
       "system_a": "gpt_audio_1_5",
       "system_b": "qwen2_5_omni",
-      "difference": "-0.047507893714258925",
-      "ci_low": "-0.05370451898101785",
-      "ci_high": "-0.040914534737630855",
+      "difference": "-0.07711538469128554",
+      "ci_low": "-0.08482618666620724",
+      "ci_high": "-0.06946308669734269",
       "excludes_zero": true
     },
     {
@@ -2958,9 +2958,9 @@
       "metric": "bertscore_f1_rescaled",
       "system_a": "gpt_audio_1_5",
       "system_b": "audio_flamingo_3",
-      "difference": "-0.0517715754901706",
-      "ci_low": "-0.05865339482908501",
-      "ci_high": "-0.04431991798571111",
+      "difference": "-0.0985031206121724",
+      "ci_low": "-0.10842436838159605",
+      "ci_high": "-0.08865523823363733",
       "excludes_zero": true
     },
     {
@@ -2971,9 +2971,9 @@
       "metric": "bertscore_f1_rescaled",
       "system_a": "gemini_3_8_flash",
       "system_b": "qwen2_5_omni",
-      "difference": "-0.04582745400273114",
-      "ci_low": "-0.05230927690480347",
-      "ci_high": "-0.03931190648212664",
+      "difference": "-0.09346639664583835",
+      "ci_low": "-0.10241835664362438",
+      "ci_high": "-0.08485731989767127",
       "excludes_zero": true
     },
     {
@@ -2984,9 +2984,9 @@
       "metric": "bertscore_f1_rescaled",
       "system_a": "gemini_3_8_flash",
       "system_b": "audio_flamingo_3",
-      "difference": "-0.0500911357786428",
-      "ci_low": "-0.057690442382548016",
-      "ci_high": "-0.043389221429381515",
+      "difference": "-0.11485413256672518",
+      "ci_low": "-0.12510036190428794",
+      "ci_high": "-0.10455372832196738",
       "excludes_zero": true
     },
     {
@@ -2997,10 +2997,10 @@
       "metric": "bertscore_f1_rescaled",
       "system_a": "qwen2_5_omni",
       "system_b": "audio_flamingo_3",
-      "difference": "-0.004263681775911667",
-      "ci_low": "-0.011246998379194491",
-      "ci_high": "0.0030723198973534515",
-      "excludes_zero": false
+      "difference": "-0.02138773592088684",
+      "ci_low": "-0.031359570242218554",
+      "ci_high": "-0.01242731524318718",
+      "excludes_zero": true
     },
     {
       "condition": "five_reference",
@@ -4414,10 +4414,10 @@
       "metric": "bertscore_f1",
       "system_a": "gpt_audio_1_5",
       "system_b": "gemini_3_8_flash",
-      "difference": "-5.89255359955132e-05",
-      "ci_low": "-0.0003205801709555089",
-      "ci_high": "0.00019302146974951016",
-      "excludes_zero": false
+      "difference": "0.0008397119818255305",
+      "ci_low": "0.0005406506228609943",
+      "ci_high": "0.0011669457075186072",
+      "excludes_zero": true
     },
     {
       "condition": "five_reference",
@@ -4427,9 +4427,9 @@
       "metric": "bertscore_f1",
       "system_a": "gpt_audio_1_5",
       "system_b": "qwen2_5_omni",
-      "difference": "-0.0018910288345068693",
-      "ci_low": "-0.0021672986185876653",
-      "ci_high": "-0.0016215513111092152",
+      "difference": "-0.002896149700973183",
+      "ci_low": "-0.0032147484700544736",
+      "ci_high": "-0.0025745330494828522",
       "excludes_zero": true
     },
     {
@@ -4440,9 +4440,9 @@
       "metric": "bertscore_f1",
       "system_a": "gpt_audio_1_5",
       "system_b": "audio_flamingo_3",
-      "difference": "-0.0020658502471633255",
-      "ci_low": "-0.00234842608042527",
-      "ci_high": "-0.0017662846032180824",
+      "difference": "-0.0037564519443549216",
+      "ci_low": "-0.004157239111373201",
+      "ci_high": "-0.003341952632763423",
       "excludes_zero": true
     },
     {
@@ -4453,9 +4453,9 @@
       "metric": "bertscore_f1",
       "system_a": "gemini_3_8_flash",
       "system_b": "qwen2_5_omni",
-      "difference": "-0.0018321032985113561",
-      "ci_low": "-0.00208426767057972",
-      "ci_high": "-0.0015755347078084015",
+      "difference": "-0.0037358616827987134",
+      "ci_low": "-0.004083195023122243",
+      "ci_high": "-0.0034079701945302077",
       "excludes_zero": true
     },
     {
@@ -4466,9 +4466,9 @@
       "metric": "bertscore_f1",
       "system_a": "gemini_3_8_flash",
       "system_b": "audio_flamingo_3",
-      "difference": "-0.0020069247111678123",
-      "ci_low": "-0.0022913703782251106",
-      "ci_high": "-0.0017259951651794835",
+      "difference": "-0.004596163926180452",
+      "ci_low": "-0.004983888714923524",
+      "ci_high": "-0.0042050729156471785",
       "excludes_zero": true
     },
     {
@@ -4479,10 +4479,10 @@
       "metric": "bertscore_f1",
       "system_a": "qwen2_5_omni",
       "system_b": "audio_flamingo_3",
-      "difference": "-0.00017482141265645623",
-      "ci_low": "-0.00047743408504175017",
-      "ci_high": "0.0001466417394112794",
-      "excludes_zero": false
+      "difference": "-0.0008603022433817387",
+      "ci_low": "-0.001230568450409919",
+      "ci_high": "-0.0004585225644405001",
+      "excludes_zero": true
     },
     {
       "condition": "five_reference",
@@ -4492,10 +4492,10 @@
       "metric": "bertscore_f1_rescaled",
       "system_a": "gpt_audio_1_5",
       "system_b": "gemini_3_8_flash",
-      "difference": "-0.001479351676930939",
-      "ci_low": "-0.008048307163976426",
-      "ci_high": "0.0048458894795518756",
-      "excludes_zero": false
+      "difference": "0.021081341178588345",
+      "ci_low": "0.013573273319466624",
+      "ci_high": "0.029296688780844744",
+      "excludes_zero": true
     },
     {
       "condition": "five_reference",
@@ -4505,9 +4505,9 @@
       "metric": "bertscore_f1_rescaled",
       "system_a": "gpt_audio_1_5",
       "system_b": "qwen2_5_omni",
-      "difference": "-0.04747511635134742",
-      "ci_low": "-0.05441099162953571",
-      "ci_high": "-0.04070976378563004",
+      "difference": "-0.07270912083182327",
+      "ci_low": "-0.08070768402426379",
+      "ci_high": "-0.06463479236500437",
       "excludes_zero": true
     },
     {
@@ -4518,9 +4518,9 @@
       "metric": "bertscore_f1_rescaled",
       "system_a": "gpt_audio_1_5",
       "system_b": "audio_flamingo_3",
-      "difference": "-0.05186408533750067",
-      "ci_low": "-0.05895827677307871",
-      "ci_high": "-0.044343357180610644",
+      "difference": "-0.0943073896453837",
+      "ci_low": "-0.10436932896598722",
+      "ci_high": "-0.083901200862709",
       "excludes_zero": true
     },
     {
@@ -4531,9 +4531,9 @@
       "metric": "bertscore_f1_rescaled",
       "system_a": "gemini_3_8_flash",
       "system_b": "qwen2_5_omni",
-      "difference": "-0.045995764674416476",
-      "ci_low": "-0.05232646290870962",
-      "ci_high": "-0.03955449658084963",
+      "difference": "-0.09379046201041161",
+      "ci_low": "-0.10251041933928112",
+      "ci_high": "-0.08555860098740233",
       "excludes_zero": true
     },
     {
@@ -4544,9 +4544,9 @@
       "metric": "bertscore_f1_rescaled",
       "system_a": "gemini_3_8_flash",
       "system_b": "audio_flamingo_3",
-      "difference": "-0.050384733660569725",
-      "ci_low": "-0.057525868101654734",
-      "ci_high": "-0.0433318729960706",
+      "difference": "-0.11538873082397205",
+      "ci_low": "-0.12512273335317145",
+      "ci_high": "-0.10557021780596458",
       "excludes_zero": true
     },
     {
@@ -4557,10 +4557,10 @@
       "metric": "bertscore_f1_rescaled",
       "system_a": "qwen2_5_omni",
       "system_b": "audio_flamingo_3",
-      "difference": "-0.004388968986153251",
-      "ci_low": "-0.011986194141437796",
-      "ci_high": "0.0036815058096826537",
-      "excludes_zero": false
+      "difference": "-0.02159826881356043",
+      "ci_low": "-0.030893965917099815",
+      "ci_high": "-0.011511412041587177",
+      "excludes_zero": true
     },
     {
       "condition": "five_reference",
@@ -5295,20 +5295,20 @@
         "condition": "five_reference",
         "subset": "all",
         "metric": "bertscore_f1",
-        "order_all": "audio_flamingo_3 > qwen2_5_omni > gemini_3_8_flash > gpt_audio_1_5",
-        "order_sample": "audio_flamingo_3 > qwen2_5_omni > gemini_3_8_flash > gpt_audio_1_5",
+        "order_all": "audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash",
+        "order_sample": "audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash",
         "order_changed": false,
-        "max_abs_mean_change": "1.2921480379568528e-05",
+        "max_abs_mean_change": "0.00015404090924753255",
         "significance_changes": ""
       },
       {
         "condition": "five_reference",
         "subset": "all",
         "metric": "bertscore_f1_rescaled",
-        "order_all": "audio_flamingo_3 > qwen2_5_omni > gemini_3_8_flash > gpt_audio_1_5",
-        "order_sample": "audio_flamingo_3 > qwen2_5_omni > gemini_3_8_flash > gpt_audio_1_5",
+        "order_all": "audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash",
+        "order_sample": "audio_flamingo_3 > qwen2_5_omni > gpt_audio_1_5 > gemini_3_8_flash",
         "order_changed": false,
-        "max_abs_mean_change": "0.0003243994873347311",
+        "max_abs_mean_change": "0.003867265245217355",
         "significance_changes": ""
       },
       {
@@ -5395,16 +5395,16 @@
   },
   "timing": {
     "seconds": {
-      "ptb_tokenize": 1.9,
-      "bleu": 0.69,
-      "meteor": 27.99,
-      "cider_d": 3.66,
-      "spice": 178.17,
-      "fluency_error": 64.11,
-      "sbert": 63.87,
-      "bertscore": 673.8,
-      "clap_text": 230.01,
-      "clap_audio": 265.35
+      "ptb_tokenize": 1.82,
+      "bleu": 0.91,
+      "meteor": 24.33,
+      "cider_d": 3.43,
+      "spice": 170.81,
+      "fluency_error": 59.89,
+      "sbert": 61.2,
+      "bertscore": 344.47,
+      "clap_text": 230.76,
+      "clap_audio": 0.01
     },
     "calls": {
       "load_models": 4,
@@ -5419,9 +5419,9 @@
       "clap_text": 4,
       "clap_audio": 4
     },
-    "load_models_seconds": 6.5,
-    "scoring_seconds": 1509.6,
-    "clap_cache_hits": 0
+    "load_models_seconds": 6.6,
+    "scoring_seconds": 897.6,
+    "clap_cache_hits": 1045
   },
   "outputs": {
     "scores": "outputs/scores/five_reference_scores.csv",

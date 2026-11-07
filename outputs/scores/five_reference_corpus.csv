@@ -9,8 +9,8 @@ gpt_audio_1_5,five_reference,all,spice,0.06656150595840296,0.06656150595840296,1
 gpt_audio_1_5,five_reference,all,spider,0.057218403629410754,0.057218403629410754,1045
 gpt_audio_1_5,five_reference,all,spider_fl,0.0572180716005338,0.0572180716005338,1045
 gpt_audio_1_5,five_reference,all,fense,0.40059686722902305,0.40059686722902305,1045
-gpt_audio_1_5,five_reference,all,bertscore_f1,0.9692321530939859,0.9692321530939859,1045
-gpt_audio_1_5,five_reference,all,bertscore_f1_rescaled,0.2275595775754656,0.2275595775754656,1045
+gpt_audio_1_5,five_reference,all,bertscore_f1,0.9702834307291861,0.9702834307291861,1045
+gpt_audio_1_5,five_reference,all,bertscore_f1_rescaled,0.2539523681759922,0.2539523681759922,1045
 gpt_audio_1_5,five_reference,all,clap_similarity,0.46640355204764467,0.46640355204764467,1045
 gpt_audio_1_5,five_reference,all,mace,0.5729423804790881,0.5729423804790881,1045
 gpt_audio_1_5,five_reference,all,mace_text,0.6794812089105314,0.6794812089105314,1045
@@ -29,8 +29,8 @@ gemini_3_8_flash,five_reference,all,spice,0.05090645199126072,0.0509064519912607
 gemini_3_8_flash,five_reference,all,spider,0.05750750326965099,0.05750750326965099,1045
 gemini_3_8_flash,five_reference,all,spider_fl,0.057501311305044205,0.057501311305044205,1045
 gemini_3_8_flash,five_reference,all,fense,0.38739748928482026,0.38739748928482026,1045
-gemini_3_8_flash,five_reference,all,bertscore_f1,0.9692990883685756,0.9692990883685756,1045
-gemini_3_8_flash,five_reference,all,bertscore_f1_rescaled,0.22924001728699342,0.22924001728699342,1045
+gemini_3_8_flash,five_reference,all,bertscore_f1,0.9696321372210124,0.9696321372210124,1045
+gemini_3_8_flash,five_reference,all,bertscore_f1_rescaled,0.23760135622143938,0.23760135622143938,1045
 gemini_3_8_flash,five_reference,all,clap_similarity,0.3811172001369427,0.3811172001369427,1045
 gemini_3_8_flash,five_reference,all,mace,0.4887915999712067,0.4887915999712067,1045
 gemini_3_8_flash,five_reference,all,mace_text,0.5964561549037088,0.5964561549037088,1045
@@ -49,8 +49,8 @@ qwen2_5_omni,five_reference,all,spice,0.09058890615739013,0.09058890615739013,10
 qwen2_5_omni,five_reference,all,spider,0.12716558031984496,0.12716558031984496,1045
 qwen2_5_omni,five_reference,all,spider_fl,0.12698198986448564,0.12698198986448564,1045
 qwen2_5_omni,five_reference,all,fense,0.47364975485148614,0.47364975485148614,1045
-qwen2_5_omni,five_reference,all,bertscore_f1,0.9711244875164123,0.9711244875164123,1045
-qwen2_5_omni,five_reference,all,bertscore_f1_rescaled,0.27506747128972453,0.27506747128972453,1045
+qwen2_5_omni,five_reference,all,bertscore_f1,0.9733550907322094,0.9733550907322094,1045
+qwen2_5_omni,five_reference,all,bertscore_f1_rescaled,0.3310677528672777,0.3310677528672777,1045
 qwen2_5_omni,five_reference,all,clap_similarity,0.46233271439069923,0.46233271439069923,1045
 qwen2_5_omni,five_reference,all,mace,0.5748340224790035,0.5748340224790035,1045
 qwen2_5_omni,five_reference,all,mace_text,0.6873353305673077,0.6873353305673077,1045
@@ -69,8 +69,8 @@ audio_flamingo_3,five_reference,all,spice,0.11652216289891876,0.1165221628989187
 audio_flamingo_3,five_reference,all,spider,0.15385066297015754,0.15385066297015754,1045
 audio_flamingo_3,five_reference,all,spider_fl,0.1527329762367159,0.1527329762367159,1045
 audio_flamingo_3,five_reference,all,fense,0.509626601935859,0.509626601935859,1045
-audio_flamingo_3,five_reference,all,bertscore_f1,0.9712943184889105,0.9712943184889105,1045
-audio_flamingo_3,five_reference,all,bertscore_f1_rescaled,0.2793311530656362,0.2793311530656362,1045
+audio_flamingo_3,five_reference,all,bertscore_f1,0.9742070070294102,0.9742070070294102,1045
+audio_flamingo_3,five_reference,all,bertscore_f1_rescaled,0.3524554887881646,0.3524554887881646,1045
 audio_flamingo_3,five_reference,all,clap_similarity,0.508762275396887,0.508762275396887,1045
 audio_flamingo_3,five_reference,all,mace,0.6078394327505624,0.6078394327505624,1045
 audio_flamingo_3,five_reference,all,mace_text,0.7073525817943574,0.7073525817943574,1045
