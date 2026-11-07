@@ -284,7 +284,7 @@ The report is `outputs/reports/cross_metric_comparison.{json,md}`. `make figures
 | | (pause) | `make qualitative-sample` (E16); label `outputs/qualitative/annotations_reviewer_1.csv` following `annotation_guidelines.md` (E17); `make audio-review-sheet`; listen and label `audio_annotations_reviewer_1.csv` and `disputed_verification_reviewer_1.csv` following `audio_review_guidelines.md` (E18) |
 | 4 | `make qualitative` | `annotations`, `audio-review`, `examples`, `compare` (E17–E20 analyses) |
 
-This is the order for a fresh project. In this repository every step has already been run and its outputs are committed: the scripts refuse to overwrite frozen manifests, captions, scores and labelled templates unless given `--force` (labelled templates are never overwritten). The frozen experimental results are tagged `results-frozen-2026-11-07`.
+This is the order for a fresh project. In this repository every step has already been run and its outputs are committed: the scripts refuse to overwrite frozen manifests, captions, scores and labelled templates unless given `--force` (labelled templates are never overwritten). The release that accompanies the paper will be published as a GitHub release.
 
 ## Running tasks
 
