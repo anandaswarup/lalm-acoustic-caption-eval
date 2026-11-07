@@ -1,14 +1,14 @@
 {
   "run_info": {
     "experiment": "evaluate_captions",
-    "timestamp_utc": "2026-11-07T08:07:34+00:00",
-    "git_commit": "7b6a3711041c9bb7dca22ec4139ef32fd23a931c",
+    "timestamp_utc": "2026-11-07T12:45:00+00:00",
+    "git_commit": "75951b4cc4832b2fb5656032be16e9fb310c2165",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
   },
-  "task": "E12",
+  "task": "E11",
   "condition": "five_reference",
   "subset": "all",
   "smoke_test_limit": null,
@@ -5395,16 +5395,16 @@
   },
   "timing": {
     "seconds": {
-      "ptb_tokenize": 1.82,
-      "bleu": 0.91,
-      "meteor": 24.33,
-      "cider_d": 3.43,
-      "spice": 170.81,
-      "fluency_error": 59.89,
-      "sbert": 61.2,
-      "bertscore": 344.47,
-      "clap_text": 230.76,
-      "clap_audio": 0.01
+      "ptb_tokenize": 1.92,
+      "bleu": 0.95,
+      "meteor": 27.7,
+      "cider_d": 3.68,
+      "spice": 191.94,
+      "fluency_error": 67.11,
+      "sbert": 68.21,
+      "bertscore": 378.24,
+      "clap_text": 263.37,
+      "clap_audio": 0.02
     },
     "calls": {
       "load_models": 4,
@@ -5419,8 +5419,8 @@
       "clap_text": 4,
       "clap_audio": 4
     },
-    "load_models_seconds": 6.6,
-    "scoring_seconds": 897.6,
+    "load_models_seconds": 8.0,
+    "scoring_seconds": 1003.1,
     "clap_cache_hits": 1045
   },
   "outputs": {
