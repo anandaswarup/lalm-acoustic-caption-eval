@@ -12,12 +12,12 @@ MODELS      := gpt_audio_1_5 gemini_3_8_flash qwen2_5_omni audio_flamingo_3
 .DEFAULT_GOAL := help
 .PHONY: help venv install check-env test test-metrics validate-metrics lint format venv-metrics install-metrics metric-tools \
         prepare-data pilot generate hf-upload-audio fetch-hf consolidate \
-        evaluate loo evaluate-four-ref lengths stats qualitative-sample annotations audio-review-sheet audio-review examples compare figures reproduce check-reproducibility all paper paper-clean clean
+        evaluate loo evaluate-four-ref lengths stats qualitative-sample annotations audio-review-sheet audio-review examples compare figures all paper paper-clean clean
 
 help: ## List available targets
 	@grep -E '^[a-zA-Z0-9_%-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-24s\033[0m %s\n", $$1, $$2}'
 
-# --- Environment (E01, E23) ---------------------------------------------------
+# --- Environment (E01, E22) ---------------------------------------------------
 venv: ## Create .venv with uv from the Miniforge Python
 	uv venv --python $(BASE_PYTHON) $(VENV)
 
@@ -122,32 +122,9 @@ compare: ## Cross-metric correlations, model rankings and audio-rating concordan
 figures: ## Regenerate manuscript tables and figures
 	$(PYTHON) scripts/generate_figures.py
 
-MODEL_KEYS := gpt_audio_1_5 gemini_3_8_flash qwen2_5_omni audio_flamingo_3
-
-reproduce: ## Regenerate every result from the frozen captions and labels, no caption generation (E22; ~2 h)
-	@mkdir -p outputs/logs && date +%s > outputs/logs/reproduce_started
-	$(PYTHON) scripts/prepare_dataset.py --force
-	$(PYTHON) scripts/consolidate_captions.py --force
-	for model in $(MODEL_KEYS); do $(PYTHON) scripts/caption_report.py --model $$model --run evaluation || exit 1; done
-	$(METRICS_PYTHON) scripts/validate_metrics.py
-	$(METRICS_PYTHON) scripts/evaluate_captions.py --set condition=five_reference --force
-	$(METRICS_PYTHON) scripts/human_leave_one_out.py --force
-	$(METRICS_PYTHON) scripts/evaluate_captions.py --set condition=four_reference --force
-	$(PYTHON) scripts/analyze_lengths.py --force
-	$(PYTHON) scripts/analyze_results.py --force
-	$(PYTHON) scripts/prepare_qualitative.py --force --keep-labelled
-	$(PYTHON) scripts/analyze_annotations.py --force
-	$(PYTHON) scripts/analyze_audio_review.py --force
-	$(PYTHON) scripts/prepare_examples.py --force
-	$(PYTHON) scripts/compare_metrics.py --force
-	$(PYTHON) scripts/generate_figures.py --force
-
-check-reproducibility: ## Compare the outputs of make reproduce with the committed ones (E22)
-	$(PYTHON) scripts/check_reproducibility.py
-
 all: prepare-data generate consolidate evaluate loo evaluate-four-ref lengths stats figures ## Full workflow
 
-# --- Manuscript (E24-E25) ----------------------------------------------------
+# --- Manuscript (E23-E24) ----------------------------------------------------
 paper: ## Build the manuscript PDF (once manuscript/main.tex exists)
 	@test -f manuscript/main.tex || { echo "manuscript/main.tex not found; add the template first."; exit 1; }
 	cd manuscript && latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex

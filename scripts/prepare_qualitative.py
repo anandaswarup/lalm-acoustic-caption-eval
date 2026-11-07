@@ -55,11 +55,6 @@ def main() -> int:
     parser.add_argument("--output-dir", help="default: output_dir in configs/qualitative.yaml")
     parser.add_argument("--report-dir", help="default: outputs/reports")
     parser.add_argument("--force", action="store_true", help="overwrite existing outputs")
-    parser.add_argument(
-        "--keep-labelled",
-        action="store_true",
-        help="leave templates that hold labels untouched (after checking their review columns) and write the rest",
-    )
     args = parser.parse_args()
     logger = init_run(Path(__file__).stem, args)
     run_info = collect_run_info(Path(__file__).stem, seed=args.seed)  # before this run writes any output
@@ -82,10 +77,8 @@ def main() -> int:
     if not args.force and (existing := existing_outputs(outputs)):
         logger.error("Outputs exist (use --force to overwrite): %s", existing)
         return 1
-    labelled = {n: p for n, p in templates.items() if p.is_file() and has_annotations(read_table(p))}
-    if labelled and not args.keep_labelled:
-        logger.error("Annotation templates already hold labels and are never overwritten (see --keep-labelled): %s",
-                     [relative(p) for p in labelled.values()])  # fmt: skip
+    if annotated := [relative(p) for p in templates.values() if p.is_file() and has_annotations(read_table(p))]:
+        logger.error("Annotation templates already hold labels and are never overwritten: %s", annotated)
         return 1
     problems = [f"manifests: {e}" for e in verify_checksums(MANIFEST_DIR / "SHA256SUMS")]
     problems += [f"captions: {e}" for e in verify_checksums(OUTPUT_DIR / "captions" / "SHA256SUMS")]
@@ -117,18 +110,10 @@ def main() -> int:
         return 1
     logger.info("%d recordings, %d review items, %d reviewer templates", len(sample), len(review), len(templates))
 
-    for path in labelled.values():  # a kept template must describe exactly this review
-        rows = read_table(path)
-        if [[row[c] for c in REVIEW_COLUMNS] for row in rows] != [[row[c] for c in REVIEW_COLUMNS] for row in review]:
-            logger.error("%s holds labels for a different review; nothing written", relative(path))
-            return 1
-        logger.info("Kept the labelled template %s (review columns match)", relative(path))
-
     write_csv(review, outputs["review"], REVIEW_COLUMNS)
     outputs["review_sheet"].write_text(review_sheet_markdown(review), encoding="utf-8")
-    for n, path in templates.items():
-        if n not in labelled:
-            write_csv(annotation_template(review), path, ANNOTATION_COLUMNS)
+    for path in templates.values():
+        write_csv(annotation_template(review), path, ANNOTATION_COLUMNS)
     write_csv(config["categories"], outputs["categories"], CATEGORY_COLUMNS)
     write_csv(full_key, outputs["key"], KEY_COLUMNS)
     sample_manifest = {
