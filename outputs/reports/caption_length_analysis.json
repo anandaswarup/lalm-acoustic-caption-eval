@@ -1,8 +1,8 @@
 {
   "run_info": {
     "experiment": "analyze_lengths",
-    "timestamp_utc": "2026-11-05T06:35:45+00:00",
-    "git_commit": "aecc06d21c9f209d1f2320cbafc26306febbc2a2",
+    "timestamp_utc": "2026-11-07T09:25:34+00:00",
+    "git_commit": "a787119022c65856ff2fa2fb99904d23e3230897",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
@@ -43,11 +43,11 @@
     },
     "model_scores": {
       "path": "outputs/scores/five_reference_scores.csv",
-      "sha256": "9b21a8d90f0b799b88f9dd52daedc6afb74b7ff566857403c6e4aeca4bc5dad4"
+      "sha256": "081273666ce07d4b3265a48785ebae9f3f88f777cee9419f1025f28ff3b63452"
     },
     "human_scores": {
       "path": "outputs/scores/human_loo_scores.csv",
-      "sha256": "f7324f04502f05a912f89e68f63af7f7728f422d1b7bad8300a502b6db417d1b"
+      "sha256": "ef50e329df47374a465acadbf1d6f276ad5f6572005f694268ddcef21fd83f2a"
     }
   },
   "bootstrap": {
@@ -381,9 +381,9 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1045,
       "num_pairs": 1045,
-      "spearman": "-0.08495768646342289",
-      "ci_low": "-0.14555477282072568",
-      "ci_high": "-0.02416379627884629",
+      "spearman": "-0.2761903241455149",
+      "ci_low": "-0.33280669733270507",
+      "ci_high": "-0.21500670683069228",
       "excludes_zero": true
     },
     {
@@ -393,10 +393,10 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1045,
       "num_pairs": 1045,
-      "spearman": "-0.05962447336412597",
-      "ci_low": "-0.11699746280953569",
-      "ci_high": "0.0025420099186401566",
-      "excludes_zero": false
+      "spearman": "-0.19303604947709582",
+      "ci_low": "-0.25114182138970415",
+      "ci_high": "-0.1334179730850943",
+      "excludes_zero": true
     },
     {
       "system": "gpt_audio_1_5",
@@ -549,10 +549,10 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1045,
       "num_pairs": 1045,
-      "spearman": "-0.039497649911725864",
-      "ci_low": "-0.09690661667042862",
-      "ci_high": "0.020537673451654297",
-      "excludes_zero": false
+      "spearman": "-0.1930282181566151",
+      "ci_low": "-0.255171731707288",
+      "ci_high": "-0.13295615078163647",
+      "excludes_zero": true
     },
     {
       "system": "gemini_3_8_flash",
@@ -561,10 +561,10 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1045,
       "num_pairs": 1045,
-      "spearman": "-0.01722214946211317",
-      "ci_low": "-0.07441338367382692",
-      "ci_high": "0.04325681333513546",
-      "excludes_zero": false
+      "spearman": "-0.1017505783487185",
+      "ci_low": "-0.16480560542449996",
+      "ci_high": "-0.04131832377838165",
+      "excludes_zero": true
     },
     {
       "system": "gemini_3_8_flash",
@@ -717,10 +717,10 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1045,
       "num_pairs": 1045,
-      "spearman": "-0.023995275629975225",
-      "ci_low": "-0.08664744026602181",
-      "ci_high": "0.033055219150722986",
-      "excludes_zero": false
+      "spearman": "-0.3235318665744722",
+      "ci_low": "-0.37879754760248946",
+      "ci_high": "-0.2681203587331111",
+      "excludes_zero": true
     },
     {
       "system": "qwen2_5_omni",
@@ -729,10 +729,10 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1045,
       "num_pairs": 1045,
-      "spearman": "-0.021039341044795115",
-      "ci_low": "-0.08399597119395338",
-      "ci_high": "0.03600635190218548",
-      "excludes_zero": false
+      "spearman": "-0.24988499319386784",
+      "ci_low": "-0.30578558496454605",
+      "ci_high": "-0.19562765572974625",
+      "excludes_zero": true
     },
     {
       "system": "qwen2_5_omni",
@@ -885,10 +885,10 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1045,
       "num_pairs": 1045,
-      "spearman": "-0.03278297625360031",
-      "ci_low": "-0.09819615885548612",
-      "ci_high": "0.032956070811139444",
-      "excludes_zero": false
+      "spearman": "-0.5231438606901558",
+      "ci_low": "-0.5679901373341382",
+      "ci_high": "-0.4734413354994754",
+      "excludes_zero": true
     },
     {
       "system": "audio_flamingo_3",
@@ -897,10 +897,10 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1045,
       "num_pairs": 1045,
-      "spearman": "-0.02184227465569431",
-      "ci_low": "-0.08656838052070685",
-      "ci_high": "0.03986364991690383",
-      "excludes_zero": false
+      "spearman": "-0.4799050148406841",
+      "ci_low": "-0.5242352859792474",
+      "ci_high": "-0.42725813604223045",
+      "excludes_zero": true
     },
     {
       "system": "audio_flamingo_3",
@@ -1053,9 +1053,9 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1045,
       "num_pairs": 5225,
-      "spearman": "-0.053832093245630375",
-      "ci_low": "-0.08049053342409655",
-      "ci_high": "-0.0243392601152606",
+      "spearman": "-0.04372239402923637",
+      "ci_low": "-0.07449509353344581",
+      "ci_high": "-0.013482762219102778",
       "excludes_zero": true
     },
     {
@@ -1065,9 +1065,9 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1045,
       "num_pairs": 5225,
-      "spearman": "-0.022273884796746565",
-      "ci_low": "-0.048905902952574",
-      "ci_high": "0.005050641047255518",
+      "spearman": "0.026449941732979737",
+      "ci_low": "-0.0052115561579109595",
+      "ci_high": "0.056721165798978554",
       "excludes_zero": false
     },
     {
@@ -1221,9 +1221,9 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1024,
       "num_pairs": 1024,
-      "spearman": "-0.08568960435510352",
-      "ci_low": "-0.14582445656484236",
-      "ci_high": "-0.02338211282856998",
+      "spearman": "-0.2949364859081496",
+      "ci_low": "-0.35131575362551204",
+      "ci_high": "-0.24228535691296438",
       "excludes_zero": true
     },
     {
@@ -1233,9 +1233,9 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1024,
       "num_pairs": 1024,
-      "spearman": "-0.06072367955686029",
-      "ci_low": "-0.12013172277065998",
-      "ci_high": "-0.00307681935266319",
+      "spearman": "-0.2101662419152772",
+      "ci_low": "-0.2688231909492983",
+      "ci_high": "-0.14854563604979532",
       "excludes_zero": true
     },
     {
@@ -1389,10 +1389,10 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1024,
       "num_pairs": 1024,
-      "spearman": "-0.035573872316937975",
-      "ci_low": "-0.09427706464214088",
-      "ci_high": "0.02319781246874057",
-      "excludes_zero": false
+      "spearman": "-0.18547414400285026",
+      "ci_low": "-0.24132204446480696",
+      "ci_high": "-0.12046344545878496",
+      "excludes_zero": true
     },
     {
       "system": "gemini_3_8_flash",
@@ -1401,10 +1401,10 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1024,
       "num_pairs": 1024,
-      "spearman": "-0.020135410644823944",
-      "ci_low": "-0.08077138092406393",
-      "ci_high": "0.0364981165046822",
-      "excludes_zero": false
+      "spearman": "-0.10160810363219099",
+      "ci_low": "-0.15810163008854666",
+      "ci_high": "-0.0364199880193595",
+      "excludes_zero": true
     },
     {
       "system": "gemini_3_8_flash",
@@ -1557,10 +1557,10 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1024,
       "num_pairs": 1024,
-      "spearman": "-0.028424395380101754",
-      "ci_low": "-0.09339473350000245",
-      "ci_high": "0.031226971865415096",
-      "excludes_zero": false
+      "spearman": "-0.32723060066640297",
+      "ci_low": "-0.3817321751129309",
+      "ci_high": "-0.265762103430792",
+      "excludes_zero": true
     },
     {
       "system": "qwen2_5_omni",
@@ -1569,10 +1569,10 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1024,
       "num_pairs": 1024,
-      "spearman": "-0.02655886823369157",
-      "ci_low": "-0.09237559736331506",
-      "ci_high": "0.032270751241967634",
-      "excludes_zero": false
+      "spearman": "-0.2571500304531029",
+      "ci_low": "-0.31458291838823915",
+      "ci_high": "-0.19420322857054276",
+      "excludes_zero": true
     },
     {
       "system": "qwen2_5_omni",
@@ -1725,10 +1725,10 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1024,
       "num_pairs": 1024,
-      "spearman": "-0.03844684216946064",
-      "ci_low": "-0.10170830932838228",
-      "ci_high": "0.023154002124227642",
-      "excludes_zero": false
+      "spearman": "-0.523454013956117",
+      "ci_low": "-0.5644503975455458",
+      "ci_high": "-0.476590363158676",
+      "excludes_zero": true
     },
     {
       "system": "audio_flamingo_3",
@@ -1737,10 +1737,10 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1024,
       "num_pairs": 1024,
-      "spearman": "-0.027433386787486445",
-      "ci_low": "-0.08946578197177059",
-      "ci_high": "0.032843102478429795",
-      "excludes_zero": false
+      "spearman": "-0.4815534861992314",
+      "ci_low": "-0.5238913599091755",
+      "ci_high": "-0.4300558429468073",
+      "excludes_zero": true
     },
     {
       "system": "audio_flamingo_3",
@@ -1893,9 +1893,9 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1024,
       "num_pairs": 5120,
-      "spearman": "-0.0514693837947375",
-      "ci_low": "-0.07803053489350475",
-      "ci_high": "-0.022334500970536637",
+      "spearman": "-0.04408044403360442",
+      "ci_low": "-0.07680442926960249",
+      "ci_high": "-0.012038118599553897",
       "excludes_zero": true
     },
     {
@@ -1905,9 +1905,9 @@
       "metric": "bertscore_f1_rescaled",
       "num_recordings": 1024,
       "num_pairs": 5120,
-      "spearman": "-0.020045989935371624",
-      "ci_low": "-0.04633588609824276",
-      "ci_high": "0.009044405596171139",
+      "spearman": "0.026167241652476973",
+      "ci_low": "-0.00708386170276795",
+      "ci_high": "0.057815917065371356",
       "excludes_zero": false
     },
     {
