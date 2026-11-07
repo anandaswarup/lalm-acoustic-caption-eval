@@ -42,3 +42,22 @@ def test_tables_must_be_identical_and_report_the_difference():
     assert compare_file("f.png", b"\x89PNG1", b"\x89PNG2")["detail"] == "bytes differ"
     rows = [{"status": "identical"}, {"status": "different"}, {"status": "identical"}]
     assert summarize(rows) == {"identical": 2, "metadata_only": 0, "different": 1, "not_regenerated": 0, "missing": 0}
+
+
+def test_commit_hashes_and_platform_are_metadata_but_checksums_are_not():
+    from src.analysis.reproducibility import not_regenerated_reason
+
+    line = "- Input `t.csv` (sha256 `{sha}`) from commit `{commit}`;"
+    old = line.format(sha="a" * 64, commit="0" * 40).encode()
+    assert compare_file("r.md", old, line.format(sha="a" * 64, commit="1" * 40).encode())["status"] == "metadata_only"
+    assert compare_file("r.md", old, line.format(sha="b" * 64, commit="0" * 40).encode())["status"] == "different"
+    old_json, new_json = {"run_info": {"platform": "macOS-26"}, "n": 1}, {"run_info": {"platform": "macOS-27"}, "n": 1}
+    assert compare_file("r.json", json.dumps(old_json).encode(), json.dumps(new_json).encode())["status"] == (
+        "metadata_only"
+    )
+    assert (
+        compare_file("r.json", b'{"platform": "a", "n": 1}', b'{"platform": "b", "n": 1}')["status"] == "metadata_only"
+    )
+    assert "reviewer labels" in not_regenerated_reason("outputs/qualitative/annotations_reviewer_1.csv")
+    assert "generation output" in not_regenerated_reason("outputs/captions/pilot/x_captions.jsonl")
+    assert not_regenerated_reason("outputs/scores/x.csv") == "no reason recorded"

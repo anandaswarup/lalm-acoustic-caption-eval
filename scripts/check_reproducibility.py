@@ -20,6 +20,7 @@ from src.analysis.reproducibility import (  # noqa: E402
     METADATA_KEYS,
     METADATA_SECTIONS,
     compare_file,
+    not_regenerated_reason,
     report_markdown,
     summarize,
 )
@@ -63,6 +64,7 @@ def freeze(python: Path) -> str:
 def main() -> int:
     parser = base_parser(__doc__.splitlines()[0])
     parser.add_argument("--started", type=float, help="Unix time the reproduction started (default: from make)")
+    parser.add_argument("--reproduced-at", default="HEAD", help="commit make reproduce ran at (default: HEAD)")
     args = parser.parse_args()
     logger = init_run(Path(__file__).stem, args)
     if args.started is None and not STARTED.is_file():
@@ -85,7 +87,8 @@ def main() -> int:
         current = REPO_ROOT / path
         new = current.read_bytes() if current.is_file() else None
         if new is not None and current.stat().st_mtime < started:
-            row = {"path": path, "status": "not_regenerated", "detail": "" if new == old else "changed before the run"}
+            detail = not_regenerated_reason(path) if new == old else "changed before the run"
+            row = {"path": path, "status": "not_regenerated", "detail": detail}
         else:
             row = compare_file(path, old, new)
         files.append(row)
@@ -109,6 +112,8 @@ def main() -> int:
     report = {
         "task": "E22",
         "commit": git("rev-parse", "HEAD").decode().strip(),
+        "reproduced_at": git("rev-parse", args.reproduced_at).decode().strip(),
+        "same_committed_outputs": not git("diff", "--name-only", args.reproduced_at, "HEAD", "--", *SCOPE).strip(),
         "timestamp_utc": datetime.now(UTC).isoformat(timespec="seconds"),
         "procedure": PROCEDURE,
         "environment": environment,
