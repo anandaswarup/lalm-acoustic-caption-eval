@@ -1,14 +1,14 @@
 {
   "run_info": {
     "experiment": "prepare_examples",
-    "timestamp_utc": "2026-11-07T07:06:58+00:00",
-    "git_commit": "53cc79901767a28c3a39ca99ef09b75ab11222c7",
+    "timestamp_utc": "2026-11-07T14:11:19+00:00",
+    "git_commit": "e6b1099851cc5c523f8ea00cd70ddd099e790c12",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
   },
-  "task": "E20",
+  "task": "E19",
   "seed": 42,
   "selection_method": "Per pattern, the recording with the most qualifying captions, preferring recordings not chosen for another pattern; ties broken by a shuffle seeded with '<seed>:<pattern>'; patterns with fewer eligible recordings choose first.",
   "num_recordings": 50,
@@ -17,7 +17,7 @@
     {
       "pattern": "strong_agreement",
       "name": "Strong agreement",
-      "rule": "E18 category 1 or 2 and E19 rating 1",
+      "rule": "E17 category 1 or 2 and E18 rating 1",
       "recording_code": "R31",
       "qualifying_items": [
         "R31A",
@@ -95,7 +95,7 @@
     {
       "pattern": "supported_extra_detail",
       "name": "Reference-absent detail supported by the audio",
-      "rule": "E18 category 3 or 5 with at least one disputed phrase verified as supported (S)",
+      "rule": "E17 category 3 or 5 with at least one disputed phrase verified as supported (S)",
       "recording_code": "R07",
       "qualifying_items": [
         "R07B",
@@ -355,7 +355,7 @@
     {
       "pattern": "omission",
       "name": "Omission of referenced content",
-      "rule": "E18 category 4",
+      "rule": "E17 category 4",
       "recording_code": "R46",
       "qualifying_items": [
         "R46A",
@@ -437,7 +437,7 @@
     {
       "pattern": "real_mismatch",
       "name": "Sound-source or event mismatch",
-      "rule": "E18 category 6 and E19 rating 3",
+      "rule": "E17 category 6 and E18 rating 3",
       "recording_code": "R38",
       "qualifying_items": [
         "R38C"
@@ -475,7 +475,7 @@
     {
       "pattern": "incomplete_references",
       "name": "Correct caption, incomplete references",
-      "rule": "E18 category 6 and E19 rating 1",
+      "rule": "E17 category 6 and E18 rating 1",
       "recording_code": "R14",
       "qualifying_items": [
         "R14A",
@@ -1096,7 +1096,7 @@
     },
     "audio_review_manifest": {
       "path": "outputs/qualitative/audio_review_manifest.json",
-      "sha256": "58d7ef80492b5682ccc60466f0b98b72b37dab45a0cbf08bd4e7766c49785e41"
+      "sha256": "8e1b2ee570cf0ce6362837db07955cc229b250c36e4357fca54f3253d93f2b8c"
     }
   },
   "outputs": {
@@ -1104,12 +1104,12 @@
     "examples_tex": "outputs/tables/representative_examples.tex",
     "all_md": "outputs/tables/qualitative_sample_all.md",
     "all_tex": "outputs/tables/qualitative_sample_all.tex",
-    "e18_categories_by_model_pdf": "outputs/figures/e18_categories_by_model.pdf",
-    "e18_categories_by_model_png": "outputs/figures/e18_categories_by_model.png",
-    "e19_ratings_by_model_pdf": "outputs/figures/e19_ratings_by_model.pdf",
-    "e19_ratings_by_model_png": "outputs/figures/e19_ratings_by_model.png",
-    "e18_e19_heatmap_pdf": "outputs/figures/e18_e19_heatmap.pdf",
-    "e18_e19_heatmap_png": "outputs/figures/e18_e19_heatmap.png",
+    "e17_categories_by_model_pdf": "outputs/figures/e17_categories_by_model.pdf",
+    "e17_categories_by_model_png": "outputs/figures/e17_categories_by_model.png",
+    "e18_ratings_by_model_pdf": "outputs/figures/e18_ratings_by_model.pdf",
+    "e18_ratings_by_model_png": "outputs/figures/e18_ratings_by_model.png",
+    "e17_e18_heatmap_pdf": "outputs/figures/e17_e18_heatmap.pdf",
+    "e17_e18_heatmap_png": "outputs/figures/e17_e18_heatmap.png",
     "manifest": "outputs/qualitative/example_manifest.json"
   }
 }
