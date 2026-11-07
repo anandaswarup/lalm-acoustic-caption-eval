@@ -1,8 +1,8 @@
 {
   "run_info": {
     "experiment": "analyze_audio_review",
-    "timestamp_utc": "2026-11-07T06:06:45+00:00",
-    "git_commit": "bc60ae09a4819ff701f0edca3578549f3691e70e",
+    "timestamp_utc": "2026-11-07T09:34:44+00:00",
+    "git_commit": "25aa7fe09f1bb8c53333e9f43a82db624fd6ae09",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
@@ -1058,8 +1058,8 @@
       "audio_rating": 1,
       "metric": "bertscore_f1_rescaled",
       "num_items": 122,
-      "mean": 0.2437524668817967,
-      "sd": 0.09665204775689068
+      "mean": 0.2922507866117229,
+      "sd": 0.11193063032243082
     },
     {
       "audio_rating": 1,
@@ -1100,8 +1100,8 @@
       "audio_rating": 2,
       "metric": "bertscore_f1_rescaled",
       "num_items": 57,
-      "mean": 0.26035242753629945,
-      "sd": 0.09429488464715331
+      "mean": 0.30767994216192696,
+      "sd": 0.12109439926575351
     },
     {
       "audio_rating": 2,
@@ -1142,8 +1142,8 @@
       "audio_rating": 3,
       "metric": "bertscore_f1_rescaled",
       "num_items": 21,
-      "mean": 0.2960850583584517,
-      "sd": 0.118448507059272
+      "mean": 0.3372643038049451,
+      "sd": 0.13904603992559098
     },
     {
       "audio_rating": 3,
