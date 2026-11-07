@@ -1,4 +1,4 @@
-"""Metric interpretation notes and package versions recorded in the evaluation reports (E12-E14)."""
+"""Metric interpretation notes and package versions recorded in the evaluation reports (E11-E13)."""
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ PACKAGES = (
 
 LIMITATIONS = [
     "CIDEr-D, SPICE, SPIDEr and SPIDEr-FL depend on the reference set (CIDEr-D's document frequencies come from the "
-    "references of each call), so five-reference (E12) and four-reference (E13/E14) scores are not directly "
+    "references of each call), so five-reference (E11) and four-reference (E12/E13) scores are not directly "
     "comparable.",
     "BLEU and METEOR corpus values are computed from corpus statistics, not as the mean of per-item scores; "
     "bootstrap intervals are on the per-item mean and are reported next to the corpus value.",
