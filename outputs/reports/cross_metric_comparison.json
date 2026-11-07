@@ -1,0 +1,3793 @@
+{
+  "run_info": {
+    "experiment": "compare_metrics",
+    "timestamp_utc": "2026-11-07T09:50:11+00:00",
+    "git_commit": "1e26e2617ee823e1a536eb4105afe3032facbf71",
+    "git_dirty": false,
+    "python": "3.13.12",
+    "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+    "seed": 42
+  },
+  "task": "E21",
+  "settings": {
+    "metrics": [
+      "bleu_1",
+      "bleu_4",
+      "meteor",
+      "cider_d",
+      "spice",
+      "spider",
+      "fense",
+      "bertscore_f1_rescaled",
+      "clap_similarity",
+      "mace"
+    ],
+    "correlation_resamples": 1000,
+    "num_resamples": 10000,
+    "num_permutations": 10000,
+    "confidence": 0.95,
+    "alpha": 0.05,
+    "seed": 42
+  },
+  "confidence": 0.95,
+  "display_names": {
+    "gpt_audio_1_5": "GPT-Audio-1.5",
+    "gemini_3_8_flash": "Gemini 3.8 Flash",
+    "qwen2_5_omni": "Qwen2.5-Omni-7B",
+    "audio_flamingo_3": "Audio Flamingo 3"
+  },
+  "metrics": [
+    "bleu_1",
+    "bleu_4",
+    "meteor",
+    "cider_d",
+    "spice",
+    "spider",
+    "fense",
+    "bertscore_f1_rescaled",
+    "clap_similarity",
+    "mace"
+  ],
+  "metric_labels": {
+    "bleu_1": "BLEU-1",
+    "bleu_2": "BLEU-2",
+    "bleu_3": "BLEU-3",
+    "bleu_4": "BLEU-4",
+    "meteor": "METEOR",
+    "cider_d": "CIDEr-D",
+    "spice": "SPICE",
+    "spider": "SPIDEr",
+    "spider_fl": "SPIDEr-FL",
+    "fense": "FENSE",
+    "bertscore_f1": "BERTScore-F1",
+    "bertscore_f1_rescaled": "BERTScore-F1 (rescaled)",
+    "clap_similarity": "CLAP similarity",
+    "mace": "MACE"
+  },
+  "ranker_labels": {
+    "bleu_1": "BLEU-1",
+    "bleu_2": "BLEU-2",
+    "bleu_3": "BLEU-3",
+    "bleu_4": "BLEU-4",
+    "meteor": "METEOR",
+    "cider_d": "CIDEr-D",
+    "spice": "SPICE",
+    "spider": "SPIDEr",
+    "spider_fl": "SPIDEr-FL",
+    "fense": "FENSE",
+    "bertscore_f1": "BERTScore-F1",
+    "bertscore_f1_rescaled": "BERTScore-F1 (rescaled)",
+    "clap_similarity": "CLAP similarity",
+    "mace": "MACE",
+    "e18_categories_1_3": "E18: categories 1-3 (sample)",
+    "e19_rated_accurate": "E19: rated accurate (sample)"
+  },
+  "review_rankers": [
+    "e18_categories_1_3",
+    "e19_rated_accurate"
+  ],
+  "num_recordings": 1045,
+  "num_sampled_recordings": 50,
+  "inputs": {
+    "five_reference_scores": {
+      "path": "outputs/scores/five_reference_scores.csv",
+      "sha256": "081273666ce07d4b3265a48785ebae9f3f88f777cee9419f1025f28ff3b63452"
+    },
+    "five_reference_corpus": {
+      "path": "outputs/scores/five_reference_corpus.csv",
+      "sha256": "c0c2fc1426f763cb401b91880f1e1149dbd74ae248359ac8dbfb7044a1a9326e"
+    },
+    "statistics_orders": {
+      "path": "outputs/scores/statistics_orders.csv",
+      "sha256": "5504b86bfa2d0dac84a7ffd974c74f9da673bf7af4bd1e4a0eedd27943e31876"
+    },
+    "audio_review": {
+      "path": "outputs/qualitative/audio_review_annotations.csv",
+      "sha256": "9049b09323d45fad291b7752510dec3538d1c538b983e87af95572f24e0c5701"
+    }
+  },
+  "rankings": [
+    {
+      "ranker": "bleu_1",
+      "source": "E12",
+      "system": "gpt_audio_1_5",
+      "value": "0.276731601600101",
+      "rank": 3,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bleu_1",
+      "source": "E12",
+      "system": "gemini_3_8_flash",
+      "value": "0.2513066033861575",
+      "rank": 4,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bleu_1",
+      "source": "E12",
+      "system": "qwen2_5_omni",
+      "value": "0.3681836819588078",
+      "rank": 2,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bleu_1",
+      "source": "E12",
+      "system": "audio_flamingo_3",
+      "value": "0.406867700834832",
+      "rank": 1,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bleu_2",
+      "source": "E12",
+      "system": "gpt_audio_1_5",
+      "value": "0.07490166804805469",
+      "rank": 3,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bleu_2",
+      "source": "E12",
+      "system": "gemini_3_8_flash",
+      "value": "0.059025194865095755",
+      "rank": 4,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bleu_2",
+      "source": "E12",
+      "system": "qwen2_5_omni",
+      "value": "0.153572290322368",
+      "rank": 2,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bleu_2",
+      "source": "E12",
+      "system": "audio_flamingo_3",
+      "value": "0.2035976200304478",
+      "rank": 1,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bleu_3",
+      "source": "E12",
+      "system": "gpt_audio_1_5",
+      "value": "0.018731518509610117",
+      "rank": 3,
+      "share_observed_order": "0.8678"
+    },
+    {
+      "ranker": "bleu_3",
+      "source": "E12",
+      "system": "gemini_3_8_flash",
+      "value": "0.01632012858180003",
+      "rank": 4,
+      "share_observed_order": "0.8678"
+    },
+    {
+      "ranker": "bleu_3",
+      "source": "E12",
+      "system": "qwen2_5_omni",
+      "value": "0.05319176232324807",
+      "rank": 2,
+      "share_observed_order": "0.8678"
+    },
+    {
+      "ranker": "bleu_3",
+      "source": "E12",
+      "system": "audio_flamingo_3",
+      "value": "0.08795450760560873",
+      "rank": 1,
+      "share_observed_order": "0.8678"
+    },
+    {
+      "ranker": "bleu_4",
+      "source": "E12",
+      "system": "gpt_audio_1_5",
+      "value": "0.00431551967443935",
+      "rank": 3,
+      "share_observed_order": "0.9946"
+    },
+    {
+      "ranker": "bleu_4",
+      "source": "E12",
+      "system": "gemini_3_8_flash",
+      "value": "0.0019404396238166975",
+      "rank": 4,
+      "share_observed_order": "0.9946"
+    },
+    {
+      "ranker": "bleu_4",
+      "source": "E12",
+      "system": "qwen2_5_omni",
+      "value": "0.014924720579127436",
+      "rank": 2,
+      "share_observed_order": "0.9946"
+    },
+    {
+      "ranker": "bleu_4",
+      "source": "E12",
+      "system": "audio_flamingo_3",
+      "value": "0.030157314420538282",
+      "rank": 1,
+      "share_observed_order": "0.9946"
+    },
+    {
+      "ranker": "meteor",
+      "source": "E12",
+      "system": "gpt_audio_1_5",
+      "value": "0.12402041215702074",
+      "rank": 3,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "meteor",
+      "source": "E12",
+      "system": "gemini_3_8_flash",
+      "value": "0.10247577231677645",
+      "rank": 4,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "meteor",
+      "source": "E12",
+      "system": "qwen2_5_omni",
+      "value": "0.15103999643097374",
+      "rank": 2,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "meteor",
+      "source": "E12",
+      "system": "audio_flamingo_3",
+      "value": "0.17362801389091215",
+      "rank": 1,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "cider_d",
+      "source": "E12",
+      "system": "gpt_audio_1_5",
+      "value": "0.04787530130041854",
+      "rank": 4,
+      "share_observed_order": "0.9967"
+    },
+    {
+      "ranker": "cider_d",
+      "source": "E12",
+      "system": "gemini_3_8_flash",
+      "value": "0.06410855454804125",
+      "rank": 3,
+      "share_observed_order": "0.9967"
+    },
+    {
+      "ranker": "cider_d",
+      "source": "E12",
+      "system": "qwen2_5_omni",
+      "value": "0.16374225448229981",
+      "rank": 2,
+      "share_observed_order": "0.9967"
+    },
+    {
+      "ranker": "cider_d",
+      "source": "E12",
+      "system": "audio_flamingo_3",
+      "value": "0.1911791630413964",
+      "rank": 1,
+      "share_observed_order": "0.9967"
+    },
+    {
+      "ranker": "spice",
+      "source": "E12",
+      "system": "gpt_audio_1_5",
+      "value": "0.06656150595840296",
+      "rank": 3,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "spice",
+      "source": "E12",
+      "system": "gemini_3_8_flash",
+      "value": "0.05090645199126072",
+      "rank": 4,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "spice",
+      "source": "E12",
+      "system": "qwen2_5_omni",
+      "value": "0.09058890615739013",
+      "rank": 2,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "spice",
+      "source": "E12",
+      "system": "audio_flamingo_3",
+      "value": "0.11652216289891876",
+      "rank": 1,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "spider",
+      "source": "E12",
+      "system": "gpt_audio_1_5",
+      "value": "0.057218403629410754",
+      "rank": 4,
+      "share_observed_order": "0.547"
+    },
+    {
+      "ranker": "spider",
+      "source": "E12",
+      "system": "gemini_3_8_flash",
+      "value": "0.05750750326965099",
+      "rank": 3,
+      "share_observed_order": "0.547"
+    },
+    {
+      "ranker": "spider",
+      "source": "E12",
+      "system": "qwen2_5_omni",
+      "value": "0.12716558031984496",
+      "rank": 2,
+      "share_observed_order": "0.547"
+    },
+    {
+      "ranker": "spider",
+      "source": "E12",
+      "system": "audio_flamingo_3",
+      "value": "0.15385066297015754",
+      "rank": 1,
+      "share_observed_order": "0.547"
+    },
+    {
+      "ranker": "spider_fl",
+      "source": "E12",
+      "system": "gpt_audio_1_5",
+      "value": "0.0572180716005338",
+      "rank": 4,
+      "share_observed_order": "0.5461"
+    },
+    {
+      "ranker": "spider_fl",
+      "source": "E12",
+      "system": "gemini_3_8_flash",
+      "value": "0.057501311305044205",
+      "rank": 3,
+      "share_observed_order": "0.5461"
+    },
+    {
+      "ranker": "spider_fl",
+      "source": "E12",
+      "system": "qwen2_5_omni",
+      "value": "0.12698198986448564",
+      "rank": 2,
+      "share_observed_order": "0.5461"
+    },
+    {
+      "ranker": "spider_fl",
+      "source": "E12",
+      "system": "audio_flamingo_3",
+      "value": "0.1527329762367159",
+      "rank": 1,
+      "share_observed_order": "0.5461"
+    },
+    {
+      "ranker": "fense",
+      "source": "E12",
+      "system": "gpt_audio_1_5",
+      "value": "0.40059686722902305",
+      "rank": 3,
+      "share_observed_order": "0.9935"
+    },
+    {
+      "ranker": "fense",
+      "source": "E12",
+      "system": "gemini_3_8_flash",
+      "value": "0.38739748928482026",
+      "rank": 4,
+      "share_observed_order": "0.9935"
+    },
+    {
+      "ranker": "fense",
+      "source": "E12",
+      "system": "qwen2_5_omni",
+      "value": "0.47364975485148614",
+      "rank": 2,
+      "share_observed_order": "0.9935"
+    },
+    {
+      "ranker": "fense",
+      "source": "E12",
+      "system": "audio_flamingo_3",
+      "value": "0.509626601935859",
+      "rank": 1,
+      "share_observed_order": "0.9935"
+    },
+    {
+      "ranker": "bertscore_f1",
+      "source": "E12",
+      "system": "gpt_audio_1_5",
+      "value": "0.9702834307291861",
+      "rank": 3,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bertscore_f1",
+      "source": "E12",
+      "system": "gemini_3_8_flash",
+      "value": "0.9696321372210124",
+      "rank": 4,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bertscore_f1",
+      "source": "E12",
+      "system": "qwen2_5_omni",
+      "value": "0.9733550907322094",
+      "rank": 2,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bertscore_f1",
+      "source": "E12",
+      "system": "audio_flamingo_3",
+      "value": "0.9742070070294102",
+      "rank": 1,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bertscore_f1_rescaled",
+      "source": "E12",
+      "system": "gpt_audio_1_5",
+      "value": "0.2539523681759922",
+      "rank": 3,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bertscore_f1_rescaled",
+      "source": "E12",
+      "system": "gemini_3_8_flash",
+      "value": "0.23760135622143938",
+      "rank": 4,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bertscore_f1_rescaled",
+      "source": "E12",
+      "system": "qwen2_5_omni",
+      "value": "0.3310677528672777",
+      "rank": 2,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "bertscore_f1_rescaled",
+      "source": "E12",
+      "system": "audio_flamingo_3",
+      "value": "0.3524554887881646",
+      "rank": 1,
+      "share_observed_order": "1.0"
+    },
+    {
+      "ranker": "clap_similarity",
+      "source": "E12",
+      "system": "gpt_audio_1_5",
+      "value": "0.46640355204764467",
+      "rank": 2,
+      "share_observed_order": "0.8678"
+    },
+    {
+      "ranker": "clap_similarity",
+      "source": "E12",
+      "system": "gemini_3_8_flash",
+      "value": "0.3811172001369427",
+      "rank": 4,
+      "share_observed_order": "0.8678"
+    },
+    {
+      "ranker": "clap_similarity",
+      "source": "E12",
+      "system": "qwen2_5_omni",
+      "value": "0.46233271439069923",
+      "rank": 3,
+      "share_observed_order": "0.8678"
+    },
+    {
+      "ranker": "clap_similarity",
+      "source": "E12",
+      "system": "audio_flamingo_3",
+      "value": "0.508762275396887",
+      "rank": 1,
+      "share_observed_order": "0.8678"
+    },
+    {
+      "ranker": "mace",
+      "source": "E12",
+      "system": "gpt_audio_1_5",
+      "value": "0.5729423804790881",
+      "rank": 3,
+      "share_observed_order": "0.7143"
+    },
+    {
+      "ranker": "mace",
+      "source": "E12",
+      "system": "gemini_3_8_flash",
+      "value": "0.4887915999712067",
+      "rank": 4,
+      "share_observed_order": "0.7143"
+    },
+    {
+      "ranker": "mace",
+      "source": "E12",
+      "system": "qwen2_5_omni",
+      "value": "0.5748340224790035",
+      "rank": 2,
+      "share_observed_order": "0.7143"
+    },
+    {
+      "ranker": "mace",
+      "source": "E12",
+      "system": "audio_flamingo_3",
+      "value": "0.6078394327505624",
+      "rank": 1,
+      "share_observed_order": "0.7143"
+    },
+    {
+      "ranker": "e18_categories_1_3",
+      "source": "E18",
+      "system": "gpt_audio_1_5",
+      "value": "0.3",
+      "rank": 3,
+      "share_observed_order": "0.8115"
+    },
+    {
+      "ranker": "e18_categories_1_3",
+      "source": "E18",
+      "system": "gemini_3_8_flash",
+      "value": "0.16",
+      "rank": 4,
+      "share_observed_order": "0.8115"
+    },
+    {
+      "ranker": "e18_categories_1_3",
+      "source": "E18",
+      "system": "qwen2_5_omni",
+      "value": "0.42",
+      "rank": 2,
+      "share_observed_order": "0.8115"
+    },
+    {
+      "ranker": "e18_categories_1_3",
+      "source": "E18",
+      "system": "audio_flamingo_3",
+      "value": "0.52",
+      "rank": 1,
+      "share_observed_order": "0.8115"
+    },
+    {
+      "ranker": "e19_rated_accurate",
+      "source": "E19",
+      "system": "gpt_audio_1_5",
+      "value": "0.94",
+      "rank": 1,
+      "share_observed_order": "0.3347"
+    },
+    {
+      "ranker": "e19_rated_accurate",
+      "source": "E19",
+      "system": "gemini_3_8_flash",
+      "value": "0.46",
+      "rank": 4,
+      "share_observed_order": "0.3347"
+    },
+    {
+      "ranker": "e19_rated_accurate",
+      "source": "E19",
+      "system": "qwen2_5_omni",
+      "value": "0.5",
+      "rank": 3,
+      "share_observed_order": "0.3347"
+    },
+    {
+      "ranker": "e19_rated_accurate",
+      "source": "E19",
+      "system": "audio_flamingo_3",
+      "value": "0.54",
+      "rank": 2,
+      "share_observed_order": "0.3347"
+    }
+  ],
+  "kendall_tau": [
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "bleu_2",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "bleu_3",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "bleu_4",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "meteor",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "cider_d",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "spice",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "spider",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "spider_fl",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "fense",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "bertscore_f1",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "bertscore_f1_rescaled",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "clap_similarity",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "mace",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "e18_categories_1_3",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_1",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.3333333333333333"
+    },
+    {
+      "ranker_a": "bleu_2",
+      "ranker_b": "bleu_3",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_2",
+      "ranker_b": "bleu_4",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_2",
+      "ranker_b": "meteor",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_2",
+      "ranker_b": "cider_d",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_2",
+      "ranker_b": "spice",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_2",
+      "ranker_b": "spider",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_2",
+      "ranker_b": "spider_fl",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_2",
+      "ranker_b": "fense",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_2",
+      "ranker_b": "bertscore_f1",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_2",
+      "ranker_b": "bertscore_f1_rescaled",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_2",
+      "ranker_b": "clap_similarity",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_2",
+      "ranker_b": "mace",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_2",
+      "ranker_b": "e18_categories_1_3",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_2",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.3333333333333333"
+    },
+    {
+      "ranker_a": "bleu_3",
+      "ranker_b": "bleu_4",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_3",
+      "ranker_b": "meteor",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_3",
+      "ranker_b": "cider_d",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_3",
+      "ranker_b": "spice",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_3",
+      "ranker_b": "spider",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_3",
+      "ranker_b": "spider_fl",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_3",
+      "ranker_b": "fense",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_3",
+      "ranker_b": "bertscore_f1",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_3",
+      "ranker_b": "bertscore_f1_rescaled",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_3",
+      "ranker_b": "clap_similarity",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_3",
+      "ranker_b": "mace",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_3",
+      "ranker_b": "e18_categories_1_3",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_3",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.3333333333333333"
+    },
+    {
+      "ranker_a": "bleu_4",
+      "ranker_b": "meteor",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_4",
+      "ranker_b": "cider_d",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_4",
+      "ranker_b": "spice",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_4",
+      "ranker_b": "spider",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_4",
+      "ranker_b": "spider_fl",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_4",
+      "ranker_b": "fense",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_4",
+      "ranker_b": "bertscore_f1",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_4",
+      "ranker_b": "bertscore_f1_rescaled",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_4",
+      "ranker_b": "clap_similarity",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bleu_4",
+      "ranker_b": "mace",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_4",
+      "ranker_b": "e18_categories_1_3",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bleu_4",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.3333333333333333"
+    },
+    {
+      "ranker_a": "meteor",
+      "ranker_b": "cider_d",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "meteor",
+      "ranker_b": "spice",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "meteor",
+      "ranker_b": "spider",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "meteor",
+      "ranker_b": "spider_fl",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "meteor",
+      "ranker_b": "fense",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "meteor",
+      "ranker_b": "bertscore_f1",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "meteor",
+      "ranker_b": "bertscore_f1_rescaled",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "meteor",
+      "ranker_b": "clap_similarity",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "meteor",
+      "ranker_b": "mace",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "meteor",
+      "ranker_b": "e18_categories_1_3",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "meteor",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.3333333333333333"
+    },
+    {
+      "ranker_a": "cider_d",
+      "ranker_b": "spice",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "cider_d",
+      "ranker_b": "spider",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "cider_d",
+      "ranker_b": "spider_fl",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "cider_d",
+      "ranker_b": "fense",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "cider_d",
+      "ranker_b": "bertscore_f1",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "cider_d",
+      "ranker_b": "bertscore_f1_rescaled",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "cider_d",
+      "ranker_b": "clap_similarity",
+      "kendall_tau_b": "0.3333333333333333"
+    },
+    {
+      "ranker_a": "cider_d",
+      "ranker_b": "mace",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "cider_d",
+      "ranker_b": "e18_categories_1_3",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "cider_d",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.0"
+    },
+    {
+      "ranker_a": "spice",
+      "ranker_b": "spider",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "spice",
+      "ranker_b": "spider_fl",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "spice",
+      "ranker_b": "fense",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "spice",
+      "ranker_b": "bertscore_f1",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "spice",
+      "ranker_b": "bertscore_f1_rescaled",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "spice",
+      "ranker_b": "clap_similarity",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "spice",
+      "ranker_b": "mace",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "spice",
+      "ranker_b": "e18_categories_1_3",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "spice",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.3333333333333333"
+    },
+    {
+      "ranker_a": "spider",
+      "ranker_b": "spider_fl",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "spider",
+      "ranker_b": "fense",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "spider",
+      "ranker_b": "bertscore_f1",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "spider",
+      "ranker_b": "bertscore_f1_rescaled",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "spider",
+      "ranker_b": "clap_similarity",
+      "kendall_tau_b": "0.3333333333333333"
+    },
+    {
+      "ranker_a": "spider",
+      "ranker_b": "mace",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "spider",
+      "ranker_b": "e18_categories_1_3",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "spider",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.0"
+    },
+    {
+      "ranker_a": "spider_fl",
+      "ranker_b": "fense",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "spider_fl",
+      "ranker_b": "bertscore_f1",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "spider_fl",
+      "ranker_b": "bertscore_f1_rescaled",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "spider_fl",
+      "ranker_b": "clap_similarity",
+      "kendall_tau_b": "0.3333333333333333"
+    },
+    {
+      "ranker_a": "spider_fl",
+      "ranker_b": "mace",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "spider_fl",
+      "ranker_b": "e18_categories_1_3",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "spider_fl",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.0"
+    },
+    {
+      "ranker_a": "fense",
+      "ranker_b": "bertscore_f1",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "fense",
+      "ranker_b": "bertscore_f1_rescaled",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "fense",
+      "ranker_b": "clap_similarity",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "fense",
+      "ranker_b": "mace",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "fense",
+      "ranker_b": "e18_categories_1_3",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "fense",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.3333333333333333"
+    },
+    {
+      "ranker_a": "bertscore_f1",
+      "ranker_b": "bertscore_f1_rescaled",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bertscore_f1",
+      "ranker_b": "clap_similarity",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bertscore_f1",
+      "ranker_b": "mace",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bertscore_f1",
+      "ranker_b": "e18_categories_1_3",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bertscore_f1",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.3333333333333333"
+    },
+    {
+      "ranker_a": "bertscore_f1_rescaled",
+      "ranker_b": "clap_similarity",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "bertscore_f1_rescaled",
+      "ranker_b": "mace",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bertscore_f1_rescaled",
+      "ranker_b": "e18_categories_1_3",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "bertscore_f1_rescaled",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.3333333333333333"
+    },
+    {
+      "ranker_a": "clap_similarity",
+      "ranker_b": "mace",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "clap_similarity",
+      "ranker_b": "e18_categories_1_3",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "clap_similarity",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.6666666666666666"
+    },
+    {
+      "ranker_a": "mace",
+      "ranker_b": "e18_categories_1_3",
+      "kendall_tau_b": "1.0"
+    },
+    {
+      "ranker_a": "mace",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.3333333333333333"
+    },
+    {
+      "ranker_a": "e18_categories_1_3",
+      "ranker_b": "e19_rated_accurate",
+      "kendall_tau_b": "0.3333333333333333"
+    }
+  ],
+  "concordance": [
+    {
+      "metric": "bleu_1",
+      "pairs": "all",
+      "num_pairs": 156,
+      "num_recordings": 42,
+      "concordant": 70,
+      "ties": 0,
+      "discordant": 86,
+      "concordance": "0.44871794871794873",
+      "ci_low": "0.348993288590604",
+      "ci_high": "0.5493827160493827",
+      "p_value": "0.35976402359764026",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "bleu_4",
+      "pairs": "all",
+      "num_pairs": 156,
+      "num_recordings": 42,
+      "concordant": 73,
+      "ties": 0,
+      "discordant": 83,
+      "concordance": "0.46794871794871795",
+      "ci_low": "0.3825503355704698",
+      "ci_high": "0.5526315789473685",
+      "p_value": "0.5111488851114888",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "meteor",
+      "pairs": "all",
+      "num_pairs": 156,
+      "num_recordings": 42,
+      "concordant": 64,
+      "ties": 0,
+      "discordant": 92,
+      "concordance": "0.41025641025641024",
+      "ci_low": "0.3167646007417669",
+      "ci_high": "0.509090909090909",
+      "p_value": "0.0867913208679132",
+      "p_holm": "0.7811218878112188",
+      "significant": false
+    },
+    {
+      "metric": "cider_d",
+      "pairs": "all",
+      "num_pairs": 156,
+      "num_recordings": 42,
+      "concordant": 73,
+      "ties": 0,
+      "discordant": 83,
+      "concordance": "0.46794871794871795",
+      "ci_low": "0.375",
+      "ci_high": "0.5625",
+      "p_value": "0.5517448255174483",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "spice",
+      "pairs": "all",
+      "num_pairs": 156,
+      "num_recordings": 42,
+      "concordant": 71,
+      "ties": 20,
+      "discordant": 65,
+      "concordance": "0.5192307692307693",
+      "ci_low": "0.43037974683544306",
+      "ci_high": "0.6118939393939393",
+      "p_value": "0.7349265073492651",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "spider",
+      "pairs": "all",
+      "num_pairs": 156,
+      "num_recordings": 42,
+      "concordant": 77,
+      "ties": 0,
+      "discordant": 79,
+      "concordance": "0.4935897435897436",
+      "ci_low": "0.39751552795031053",
+      "ci_high": "0.5886075949367089",
+      "p_value": "0.9478052194780522",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "fense",
+      "pairs": "all",
+      "num_pairs": 156,
+      "num_recordings": 42,
+      "concordant": 80,
+      "ties": 0,
+      "discordant": 76,
+      "concordance": "0.5128205128205128",
+      "ci_low": "0.40559440559440557",
+      "ci_high": "0.618421052631579",
+      "p_value": "0.8619138086191381",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "bertscore_f1_rescaled",
+      "pairs": "all",
+      "num_pairs": 156,
+      "num_recordings": 42,
+      "concordant": 61,
+      "ties": 0,
+      "discordant": 95,
+      "concordance": "0.391025641025641",
+      "ci_low": "0.2993619740889987",
+      "ci_high": "0.4838709677419355",
+      "p_value": "0.03469653034696531",
+      "p_holm": "0.34696530346965304",
+      "significant": false
+    },
+    {
+      "metric": "clap_similarity",
+      "pairs": "all",
+      "num_pairs": 156,
+      "num_recordings": 42,
+      "concordant": 87,
+      "ties": 0,
+      "discordant": 69,
+      "concordance": "0.5576923076923077",
+      "ci_low": "0.4529384017758047",
+      "ci_high": "0.6644747453310696",
+      "p_value": "0.3114688531146885",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "mace",
+      "pairs": "all",
+      "num_pairs": 156,
+      "num_recordings": 42,
+      "concordant": 90,
+      "ties": 0,
+      "discordant": 66,
+      "concordance": "0.5769230769230769",
+      "ci_low": "0.4647011385199242",
+      "ci_high": "0.6900605386706201",
+      "p_value": "0.20887911208879112",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "bleu_1",
+      "pairs": "1_vs_3",
+      "num_pairs": 37,
+      "num_recordings": 15,
+      "concordant": 16,
+      "ties": 0,
+      "discordant": 21,
+      "concordance": "0.43243243243243246",
+      "ci_low": "0.23251341681574278",
+      "ci_high": "0.6551724137931034",
+      "p_value": "0.6301369863013698",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "bleu_4",
+      "pairs": "1_vs_3",
+      "num_pairs": 37,
+      "num_recordings": 15,
+      "concordant": 17,
+      "ties": 0,
+      "discordant": 20,
+      "concordance": "0.4594594594594595",
+      "ci_low": "0.3103448275862069",
+      "ci_high": "0.5882352941176471",
+      "p_value": "0.7045295470452955",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "meteor",
+      "pairs": "1_vs_3",
+      "num_pairs": 37,
+      "num_recordings": 15,
+      "concordant": 14,
+      "ties": 0,
+      "discordant": 23,
+      "concordance": "0.3783783783783784",
+      "ci_low": "0.16666666666666666",
+      "ci_high": "0.6052631578947368",
+      "p_value": "0.3381661833816618",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "cider_d",
+      "pairs": "1_vs_3",
+      "num_pairs": 37,
+      "num_recordings": 15,
+      "concordant": 19,
+      "ties": 0,
+      "discordant": 18,
+      "concordance": "0.5135135135135135",
+      "ci_low": "0.3333333333333333",
+      "ci_high": "0.6956521739130435",
+      "p_value": "1.0",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "spice",
+      "pairs": "1_vs_3",
+      "num_pairs": 37,
+      "num_recordings": 15,
+      "concordant": 19,
+      "ties": 2,
+      "discordant": 16,
+      "concordance": "0.5405405405405406",
+      "ci_low": "0.3815789473684211",
+      "ci_high": "0.7142857142857143",
+      "p_value": "0.7355264473552645",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "spider",
+      "pairs": "1_vs_3",
+      "num_pairs": 37,
+      "num_recordings": 15,
+      "concordant": 21,
+      "ties": 0,
+      "discordant": 16,
+      "concordance": "0.5675675675675675",
+      "ci_low": "0.4166666666666667",
+      "ci_high": "0.7272727272727273",
+      "p_value": "0.49675032496750327",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "fense",
+      "pairs": "1_vs_3",
+      "num_pairs": 37,
+      "num_recordings": 15,
+      "concordant": 17,
+      "ties": 0,
+      "discordant": 20,
+      "concordance": "0.4594594594594595",
+      "ci_low": "0.24324324324324326",
+      "ci_high": "0.6764943074003792",
+      "p_value": "0.8042195780421958",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "bertscore_f1_rescaled",
+      "pairs": "1_vs_3",
+      "num_pairs": 37,
+      "num_recordings": 15,
+      "concordant": 11,
+      "ties": 0,
+      "discordant": 26,
+      "concordance": "0.2972972972972973",
+      "ci_low": "0.11315513626834428",
+      "ci_high": "0.5",
+      "p_value": "0.0761923807619238",
+      "p_holm": "0.7619238076192381",
+      "significant": false
+    },
+    {
+      "metric": "clap_similarity",
+      "pairs": "1_vs_3",
+      "num_pairs": 37,
+      "num_recordings": 15,
+      "concordant": 23,
+      "ties": 0,
+      "discordant": 14,
+      "concordance": "0.6216216216216216",
+      "ci_low": "0.4",
+      "ci_high": "0.8333333333333334",
+      "p_value": "0.35036496350364965",
+      "p_holm": "1.0",
+      "significant": false
+    },
+    {
+      "metric": "mace",
+      "pairs": "1_vs_3",
+      "num_pairs": 37,
+      "num_recordings": 15,
+      "concordant": 23,
+      "ties": 0,
+      "discordant": 14,
+      "concordance": "0.6216216216216216",
+      "ci_low": "0.4",
+      "ci_high": "0.8292682926829268",
+      "p_value": "0.3487651234876512",
+      "p_holm": "1.0",
+      "significant": false
+    }
+  ],
+  "correlations": [
+    {
+      "scope": "all",
+      "metric_a": "bleu_1",
+      "metric_b": "bleu_4",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.7425854424631617",
+      "ci_low": "0.725803318425724",
+      "ci_high": "0.7574989852856706"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_1",
+      "metric_b": "meteor",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.7307774358089851",
+      "ci_low": "0.7131263100958809",
+      "ci_high": "0.7465631856900014"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_1",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.7603655183032955",
+      "ci_low": "0.7442180514560107",
+      "ci_high": "0.7752649390724483"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_1",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.5696821696582631",
+      "ci_low": "0.5491532694548443",
+      "ci_high": "0.5915801400062713"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_1",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.7560086591360702",
+      "ci_low": "0.740453903952198",
+      "ci_high": "0.7718992315886317"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_1",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.5482063594470122",
+      "ci_low": "0.5233574890750424",
+      "ci_high": "0.5698815039074125"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_1",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.5133353196369965",
+      "ci_low": "0.4851210442067772",
+      "ci_high": "0.5384567775199082"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_1",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.35364065070181366",
+      "ci_low": "0.3232426189135671",
+      "ci_high": "0.3833476849149191"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_1",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.44301885834998983",
+      "ci_low": "0.41515612383576284",
+      "ci_high": "0.46913023418716815"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_4",
+      "metric_b": "meteor",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.6748753836446265",
+      "ci_low": "0.6558867153264746",
+      "ci_high": "0.6933807880243705"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_4",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.6652923069967284",
+      "ci_low": "0.6458760408512605",
+      "ci_high": "0.6846432919743854"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_4",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.5249325600461052",
+      "ci_low": "0.4994731595093351",
+      "ci_high": "0.5503716000795476"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_4",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.6814607905274",
+      "ci_low": "0.6636030809747847",
+      "ci_high": "0.7005576113407972"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_4",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.4816459006411719",
+      "ci_low": "0.4558633058634724",
+      "ci_high": "0.506144947878446"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_4",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.4904192333977744",
+      "ci_low": "0.4631464450541848",
+      "ci_high": "0.5143263676014532"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_4",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.284630739984314",
+      "ci_low": "0.25462125734202423",
+      "ci_high": "0.31174687534624423"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bleu_4",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.36309226830398217",
+      "ci_low": "0.334562825292731",
+      "ci_high": "0.3875478668590119"
+    },
+    {
+      "scope": "all",
+      "metric_a": "meteor",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.6590881163647974",
+      "ci_low": "0.6375369856197048",
+      "ci_high": "0.6790925357850635"
+    },
+    {
+      "scope": "all",
+      "metric_a": "meteor",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.660067152490921",
+      "ci_low": "0.6408197650293619",
+      "ci_high": "0.6800561762589777"
+    },
+    {
+      "scope": "all",
+      "metric_a": "meteor",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.7512846371487552",
+      "ci_low": "0.7356771947094035",
+      "ci_high": "0.7659610002242806"
+    },
+    {
+      "scope": "all",
+      "metric_a": "meteor",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.6297180443588075",
+      "ci_low": "0.6069707235893366",
+      "ci_high": "0.6501287953853877"
+    },
+    {
+      "scope": "all",
+      "metric_a": "meteor",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.5065800664632173",
+      "ci_low": "0.480183471694475",
+      "ci_high": "0.532917754581674"
+    },
+    {
+      "scope": "all",
+      "metric_a": "meteor",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.4330587220908453",
+      "ci_low": "0.4049090604539543",
+      "ci_high": "0.4618509455284465"
+    },
+    {
+      "scope": "all",
+      "metric_a": "meteor",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.5521766643084735",
+      "ci_low": "0.5266992372210922",
+      "ci_high": "0.5768710023121203"
+    },
+    {
+      "scope": "all",
+      "metric_a": "cider_d",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.5512475220216276",
+      "ci_low": "0.5269312668654331",
+      "ci_high": "0.5751623746818125"
+    },
+    {
+      "scope": "all",
+      "metric_a": "cider_d",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.8787147211635441",
+      "ci_low": "0.8658422632686137",
+      "ci_high": "0.8898727317875705"
+    },
+    {
+      "scope": "all",
+      "metric_a": "cider_d",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.6234591517321032",
+      "ci_low": "0.5991372228467163",
+      "ci_high": "0.6429740346000984"
+    },
+    {
+      "scope": "all",
+      "metric_a": "cider_d",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.5108199430484748",
+      "ci_low": "0.48325046937997335",
+      "ci_high": "0.538401942540253"
+    },
+    {
+      "scope": "all",
+      "metric_a": "cider_d",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.3649929375731787",
+      "ci_low": "0.3344982474404396",
+      "ci_high": "0.39408168607454647"
+    },
+    {
+      "scope": "all",
+      "metric_a": "cider_d",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.4951244590603831",
+      "ci_low": "0.4684086472597428",
+      "ci_high": "0.5198037252776165"
+    },
+    {
+      "scope": "all",
+      "metric_a": "spice",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.8466814925180118",
+      "ci_low": "0.8339027003422783",
+      "ci_high": "0.8580558530586707"
+    },
+    {
+      "scope": "all",
+      "metric_a": "spice",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.5899588068320595",
+      "ci_low": "0.5675708973523924",
+      "ci_high": "0.6132284795825571"
+    },
+    {
+      "scope": "all",
+      "metric_a": "spice",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.40563614530876146",
+      "ci_low": "0.3765580042517258",
+      "ci_high": "0.4348850048825517"
+    },
+    {
+      "scope": "all",
+      "metric_a": "spice",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.392517310452729",
+      "ci_low": "0.361829632915437",
+      "ci_high": "0.4199341906087382"
+    },
+    {
+      "scope": "all",
+      "metric_a": "spice",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.5008302991560347",
+      "ci_low": "0.47427471609527455",
+      "ci_high": "0.5255393385151996"
+    },
+    {
+      "scope": "all",
+      "metric_a": "spider",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.6924668459308813",
+      "ci_low": "0.6712290732636008",
+      "ci_high": "0.710166541821401"
+    },
+    {
+      "scope": "all",
+      "metric_a": "spider",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.5198212401048445",
+      "ci_low": "0.49345719635241936",
+      "ci_high": "0.5482685041140439"
+    },
+    {
+      "scope": "all",
+      "metric_a": "spider",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.4388550306058053",
+      "ci_low": "0.40920746898982274",
+      "ci_high": "0.4655231422427961"
+    },
+    {
+      "scope": "all",
+      "metric_a": "spider",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.5702559655587702",
+      "ci_low": "0.5448682837910939",
+      "ci_high": "0.591801678913683"
+    },
+    {
+      "scope": "all",
+      "metric_a": "fense",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.43019458557019974",
+      "ci_low": "0.39985107384401286",
+      "ci_high": "0.4598623935719139"
+    },
+    {
+      "scope": "all",
+      "metric_a": "fense",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.4756972867316118",
+      "ci_low": "0.4456929482055217",
+      "ci_high": "0.5053921897728945"
+    },
+    {
+      "scope": "all",
+      "metric_a": "fense",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.6696598100910125",
+      "ci_low": "0.6480081633988358",
+      "ci_high": "0.6903252049084713"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bertscore_f1_rescaled",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.2921997598422838",
+      "ci_low": "0.2626385156051773",
+      "ci_high": "0.32251450116075325"
+    },
+    {
+      "scope": "all",
+      "metric_a": "bertscore_f1_rescaled",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.3777440756886464",
+      "ci_low": "0.3508735157790012",
+      "ci_high": "0.407784428223875"
+    },
+    {
+      "scope": "all",
+      "metric_a": "clap_similarity",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 4180,
+      "spearman": "0.8897898342709731",
+      "ci_low": "0.8803494264585",
+      "ci_high": "0.8983845698740738"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_1",
+      "metric_b": "bleu_4",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6731098219405117",
+      "ci_low": "0.6370364870296975",
+      "ci_high": "0.7079168144563378"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_1",
+      "metric_b": "meteor",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.7002962784586954",
+      "ci_low": "0.6667911380035819",
+      "ci_high": "0.7306199713280345"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_1",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.7102340716252318",
+      "ci_low": "0.6745696578184025",
+      "ci_high": "0.7435737006710278"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_1",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.46148626357571193",
+      "ci_low": "0.40804198355538945",
+      "ci_high": "0.5093577323457573"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_1",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6466693132737015",
+      "ci_low": "0.6058689524385896",
+      "ci_high": "0.6848670256902285"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_1",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5230671713841679",
+      "ci_low": "0.48050702318920413",
+      "ci_high": "0.5695709372290799"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_1",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3275761313269919",
+      "ci_low": "0.2710950321179856",
+      "ci_high": "0.38436118915200373"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_1",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3027491831265736",
+      "ci_low": "0.24004322323099905",
+      "ci_high": "0.3571792541275785"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_1",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4101950106141829",
+      "ci_low": "0.3529565859021788",
+      "ci_high": "0.46266143655081826"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_4",
+      "metric_b": "meteor",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5617236378611519",
+      "ci_low": "0.5130420952131078",
+      "ci_high": "0.6059369070832591"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_4",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6281810459202987",
+      "ci_low": "0.5889168186118189",
+      "ci_high": "0.6663786936643038"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_4",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.36606003032299383",
+      "ci_low": "0.3129958398926444",
+      "ci_high": "0.42091604577097913"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_4",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5435186643269401",
+      "ci_low": "0.4957695985315967",
+      "ci_high": "0.5858752087325925"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_4",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.40041786318396",
+      "ci_low": "0.3515983017202374",
+      "ci_high": "0.44976113776761434"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_4",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3563769198050649",
+      "ci_low": "0.3005523085509813",
+      "ci_high": "0.4074769241220597"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_4",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.2051549114135073",
+      "ci_low": "0.14600124666903505",
+      "ci_high": "0.2614617534872515"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bleu_4",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.29819375578418295",
+      "ci_low": "0.23918311853416294",
+      "ci_high": "0.35463551946845545"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "meteor",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6407706366502901",
+      "ci_low": "0.5988835433107462",
+      "ci_high": "0.6777142111716878"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "meteor",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5854932334960664",
+      "ci_low": "0.5446416623551549",
+      "ci_high": "0.6276538164569369"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "meteor",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.693493655805885",
+      "ci_low": "0.6570143212091328",
+      "ci_high": "0.7249508871805667"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "meteor",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6503253405411257",
+      "ci_low": "0.6123496281815702",
+      "ci_high": "0.6839475911543619"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "meteor",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3891372654678401",
+      "ci_low": "0.3359146540614105",
+      "ci_high": "0.444933604883091"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "meteor",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.37333921469123904",
+      "ci_low": "0.32007150282143393",
+      "ci_high": "0.4230834619151347"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "meteor",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5235736284191361",
+      "ci_low": "0.47676951446104704",
+      "ci_high": "0.5665177892095788"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "cider_d",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4959686462351088",
+      "ci_low": "0.4476596193880624",
+      "ci_high": "0.5413659315464067"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "cider_d",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.8027243210070887",
+      "ci_low": "0.7729626953344234",
+      "ci_high": "0.8277358398512127"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "cider_d",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5927754361358482",
+      "ci_low": "0.5523275173886563",
+      "ci_high": "0.6312252576090958"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "cider_d",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.38775988410307793",
+      "ci_low": "0.33485389558183304",
+      "ci_high": "0.44418322078447603"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "cider_d",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.33240831028583523",
+      "ci_low": "0.27829731694695964",
+      "ci_high": "0.38336410003726723"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "cider_d",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.46514132030748784",
+      "ci_low": "0.4157627039063207",
+      "ci_high": "0.5159012817621202"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "spice",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.8847030185417646",
+      "ci_low": "0.8653144919289985",
+      "ci_high": "0.901338410392511"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "spice",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5954798505650707",
+      "ci_low": "0.5555549583772745",
+      "ci_high": "0.6332678156871218"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "spice",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3294965844531331",
+      "ci_low": "0.27222166790983965",
+      "ci_high": "0.38590194720605886"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "spice",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.30550354697674725",
+      "ci_low": "0.24808648702365144",
+      "ci_high": "0.36274401845355986"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "spice",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.42870662262694503",
+      "ci_low": "0.37656053744785456",
+      "ci_high": "0.47805245236379257"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "spider",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6831601682028335",
+      "ci_low": "0.6480196860808553",
+      "ci_high": "0.714964336626445"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "spider",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.40602465965579143",
+      "ci_low": "0.3511709291523543",
+      "ci_high": "0.4606942711871169"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "spider",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3689353060119926",
+      "ci_low": "0.3143700935744357",
+      "ci_high": "0.42142833114154077"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "spider",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5130612303699303",
+      "ci_low": "0.4663127274271732",
+      "ci_high": "0.5540269411352157"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "fense",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.32256550732142675",
+      "ci_low": "0.26683383926062004",
+      "ci_high": "0.37947501115921245"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "fense",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4379395941558254",
+      "ci_low": "0.3851849616929632",
+      "ci_high": "0.4856881653795887"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "fense",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6335559374109134",
+      "ci_low": "0.5930397113560735",
+      "ci_high": "0.668019338401851"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bertscore_f1_rescaled",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.1596617051049136",
+      "ci_low": "0.10093630340023105",
+      "ci_high": "0.21904043781019936"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "bertscore_f1_rescaled",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.27133589542891345",
+      "ci_low": "0.21645302728680313",
+      "ci_high": "0.33124467507839933"
+    },
+    {
+      "scope": "gpt_audio_1_5",
+      "metric_a": "clap_similarity",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.8746158899289137",
+      "ci_low": "0.8566081932229048",
+      "ci_high": "0.8888268566074863"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_1",
+      "metric_b": "bleu_4",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6574611717748468",
+      "ci_low": "0.6196204373097434",
+      "ci_high": "0.6933073005753357"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_1",
+      "metric_b": "meteor",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6730433419835444",
+      "ci_low": "0.6374481625184059",
+      "ci_high": "0.7062023323086005"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_1",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.7008537348547512",
+      "ci_low": "0.6633062589886373",
+      "ci_high": "0.7360905004656265"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_1",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4921904154294582",
+      "ci_low": "0.4405290741150706",
+      "ci_high": "0.5396038633224647"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_1",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6715358552147945",
+      "ci_low": "0.6316261260530304",
+      "ci_high": "0.7077753517241747"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_1",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.43502661556981026",
+      "ci_low": "0.3842202649325131",
+      "ci_high": "0.4837563470914429"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_1",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3207464130309758",
+      "ci_low": "0.2609913654857257",
+      "ci_high": "0.3770994744510736"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_1",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.31914357130751886",
+      "ci_low": "0.26269498753954096",
+      "ci_high": "0.3742686184418282"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_1",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3585043024673847",
+      "ci_low": "0.30415663731563036",
+      "ci_high": "0.41255267560221665"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_4",
+      "metric_b": "meteor",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5170507745969024",
+      "ci_low": "0.4688335424697361",
+      "ci_high": "0.5629441285594443"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_4",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5918987600481965",
+      "ci_low": "0.5512893006873125",
+      "ci_high": "0.6286211067260967"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_4",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.39216498227441526",
+      "ci_low": "0.33896331218696424",
+      "ci_high": "0.4398773003878256"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_4",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5510541365916323",
+      "ci_low": "0.5048182592297434",
+      "ci_high": "0.5915214170356644"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_4",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.339751521863627",
+      "ci_low": "0.2873757849474813",
+      "ci_high": "0.3907055307055203"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_4",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.34056372349747466",
+      "ci_low": "0.2850532865259073",
+      "ci_high": "0.3940380495653018"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_4",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.25141457802178335",
+      "ci_low": "0.1942068214276508",
+      "ci_high": "0.30731551056661666"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bleu_4",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.2894598969543091",
+      "ci_low": "0.22764398400574323",
+      "ci_high": "0.3433306089577916"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "meteor",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.671789577670153",
+      "ci_low": "0.6377338348932785",
+      "ci_high": "0.7054241604645135"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "meteor",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5735149353136727",
+      "ci_low": "0.5303460096256901",
+      "ci_high": "0.6134744362252719"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "meteor",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6998536512870163",
+      "ci_low": "0.6646149472619726",
+      "ci_high": "0.7314148890885026"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "meteor",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5542998776316305",
+      "ci_low": "0.5098468888043085",
+      "ci_high": "0.5947577018357297"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "meteor",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3248053209162411",
+      "ci_low": "0.26768060203882704",
+      "ci_high": "0.3826666849442436"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "meteor",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4275097507264469",
+      "ci_low": "0.373128736881662",
+      "ci_high": "0.47838868828388703"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "meteor",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4942688711594942",
+      "ci_low": "0.44332390285878015",
+      "ci_high": "0.5426741873183254"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "cider_d",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5608093486660303",
+      "ci_low": "0.5195690500253903",
+      "ci_high": "0.6025474596879303"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "cider_d",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.8861493702973844",
+      "ci_low": "0.866414472369299",
+      "ci_high": "0.9039181473849823"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "cider_d",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5931436076557779",
+      "ci_low": "0.5517601922027513",
+      "ci_high": "0.6315743378119043"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "cider_d",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3388306013406055",
+      "ci_low": "0.28297801665506706",
+      "ci_high": "0.3951435864833983"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "cider_d",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4329409092515019",
+      "ci_low": "0.3800829829937806",
+      "ci_high": "0.4857778576811657"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "cider_d",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5175601425708536",
+      "ci_low": "0.4700078661041323",
+      "ci_high": "0.5648617750740084"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "spice",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.8509784133361648",
+      "ci_low": "0.8315885124880624",
+      "ci_high": "0.8681604089148788"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "spice",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.546198054750701",
+      "ci_low": "0.5009291174776586",
+      "ci_high": "0.5882297988467396"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "spice",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.27179198379675246",
+      "ci_low": "0.21127465534859063",
+      "ci_high": "0.3316317466427196"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "spice",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4216169395595826",
+      "ci_low": "0.3678458957385059",
+      "ci_high": "0.4687004343485884"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "spice",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4786513331178497",
+      "ci_low": "0.4268098723061319",
+      "ci_high": "0.5219084461558773"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "spider",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6396823261080178",
+      "ci_low": "0.6012190592413943",
+      "ci_high": "0.6745968144958384"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "spider",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3470339531231949",
+      "ci_low": "0.29132335294345113",
+      "ci_high": "0.4041706627823628"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "spider",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4863293374440869",
+      "ci_low": "0.4350111439678068",
+      "ci_high": "0.5309879045458844"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "spider",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.564638858788356",
+      "ci_low": "0.5187138048453527",
+      "ci_high": "0.606063047832513"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "fense",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3467723908279349",
+      "ci_low": "0.2895271693603699",
+      "ci_high": "0.3993276384086939"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "fense",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5424634760117265",
+      "ci_low": "0.5002504345428075",
+      "ci_high": "0.5856127529755009"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "fense",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6885576099121434",
+      "ci_low": "0.6550186701300489",
+      "ci_high": "0.7202286627296308"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bertscore_f1_rescaled",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.303935254253852",
+      "ci_low": "0.24540089254927772",
+      "ci_high": "0.35921777303959573"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "bertscore_f1_rescaled",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.33738796058891996",
+      "ci_low": "0.2810031248938941",
+      "ci_high": "0.39343309807765997"
+    },
+    {
+      "scope": "gemini_3_8_flash",
+      "metric_a": "clap_similarity",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.9312544369128435",
+      "ci_low": "0.9210320620674817",
+      "ci_high": "0.9388691440743592"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_1",
+      "metric_b": "bleu_4",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.734348058215948",
+      "ci_low": "0.7049076031942048",
+      "ci_high": "0.7617234913994129"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_1",
+      "metric_b": "meteor",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6759077696768158",
+      "ci_low": "0.6379955777124974",
+      "ci_high": "0.7058197688499694"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_1",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.7720902854191207",
+      "ci_low": "0.7432909004659104",
+      "ci_high": "0.7966164004164591"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_1",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5286049002425887",
+      "ci_low": "0.48307850379134243",
+      "ci_high": "0.5714441180981317"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_1",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.7487424993208033",
+      "ci_low": "0.718773618106543",
+      "ci_high": "0.7763362642171269"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_1",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5468472251069453",
+      "ci_low": "0.5018622818195175",
+      "ci_high": "0.5906420221401737"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_1",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.43781869145851227",
+      "ci_low": "0.38526456695026384",
+      "ci_high": "0.4845891772871886"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_1",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.18342076644174804",
+      "ci_low": "0.12528528080195",
+      "ci_high": "0.24185984876905026"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_1",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3105987053368791",
+      "ci_low": "0.2569350530419716",
+      "ci_high": "0.36766714289117297"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_4",
+      "metric_b": "meteor",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6784308512808483",
+      "ci_low": "0.6399914173001736",
+      "ci_high": "0.7074625866635531"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_4",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.707118367420473",
+      "ci_low": "0.6758219176292112",
+      "ci_high": "0.7363590182347861"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_4",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5224444961867704",
+      "ci_low": "0.4717403250316809",
+      "ci_high": "0.5678430574777269"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_4",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.7078506014911796",
+      "ci_low": "0.6764974232092048",
+      "ci_high": "0.7368824495589712"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_4",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4983289985424063",
+      "ci_low": "0.4521496023770175",
+      "ci_high": "0.5430448624377067"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_4",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.41826608810795385",
+      "ci_low": "0.36339614539102294",
+      "ci_high": "0.4679144622993785"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_4",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.17468528285031376",
+      "ci_low": "0.11587519946377967",
+      "ci_high": "0.23111882452965418"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bleu_4",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.28773884049290605",
+      "ci_low": "0.2324626846158862",
+      "ci_high": "0.3407898722795138"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "meteor",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6975197702884464",
+      "ci_low": "0.6604934575705241",
+      "ci_high": "0.7275610538452817"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "meteor",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6462321472429359",
+      "ci_low": "0.6100452811756876",
+      "ci_high": "0.681879527780654"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "meteor",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.7584792179035028",
+      "ci_low": "0.7312388868778029",
+      "ci_high": "0.7819049563669165"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "meteor",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6040291427953939",
+      "ci_low": "0.5620769366681942",
+      "ci_high": "0.6422814572894671"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "meteor",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4778807646615826",
+      "ci_low": "0.4297881433017877",
+      "ci_high": "0.5260534669912639"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "meteor",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.2837553689044976",
+      "ci_low": "0.22664365082349303",
+      "ci_high": "0.3419592411235238"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "meteor",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.45595011971383825",
+      "ci_low": "0.40902782017245976",
+      "ci_high": "0.5061276933632994"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "cider_d",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5688537330801251",
+      "ci_low": "0.525846716884349",
+      "ci_high": "0.6112243307619897"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "cider_d",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.9239673579917114",
+      "ci_low": "0.9098966610118794",
+      "ci_high": "0.9365530158646178"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "cider_d",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6765993154995594",
+      "ci_low": "0.6415234998482973",
+      "ci_high": "0.7079881479021682"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "cider_d",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.477500528551928",
+      "ci_low": "0.4294304293353421",
+      "ci_high": "0.5223246924035689"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "cider_d",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.2896967299419993",
+      "ci_low": "0.23410161609886979",
+      "ci_high": "0.3446358945502856"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "cider_d",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4716854637718147",
+      "ci_low": "0.4224006591860407",
+      "ci_high": "0.5179768539118164"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "spice",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.8084813775839338",
+      "ci_low": "0.7824801534371196",
+      "ci_high": "0.8333332820651665"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "spice",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5340348947783191",
+      "ci_low": "0.48911557840321834",
+      "ci_high": "0.5788711490383769"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "spice",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3582053893378862",
+      "ci_low": "0.29996923295156974",
+      "ci_high": "0.41373420529403054"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "spice",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.28379416296218796",
+      "ci_low": "0.22807676918046244",
+      "ci_high": "0.3413161146207767"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "spice",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4415972470688268",
+      "ci_low": "0.3916984044088223",
+      "ci_high": "0.4940694067405694"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "spider",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6936454101802695",
+      "ci_low": "0.6585015842500619",
+      "ci_high": "0.7244463880640492"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "spider",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4771592930822557",
+      "ci_low": "0.4249600107524552",
+      "ci_high": "0.5240437458157222"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "spider",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.32984750637480076",
+      "ci_low": "0.2728121243692859",
+      "ci_high": "0.38544818001419945"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "spider",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5161816728566563",
+      "ci_low": "0.46937350845897996",
+      "ci_high": "0.5602288276013154"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "fense",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.403457437043854",
+      "ci_low": "0.3518844183443953",
+      "ci_high": "0.4558574006327841"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "fense",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.37138675852226394",
+      "ci_low": "0.31986107198280783",
+      "ci_high": "0.42357579994614214"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "fense",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6167788835599491",
+      "ci_low": "0.5798862881076543",
+      "ci_high": "0.6550985349489209"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bertscore_f1_rescaled",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.18105830673187953",
+      "ci_low": "0.1270570617245786",
+      "ci_high": "0.2426624681575696"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "bertscore_f1_rescaled",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.2986707232506837",
+      "ci_low": "0.2486835079864167",
+      "ci_high": "0.3546098016072998"
+    },
+    {
+      "scope": "qwen2_5_omni",
+      "metric_a": "clap_similarity",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.8447903085152237",
+      "ci_low": "0.8232278979202129",
+      "ci_high": "0.8629449634063128"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_1",
+      "metric_b": "bleu_4",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.7028250316205773",
+      "ci_low": "0.6647643548056895",
+      "ci_high": "0.7362385127374659"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_1",
+      "metric_b": "meteor",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6308953866424789",
+      "ci_low": "0.5861761471328746",
+      "ci_high": "0.6680329039263994"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_1",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.7887554563468755",
+      "ci_low": "0.7625343662040056",
+      "ci_high": "0.8124184949629888"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_1",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.49367607107605754",
+      "ci_low": "0.44460406094781557",
+      "ci_high": "0.5384480345204671"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_1",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.7725200907479728",
+      "ci_low": "0.7431843606905599",
+      "ci_high": "0.798707690258311"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_1",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.43335111392303705",
+      "ci_low": "0.3775078994431833",
+      "ci_high": "0.47894362008731334"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_1",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5869314369869066",
+      "ci_low": "0.539217781899691",
+      "ci_high": "0.6287346436849447"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_1",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.24747120170101325",
+      "ci_low": "0.18739866218244008",
+      "ci_high": "0.30186513964158307"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_1",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3955399577356033",
+      "ci_low": "0.34264004437808515",
+      "ci_high": "0.4462505961591975"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_4",
+      "metric_b": "meteor",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.7042436990040798",
+      "ci_low": "0.6706728200267277",
+      "ci_high": "0.7337530903528475"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_4",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6170738040919792",
+      "ci_low": "0.5687217854569824",
+      "ci_high": "0.6586675861034604"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_4",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5335399871639733",
+      "ci_low": "0.4883250297540858",
+      "ci_high": "0.5760979068242152"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_4",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6898166563344111",
+      "ci_low": "0.6543024938518899",
+      "ci_high": "0.7226306365675043"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_4",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4183866775438857",
+      "ci_low": "0.36495099861074",
+      "ci_high": "0.4673197812563729"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_4",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5326127208379949",
+      "ci_low": "0.48282624366851823",
+      "ci_high": "0.5788312900478039"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_4",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.2171697472782562",
+      "ci_low": "0.15676872626957888",
+      "ci_high": "0.27560842852960993"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bleu_4",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3448492095230321",
+      "ci_low": "0.29044045011191266",
+      "ci_high": "0.39692262063573286"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "meteor",
+      "metric_b": "cider_d",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5563380725084298",
+      "ci_low": "0.5047721412865421",
+      "ci_high": "0.6000771667825183"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "meteor",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6177778592430029",
+      "ci_low": "0.574515258024801",
+      "ci_high": "0.6591565209516367"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "meteor",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6801389456850113",
+      "ci_low": "0.6411542278671",
+      "ci_high": "0.7134068642333342"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "meteor",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5487608215426135",
+      "ci_low": "0.5038005856632645",
+      "ci_high": "0.5913558543235986"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "meteor",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5105923841005973",
+      "ci_low": "0.46188093251440954",
+      "ci_high": "0.5584442177057298"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "meteor",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3138969363444046",
+      "ci_low": "0.2576897490176615",
+      "ci_high": "0.3677137732819645"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "meteor",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.48477243720852015",
+      "ci_low": "0.432790917533588",
+      "ci_high": "0.5316567876403363"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "cider_d",
+      "metric_b": "spice",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.45410667636647056",
+      "ci_low": "0.400957400468898",
+      "ci_high": "0.5020097228839967"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "cider_d",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.894732194223819",
+      "ci_low": "0.8753563308916968",
+      "ci_high": "0.9109273102980919"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "cider_d",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5317597941219863",
+      "ci_low": "0.4807667514922634",
+      "ci_high": "0.5736337384910789"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "cider_d",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6049440135599523",
+      "ci_low": "0.5592147325819722",
+      "ci_high": "0.6478502553800702"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "cider_d",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.30445135597734907",
+      "ci_low": "0.2473160827561353",
+      "ci_high": "0.35539069959538205"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "cider_d",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4830884204763784",
+      "ci_low": "0.4360187509856719",
+      "ci_high": "0.5288042510707446"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "spice",
+      "metric_b": "spider",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.7541457543510218",
+      "ci_low": "0.7161635442193245",
+      "ci_high": "0.7840015109084546"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "spice",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5288760696429151",
+      "ci_low": "0.48397229267194974",
+      "ci_high": "0.5739785356034304"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "spice",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.37159460763816327",
+      "ci_low": "0.3134614247125332",
+      "ci_high": "0.42590676022924706"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "spice",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.27676870971521356",
+      "ci_low": "0.21629944688729613",
+      "ci_high": "0.3315187318954551"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "spice",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.4466389054163157",
+      "ci_low": "0.39464886782649516",
+      "ci_high": "0.4952978962841635"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "spider",
+      "metric_b": "fense",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6200504978648663",
+      "ci_low": "0.575213066969181",
+      "ci_high": "0.6583243276330804"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "spider",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5745154534934531",
+      "ci_low": "0.5272566950918279",
+      "ci_high": "0.6193981352624393"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "spider",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.341674419269822",
+      "ci_low": "0.28712966165309445",
+      "ci_high": "0.3905369582289788"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "spider",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.5453764989023323",
+      "ci_low": "0.500420783589699",
+      "ci_high": "0.5880780659978132"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "fense",
+      "metric_b": "bertscore_f1_rescaled",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.37191279655304277",
+      "ci_low": "0.31516401058649735",
+      "ci_high": "0.4262547084019197"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "fense",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3914870791524746",
+      "ci_low": "0.3363096855944528",
+      "ci_high": "0.44652374494902963"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "fense",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.6859854807334272",
+      "ci_low": "0.6474392828488239",
+      "ci_high": "0.7216856544008764"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bertscore_f1_rescaled",
+      "metric_b": "clap_similarity",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.21112902724536065",
+      "ci_low": "0.1488001288455693",
+      "ci_high": "0.26369757006894623"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "bertscore_f1_rescaled",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.3498968914290484",
+      "ci_low": "0.2923314584700795",
+      "ci_high": "0.4025130484802456"
+    },
+    {
+      "scope": "audio_flamingo_3",
+      "metric_a": "clap_similarity",
+      "metric_b": "mace",
+      "num_recordings": 1045,
+      "num_captions": 1045,
+      "spearman": "0.8314388063819829",
+      "ci_low": "0.8084597223139957",
+      "ci_high": "0.8515338088206418"
+    }
+  ],
+  "limitations": [
+    "The E18 and E19 rankings come from the 50-recording qualitative sample and one reviewer; the metric rankings from all 1,045 recordings. Their order-stability shares resample different numbers of recordings.",
+    "Kendall's tau over four models takes only seven values and is not tested; it summarises agreement between rankings, not its significance.",
+    "Concordance uses the 200 sampled captions: pairs within a recording share the recording and the references, but the pairs of one recording are not independent (the CI and test resample whole recordings). E19 ratings are one reviewer's judgements.",
+    "Metric correlations are over captions scored against five references (E12); they describe how the metrics vary together, not which metric is right."
+  ],
+  "outputs": {
+    "correlations": "outputs/scores/cross_metric_correlations.csv",
+    "rankings": "outputs/scores/model_rankings.csv",
+    "kendall_tau": "outputs/scores/ranking_kendall_tau.csv",
+    "concordance": "outputs/scores/audio_rating_concordance.csv",
+    "report_json": "outputs/reports/cross_metric_comparison.json",
+    "report_md": "outputs/reports/cross_metric_comparison.md"
+  }
+}
