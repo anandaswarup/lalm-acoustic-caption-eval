@@ -307,7 +307,7 @@ Tasks are numbered E01–E25. Configs, scripts, Makefile targets and commit mess
 | | E18 | Annotate model–reference agreement | Done |
 | | E19 | Audio-grounded review of the qualitative sample | Done |
 | | E20 | Representative caption comparisons | Done |
-| 6. Synthesis and reproducibility | E21 | Cross-metric and model comparison | Done |
+| 6. Synthesis and repository | E21 | Cross-metric and model comparison | Done |
 | | E22 | Finalize research repository | — |
 | 7. Manuscript and release | E23 | Draft manuscript | — |
 | | E24 | Final validation, public release and submission | — |
