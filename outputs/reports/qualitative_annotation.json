@@ -1,14 +1,14 @@
 {
   "run_info": {
     "experiment": "analyze_annotations",
-    "timestamp_utc": "2026-11-07T09:34:30+00:00",
-    "git_commit": "cb95ac144df7e879cf62bb12d617f346a597e0a1",
+    "timestamp_utc": "2026-11-07T14:11:17+00:00",
+    "git_commit": "5c064eadefc92101a510c63154af37228399b519",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
   },
-  "task": "E18",
+  "task": "E17",
   "display_names": {
     "gpt_audio_1_5": "GPT-Audio-1.5",
     "gemini_3_8_flash": "Gemini 3.8 Flash",
@@ -79,11 +79,11 @@
     },
     "manifest": {
       "path": "outputs/qualitative/sample_manifest.json",
-      "sha256": "8d71514231d629630b8402130f86c6031beb35ee07e6f0f1ca0edc4ed9ecb3df"
+      "sha256": "3a580c7f05660249e6fffd31d4b651720f51cc785430b98d06c1ce72a4a763cb"
     },
     "guidelines": {
       "path": "outputs/qualitative/annotation_guidelines.md",
-      "sha256": "dfca7e00dde7e28a55c1af0c8f2f4c6b401ae273200bc40d3b021c3b585969de"
+      "sha256": "54b25809d695fc7ca8da5659ccbd49194e0df42b47b6be549314dbff8b668025"
     },
     "key": {
       "path": "outputs/qualitative/blinding_key.csv",
@@ -590,8 +590,8 @@
   ],
   "limitations": [
     "One reviewer labelled every item, so inter-annotator agreement cannot be estimated and each label is a single judgement; more reviewers are left for future work.",
-    "The reviewer had seen pilot captions (E05) and knows the models' styles, so blinding is weaker than for a new reviewer; captions also carry style cues (E17).",
-    "Categories describe agreement with the references, not correctness about the audio; disputed details are checked against the audio in E19.",
+    "The reviewer had seen earlier captions from these models and knows their styles, so blinding is weaker than for a new reviewer; captions also carry style cues (E16).",
+    "Categories describe agreement with the references, not correctness about the audio; disputed details are checked against the audio in E18.",
     "With 50 items per model, proportions are coarse (one item is 2 percentage points) and the Wilson intervals wide; the summary is descriptive and the four captions of a recording are not independent."
   ],
   "outputs": {
