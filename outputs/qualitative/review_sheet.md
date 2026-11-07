@@ -1,4 +1,4 @@
-# Qualitative review sheet (E17-E18)
+# Qualitative review sheet (E16-E17)
 
 Reading view of `review_items.csv`. Enter labels in the annotation template (`annotations_reviewer_1.csv`), following `annotation_guidelines.md`.
 

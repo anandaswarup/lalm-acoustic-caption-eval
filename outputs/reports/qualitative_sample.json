@@ -1,14 +1,14 @@
 {
   "run_info": {
     "experiment": "prepare_qualitative",
-    "timestamp_utc": "2026-11-07T09:34:11+00:00",
-    "git_commit": "c095ae4867fb0568c40a518d68f7e205014ff4c0",
+    "timestamp_utc": "2026-11-07T14:11:16+00:00",
+    "git_commit": "79a58efc257bea57b8e807fffe1044587feca3e3",
     "git_dirty": true,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
   },
-  "task": "E17",
+  "task": "E16",
   "models": [
     "gpt_audio_1_5",
     "gemini_3_8_flash",
@@ -16,7 +16,7 @@
     "audio_flamingo_3"
   ],
   "manifest": {
-    "task": "E17",
+    "task": "E16",
     "seed": 42,
     "population": 1045,
     "num_recordings": 50,
@@ -339,7 +339,7 @@
     }
   ],
   "limitations": [
-    "Blinding is imperfect: style can reveal a model (GPT's JSON-like captions are shown as scored, many Qwen captions begin with 'The audio', and the models differ in typical length; see E06-E10 and E15).",
+    "Blinding is imperfect: style can reveal a model (GPT's JSON-like captions are shown as scored, many Qwen captions begin with 'The audio', and the models differ in typical length; see E05-E09 and E14).",
     "One reviewer annotates the sample, so inter-annotator agreement cannot be estimated and every label reflects a single judgement; more reviewers are left for future work.",
     "50 recordings give coarse category proportions per model (one caption is 2 percentage points); the review is exploratory and not used to estimate dataset-wide rates."
   ],
