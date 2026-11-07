@@ -1,0 +1,6 @@
+model_key,category_6,real_mismatch,references_incomplete
+gpt_audio_1_5,15,0,15
+gemini_3_8_flash,24,6,18
+qwen2_5_omni,15,1,14
+audio_flamingo_3,10,1,9
+all,64,8,56

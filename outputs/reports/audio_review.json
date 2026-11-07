@@ -1,0 +1,1185 @@
+{
+  "run_info": {
+    "experiment": "analyze_audio_review",
+    "timestamp_utc": "2026-11-07T06:06:45+00:00",
+    "git_commit": "bc60ae09a4819ff701f0edca3578549f3691e70e",
+    "git_dirty": false,
+    "python": "3.13.12",
+    "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+    "seed": 42
+  },
+  "task": "E19",
+  "display_names": {
+    "gpt_audio_1_5": "GPT-Audio-1.5",
+    "gemini_3_8_flash": "Gemini 3.8 Flash",
+    "qwen2_5_omni": "Qwen2.5-Omni-7B",
+    "audio_flamingo_3": "Audio Flamingo 3"
+  },
+  "categories": [
+    {
+      "code": 1,
+      "name": "Strong agreement",
+      "description": "Closely matches the principal sound sources, events and characteristics in the references."
+    },
+    {
+      "code": 2,
+      "name": "Mostly aligned",
+      "description": "Agrees with the main content of the references, with minor differences in wording or emphasis."
+    },
+    {
+      "code": 3,
+      "name": "Mostly aligned with additional details",
+      "description": "The main description agrees, but the caption adds acoustic details absent from the references."
+    },
+    {
+      "code": 4,
+      "name": "Partially aligned with missing details",
+      "description": "Captures some referenced content but omits important sound sources, events or characteristics."
+    },
+    {
+      "code": 5,
+      "name": "Partially aligned with additional details",
+      "description": "Captures some referenced content but introduces sources, events or descriptions not in the references."
+    },
+    {
+      "code": 6,
+      "name": "Weak agreement or sound-source/event mismatch",
+      "description": "Differs substantially from the references or appears to describe a different source or event."
+    }
+  ],
+  "ratings": [
+    {
+      "code": 1,
+      "name": "Accurate",
+      "description": "Every sound source and event in the caption is audible, and the described attributes and order match the recording. Omitting secondary sounds is acceptable."
+    },
+    {
+      "code": 2,
+      "name": "Minor errors",
+      "description": "The principal sound source and event are correct, but the caption has a wrong attribute or order, an unsupported secondary detail, or omits a secondary sound."
+    },
+    {
+      "code": 3,
+      "name": "Major error or wrong sound source",
+      "description": "The principal sound source or event is wrong, a principal source is invented, or the dominant sound is omitted."
+    }
+  ],
+  "verdicts": [
+    {
+      "code": "S",
+      "name": "Supported",
+      "description": "The recording contains what the phrase describes."
+    },
+    {
+      "code": "U",
+      "name": "Unsupported",
+      "description": "The recording does not contain what the phrase describes, or contradicts it."
+    },
+    {
+      "code": "A",
+      "name": "Ambiguous or unverifiable",
+      "description": "Listening can neither confirm nor rule it out (masked, too faint, or not decidable from sound alone)."
+    }
+  ],
+  "confidence": 0.95,
+  "metrics": [
+    "cider_d",
+    "spice",
+    "fense",
+    "bertscore_f1_rescaled",
+    "clap_similarity",
+    "mace"
+  ],
+  "metric_labels": {
+    "cider_d": "CIDEr-D",
+    "spice": "SPICE",
+    "fense": "FENSE",
+    "bertscore_f1_rescaled": "BERTScore-F1 (rescaled)",
+    "clap_similarity": "CLAP similarity",
+    "mace": "MACE"
+  },
+  "num_items": 200,
+  "num_recordings": 50,
+  "num_phrases": 262,
+  "items_per_model": 50,
+  "inputs_verified": true,
+  "inputs": {
+    "audio_annotations": {
+      "path": "outputs/qualitative/audio_annotations_reviewer_1.csv",
+      "sha256": "f25ad85e0e551802b5714c820eb4b8f4ccda642b29987568ba153275b92ee59b"
+    },
+    "phrase_verdicts": {
+      "path": "outputs/qualitative/disputed_verification_reviewer_1.csv",
+      "sha256": "3cdedafbdcd0d985eb3229eeda726f0ce799b60256c122a60face6bf4b60cab6"
+    },
+    "review": {
+      "path": "outputs/qualitative/review_items.csv",
+      "sha256": "fa4daa5af2dea529a306a9cd8eb2507fe2574cffa0fa053f97239786da269f24"
+    },
+    "annotations": {
+      "path": "outputs/qualitative/annotations_reviewer_1.csv",
+      "sha256": "7bab15af12162fb9221b7346f937c2d14faf4d25b2b5b44775ad596395b252ee"
+    },
+    "sample_manifest": {
+      "path": "outputs/qualitative/sample_manifest.json",
+      "sha256": "8d71514231d629630b8402130f86c6031beb35ee07e6f0f1ca0edc4ed9ecb3df"
+    },
+    "audio_review_manifest": {
+      "path": "outputs/qualitative/audio_review_manifest.json",
+      "sha256": "58d7ef80492b5682ccc60466f0b98b72b37dab45a0cbf08bd4e7766c49785e41"
+    },
+    "guidelines": {
+      "path": "outputs/qualitative/audio_review_guidelines.md",
+      "sha256": "8be84bdf6e5853facad51f0b298f4b87f42ee38b3b79a85a345610cdf2dc8883"
+    },
+    "key": {
+      "path": "outputs/qualitative/blinding_key.csv",
+      "sha256": "f173edd52b8bd09a3dfc0e68b700041fa5b621abc38a00b727daf627609b2a2a"
+    }
+  },
+  "rating_summary": [
+    {
+      "model_key": "gpt_audio_1_5",
+      "audio_rating": 1,
+      "count": 47,
+      "total": 50,
+      "share": 0.94,
+      "ci_low": 0.8378290831116182,
+      "ci_high": 0.979385029651026
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "audio_rating": 2,
+      "count": 3,
+      "total": 50,
+      "share": 0.06,
+      "ci_low": 0.02061497034897397,
+      "ci_high": 0.16217091688838167
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "audio_rating": 3,
+      "count": 0,
+      "total": 50,
+      "share": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.07134759913335868
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "audio_rating": 1,
+      "count": 23,
+      "total": 50,
+      "share": 0.46,
+      "ci_low": 0.3296965219222435,
+      "ci_high": 0.5960112860084252
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "audio_rating": 2,
+      "count": 18,
+      "total": 50,
+      "share": 0.36,
+      "ci_low": 0.2413874965184674,
+      "ci_high": 0.498589831238873
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "audio_rating": 3,
+      "count": 9,
+      "total": 50,
+      "share": 0.18,
+      "ci_low": 0.09770192670234176,
+      "ci_high": 0.3079605367430077
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "audio_rating": 1,
+      "count": 25,
+      "total": 50,
+      "share": 0.5,
+      "ci_low": 0.3664451431682858,
+      "ci_high": 0.6335548568317142
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "audio_rating": 2,
+      "count": 20,
+      "total": 50,
+      "share": 0.4,
+      "ci_low": 0.27608389730256544,
+      "ci_high": 0.5381856225241063
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "audio_rating": 3,
+      "count": 5,
+      "total": 50,
+      "share": 0.1,
+      "ci_low": 0.04347576493189044,
+      "ci_high": 0.21360231437479654
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "audio_rating": 1,
+      "count": 27,
+      "total": 50,
+      "share": 0.54,
+      "ci_low": 0.4039887139915749,
+      "ci_high": 0.6703034780777565
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "audio_rating": 2,
+      "count": 16,
+      "total": 50,
+      "share": 0.32,
+      "ci_low": 0.20758216260656848,
+      "ci_high": 0.45810297308144066
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "audio_rating": 3,
+      "count": 7,
+      "total": 50,
+      "share": 0.14,
+      "ci_low": 0.06950833427016292,
+      "ci_high": 0.26186193710585537
+    },
+    {
+      "model_key": "all",
+      "audio_rating": 1,
+      "count": 122,
+      "total": 200,
+      "share": 0.61,
+      "ci_low": 0.5409374595716976,
+      "ci_high": 0.6749165686253038
+    },
+    {
+      "model_key": "all",
+      "audio_rating": 2,
+      "count": 57,
+      "total": 200,
+      "share": 0.285,
+      "ci_low": 0.22695003004617292,
+      "ci_high": 0.3511534602960517
+    },
+    {
+      "model_key": "all",
+      "audio_rating": 3,
+      "count": 21,
+      "total": 200,
+      "share": 0.105,
+      "ci_low": 0.06970748792681017,
+      "ci_high": 0.15518031991123038
+    }
+  ],
+  "verdict_summary": [
+    {
+      "model_key": "gpt_audio_1_5",
+      "verdict": "S",
+      "count": 55,
+      "total": 59,
+      "share": 0.9322033898305084,
+      "ci_low": 0.838244756312555,
+      "ci_high": 0.9733213810286956
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "verdict": "U",
+      "count": 1,
+      "total": 59,
+      "share": 0.01694915254237288,
+      "ci_low": 0.0029982339183556306,
+      "ci_high": 0.08995725964142293
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "verdict": "A",
+      "count": 3,
+      "total": 59,
+      "share": 0.05084745762711865,
+      "ci_low": 0.01744271747299006,
+      "ci_high": 0.13916502215276896
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "verdict": "S",
+      "count": 38,
+      "total": 80,
+      "share": 0.475,
+      "ci_low": 0.3692473329740758,
+      "ci_high": 0.5830435735027006
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "verdict": "U",
+      "count": 34,
+      "total": 80,
+      "share": 0.425,
+      "ci_low": 0.3225656178960178,
+      "ci_high": 0.5343071015343114
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "verdict": "A",
+      "count": 8,
+      "total": 80,
+      "share": 0.1,
+      "ci_low": 0.051547615567380856,
+      "ci_high": 0.18510688806104086
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "verdict": "S",
+      "count": 37,
+      "total": 58,
+      "share": 0.6379310344827587,
+      "ci_low": 0.509275237048117,
+      "ci_high": 0.7494508717002409
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "verdict": "U",
+      "count": 20,
+      "total": 58,
+      "share": 0.3448275862068966,
+      "ci_low": 0.23561089331950172,
+      "ci_high": 0.47332223433859577
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "verdict": "A",
+      "count": 1,
+      "total": 58,
+      "share": 0.017241379310344827,
+      "ci_low": 0.0030500384460675142,
+      "ci_high": 0.0914085809346801
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "verdict": "S",
+      "count": 38,
+      "total": 65,
+      "share": 0.5846153846153846,
+      "ci_low": 0.4633898487349737,
+      "ci_high": 0.6963975844257737
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "verdict": "U",
+      "count": 19,
+      "total": 65,
+      "share": 0.2923076923076923,
+      "ci_low": 0.19583410987679917,
+      "ci_high": 0.41196037236500294
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "verdict": "A",
+      "count": 8,
+      "total": 65,
+      "share": 0.12307692307692308,
+      "ci_low": 0.06370467509869226,
+      "ci_high": 0.22451494082161522
+    },
+    {
+      "model_key": "all",
+      "verdict": "S",
+      "count": 168,
+      "total": 262,
+      "share": 0.6412213740458015,
+      "ci_low": 0.5814873354967,
+      "ci_high": 0.6968740620380308
+    },
+    {
+      "model_key": "all",
+      "verdict": "U",
+      "count": 74,
+      "total": 262,
+      "share": 0.2824427480916031,
+      "ci_low": 0.23137868897723418,
+      "ci_high": 0.3397942931989914
+    },
+    {
+      "model_key": "all",
+      "verdict": "A",
+      "count": 20,
+      "total": 262,
+      "share": 0.07633587786259542,
+      "ci_low": 0.0499564687172644,
+      "ci_high": 0.11495933867854327
+    }
+  ],
+  "unsupported_summary": [
+    {
+      "model_key": "gpt_audio_1_5",
+      "captions": 50,
+      "captions_with_phrases": 40,
+      "captions_with_unsupported": 1,
+      "share": 0.02,
+      "ci_low": 0.003539259271646236,
+      "ci_high": 0.1049544358963781
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "captions": 50,
+      "captions_with_phrases": 46,
+      "captions_with_unsupported": 26,
+      "share": 0.52,
+      "ci_low": 0.3851174489004462,
+      "ci_high": 0.6520286471342195
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "captions": 50,
+      "captions_with_phrases": 40,
+      "captions_with_unsupported": 19,
+      "share": 0.38,
+      "ci_low": 0.2586278931019359,
+      "ci_high": 0.5184955306900701
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "captions": 50,
+      "captions_with_phrases": 40,
+      "captions_with_unsupported": 15,
+      "share": 0.3,
+      "ci_low": 0.1910355350088095,
+      "ci_high": 0.43750350464453397
+    },
+    {
+      "model_key": "all",
+      "captions": 200,
+      "captions_with_phrases": 166,
+      "captions_with_unsupported": 61,
+      "share": 0.305,
+      "ci_low": 0.24536415630735037,
+      "ci_high": 0.3719855209797836
+    }
+  ],
+  "crosstab": [
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 1,
+      "audio_rating": 1,
+      "count": 3
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 1,
+      "audio_rating": 2,
+      "count": 0
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 1,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 2,
+      "audio_rating": 1,
+      "count": 6
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 2,
+      "audio_rating": 2,
+      "count": 0
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 2,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 3,
+      "audio_rating": 1,
+      "count": 6
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 3,
+      "audio_rating": 2,
+      "count": 0
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 3,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 4,
+      "audio_rating": 1,
+      "count": 10
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 4,
+      "audio_rating": 2,
+      "count": 0
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 4,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 5,
+      "audio_rating": 1,
+      "count": 7
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 5,
+      "audio_rating": 2,
+      "count": 3
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 5,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 6,
+      "audio_rating": 1,
+      "count": 15
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 6,
+      "audio_rating": 2,
+      "count": 0
+    },
+    {
+      "model_key": "gpt_audio_1_5",
+      "category": 6,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 1,
+      "audio_rating": 1,
+      "count": 0
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 1,
+      "audio_rating": 2,
+      "count": 1
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 1,
+      "audio_rating": 3,
+      "count": 1
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 2,
+      "audio_rating": 1,
+      "count": 2
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 2,
+      "audio_rating": 2,
+      "count": 0
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 2,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 3,
+      "audio_rating": 1,
+      "count": 1
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 3,
+      "audio_rating": 2,
+      "count": 3
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 3,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 4,
+      "audio_rating": 1,
+      "count": 6
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 4,
+      "audio_rating": 2,
+      "count": 0
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 4,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 5,
+      "audio_rating": 1,
+      "count": 2
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 5,
+      "audio_rating": 2,
+      "count": 8
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 5,
+      "audio_rating": 3,
+      "count": 2
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 6,
+      "audio_rating": 1,
+      "count": 12
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 6,
+      "audio_rating": 2,
+      "count": 6
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category": 6,
+      "audio_rating": 3,
+      "count": 6
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 1,
+      "audio_rating": 1,
+      "count": 3
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 1,
+      "audio_rating": 2,
+      "count": 2
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 1,
+      "audio_rating": 3,
+      "count": 1
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 2,
+      "audio_rating": 1,
+      "count": 3
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 2,
+      "audio_rating": 2,
+      "count": 1
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 2,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 3,
+      "audio_rating": 1,
+      "count": 4
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 3,
+      "audio_rating": 2,
+      "count": 4
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 3,
+      "audio_rating": 3,
+      "count": 3
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 4,
+      "audio_rating": 1,
+      "count": 4
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 4,
+      "audio_rating": 2,
+      "count": 1
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 4,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 5,
+      "audio_rating": 1,
+      "count": 3
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 5,
+      "audio_rating": 2,
+      "count": 6
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 5,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 6,
+      "audio_rating": 1,
+      "count": 8
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 6,
+      "audio_rating": 2,
+      "count": 6
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category": 6,
+      "audio_rating": 3,
+      "count": 1
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 1,
+      "audio_rating": 1,
+      "count": 4
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 1,
+      "audio_rating": 2,
+      "count": 0
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 1,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 2,
+      "audio_rating": 1,
+      "count": 7
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 2,
+      "audio_rating": 2,
+      "count": 5
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 2,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 3,
+      "audio_rating": 1,
+      "count": 4
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 3,
+      "audio_rating": 2,
+      "count": 4
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 3,
+      "audio_rating": 3,
+      "count": 2
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 4,
+      "audio_rating": 1,
+      "count": 3
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 4,
+      "audio_rating": 2,
+      "count": 2
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 4,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 5,
+      "audio_rating": 1,
+      "count": 2
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 5,
+      "audio_rating": 2,
+      "count": 3
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 5,
+      "audio_rating": 3,
+      "count": 4
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 6,
+      "audio_rating": 1,
+      "count": 7
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 6,
+      "audio_rating": 2,
+      "count": 2
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category": 6,
+      "audio_rating": 3,
+      "count": 1
+    },
+    {
+      "model_key": "all",
+      "category": 1,
+      "audio_rating": 1,
+      "count": 10
+    },
+    {
+      "model_key": "all",
+      "category": 1,
+      "audio_rating": 2,
+      "count": 3
+    },
+    {
+      "model_key": "all",
+      "category": 1,
+      "audio_rating": 3,
+      "count": 2
+    },
+    {
+      "model_key": "all",
+      "category": 2,
+      "audio_rating": 1,
+      "count": 18
+    },
+    {
+      "model_key": "all",
+      "category": 2,
+      "audio_rating": 2,
+      "count": 6
+    },
+    {
+      "model_key": "all",
+      "category": 2,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "all",
+      "category": 3,
+      "audio_rating": 1,
+      "count": 15
+    },
+    {
+      "model_key": "all",
+      "category": 3,
+      "audio_rating": 2,
+      "count": 11
+    },
+    {
+      "model_key": "all",
+      "category": 3,
+      "audio_rating": 3,
+      "count": 5
+    },
+    {
+      "model_key": "all",
+      "category": 4,
+      "audio_rating": 1,
+      "count": 23
+    },
+    {
+      "model_key": "all",
+      "category": 4,
+      "audio_rating": 2,
+      "count": 3
+    },
+    {
+      "model_key": "all",
+      "category": 4,
+      "audio_rating": 3,
+      "count": 0
+    },
+    {
+      "model_key": "all",
+      "category": 5,
+      "audio_rating": 1,
+      "count": 14
+    },
+    {
+      "model_key": "all",
+      "category": 5,
+      "audio_rating": 2,
+      "count": 20
+    },
+    {
+      "model_key": "all",
+      "category": 5,
+      "audio_rating": 3,
+      "count": 6
+    },
+    {
+      "model_key": "all",
+      "category": 6,
+      "audio_rating": 1,
+      "count": 42
+    },
+    {
+      "model_key": "all",
+      "category": 6,
+      "audio_rating": 2,
+      "count": 14
+    },
+    {
+      "model_key": "all",
+      "category": 6,
+      "audio_rating": 3,
+      "count": 8
+    }
+  ],
+  "mismatch_split": [
+    {
+      "model_key": "gpt_audio_1_5",
+      "category_6": 15,
+      "real_mismatch": 0,
+      "references_incomplete": 15
+    },
+    {
+      "model_key": "gemini_3_8_flash",
+      "category_6": 24,
+      "real_mismatch": 6,
+      "references_incomplete": 18
+    },
+    {
+      "model_key": "qwen2_5_omni",
+      "category_6": 15,
+      "real_mismatch": 1,
+      "references_incomplete": 14
+    },
+    {
+      "model_key": "audio_flamingo_3",
+      "category_6": 10,
+      "real_mismatch": 1,
+      "references_incomplete": 9
+    },
+    {
+      "model_key": "all",
+      "category_6": 64,
+      "real_mismatch": 8,
+      "references_incomplete": 56
+    }
+  ],
+  "scores_by_audio_rating": [
+    {
+      "audio_rating": 1,
+      "metric": "cider_d",
+      "num_items": 122,
+      "mean": 0.10043643690658254,
+      "sd": 0.16012415352978915
+    },
+    {
+      "audio_rating": 1,
+      "metric": "spice",
+      "num_items": 122,
+      "mean": 0.07773582585925651,
+      "sd": 0.06986497065205606
+    },
+    {
+      "audio_rating": 1,
+      "metric": "fense",
+      "num_items": 122,
+      "mean": 0.4311231924678947,
+      "sd": 0.17725439709788213
+    },
+    {
+      "audio_rating": 1,
+      "metric": "bertscore_f1_rescaled",
+      "num_items": 122,
+      "mean": 0.2437524668817967,
+      "sd": 0.09665204775689068
+    },
+    {
+      "audio_rating": 1,
+      "metric": "clap_similarity",
+      "num_items": 122,
+      "mean": 0.46380651194363554,
+      "sd": 0.11276174988271542
+    },
+    {
+      "audio_rating": 1,
+      "metric": "mace",
+      "num_items": 122,
+      "mean": 0.5674167608222412,
+      "sd": 0.10862962941184211
+    },
+    {
+      "audio_rating": 2,
+      "metric": "cider_d",
+      "num_items": 57,
+      "mean": 0.0849993782843527,
+      "sd": 0.10785280070096012
+    },
+    {
+      "audio_rating": 2,
+      "metric": "spice",
+      "num_items": 57,
+      "mean": 0.07146871512466921,
+      "sd": 0.07097772584307176
+    },
+    {
+      "audio_rating": 2,
+      "metric": "fense",
+      "num_items": 57,
+      "mean": 0.4230816565584718,
+      "sd": 0.16005744321384896
+    },
+    {
+      "audio_rating": 2,
+      "metric": "bertscore_f1_rescaled",
+      "num_items": 57,
+      "mean": 0.26035242753629945,
+      "sd": 0.09429488464715331
+    },
+    {
+      "audio_rating": 2,
+      "metric": "clap_similarity",
+      "num_items": 57,
+      "mean": 0.4652335007571189,
+      "sd": 0.10415936122546647
+    },
+    {
+      "audio_rating": 2,
+      "metric": "mace",
+      "num_items": 57,
+      "mean": 0.5614484468763498,
+      "sd": 0.09363413768551086
+    },
+    {
+      "audio_rating": 3,
+      "metric": "cider_d",
+      "num_items": 21,
+      "mean": 0.16429456339252574,
+      "sd": 0.2866144136188265
+    },
+    {
+      "audio_rating": 3,
+      "metric": "spice",
+      "num_items": 21,
+      "mean": 0.08547776418653726,
+      "sd": 0.08103336854980922
+    },
+    {
+      "audio_rating": 3,
+      "metric": "fense",
+      "num_items": 21,
+      "mean": 0.4198123237206822,
+      "sd": 0.2304756172623003
+    },
+    {
+      "audio_rating": 3,
+      "metric": "bertscore_f1_rescaled",
+      "num_items": 21,
+      "mean": 0.2960850583584517,
+      "sd": 0.118448507059272
+    },
+    {
+      "audio_rating": 3,
+      "metric": "clap_similarity",
+      "num_items": 21,
+      "mean": 0.43375792793346346,
+      "sd": 0.12936294473860435
+    },
+    {
+      "audio_rating": 3,
+      "metric": "mace",
+      "num_items": 21,
+      "mean": 0.5352593903034045,
+      "sd": 0.137248596563775
+    }
+  ],
+  "rating_conflicts": [
+    "R04B"
+  ],
+  "limitations": [
+    "One reviewer rated every caption, so inter-annotator agreement cannot be estimated; more reviewers are left for future work.",
+    "The reviewer had read the references and assigned the E18 categories before listening, so the audio judgements may be anchored on them; captions also carry model style cues (E17).",
+    "Only the phrases E18 marked as unsupported by every reference were verified one by one; the verdict shares are therefore not error rates for all caption content.",
+    "Ratings record what one listener hears in the recording; Clotho has no ground-truth source labels.",
+    "With 50 captions per model, proportions are coarse (one caption is 2 percentage points) and the Wilson intervals wide. Pooled and phrase-level intervals treat the four captions of a recording and the phrases of a caption as independent, so they are too narrow; the summary is descriptive."
+  ],
+  "outputs": {
+    "captions": "outputs/qualitative/audio_review_annotations.csv",
+    "phrases": "outputs/qualitative/disputed_verification.csv",
+    "rating_summary": "outputs/qualitative/audio_rating_summary.csv",
+    "verdict_summary": "outputs/qualitative/verdict_summary.csv",
+    "unsupported_summary": "outputs/qualitative/unsupported_summary.csv",
+    "crosstab": "outputs/qualitative/category_by_audio_rating.csv",
+    "mismatch_split": "outputs/qualitative/category_6_split.csv",
+    "scores_by_audio_rating": "outputs/qualitative/scores_by_audio_rating.csv",
+    "report_json": "outputs/reports/audio_review.json",
+    "report_md": "outputs/reports/audio_review.md"
+  }
+}
