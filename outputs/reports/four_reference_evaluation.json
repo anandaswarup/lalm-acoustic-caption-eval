@@ -1,14 +1,14 @@
 {
   "run_info": {
     "experiment": "evaluate_captions",
-    "timestamp_utc": "2026-11-07T08:36:27+00:00",
-    "git_commit": "7d9efa9a17139d08bbc537c4950e4ab4667372fd",
+    "timestamp_utc": "2026-11-07T13:15:14+00:00",
+    "git_commit": "b13bcf9c4a283ce5929d0b1170cc57470324c88c",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
   },
-  "task": "E14",
+  "task": "E13",
   "condition": "four_reference",
   "smoke_test_limit": null,
   "display_names": {
@@ -93,7 +93,7 @@
         "sha256": "c4cc09bc2af192b7aebc630b8034b864d144b7ff1c3486ef44a02351509bd851"
       },
       "report": "outputs/reports/human_loo_evaluation.json",
-      "git_commit": "00223647dbe6d69fc8683253a0cd7662a0a4993a"
+      "git_commit": "c89122d4411e8da5b6a1255f3eea973c34d709b0"
     }
   },
   "bootstrap": {
@@ -21496,15 +21496,15 @@
   },
   "timing": {
     "seconds": {
-      "ptb_tokenize": 8.96,
-      "bleu": 3.13,
-      "meteor": 123.19,
-      "cider_d": 14.99,
-      "spice": 756.35,
-      "fluency_error": 59.77,
-      "sbert": 258.65,
-      "bertscore": 1449.67,
-      "clap_text": 228.97,
+      "ptb_tokenize": 8.77,
+      "bleu": 3.09,
+      "meteor": 123.24,
+      "cider_d": 14.92,
+      "spice": 742.83,
+      "fluency_error": 59.52,
+      "sbert": 255.76,
+      "bertscore": 1439.0,
+      "clap_text": 227.21,
       "clap_audio": 0.06
     },
     "calls": {
@@ -21520,8 +21520,8 @@
       "clap_text": 20,
       "clap_audio": 20
     },
-    "load_models_seconds": 6.6,
-    "scoring_seconds": 2903.7,
+    "load_models_seconds": 5.5,
+    "scoring_seconds": 2874.4,
     "clap_cache_hits": 1045
   },
   "outputs": {
@@ -21535,9 +21535,9 @@
     "report_md": "outputs/reports/four_reference_evaluation.md"
   },
   "limitations": [
-    "Model and human captions are scored against the same four references (subset drop_k, the references left after removing CSV position k) and averaged over the five subsets in the same way; only these matched scores are compared. Four-reference scores are not comparable with the five-reference model scores of E12.",
-    "Reference-free scores (CLAP similarity, MACE audio-only, fluency-error rates) do not depend on the references: a model's value is the same in every subset and equals its E12 value, while the human value averages five different captions.",
-    "A model caption is never among its references, but a held-out human caption may have a near-paraphrase among its four (E13). The near-paraphrase samples keep, for model and human alike, only the (recording, subset) pairs whose held-out caption has closest-reference overlap below the threshold.",
+    "Model and human captions are scored against the same four references (subset drop_k, the references left after removing CSV position k) and averaged over the five subsets in the same way; only these matched scores are compared. Four-reference scores are not comparable with the five-reference model scores of E11.",
+    "Reference-free scores (CLAP similarity, MACE audio-only, fluency-error rates) do not depend on the references: a model's value is the same in every subset and equals its E11 value, while the human value averages five different captions.",
+    "A model caption is never among its references, but a held-out human caption may have a near-paraphrase among its four (E12). The near-paraphrase samples keep, for model and human alike, only the (recording, subset) pairs whose held-out caption has closest-reference overlap below the threshold.",
     "CIDEr-D, SPICE, SPIDEr and SPIDEr-FL depend on the reference set (CIDEr-D's document frequencies come from the references of each call), so five-reference (E12) and four-reference (E13/E14) scores are not directly comparable.",
     "BLEU and METEOR corpus values are computed from corpus statistics, not as the mean of per-item scores; bootstrap intervals are on the per-item mean and are reported next to the corpus value.",
     "BERTScore follows aac-metrics: roberta-large's last layer (24), no IDF, the maximum over references. Raw F1 is compressed near 1; the rescaled F1 (layer-24 baseline) is reported as a secondary column.",
