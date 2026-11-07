@@ -9,8 +9,8 @@ five_reference,all,all,spice,audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_
 five_reference,all,all,spider,audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.547,10000
 five_reference,all,all,spider_fl,audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.5461,10000
 five_reference,all,all,fense,audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,0.9935,10000
-five_reference,all,all,bertscore_f1,audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.6034,10000
-five_reference,all,all,bertscore_f1_rescaled,audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.6034,10000
+five_reference,all,all,bertscore_f1,audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
+five_reference,all,all,bertscore_f1_rescaled,audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
 five_reference,all,all,clap_similarity,audio_flamingo_3;gpt_audio_1_5;qwen2_5_omni;gemini_3_8_flash,0.8678,10000
 five_reference,all,all,mace,audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,0.7143,10000
 five_reference,all,valid_for_all_models,bleu_1,audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
@@ -23,8 +23,8 @@ five_reference,all,valid_for_all_models,spice,audio_flamingo_3;qwen2_5_omni;gpt_
 five_reference,all,valid_for_all_models,spider,audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.5126,10000
 five_reference,all,valid_for_all_models,spider_fl,audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.5118,10000
 five_reference,all,valid_for_all_models,fense,audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,0.9979,10000
-five_reference,all,valid_for_all_models,bertscore_f1,audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.5839,10000
-five_reference,all,valid_for_all_models,bertscore_f1_rescaled,audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.5839,10000
+five_reference,all,valid_for_all_models,bertscore_f1,audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
+five_reference,all,valid_for_all_models,bertscore_f1_rescaled,audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
 five_reference,all,valid_for_all_models,clap_similarity,audio_flamingo_3;gpt_audio_1_5;qwen2_5_omni;gemini_3_8_flash,0.8922,10000
 five_reference,all,valid_for_all_models,mace,audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,0.5139,10000
 four_reference,mean_drop_1_5,all,bleu_1,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
@@ -37,8 +37,8 @@ four_reference,mean_drop_1_5,all,spice,human;audio_flamingo_3;qwen2_5_omni;gpt_a
 four_reference,mean_drop_1_5,all,spider,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.5977,10000
 four_reference,mean_drop_1_5,all,spider_fl,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.5971,10000
 four_reference,mean_drop_1_5,all,fense,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,0.9935,10000
-four_reference,mean_drop_1_5,all,bertscore_f1,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.7704,10000
-four_reference,mean_drop_1_5,all,bertscore_f1_rescaled,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.7704,10000
+four_reference,mean_drop_1_5,all,bertscore_f1,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
+four_reference,mean_drop_1_5,all,bertscore_f1_rescaled,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
 four_reference,mean_drop_1_5,all,clap_similarity,audio_flamingo_3;human;gpt_audio_1_5;qwen2_5_omni;gemini_3_8_flash,0.8464,10000
 four_reference,mean_drop_1_5,all,mace,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,0.7143,10000
 four_reference,mean_drop_1_5,valid_for_all_models,bleu_1,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
@@ -51,8 +51,8 @@ four_reference,mean_drop_1_5,valid_for_all_models,spice,human;audio_flamingo_3;q
 four_reference,mean_drop_1_5,valid_for_all_models,spider,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.5597,10000
 four_reference,mean_drop_1_5,valid_for_all_models,spider_fl,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.5592,10000
 four_reference,mean_drop_1_5,valid_for_all_models,fense,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,0.9979,10000
-four_reference,mean_drop_1_5,valid_for_all_models,bertscore_f1,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.7399,10000
-four_reference,mean_drop_1_5,valid_for_all_models,bertscore_f1_rescaled,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.7399,10000
+four_reference,mean_drop_1_5,valid_for_all_models,bertscore_f1,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
+four_reference,mean_drop_1_5,valid_for_all_models,bertscore_f1_rescaled,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
 four_reference,mean_drop_1_5,valid_for_all_models,clap_similarity,audio_flamingo_3;human;gpt_audio_1_5;qwen2_5_omni;gemini_3_8_flash,0.8575,10000
 four_reference,mean_drop_1_5,valid_for_all_models,mace,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,0.5139,10000
 four_reference,mean_drop_1_5,closest_overlap_below_0.6,bleu_1,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
@@ -65,8 +65,8 @@ four_reference,mean_drop_1_5,closest_overlap_below_0.6,spice,human;audio_flaming
 four_reference,mean_drop_1_5,closest_overlap_below_0.6,spider,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.7053,10000
 four_reference,mean_drop_1_5,closest_overlap_below_0.6,spider_fl,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.7042,10000
 four_reference,mean_drop_1_5,closest_overlap_below_0.6,fense,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,0.9931,10000
-four_reference,mean_drop_1_5,closest_overlap_below_0.6,bertscore_f1,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.8592,10000
-four_reference,mean_drop_1_5,closest_overlap_below_0.6,bertscore_f1_rescaled,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.8592,10000
+four_reference,mean_drop_1_5,closest_overlap_below_0.6,bertscore_f1,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,0.9999,10000
+four_reference,mean_drop_1_5,closest_overlap_below_0.6,bertscore_f1_rescaled,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,0.9999,10000
 four_reference,mean_drop_1_5,closest_overlap_below_0.6,clap_similarity,audio_flamingo_3;human;gpt_audio_1_5;qwen2_5_omni;gemini_3_8_flash,0.867,10000
 four_reference,mean_drop_1_5,closest_overlap_below_0.6,mace,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,0.7337,10000
 four_reference,mean_drop_1_5,closest_overlap_below_0.8,bleu_1,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
@@ -79,7 +79,7 @@ four_reference,mean_drop_1_5,closest_overlap_below_0.8,spice,human;audio_flaming
 four_reference,mean_drop_1_5,closest_overlap_below_0.8,spider,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.676,10000
 four_reference,mean_drop_1_5,closest_overlap_below_0.8,spider_fl,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.6751,10000
 four_reference,mean_drop_1_5,closest_overlap_below_0.8,fense,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,0.9926,10000
-four_reference,mean_drop_1_5,closest_overlap_below_0.8,bertscore_f1,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.8518,10000
-four_reference,mean_drop_1_5,closest_overlap_below_0.8,bertscore_f1_rescaled,human;audio_flamingo_3;qwen2_5_omni;gemini_3_8_flash;gpt_audio_1_5,0.8518,10000
+four_reference,mean_drop_1_5,closest_overlap_below_0.8,bertscore_f1,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
+four_reference,mean_drop_1_5,closest_overlap_below_0.8,bertscore_f1_rescaled,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,1.0,10000
 four_reference,mean_drop_1_5,closest_overlap_below_0.8,clap_similarity,audio_flamingo_3;human;gpt_audio_1_5;qwen2_5_omni;gemini_3_8_flash,0.8623,10000
 four_reference,mean_drop_1_5,closest_overlap_below_0.8,mace,human;audio_flamingo_3;qwen2_5_omni;gpt_audio_1_5;gemini_3_8_flash,0.7172,10000
