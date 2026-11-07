@@ -1,14 +1,14 @@
 {
   "run_info": {
     "experiment": "analyze_lengths",
-    "timestamp_utc": "2026-11-07T09:25:34+00:00",
-    "git_commit": "a787119022c65856ff2fa2fb99904d23e3230897",
+    "timestamp_utc": "2026-11-07T14:03:30+00:00",
+    "git_commit": "c374e0e034c15b4c00ad244d08fc7bfa60451c1c",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
   },
-  "task": "E15",
+  "task": "E14",
   "display_names": {
     "gpt_audio_1_5": "GPT-Audio-1.5",
     "gemini_3_8_flash": "Gemini 3.8 Flash",
@@ -1968,8 +1968,8 @@
   },
   "limitations": [
     "Words are whitespace tokens, so punctuation attached to a word is not counted separately and the JSON keys of the 21 malformed GPT captions count as words; the valid-for-all sample excludes those recordings.",
-    "Model captions are scored against five references (E12) and held-out human captions against four (E13), so model and human correlations come from different reference sets.",
-    "Correlations are associations over recordings, not effects of length: length varies with the recording and the content of the caption. Formal tests and corrections for multiple comparisons belong to E16.",
+    "Model captions are scored against five references (E11) and held-out human captions against four (E12), so model and human correlations come from different reference sets.",
+    "Correlations are associations over recordings, not effects of length: length varies with the recording and the content of the caption. Formal tests and corrections for multiple comparisons belong to E15.",
     "CIs are 95% percentile intervals per comparison, uncorrected."
   ]
 }
