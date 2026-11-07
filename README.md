@@ -240,6 +240,12 @@ The LaTeX tables need `\usepackage{booktabs,tabularx}`. Figures are saved withou
 
 The report is `outputs/reports/cross_metric_comparison.{json,md}`. `make figures` draws the E12 scores by model and the E14 model − human differences (one panel per metric, 95% CIs) to `outputs/figures/e12_scores_by_model` and `e14_model_minus_human` (`.pdf`, `.png`).
 
+### Reproducing the results (E22)
+
+`make reproduce` regenerates every reported result from the frozen captions and the committed review labels, without caption generation (about 1.5 hours): Clotho validation and manifests, caption consolidation and completion reports, metric validation, the E12–E14 scoring, and every analysis, table and figure of E15–E21. `make check-reproducibility` then compares each tracked file under `outputs/` and `data/manifests/` with its committed version. A file counts as reproduced when it is byte-identical, or, for JSON and Markdown reports only, when it differs only in run metadata (commit, timestamps, durations, dirty flag, platform string); there is no numerical tolerance.
+
+The check was run on 2026-11-07 in a fresh clone with new environments built from the pinned requirements and `tools/` verified against `tools/MANIFEST.json`: 72 files byte-identical (every score table, figure, LaTeX table, manifest and caption file), 29 reports identical apart from run metadata, none different. The 23 files not regenerated are inputs: the per-model generation outputs, the hand-written guidelines, the review labels and the E19 review material. See `outputs/reports/reproducibility.md`; package versions are in `outputs/reports/reproducibility_environment.txt`.
+
 ## Running tasks
 
 Run `make help` for the full list. Main targets (task IDs are listed under [Tasks](#tasks)):
@@ -264,6 +270,8 @@ Run `make help` for the full list. Main targets (task IDs are listed under [Task
 | `make audio-review` | E19: check, unblind and summarize the audio review |
 | `make examples` | E20: representative caption comparisons, tables and qualitative figures |
 | `make figures` | E21: E12 and E14 result figures |
+| `make reproduce` | E22: regenerate every result from the frozen captions and labels (no generation) |
+| `make check-reproducibility` | E22: compare regenerated outputs with the committed ones |
 | `make paper` | Build the manuscript (once added) |
 | `make all` | Complete workflow |
 
@@ -308,7 +316,7 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | | E19 | Audio-grounded review of the qualitative sample | Done |
 | | E20 | Representative caption comparisons | Done |
 | 6. Synthesis and reproducibility | E21 | Cross-metric and model comparison | Done |
-| | E22 | Reproduce results from frozen artifacts | — |
+| | E22 | Reproduce results from frozen artifacts | Done |
 | | E23 | Finalize research repository | — |
 | 7. Manuscript and release | E24 | Draft manuscript | — |
 | | E25 | Final validation, public release and submission | — |
