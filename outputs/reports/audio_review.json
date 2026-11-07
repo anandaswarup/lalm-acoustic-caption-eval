@@ -1,14 +1,14 @@
 {
   "run_info": {
     "experiment": "analyze_audio_review",
-    "timestamp_utc": "2026-11-07T09:34:44+00:00",
-    "git_commit": "25aa7fe09f1bb8c53333e9f43a82db624fd6ae09",
+    "timestamp_utc": "2026-11-07T14:11:18+00:00",
+    "git_commit": "6e712e3384f06367063fe3fd8279efe88b958698",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
   },
-  "task": "E19",
+  "task": "E18",
   "display_names": {
     "gpt_audio_1_5": "GPT-Audio-1.5",
     "gemini_3_8_flash": "Gemini 3.8 Flash",
@@ -122,15 +122,15 @@
     },
     "sample_manifest": {
       "path": "outputs/qualitative/sample_manifest.json",
-      "sha256": "8d71514231d629630b8402130f86c6031beb35ee07e6f0f1ca0edc4ed9ecb3df"
+      "sha256": "3a580c7f05660249e6fffd31d4b651720f51cc785430b98d06c1ce72a4a763cb"
     },
     "audio_review_manifest": {
       "path": "outputs/qualitative/audio_review_manifest.json",
-      "sha256": "58d7ef80492b5682ccc60466f0b98b72b37dab45a0cbf08bd4e7766c49785e41"
+      "sha256": "8e1b2ee570cf0ce6362837db07955cc229b250c36e4357fca54f3253d93f2b8c"
     },
     "guidelines": {
       "path": "outputs/qualitative/audio_review_guidelines.md",
-      "sha256": "8be84bdf6e5853facad51f0b298f4b87f42ee38b3b79a85a345610cdf2dc8883"
+      "sha256": "1cfc67eeb36c9eb7dc7c143e96f47625c6159ff6bf1fbe6ddc0a6c55ea6492d6"
     },
     "key": {
       "path": "outputs/qualitative/blinding_key.csv",
@@ -1165,8 +1165,8 @@
   ],
   "limitations": [
     "One reviewer rated every caption, so inter-annotator agreement cannot be estimated; more reviewers are left for future work.",
-    "The reviewer had read the references and assigned the E18 categories before listening, so the audio judgements may be anchored on them; captions also carry model style cues (E17).",
-    "Only the phrases E18 marked as unsupported by every reference were verified one by one; the verdict shares are therefore not error rates for all caption content.",
+    "The reviewer had read the references and assigned the E17 categories before listening, so the audio judgements may be anchored on them; captions also carry model style cues (E16).",
+    "Only the phrases E17 marked as unsupported by every reference were verified one by one; the verdict shares are therefore not error rates for all caption content.",
     "Ratings record what one listener hears in the recording; Clotho has no ground-truth source labels.",
     "With 50 captions per model, proportions are coarse (one caption is 2 percentage points) and the Wilson intervals wide. Pooled and phrase-level intervals treat the four captions of a recording and the phrases of a caption as independent, so they are too narrow; the summary is descriptive."
   ],
