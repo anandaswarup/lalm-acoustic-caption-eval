@@ -1,11 +1,11 @@
 {
   "run_info": {
     "experiment": "consolidate_captions",
-    "timestamp_utc": "2026-11-02T07:45:34+00:00",
-    "git_commit": "eace9b9f65ef17a8c2701c74306276b428bd47e3",
-    "git_dirty": true,
+    "timestamp_utc": "2026-11-07T12:44:57+00:00",
+    "git_commit": "e5e4db6abda840ff64d10cfad5a833ee6cc43ecc",
+    "git_dirty": false,
     "python": "3.13.12",
-    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
   },
   "recordings": 1045,
