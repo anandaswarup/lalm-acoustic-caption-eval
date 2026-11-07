@@ -1,11 +1,11 @@
 {
   "run_info": {
     "experiment": "caption_report",
-    "timestamp_utc": "2026-11-02T06:48:50+00:00",
-    "git_commit": "588dd044a236e29f02ee2bc5c6ca55de96ad7173",
-    "git_dirty": true,
+    "timestamp_utc": "2026-11-07T12:44:58+00:00",
+    "git_commit": "1c2fae259f03781e5984921c9549c9c5f2c90a31",
+    "git_dirty": false,
     "python": "3.13.12",
-    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
   },
   "model_key": "gpt_audio_1_5",

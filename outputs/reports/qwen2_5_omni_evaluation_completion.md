@@ -24,7 +24,7 @@ Output: `outputs/captions/evaluation/qwen2_5_omni_captions.jsonl` (SHA-256 `cd64
 | Fixed by a retry | 0 |
 | Rejected responses | 0 |
 | Still JSON-like | none |
-| Of which exactly {"…"} (E10 unwraps) | none |
+| Of which exactly {"…"} (E09 unwraps) | none |
 | Multi-line captions | none |
 | Finish reasons | stop: 1045 |
 | Caption words | min: 4; mean: 16.96; median: 17; max: 33 |

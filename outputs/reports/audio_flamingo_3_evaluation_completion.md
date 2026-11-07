@@ -24,7 +24,7 @@ Output: `outputs/captions/evaluation/audio_flamingo_3_captions.jsonl` (SHA-256 `
 | Fixed by a retry | 0 |
 | Rejected responses | 0 |
 | Still JSON-like | none |
-| Of which exactly {"…"} (E10 unwraps) | none |
+| Of which exactly {"…"} (E09 unwraps) | none |
 | Multi-line captions | none |
 | Finish reasons | stop: 1045 |
 | Caption words | min: 4; mean: 18.96; median: 18; max: 44 |

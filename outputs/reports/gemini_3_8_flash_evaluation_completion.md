@@ -24,7 +24,7 @@ Output: `outputs/captions/evaluation/gemini_3_8_flash_captions.jsonl` (SHA-256 `
 | Fixed by a retry | 0 |
 | Rejected responses | 0 |
 | Still JSON-like | none |
-| Of which exactly {"…"} (E10 unwraps) | none |
+| Of which exactly {"…"} (E09 unwraps) | none |
 | Multi-line captions | none |
 | Finish reasons | STOP: 1045 |
 | Caption words | min: 8; mean: 16.36; median: 16; max: 36 |

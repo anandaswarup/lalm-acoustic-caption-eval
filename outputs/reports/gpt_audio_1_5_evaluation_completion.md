@@ -24,7 +24,7 @@ Output: `outputs/captions/evaluation/gpt_audio_1_5_captions.jsonl` (SHA-256 `20b
 | Fixed by a retry | 42 |
 | Rejected responses | 268 |
 | Still JSON-like | 106: `clotho_eval_0015`, `clotho_eval_0019`, `clotho_eval_0030`, `clotho_eval_0036`, `clotho_eval_0041`, `clotho_eval_0070`, `clotho_eval_0072`, `clotho_eval_0074`, `clotho_eval_0075`, `clotho_eval_0093`, `clotho_eval_0102`, `clotho_eval_0106`, `clotho_eval_0112`, `clotho_eval_0113`, `clotho_eval_0122`, `clotho_eval_0124`, `clotho_eval_0142`, `clotho_eval_0143`, `clotho_eval_0157`, `clotho_eval_0159` … (+86) |
-| Of which exactly {"…"} (E10 unwraps) | 85: `clotho_eval_0015`, `clotho_eval_0036`, `clotho_eval_0041`, `clotho_eval_0070`, `clotho_eval_0075`, `clotho_eval_0093`, `clotho_eval_0112`, `clotho_eval_0113`, `clotho_eval_0122`, `clotho_eval_0124`, `clotho_eval_0142`, `clotho_eval_0143`, `clotho_eval_0159`, `clotho_eval_0162`, `clotho_eval_0168`, `clotho_eval_0182`, `clotho_eval_0221`, `clotho_eval_0222`, `clotho_eval_0234`, `clotho_eval_0248` … (+65) |
+| Of which exactly {"…"} (E09 unwraps) | 85: `clotho_eval_0015`, `clotho_eval_0036`, `clotho_eval_0041`, `clotho_eval_0070`, `clotho_eval_0075`, `clotho_eval_0093`, `clotho_eval_0112`, `clotho_eval_0113`, `clotho_eval_0122`, `clotho_eval_0124`, `clotho_eval_0142`, `clotho_eval_0143`, `clotho_eval_0159`, `clotho_eval_0162`, `clotho_eval_0168`, `clotho_eval_0182`, `clotho_eval_0221`, `clotho_eval_0222`, `clotho_eval_0234`, `clotho_eval_0248` … (+65) |
 | Multi-line captions | none |
 | Finish reasons | stop: 1045 |
 | Caption words | min: 9; mean: 20.98; median: 21; max: 51 |
