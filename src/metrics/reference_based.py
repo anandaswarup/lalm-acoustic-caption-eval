@@ -1,8 +1,9 @@
 """Reference-based caption metrics (E11): BLEU-1..4, METEOR, CIDEr-D, SPICE, SPIDEr, SPIDEr-FL, FENSE, BERTScore.
 
-Inputs are PTB-tokenized (`src.metrics.preprocess`). BLEU, METEOR, CIDEr-D, SBERT similarity, the fluency-error detector
-and BERTScore come from aac-metrics 0.5.5; SPICE runs through `src.metrics.spice`; SPIDEr, SPIDEr-FL, FENSE and the
-rescaled BERTScore are combined here from their parts with aac-metrics' formulas. One call scores a whole corpus:
+Inputs are PTB-tokenized (`src.metrics.preprocess`). BLEU, METEOR, CIDEr-D, SBERT similarity and the fluency-error
+detector come from aac-metrics 0.5.5; SPICE runs through `src.metrics.spice`; BERTScore through `src.metrics.bertscore`
+(aac-metrics' settings, with the torchmetrics reordering bug corrected); SPIDEr, SPIDEr-FL, FENSE and the rescaled
+BERTScore are combined here from their parts with aac-metrics' formulas. One call scores a whole corpus:
 CIDEr-D document frequencies and the BLEU and METEOR corpus statistics depend on every reference in the call.
 """
 
@@ -15,6 +16,7 @@ from typing import Any
 
 import numpy as np
 
+from src.metrics.bertscore import bertscore_max
 from src.metrics.registry import Score, Timer, check_scores
 from src.metrics.spice import spice_scores
 from src.metrics.tools import java_path, tool_paths
@@ -124,7 +126,7 @@ class ReferenceScorer:
         return np.array([self._error_probs[text] for text in texts], dtype=np.float64)
 
     def score(self, candidates: Sequence[str], mult_references: Sequence[Sequence[str]]) -> dict[str, Score]:
-        from aac_metrics.functional import bert_score_mrefs, bleu, cider_d, meteor, sbert_sim
+        from aac_metrics.functional import bleu, cider_d, meteor, sbert_sim
 
         candidates, mult_references = list(candidates), [list(refs) for refs in mult_references]
         settings, scores, timer = self.settings, {}, self.timer
@@ -179,8 +181,10 @@ class ReferenceScorer:
 
         model, tokenizer = self._model("bert")
         bertscore = settings["bertscore"]
+        if bertscore["idf"] or bertscore["reduction"] != "max":
+            raise ValueError("BERTScore supports idf: false and reduction: max only (src.metrics.bertscore)")
         with timer("bertscore"):
-            _, sents = bert_score_mrefs(
+            f1 = bertscore_max(
                 candidates,
                 mult_references,
                 model=model,
@@ -188,10 +192,7 @@ class ReferenceScorer:
                 device=self.device,
                 batch_size=self.batch_size,
                 max_length=bertscore["max_length"],
-                idf=bertscore["idf"],
-                reduction=bertscore["reduction"],
             )
-        f1 = _numpy(sents["bert_score.f1"])
         scores["bertscore_f1"] = _mean_score(f1)
         scores["bertscore_f1_rescaled"] = _mean_score(rescale(f1, self.bertscore_baseline))
 

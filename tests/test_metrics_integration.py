@@ -63,7 +63,7 @@ GOLDEN_CORPUS = {
     "sbert_similarity": 0.8325,
     "fluency_error": 0.3333,
     "fense": 0.5792,
-    "bertscore_f1": 0.9817,
+    "bertscore_f1": 0.9849,  # 0.9817 before the E21 fix (torchmetrics paired captions with other references)
 }
 GOLDEN_SPICE_ITEMS = [0.2609, 0.4211, 0.3158]
 IDS = list(CANDIDATES)
@@ -207,3 +207,25 @@ def test_clap_audio_embedding_covers_the_clip(evaluator, pilot_audio):
     first = evaluator.clap.audio([audio[record["sample_id"]]])
     evaluator.clap._audio.clear()
     assert np.array_equal(first, evaluator.clap.audio([audio[record["sample_id"]]]))
+
+
+def test_bertscore_does_not_depend_on_the_other_pairs_in_the_call(evaluator):
+    """Regression (E21): torchmetrics 1.9.0 reorders embeddings with the sort permutation instead of its inverse, so a
+    batched call scored candidates against other pairs' references. Each pair must score as it does alone."""
+    from aac_metrics.functional.bert_score_mrefs import bert_score_mrefs
+
+    from src.metrics.bertscore import bertscore_max, bertscore_pairs
+
+    model, tokenizer = evaluator.reference._model("bert")
+    kw = {"model": model, "tokenizer": tokenizer, "device": "cpu", "max_length": 128}
+    candidates = [CANDIDATES[i] for i in IDS] + ["birds"]
+    references = [REFERENCES[i] for i in IDS] + [["many small birds are singing loudly in a large garden at dawn"]]
+    together = bertscore_max(candidates, references, batch_size=2, **kw)
+    alone = [bertscore_max([c, c], [r, r], batch_size=32, **kw)[0] for c, r in zip(candidates, references, strict=True)]
+    assert together == pytest.approx(alone, abs=1e-6)
+    # torchmetrics on one pair (duplicated, so nothing can be misordered) agrees with ours
+    pairs = [(c, r) for c, refs in zip(candidates, references, strict=True) for r in refs]
+    for c, r in pairs[:3] + pairs[-1:]:
+        expected = float(bert_score_mrefs([c, c], [[r], [r]], batch_size=32, idf=False, reduction="max", **kw)[1]
+                         ["bert_score.f1"][0])  # fmt: skip
+        assert bertscore_pairs([c], [r], batch_size=32, **kw)[0] == pytest.approx(expected, abs=1e-6)
