@@ -1,8 +1,8 @@
 {
   "run_info": {
     "experiment": "validate_metrics",
-    "timestamp_utc": "2026-11-03T14:35:17+00:00",
-    "git_commit": "1069a631c8bca710b9e2f0abf1f4b021a0783bb9",
+    "timestamp_utc": "2026-11-07T09:34:56+00:00",
+    "git_commit": "d8393b3952f6e699e1e3427090aa80fb01d78a11",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
@@ -241,7 +241,7 @@
     }
   ],
   "integration_tests": {
-    "summary": "10 passed, 1 warning in 71.50s (0:01:11)",
+    "summary": "11 passed, 1 warning in 80.13s (0:01:20)",
     "returncode": 0
   },
   "pilot": {
@@ -281,8 +281,8 @@
         "spider": 0.06115763561802552,
         "spider_fl": 0.06115763561802552,
         "fense": 0.40346103981137277,
-        "bertscore_f1": 0.9685025244951249,
-        "bertscore_f1_rescaled": 0.20924192847772644,
+        "bertscore_f1": 0.970847898721695,
+        "bertscore_f1_rescaled": 0.2681235871082278,
         "clap_similarity": 0.49051552125017645,
         "mace": 0.5908941554764364,
         "mace_text": 0.6912727897026965,
@@ -303,8 +303,8 @@
         "spider": 0.08826973145979605,
         "spider_fl": 0.08826973145979605,
         "fense": 0.37940712124109266,
-        "bertscore_f1": 0.9690770834684372,
-        "bertscore_f1_rescaled": 0.22366648595192756,
+        "bertscore_f1": 0.9701456725597382,
+        "bertscore_f1_rescaled": 0.2504938883244161,
         "clap_similarity": 0.4038514668992173,
         "mace": 0.5012408978853349,
         "mace_text": 0.5986303288714525,
@@ -325,8 +325,8 @@
         "spider": 0.14319499208600725,
         "spider_fl": 0.14319499208600725,
         "fense": 0.475303340703249,
-        "bertscore_f1": 0.9706982553005219,
-        "bertscore_f1_rescaled": 0.26436672274858997,
+        "bertscore_f1": 0.9724097460508346,
+        "bertscore_f1_rescaled": 0.3073344559860072,
         "clap_similarity": 0.4867312534301466,
         "mace": 0.5942166498500331,
         "mace_text": 0.7017020462699197,
@@ -347,8 +347,8 @@
         "spider": 0.18203331702553746,
         "spider_fl": 0.18203331702553746,
         "fense": 0.5104008421301842,
-        "bertscore_f1": 0.9699319154024124,
-        "bertscore_f1_rescaled": 0.24512742022525602,
+        "bertscore_f1": 0.9745084881782532,
+        "bertscore_f1_rescaled": 0.360024306543813,
         "clap_similarity": 0.5396255946982815,
         "mace": 0.6286864996665843,
         "mace_text": 0.717747404634887,
@@ -512,17 +512,17 @@
   ],
   "timing": {
     "seconds": {
-      "bertscore": 84.16,
+      "bertscore": 51.23,
       "bleu": 0.08,
       "cider_d": 0.38,
-      "clap_audio": 4.76,
-      "clap_text": 4.85,
-      "fluency_error": 2.96,
-      "load_models": 5.32,
-      "meteor": 148.15,
-      "ptb_tokenize": 7.03,
-      "sbert": 9.01,
-      "spice": 159.34
+      "clap_audio": 4.57,
+      "clap_text": 4.87,
+      "fluency_error": 2.93,
+      "load_models": 5.86,
+      "meteor": 149.12,
+      "ptb_tokenize": 6.9,
+      "sbert": 9.0,
+      "spice": 157.0
     },
     "calls": {
       "load_models": 4,
@@ -537,45 +537,45 @@
       "clap_text": 29,
       "clap_audio": 29
     },
-    "load_models_seconds": 5.3,
+    "load_models_seconds": 5.9,
     "extrapolation": {
       "pilot_items": 20,
       "full_items": 1045,
       "factor": 52.25,
       "estimated_seconds": {
-        "ptb_tokenize": 367.2,
-        "bleu": 4.4,
-        "meteor": 7740.7,
-        "cider_d": 19.8,
-        "spice": 8325.7,
-        "fluency_error": 154.7,
-        "sbert": 470.8,
-        "bertscore": 4397.2,
-        "clap_text": 253.2,
-        "clap_audio": 248.6
+        "ptb_tokenize": 360.8,
+        "bleu": 4.3,
+        "meteor": 7791.7,
+        "cider_d": 20.0,
+        "spice": 8203.0,
+        "fluency_error": 152.9,
+        "sbert": 470.1,
+        "bertscore": 2676.6,
+        "clap_text": 254.4,
+        "clap_audio": 239.0
       },
-      "estimated_total_hours": 6.11
+      "estimated_total_hours": 5.6
     },
     "scaling": {
       "large_items": 80,
       "large_seconds": {
-        "bertscore": 12.73,
+        "bertscore": 3.19,
         "bleu": 0.01,
         "cider_d": 0.06,
         "clap_audio": 0.0,
         "clap_text": 0.0,
-        "meteor": 5.16,
+        "meteor": 5.11,
         "ptb_tokenize": 0.24,
-        "sbert": 1.18,
-        "spice": 8.49
+        "sbert": 1.28,
+        "spice": 8.88
       },
       "estimate": {
         "calls": 29,
         "steps": {
           "ptb_tokenize": {
             "fixed_seconds": 0.24,
-            "seconds_per_item": 0.0,
-            "estimated_seconds": 7.3
+            "seconds_per_item": 0.0001,
+            "estimated_seconds": 9.9
           },
           "bleu": {
             "fixed_seconds": 0.0,
@@ -583,9 +583,9 @@
             "estimated_seconds": 5.3
           },
           "meteor": {
-            "fixed_seconds": 5.09,
-            "seconds_per_item": 0.0009,
-            "estimated_seconds": 173.8
+            "fixed_seconds": 5.14,
+            "seconds_per_item": 0.0,
+            "estimated_seconds": 149.1
           },
           "cider_d": {
             "fixed_seconds": 0.0,
@@ -593,22 +593,22 @@
             "estimated_seconds": 25.9
           },
           "spice": {
-            "fixed_seconds": 4.5,
-            "seconds_per_item": 0.05,
-            "estimated_seconds": 1645.0
+            "fixed_seconds": 4.26,
+            "seconds_per_item": 0.0577,
+            "estimated_seconds": 1872.3
           },
           "sbert": {
-            "fixed_seconds": 0.02,
-            "seconds_per_item": 0.0145,
-            "estimated_seconds": 441.2
+            "fixed_seconds": 0.0,
+            "seconds_per_item": 0.0161,
+            "estimated_seconds": 487.3
           },
           "bertscore": {
-            "fixed_seconds": 0.0,
-            "seconds_per_item": 0.1639,
-            "estimated_seconds": 4965.6
+            "fixed_seconds": 1.29,
+            "seconds_per_item": 0.0237,
+            "estimated_seconds": 755.1
           }
         },
-        "estimated_hours": 2.02
+        "estimated_hours": 0.92
       }
     }
   },
