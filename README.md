@@ -332,7 +332,7 @@ manuscript/   LaTeX manuscript (added when writing the paper)
 
 | Content | Terms |
 |---|---|
-| Source code, configurations, tests and scripts | MIT, see `LICENSE` |
+| Source code, configurations, tests and scripts | MIT, see [LICENSE](LICENSE) |
 | Clotho v2.1 captions: `data/manifests/clotho_eval_references.json`, and quoted as references in `outputs/qualitative/review_items.csv`, `review_sheet.md`, `annotations_reviewer_1.csv` and `outputs/tables/representative_examples.{md,tex}`, `qualitative_sample_all.{md,tex}` | © 2017 Tampere University and its licensors; experimental and **non-commercial use only**; the notice in `data/manifests/CLOTHO_LICENSE` must accompany every copy, and publications must acknowledge the Audio Research Group, Tampere University (Drossos et al., 2020) |
 | Clotho audio | **Not included.** Each recording keeps its Freesound licence, listed per recording (`audio_license`) in `data/manifests/clotho_eval_manifest.jsonl`; `make download-data` fetches the audio from Zenodo |
 | Generated captions: `outputs/captions/`, and quoted in the qualitative review files, tables and reports | Subject to each model's terms: GPT-Audio-1.5 (OpenAI) and Gemini 3.8 Flash (Google) under their providers' terms of use; Qwen2.5-Omni-7B under Apache-2.0; Audio Flamingo 3 under the NVIDIA OneWay Noncommercial License (**non-commercial**) |
