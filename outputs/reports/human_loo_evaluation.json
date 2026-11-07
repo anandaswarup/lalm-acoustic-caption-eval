@@ -1,8 +1,8 @@
 {
   "run_info": {
     "experiment": "human_leave_one_out",
-    "timestamp_utc": "2026-11-07T13:02:02+00:00",
-    "git_commit": "c89122d4411e8da5b6a1255f3eea973c34d709b0",
+    "timestamp_utc": "2026-11-07T14:28:56+00:00",
+    "git_commit": "9b92046182d9c7cbe621351c5b23a583a08a4bc0",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
@@ -2107,15 +2107,15 @@
   ],
   "timing": {
     "seconds": {
-      "ptb_tokenize": 2.15,
-      "bleu": 0.87,
-      "meteor": 34.1,
-      "cider_d": 3.28,
-      "spice": 136.01,
-      "fluency_error": 76.84,
-      "sbert": 59.11,
-      "bertscore": 331.88,
-      "clap_text": 130.99,
+      "ptb_tokenize": 2.14,
+      "bleu": 0.88,
+      "meteor": 32.65,
+      "cider_d": 3.38,
+      "spice": 141.88,
+      "fluency_error": 79.49,
+      "sbert": 64.21,
+      "bertscore": 356.18,
+      "clap_text": 134.28,
       "clap_audio": 0.02
     },
     "calls": {
@@ -2131,8 +2131,8 @@
       "clap_text": 5,
       "clap_audio": 5
     },
-    "load_models_seconds": 6.2,
-    "scoring_seconds": 775.2,
+    "load_models_seconds": 5.8,
+    "scoring_seconds": 815.1,
     "clap_cache_hits": 1045
   },
   "outputs": {
@@ -2147,7 +2147,7 @@
     "Human captions are scored against four references, so their reference-based scores are compared only with model captions scored against the same drop_k subsets (E13), never with the five-reference model scores (E11).",
     "Reference-free scores (CLAP similarity, MACE audio-only, fluency-error rates) do not depend on the references and can be compared directly with the E11 model scores.",
     "A CSV position is not a fixed annotator: Clotho's captions for one recording come from different annotators, in an arbitrary order. Differences between positions show the spread of the baseline, not annotator effects.",
-    "CIDEr-D, SPICE, SPIDEr and SPIDEr-FL depend on the reference set (CIDEr-D's document frequencies come from the references of each call), so five-reference (E12) and four-reference (E13/E14) scores are not directly comparable.",
+    "CIDEr-D, SPICE, SPIDEr and SPIDEr-FL depend on the reference set (CIDEr-D's document frequencies come from the references of each call), so five-reference (E11) and four-reference (E12/E13) scores are not directly comparable.",
     "BLEU and METEOR corpus values are computed from corpus statistics, not as the mean of per-item scores; bootstrap intervals are on the per-item mean and are reported next to the corpus value.",
     "BERTScore follows aac-metrics: roberta-large's last layer (24), no IDF, the maximum over references. Raw F1 is compressed near 1; the rescaled F1 (layer-24 baseline) is reported as a secondary column.",
     "FENSE, SPIDEr-FL and MACE multiply a caption's score by a fixed factor when the fluency-error detector flags it (probability above 0.9, or 0.97 for MACE). The detector also flags some short, plain captions, and its input is cut at 64 subwords.",
