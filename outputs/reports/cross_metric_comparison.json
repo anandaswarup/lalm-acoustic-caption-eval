@@ -1,14 +1,14 @@
 {
   "run_info": {
     "experiment": "compare_metrics",
-    "timestamp_utc": "2026-11-07T09:50:11+00:00",
-    "git_commit": "1e26e2617ee823e1a536eb4105afe3032facbf71",
+    "timestamp_utc": "2026-11-07T14:11:20+00:00",
+    "git_commit": "d7ab742b9c67c15a737dddc22547b115a8d58baa",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
   },
-  "task": "E21",
+  "task": "E20",
   "settings": {
     "metrics": [
       "bleu_1",
@@ -79,12 +79,12 @@
     "bertscore_f1_rescaled": "BERTScore-F1 (rescaled)",
     "clap_similarity": "CLAP similarity",
     "mace": "MACE",
-    "e18_categories_1_3": "E18: categories 1-3 (sample)",
-    "e19_rated_accurate": "E19: rated accurate (sample)"
+    "e17_categories_1_3": "E17: categories 1-3 (sample)",
+    "e18_rated_accurate": "E18: rated accurate (sample)"
   },
   "review_rankers": [
-    "e18_categories_1_3",
-    "e19_rated_accurate"
+    "e17_categories_1_3",
+    "e18_rated_accurate"
   ],
   "num_recordings": 1045,
   "num_sampled_recordings": 50,
@@ -109,7 +109,7 @@
   "rankings": [
     {
       "ranker": "bleu_1",
-      "source": "E12",
+      "source": "E11",
       "system": "gpt_audio_1_5",
       "value": "0.276731601600101",
       "rank": 3,
@@ -117,7 +117,7 @@
     },
     {
       "ranker": "bleu_1",
-      "source": "E12",
+      "source": "E11",
       "system": "gemini_3_8_flash",
       "value": "0.2513066033861575",
       "rank": 4,
@@ -125,7 +125,7 @@
     },
     {
       "ranker": "bleu_1",
-      "source": "E12",
+      "source": "E11",
       "system": "qwen2_5_omni",
       "value": "0.3681836819588078",
       "rank": 2,
@@ -133,7 +133,7 @@
     },
     {
       "ranker": "bleu_1",
-      "source": "E12",
+      "source": "E11",
       "system": "audio_flamingo_3",
       "value": "0.406867700834832",
       "rank": 1,
@@ -141,7 +141,7 @@
     },
     {
       "ranker": "bleu_2",
-      "source": "E12",
+      "source": "E11",
       "system": "gpt_audio_1_5",
       "value": "0.07490166804805469",
       "rank": 3,
@@ -149,7 +149,7 @@
     },
     {
       "ranker": "bleu_2",
-      "source": "E12",
+      "source": "E11",
       "system": "gemini_3_8_flash",
       "value": "0.059025194865095755",
       "rank": 4,
@@ -157,7 +157,7 @@
     },
     {
       "ranker": "bleu_2",
-      "source": "E12",
+      "source": "E11",
       "system": "qwen2_5_omni",
       "value": "0.153572290322368",
       "rank": 2,
@@ -165,7 +165,7 @@
     },
     {
       "ranker": "bleu_2",
-      "source": "E12",
+      "source": "E11",
       "system": "audio_flamingo_3",
       "value": "0.2035976200304478",
       "rank": 1,
@@ -173,7 +173,7 @@
     },
     {
       "ranker": "bleu_3",
-      "source": "E12",
+      "source": "E11",
       "system": "gpt_audio_1_5",
       "value": "0.018731518509610117",
       "rank": 3,
@@ -181,7 +181,7 @@
     },
     {
       "ranker": "bleu_3",
-      "source": "E12",
+      "source": "E11",
       "system": "gemini_3_8_flash",
       "value": "0.01632012858180003",
       "rank": 4,
@@ -189,7 +189,7 @@
     },
     {
       "ranker": "bleu_3",
-      "source": "E12",
+      "source": "E11",
       "system": "qwen2_5_omni",
       "value": "0.05319176232324807",
       "rank": 2,
@@ -197,7 +197,7 @@
     },
     {
       "ranker": "bleu_3",
-      "source": "E12",
+      "source": "E11",
       "system": "audio_flamingo_3",
       "value": "0.08795450760560873",
       "rank": 1,
@@ -205,7 +205,7 @@
     },
     {
       "ranker": "bleu_4",
-      "source": "E12",
+      "source": "E11",
       "system": "gpt_audio_1_5",
       "value": "0.00431551967443935",
       "rank": 3,
@@ -213,7 +213,7 @@
     },
     {
       "ranker": "bleu_4",
-      "source": "E12",
+      "source": "E11",
       "system": "gemini_3_8_flash",
       "value": "0.0019404396238166975",
       "rank": 4,
@@ -221,7 +221,7 @@
     },
     {
       "ranker": "bleu_4",
-      "source": "E12",
+      "source": "E11",
       "system": "qwen2_5_omni",
       "value": "0.014924720579127436",
       "rank": 2,
@@ -229,7 +229,7 @@
     },
     {
       "ranker": "bleu_4",
-      "source": "E12",
+      "source": "E11",
       "system": "audio_flamingo_3",
       "value": "0.030157314420538282",
       "rank": 1,
@@ -237,7 +237,7 @@
     },
     {
       "ranker": "meteor",
-      "source": "E12",
+      "source": "E11",
       "system": "gpt_audio_1_5",
       "value": "0.12402041215702074",
       "rank": 3,
@@ -245,7 +245,7 @@
     },
     {
       "ranker": "meteor",
-      "source": "E12",
+      "source": "E11",
       "system": "gemini_3_8_flash",
       "value": "0.10247577231677645",
       "rank": 4,
@@ -253,7 +253,7 @@
     },
     {
       "ranker": "meteor",
-      "source": "E12",
+      "source": "E11",
       "system": "qwen2_5_omni",
       "value": "0.15103999643097374",
       "rank": 2,
@@ -261,7 +261,7 @@
     },
     {
       "ranker": "meteor",
-      "source": "E12",
+      "source": "E11",
       "system": "audio_flamingo_3",
       "value": "0.17362801389091215",
       "rank": 1,
@@ -269,7 +269,7 @@
     },
     {
       "ranker": "cider_d",
-      "source": "E12",
+      "source": "E11",
       "system": "gpt_audio_1_5",
       "value": "0.04787530130041854",
       "rank": 4,
@@ -277,7 +277,7 @@
     },
     {
       "ranker": "cider_d",
-      "source": "E12",
+      "source": "E11",
       "system": "gemini_3_8_flash",
       "value": "0.06410855454804125",
       "rank": 3,
@@ -285,7 +285,7 @@
     },
     {
       "ranker": "cider_d",
-      "source": "E12",
+      "source": "E11",
       "system": "qwen2_5_omni",
       "value": "0.16374225448229981",
       "rank": 2,
@@ -293,7 +293,7 @@
     },
     {
       "ranker": "cider_d",
-      "source": "E12",
+      "source": "E11",
       "system": "audio_flamingo_3",
       "value": "0.1911791630413964",
       "rank": 1,
@@ -301,7 +301,7 @@
     },
     {
       "ranker": "spice",
-      "source": "E12",
+      "source": "E11",
       "system": "gpt_audio_1_5",
       "value": "0.06656150595840296",
       "rank": 3,
@@ -309,7 +309,7 @@
     },
     {
       "ranker": "spice",
-      "source": "E12",
+      "source": "E11",
       "system": "gemini_3_8_flash",
       "value": "0.05090645199126072",
       "rank": 4,
@@ -317,7 +317,7 @@
     },
     {
       "ranker": "spice",
-      "source": "E12",
+      "source": "E11",
       "system": "qwen2_5_omni",
       "value": "0.09058890615739013",
       "rank": 2,
@@ -325,7 +325,7 @@
     },
     {
       "ranker": "spice",
-      "source": "E12",
+      "source": "E11",
       "system": "audio_flamingo_3",
       "value": "0.11652216289891876",
       "rank": 1,
@@ -333,7 +333,7 @@
     },
     {
       "ranker": "spider",
-      "source": "E12",
+      "source": "E11",
       "system": "gpt_audio_1_5",
       "value": "0.057218403629410754",
       "rank": 4,
@@ -341,7 +341,7 @@
     },
     {
       "ranker": "spider",
-      "source": "E12",
+      "source": "E11",
       "system": "gemini_3_8_flash",
       "value": "0.05750750326965099",
       "rank": 3,
@@ -349,7 +349,7 @@
     },
     {
       "ranker": "spider",
-      "source": "E12",
+      "source": "E11",
       "system": "qwen2_5_omni",
       "value": "0.12716558031984496",
       "rank": 2,
@@ -357,7 +357,7 @@
     },
     {
       "ranker": "spider",
-      "source": "E12",
+      "source": "E11",
       "system": "audio_flamingo_3",
       "value": "0.15385066297015754",
       "rank": 1,
@@ -365,7 +365,7 @@
     },
     {
       "ranker": "spider_fl",
-      "source": "E12",
+      "source": "E11",
       "system": "gpt_audio_1_5",
       "value": "0.0572180716005338",
       "rank": 4,
@@ -373,7 +373,7 @@
     },
     {
       "ranker": "spider_fl",
-      "source": "E12",
+      "source": "E11",
       "system": "gemini_3_8_flash",
       "value": "0.057501311305044205",
       "rank": 3,
@@ -381,7 +381,7 @@
     },
     {
       "ranker": "spider_fl",
-      "source": "E12",
+      "source": "E11",
       "system": "qwen2_5_omni",
       "value": "0.12698198986448564",
       "rank": 2,
@@ -389,7 +389,7 @@
     },
     {
       "ranker": "spider_fl",
-      "source": "E12",
+      "source": "E11",
       "system": "audio_flamingo_3",
       "value": "0.1527329762367159",
       "rank": 1,
@@ -397,7 +397,7 @@
     },
     {
       "ranker": "fense",
-      "source": "E12",
+      "source": "E11",
       "system": "gpt_audio_1_5",
       "value": "0.40059686722902305",
       "rank": 3,
@@ -405,7 +405,7 @@
     },
     {
       "ranker": "fense",
-      "source": "E12",
+      "source": "E11",
       "system": "gemini_3_8_flash",
       "value": "0.38739748928482026",
       "rank": 4,
@@ -413,7 +413,7 @@
     },
     {
       "ranker": "fense",
-      "source": "E12",
+      "source": "E11",
       "system": "qwen2_5_omni",
       "value": "0.47364975485148614",
       "rank": 2,
@@ -421,7 +421,7 @@
     },
     {
       "ranker": "fense",
-      "source": "E12",
+      "source": "E11",
       "system": "audio_flamingo_3",
       "value": "0.509626601935859",
       "rank": 1,
@@ -429,7 +429,7 @@
     },
     {
       "ranker": "bertscore_f1",
-      "source": "E12",
+      "source": "E11",
       "system": "gpt_audio_1_5",
       "value": "0.9702834307291861",
       "rank": 3,
@@ -437,7 +437,7 @@
     },
     {
       "ranker": "bertscore_f1",
-      "source": "E12",
+      "source": "E11",
       "system": "gemini_3_8_flash",
       "value": "0.9696321372210124",
       "rank": 4,
@@ -445,7 +445,7 @@
     },
     {
       "ranker": "bertscore_f1",
-      "source": "E12",
+      "source": "E11",
       "system": "qwen2_5_omni",
       "value": "0.9733550907322094",
       "rank": 2,
@@ -453,7 +453,7 @@
     },
     {
       "ranker": "bertscore_f1",
-      "source": "E12",
+      "source": "E11",
       "system": "audio_flamingo_3",
       "value": "0.9742070070294102",
       "rank": 1,
@@ -461,7 +461,7 @@
     },
     {
       "ranker": "bertscore_f1_rescaled",
-      "source": "E12",
+      "source": "E11",
       "system": "gpt_audio_1_5",
       "value": "0.2539523681759922",
       "rank": 3,
@@ -469,7 +469,7 @@
     },
     {
       "ranker": "bertscore_f1_rescaled",
-      "source": "E12",
+      "source": "E11",
       "system": "gemini_3_8_flash",
       "value": "0.23760135622143938",
       "rank": 4,
@@ -477,7 +477,7 @@
     },
     {
       "ranker": "bertscore_f1_rescaled",
-      "source": "E12",
+      "source": "E11",
       "system": "qwen2_5_omni",
       "value": "0.3310677528672777",
       "rank": 2,
@@ -485,7 +485,7 @@
     },
     {
       "ranker": "bertscore_f1_rescaled",
-      "source": "E12",
+      "source": "E11",
       "system": "audio_flamingo_3",
       "value": "0.3524554887881646",
       "rank": 1,
@@ -493,7 +493,7 @@
     },
     {
       "ranker": "clap_similarity",
-      "source": "E12",
+      "source": "E11",
       "system": "gpt_audio_1_5",
       "value": "0.46640355204764467",
       "rank": 2,
@@ -501,7 +501,7 @@
     },
     {
       "ranker": "clap_similarity",
-      "source": "E12",
+      "source": "E11",
       "system": "gemini_3_8_flash",
       "value": "0.3811172001369427",
       "rank": 4,
@@ -509,7 +509,7 @@
     },
     {
       "ranker": "clap_similarity",
-      "source": "E12",
+      "source": "E11",
       "system": "qwen2_5_omni",
       "value": "0.46233271439069923",
       "rank": 3,
@@ -517,7 +517,7 @@
     },
     {
       "ranker": "clap_similarity",
-      "source": "E12",
+      "source": "E11",
       "system": "audio_flamingo_3",
       "value": "0.508762275396887",
       "rank": 1,
@@ -525,7 +525,7 @@
     },
     {
       "ranker": "mace",
-      "source": "E12",
+      "source": "E11",
       "system": "gpt_audio_1_5",
       "value": "0.5729423804790881",
       "rank": 3,
@@ -533,7 +533,7 @@
     },
     {
       "ranker": "mace",
-      "source": "E12",
+      "source": "E11",
       "system": "gemini_3_8_flash",
       "value": "0.4887915999712067",
       "rank": 4,
@@ -541,7 +541,7 @@
     },
     {
       "ranker": "mace",
-      "source": "E12",
+      "source": "E11",
       "system": "qwen2_5_omni",
       "value": "0.5748340224790035",
       "rank": 2,
@@ -549,71 +549,71 @@
     },
     {
       "ranker": "mace",
-      "source": "E12",
+      "source": "E11",
       "system": "audio_flamingo_3",
       "value": "0.6078394327505624",
       "rank": 1,
       "share_observed_order": "0.7143"
     },
     {
-      "ranker": "e18_categories_1_3",
-      "source": "E18",
+      "ranker": "e17_categories_1_3",
+      "source": "E17",
       "system": "gpt_audio_1_5",
       "value": "0.3",
       "rank": 3,
       "share_observed_order": "0.8115"
     },
     {
-      "ranker": "e18_categories_1_3",
-      "source": "E18",
+      "ranker": "e17_categories_1_3",
+      "source": "E17",
       "system": "gemini_3_8_flash",
       "value": "0.16",
       "rank": 4,
       "share_observed_order": "0.8115"
     },
     {
-      "ranker": "e18_categories_1_3",
-      "source": "E18",
+      "ranker": "e17_categories_1_3",
+      "source": "E17",
       "system": "qwen2_5_omni",
       "value": "0.42",
       "rank": 2,
       "share_observed_order": "0.8115"
     },
     {
-      "ranker": "e18_categories_1_3",
-      "source": "E18",
+      "ranker": "e17_categories_1_3",
+      "source": "E17",
       "system": "audio_flamingo_3",
       "value": "0.52",
       "rank": 1,
       "share_observed_order": "0.8115"
     },
     {
-      "ranker": "e19_rated_accurate",
-      "source": "E19",
+      "ranker": "e18_rated_accurate",
+      "source": "E18",
       "system": "gpt_audio_1_5",
       "value": "0.94",
       "rank": 1,
       "share_observed_order": "0.3347"
     },
     {
-      "ranker": "e19_rated_accurate",
-      "source": "E19",
+      "ranker": "e18_rated_accurate",
+      "source": "E18",
       "system": "gemini_3_8_flash",
       "value": "0.46",
       "rank": 4,
       "share_observed_order": "0.3347"
     },
     {
-      "ranker": "e19_rated_accurate",
-      "source": "E19",
+      "ranker": "e18_rated_accurate",
+      "source": "E18",
       "system": "qwen2_5_omni",
       "value": "0.5",
       "rank": 3,
       "share_observed_order": "0.3347"
     },
     {
-      "ranker": "e19_rated_accurate",
-      "source": "E19",
+      "ranker": "e18_rated_accurate",
+      "source": "E18",
       "system": "audio_flamingo_3",
       "value": "0.54",
       "rank": 2,
@@ -688,12 +688,12 @@
     },
     {
       "ranker_a": "bleu_1",
-      "ranker_b": "e18_categories_1_3",
+      "ranker_b": "e17_categories_1_3",
       "kendall_tau_b": "1.0"
     },
     {
       "ranker_a": "bleu_1",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.3333333333333333"
     },
     {
@@ -758,12 +758,12 @@
     },
     {
       "ranker_a": "bleu_2",
-      "ranker_b": "e18_categories_1_3",
+      "ranker_b": "e17_categories_1_3",
       "kendall_tau_b": "1.0"
     },
     {
       "ranker_a": "bleu_2",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.3333333333333333"
     },
     {
@@ -823,12 +823,12 @@
     },
     {
       "ranker_a": "bleu_3",
-      "ranker_b": "e18_categories_1_3",
+      "ranker_b": "e17_categories_1_3",
       "kendall_tau_b": "1.0"
     },
     {
       "ranker_a": "bleu_3",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.3333333333333333"
     },
     {
@@ -883,12 +883,12 @@
     },
     {
       "ranker_a": "bleu_4",
-      "ranker_b": "e18_categories_1_3",
+      "ranker_b": "e17_categories_1_3",
       "kendall_tau_b": "1.0"
     },
     {
       "ranker_a": "bleu_4",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.3333333333333333"
     },
     {
@@ -938,12 +938,12 @@
     },
     {
       "ranker_a": "meteor",
-      "ranker_b": "e18_categories_1_3",
+      "ranker_b": "e17_categories_1_3",
       "kendall_tau_b": "1.0"
     },
     {
       "ranker_a": "meteor",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.3333333333333333"
     },
     {
@@ -988,12 +988,12 @@
     },
     {
       "ranker_a": "cider_d",
-      "ranker_b": "e18_categories_1_3",
+      "ranker_b": "e17_categories_1_3",
       "kendall_tau_b": "0.6666666666666666"
     },
     {
       "ranker_a": "cider_d",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.0"
     },
     {
@@ -1033,12 +1033,12 @@
     },
     {
       "ranker_a": "spice",
-      "ranker_b": "e18_categories_1_3",
+      "ranker_b": "e17_categories_1_3",
       "kendall_tau_b": "1.0"
     },
     {
       "ranker_a": "spice",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.3333333333333333"
     },
     {
@@ -1073,12 +1073,12 @@
     },
     {
       "ranker_a": "spider",
-      "ranker_b": "e18_categories_1_3",
+      "ranker_b": "e17_categories_1_3",
       "kendall_tau_b": "0.6666666666666666"
     },
     {
       "ranker_a": "spider",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.0"
     },
     {
@@ -1108,12 +1108,12 @@
     },
     {
       "ranker_a": "spider_fl",
-      "ranker_b": "e18_categories_1_3",
+      "ranker_b": "e17_categories_1_3",
       "kendall_tau_b": "0.6666666666666666"
     },
     {
       "ranker_a": "spider_fl",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.0"
     },
     {
@@ -1138,12 +1138,12 @@
     },
     {
       "ranker_a": "fense",
-      "ranker_b": "e18_categories_1_3",
+      "ranker_b": "e17_categories_1_3",
       "kendall_tau_b": "1.0"
     },
     {
       "ranker_a": "fense",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.3333333333333333"
     },
     {
@@ -1163,12 +1163,12 @@
     },
     {
       "ranker_a": "bertscore_f1",
-      "ranker_b": "e18_categories_1_3",
+      "ranker_b": "e17_categories_1_3",
       "kendall_tau_b": "1.0"
     },
     {
       "ranker_a": "bertscore_f1",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.3333333333333333"
     },
     {
@@ -1183,12 +1183,12 @@
     },
     {
       "ranker_a": "bertscore_f1_rescaled",
-      "ranker_b": "e18_categories_1_3",
+      "ranker_b": "e17_categories_1_3",
       "kendall_tau_b": "1.0"
     },
     {
       "ranker_a": "bertscore_f1_rescaled",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.3333333333333333"
     },
     {
@@ -1198,27 +1198,27 @@
     },
     {
       "ranker_a": "clap_similarity",
-      "ranker_b": "e18_categories_1_3",
+      "ranker_b": "e17_categories_1_3",
       "kendall_tau_b": "0.6666666666666666"
     },
     {
       "ranker_a": "clap_similarity",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.6666666666666666"
     },
     {
       "ranker_a": "mace",
-      "ranker_b": "e18_categories_1_3",
+      "ranker_b": "e17_categories_1_3",
       "kendall_tau_b": "1.0"
     },
     {
       "ranker_a": "mace",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.3333333333333333"
     },
     {
-      "ranker_a": "e18_categories_1_3",
-      "ranker_b": "e19_rated_accurate",
+      "ranker_a": "e17_categories_1_3",
+      "ranker_b": "e18_rated_accurate",
       "kendall_tau_b": "0.3333333333333333"
     }
   ],
@@ -3777,10 +3777,10 @@
     }
   ],
   "limitations": [
-    "The E18 and E19 rankings come from the 50-recording qualitative sample and one reviewer; the metric rankings from all 1,045 recordings. Their order-stability shares resample different numbers of recordings.",
+    "The E17 and E18 rankings come from the 50-recording qualitative sample and one reviewer; the metric rankings from all 1,045 recordings. Their order-stability shares resample different numbers of recordings.",
     "Kendall's tau over four models takes only seven values and is not tested; it summarises agreement between rankings, not its significance.",
-    "Concordance uses the 200 sampled captions: pairs within a recording share the recording and the references, but the pairs of one recording are not independent (the CI and test resample whole recordings). E19 ratings are one reviewer's judgements.",
-    "Metric correlations are over captions scored against five references (E12); they describe how the metrics vary together, not which metric is right."
+    "Concordance uses the 200 sampled captions: pairs within a recording share the recording and the references, but the pairs of one recording are not independent (the CI and test resample whole recordings). E18 ratings are one reviewer's judgements.",
+    "Metric correlations are over captions scored against five references (E11); they describe how the metrics vary together, not which metric is right."
   ],
   "outputs": {
     "correlations": "outputs/scores/cross_metric_correlations.csv",
