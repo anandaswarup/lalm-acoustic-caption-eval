@@ -19,13 +19,3 @@
 | Total duration (h) | 6.505 |
 | CSV MD5s match Zenodo | True |
 | Errors | 0 |
-
-## Pilot (validation)
-
-| Item | Value |
-|---|---|
-| Pool after excluding shared sources | 1043 |
-| Excluded (shared with evaluation) | `01 A pug struggles to breathe 1_14_2008.wav`, `Bus(Drive_Reverse)_1-2.wav` |
-| Unknown Freesound source (evaluation / pilot pool) | 5 / 6 |
-| Recordings | 20 |
-| Errors | 0 |

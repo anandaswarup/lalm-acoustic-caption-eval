@@ -1,11 +1,11 @@
 {
   "run": {
     "experiment": "prepare_dataset",
-    "timestamp_utc": "2026-11-01T05:17:15+00:00",
-    "git_commit": "b1729373e4a5599c0eb3c5a1f813f8e6ea33d631",
+    "timestamp_utc": "2026-11-07T12:44:57+00:00",
+    "git_commit": "03590435c53d08fb2f608c368b2c856a09588ed9",
     "git_dirty": false,
     "python": "3.13.12",
-    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
   },
   "provenance": {
@@ -84,67 +84,5 @@
     },
     "errors": [],
     "ok": true
-  },
-  "pilot": {
-    "split": "validation",
-    "recordings": 1045,
-    "captions": 5225,
-    "decoded": 20,
-    "duration_seconds": {
-      "min": 15.3,
-      "max": 27.4,
-      "total": 421.55510204081634
-    },
-    "csv_checksums": {
-      "clotho_captions_validation.csv": {
-        "md5": "5879e023032b22a2c930aaa0528bead4",
-        "zenodo_md5": "5879e023032b22a2c930aaa0528bead4",
-        "match": true
-      },
-      "clotho_metadata_validation.csv": {
-        "md5": "2e010427c56b1ce6008b0f03f41048ce",
-        "zenodo_md5": "2e010427c56b1ce6008b0f03f41048ce",
-        "match": true
-      }
-    },
-    "errors": [],
-    "ok": true,
-    "pool": 1043,
-    "excluded_shared_with_evaluation": [
-      {
-        "file_name": "01 A pug struggles to breathe 1_14_2008.wav",
-        "sound_id": "66304"
-      },
-      {
-        "file_name": "Bus(Drive_Reverse)_1-2.wav",
-        "sound_id": "86161"
-      }
-    ],
-    "unknown_freesound_source": {
-      "evaluation": 5,
-      "pilot_pool": 6
-    },
-    "selected": [
-      "20060221.box.fan.fast.wav",
-      "20070418.hoverflies.wav",
-      "20081231.herd.night.wav",
-      "20090628.passing.car.wav",
-      "CARDBOARD_PRESS_DOWN_001.wav",
-      "Car Start.wav",
-      "Cityscape 01 090617.wav",
-      "Crowd, int, echoes.wav",
-      "Footsteps on a gravel road.wav",
-      "Moving paper.wav",
-      "Pelion fount.wav",
-      "Pickup_Ford_62_Start_Idle.wav",
-      "Plastic box being crumpled.wav",
-      "RG Dogs Ear.wav",
-      "RubbishCollection.wav",
-      "Steam Leaking Stereo.wav",
-      "last_call.wav",
-      "little buzz in the rain.wav",
-      "pedestrian_lights.wav",
-      "wine_glass_slowed_down.wav"
-    ]
   }
 }
