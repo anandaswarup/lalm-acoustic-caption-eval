@@ -1,8 +1,8 @@
 {
   "run_info": {
     "experiment": "analyze_annotations",
-    "timestamp_utc": "2026-11-06T15:44:00+00:00",
-    "git_commit": "2acfd51ca4213355b87f71564a69c1f17842f7d0",
+    "timestamp_utc": "2026-11-07T09:34:30+00:00",
+    "git_commit": "cb95ac144df7e879cf62bb12d617f346a597e0a1",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
@@ -360,8 +360,8 @@
       "category": 1,
       "metric": "bertscore_f1_rescaled",
       "num_items": 15,
-      "mean": 0.2657489483556152,
-      "sd": 0.08592353421978513
+      "mean": 0.4308685190173093,
+      "sd": 0.10247088883816702
     },
     {
       "category": 1,
@@ -402,8 +402,8 @@
       "category": 2,
       "metric": "bertscore_f1_rescaled",
       "num_items": 24,
-      "mean": 0.2778696094346488,
-      "sd": 0.10022852558838391
+      "mean": 0.30633121887316045,
+      "sd": 0.0979632664469658
     },
     {
       "category": 2,
@@ -444,8 +444,8 @@
       "category": 3,
       "metric": "bertscore_f1_rescaled",
       "num_items": 31,
-      "mean": 0.2572857387182553,
-      "sd": 0.1306211577213205
+      "mean": 0.30567731979267065,
+      "sd": 0.1354172126855279
     },
     {
       "category": 3,
@@ -486,8 +486,8 @@
       "category": 4,
       "metric": "bertscore_f1_rescaled",
       "num_items": 26,
-      "mean": 0.21825956898256244,
-      "sd": 0.07453890061126461
+      "mean": 0.32873494141417875,
+      "sd": 0.10741157862129684
     },
     {
       "category": 4,
@@ -528,8 +528,8 @@
       "category": 5,
       "metric": "bertscore_f1_rescaled",
       "num_items": 40,
-      "mean": 0.26383946585497153,
-      "sd": 0.11112302739637892
+      "mean": 0.30102244950269746,
+      "sd": 0.10621532685279152
     },
     {
       "category": 5,
@@ -570,8 +570,8 @@
       "category": 6,
       "metric": "bertscore_f1_rescaled",
       "num_items": 64,
-      "mean": 0.24900602148278989,
-      "sd": 0.08353813278758998
+      "mean": 0.25618629126717285,
+      "sd": 0.10646829886469568
     },
     {
       "category": 6,
