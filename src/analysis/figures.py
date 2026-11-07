@@ -1,9 +1,9 @@
-"""Manuscript figures from frozen result tables (E21): E12 scores by model and E14 model - human differences.
+"""Manuscript figures from frozen result tables (E20): E11 scores by model and E13 model - human differences.
 
 Small multiples, one panel per metric with its own x-axis, the models as rows (identity by position and label, so
 one ink colour serves every mark). Dots are point estimates, lines 95% bootstrap CIs. In the difference figure a
-hollow dot marks a difference that is not significant after Holm correction (E16), and a dashed line marks zero.
-Same style and reproducible saving as the E20 figures.
+hollow dot marks a difference that is not significant after Holm correction (E15), and a dashed line marks zero.
+Same style and reproducible saving as the E19 figures.
 """
 
 from __future__ import annotations
@@ -48,7 +48,7 @@ def dot_panels(
     return fig
 
 
-def e12_panels(summary: list[dict[str, str]], metrics: list[str], labels: dict[str, str]) -> list[dict[str, Any]]:
+def e11_panels(summary: list[dict[str, str]], metrics: list[str], labels: dict[str, str]) -> list[dict[str, Any]]:
     """Panels from five_reference_summary.csv rows (sample `all`): item mean and its CI per system."""
     by = {(r["metric"], r["system"]): r for r in summary if r["sample"] == "all"}
     return [
@@ -64,7 +64,7 @@ def e12_panels(summary: list[dict[str, str]], metrics: list[str], labels: dict[s
     ]
 
 
-def e14_panels(tests: list[dict[str, str]], metrics: list[str], labels: dict[str, str]) -> list[dict[str, Any]]:
+def e13_panels(tests: list[dict[str, str]], metrics: list[str], labels: dict[str, str]) -> list[dict[str, Any]]:
     """Panels from statistics_tests.csv rows of family rq2_model_vs_human, sample `all`: model - human difference,
     CI, filled when significant after Holm."""
     by = {

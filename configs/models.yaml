@@ -1,5 +1,5 @@
-# LALMs under evaluation (E04-E09).
-# Model identifiers verified and checkpoint revisions pinned in E04; frozen in E05.
+# LALMs under evaluation (E04-E08).
+# Model identifiers verified and checkpoint revisions pinned in E04; frozen before caption generation.
 #
 # compute:
 #   local    - runs on the laptop (API calls, light CPU work)
@@ -66,7 +66,7 @@ models:
       flavor: a100-large
     output: audio_flamingo_3_captions.jsonl
 
-# Shared Hugging Face Jobs settings (E08, E09).
+# Shared Hugging Face Jobs settings (E07, E08).
 hf_jobs:
   bucket: anandaswarup/lalm-acoustic-caption-eval  # private
   mount: /mnt

@@ -1,4 +1,4 @@
-"""Metric names and metadata (E11). The order here is the reporting order."""
+"""Metric names and metadata (E10). The order here is the reporting order."""
 
 from __future__ import annotations
 

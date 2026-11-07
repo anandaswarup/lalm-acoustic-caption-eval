@@ -1,4 +1,4 @@
-"""Score-table round trip, human baseline, model-human differences and the matched report (E14). No Java or models."""
+"""Score-table round trip, human baseline, model-human differences and the matched report (E13). No Java or models."""
 
 import json
 import math
@@ -87,7 +87,7 @@ def test_read_score_sets_rejects_bad_tables(tmp_path):
 
 
 def human_files(tmp_path, sets: list[ScoreSet]):
-    """E13-like tables and report for `sets`."""
+    """E12-like tables and report for `sets`."""
     scores, corpus = write_tables(tmp_path, sets)
     averaged = average_subsets(sets)
     report = {

@@ -1,6 +1,6 @@
 """Check, unblind and summarize the qualitative annotations.
 
-E18: run once the reviewer's labels in outputs/qualitative/annotations_reviewer_1.csv are final. Checks that every item
+E17: run once the reviewer's labels in outputs/qualitative/annotations_reviewer_1.csv are final. Checks that every item
 has a valid category and that no review column was changed, verifies the blinding key against the SHA-256 in
 sample_manifest.json, then writes the unblinded annotations, the category shares per model (Wilson intervals), the
 disputed-detail counts and the mean five-reference scores per category to outputs/qualitative/, and
@@ -109,7 +109,7 @@ def main() -> int:
     write_csv(by_category, outputs["scores_by_category"], SCORE_COLUMNS)
     report = {
         "run_info": run_info,
-        "task": "E18",
+        "task": "E17",
         "display_names": {key: model["display_name"] for key, model in models.items()},
         "categories": config["categories"],
         "confidence": settings["confidence"],

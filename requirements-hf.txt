@@ -1,4 +1,4 @@
-# Hugging Face Jobs (GPU) dependencies for open-weight caption generation (E08, E09).
+# Hugging Face Jobs (GPU) dependencies for open-weight caption generation (E07, E08).
 # The job image (configs/models.yaml hf_jobs.image) provides Python 3.13 and uv only; torch is the CUDA 12.6
 # build from the PyTorch index, which needs a less recent NVIDIA driver than the default CUDA 13 wheel on PyPI.
 # Installed inside the job with: uv pip install --system -r requirements-hf.txt

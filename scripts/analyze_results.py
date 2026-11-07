@@ -1,11 +1,11 @@
 """Paired bootstrap confidence intervals and cross-metric comparisons.
 
-E16: formal paired tests (sign-flip permutation), Holm-Bonferroni within the families of `statistics` in
-configs/metrics.yaml, bootstrap CIs and paired effect sizes for the model pairs of E12, the model-human comparison of
-E14 (with its sensitivity samples), the model-human length differences and the length-score correlations of E15, and
-the ranking stability of E12 and E14. Reads the committed per-item tables only (no rescoring, no Java or models).
+E15: formal paired tests (sign-flip permutation), Holm-Bonferroni within the families of `statistics` in
+configs/metrics.yaml, bootstrap CIs and paired effect sizes for the model pairs of E11, the model-human comparison of
+E13 (with its sensitivity samples), the model-human length differences and the length-score correlations of E14, and
+the ranking stability of E11 and E13. Reads the committed per-item tables only (no rescoring, no Java or models).
 Writes outputs/scores/statistics_{tests,correlations,ranks,orders}.csv and
-outputs/reports/statistical_analysis.{json,md}. E21's cross-metric comparisons are in compare_metrics.py and its
+outputs/reports/statistical_analysis.{json,md}. E20's cross-metric comparisons are in compare_metrics.py and its
 figures in generate_figures.py.
 """
 
@@ -66,12 +66,12 @@ INPUTS = {
     "captions": CAPTIONS,
 }
 FAMILIES = {
-    "rq1_model_pairs": "Every pair of models on every main metric, five references (E12).",
+    "rq1_model_pairs": "Every pair of models on every main metric, five references (E11).",
     "rq2_model_vs_human": "Every model minus the human baseline on every main metric, matched four references, "
-    "five-subset mean (E14).",
-    "length_vs_human": "Every model's caption length minus its recording's mean reference length (E15).",
+    "five-subset mean (E13).",
+    "length_vs_human": "Every model's caption length minus its recording's mean reference length (E14).",
     "length_score_correlation": "Spearman correlation of raw caption length with score, every system and "
-    "association metric (E15).",
+    "association metric (E14).",
 }
 
 
@@ -145,7 +145,7 @@ def main() -> int:
     samples = matched_samples(four, human_sets, valid_ids, overlaps, loo["overlap_thresholds"])
     five_sets = list(five.values())
     five_samples = [(ALL_RECORDINGS, five_sets), (VALID_FOR_ALL, restrict(five_sets, valid_ids))]
-    logger.info("%d recordings, %d valid for all models; %d E14 samples", len(sample_ids), len(valid_ids), len(samples))
+    logger.info("%d recordings, %d valid for all models; %d E13 samples", len(sample_ids), len(valid_ids), len(samples))
 
     tests = []
     for name, sets in five_samples:
@@ -216,7 +216,7 @@ def main() -> int:
     primary = [*[r for r in tests if r["p_holm"] != ""], *[r for r in correlations if r["p_holm"] != ""]]
     report = {
         "run_info": run_info,
-        "task": "E16",
+        "task": "E15",
         "display_names": {key: model["display_name"] for key, model in models.items()},
         "settings": {**stats, "confidence": resampling.confidence},
         "families": FAMILIES,
@@ -234,12 +234,12 @@ def main() -> int:
         "ranks": ranks,
         "orders": orders,
         "rank_titles": [
-            [conditions.FIVE_REFERENCE, "all", "Models, five references (E12)"],
-            [conditions.FOUR_REFERENCE, POSITION_MEAN, "Models and human, matched four references (E14)"],
+            [conditions.FIVE_REFERENCE, "all", "Models, five references (E11)"],
+            [conditions.FOUR_REFERENCE, POSITION_MEAN, "Models and human, matched four references (E13)"],
         ],
         "earlier": {
-            "rq1_model_pairs": f"`{relative(INPUTS['five_reference_differences'])}` (E12)",
-            "rq2_model_vs_human": f"`{relative(INPUTS['matched_human_model_comparison'])}` (E14)",
+            "rq1_model_pairs": f"`{relative(INPUTS['five_reference_differences'])}` (E11)",
+            "rq2_model_vs_human": f"`{relative(INPUTS['matched_human_model_comparison'])}` (E13)",
         },
         "decision_changes": {
             family: decision_changes(tests, rows, family, ALL_RECORDINGS) for family, rows in earlier.items()

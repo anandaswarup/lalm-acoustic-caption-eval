@@ -1,13 +1,13 @@
-"""Blinded audio-grounded review of the qualitative sample (E19).
+"""Blinded audio-grounded review of the qualitative sample (E18).
 
-After the E18 labels are final, the reviewer listens to each sampled recording and rates every caption against the
-audio, and checks every E18 disputed phrase. The review material keeps the E17 recording codes and caption labels and
-shows each caption with its disputed phrases, never the references, E18 categories, model names, file names or scores.
+After the E17 labels are final, the reviewer listens to each sampled recording and rates every caption against the
+audio, and checks every E17 disputed phrase. The review material keeps the E16 recording codes and caption labels and
+shows each caption with its disputed phrases, never the references, E17 categories, model names, file names or scores.
 Audio copies are named by recording code. Two templates: one row per caption (`audio_rating` and notes) and one row per
 disputed phrase (`verdict` and a note).
 
 Once both templates are complete they are checked against the review material, unblinded with the key and summarised:
-rating and verdict shares per model with Wilson intervals (descriptive), the E18 category x audio rating cross-tab,
+rating and verdict shares per model with Wilson intervals (descriptive), the E17 category x audio rating cross-tab,
 the category-6 split, and the mean five-reference scores per audio rating.
 """
 
@@ -31,7 +31,7 @@ WAV_CHUNKS = ("fmt ", "data")  # anything else (LIST/INFO, id3, bext) could carr
 
 POOLED = "all"  # model_key of the rows pooled over models
 UNSUPPORTED = "U"
-MISMATCH_CATEGORY, MAJOR_RATING = 6, 3  # E18 category 6 rated 3 is a real mismatch; rated 1-2, references incomplete
+MISMATCH_CATEGORY, MAJOR_RATING = 6, 3  # E17 category 6 rated 3 is a real mismatch; rated 1-2, references incomplete
 CAPTION_COLUMNS = (
     "item_id", "recording_code", "caption_label", "sample_id", "model_key", "normalization", "category",
     "audio_rating", "num_phrases", "num_unsupported", "verdicts", *AUDIO_FIELDS[1:],
@@ -57,7 +57,7 @@ def audio_template(review: list[dict[str, str]]) -> list[dict[str, str]]:
 
 
 def phrase_template(annotations: list[dict[str, str]]) -> list[dict[str, str]]:
-    """One blank row per E18 disputed phrase, in review order; phrase IDs are the item ID and the phrase's position
+    """One blank row per E17 disputed phrase, in review order; phrase IDs are the item ID and the phrase's position
     (R01B-1, R01B-2, ...)."""
     rows = []
     for row in annotations:
@@ -109,7 +109,7 @@ def review_sheet_markdown(review: list[dict[str, str]], phrases: list[dict[str, 
     """Text of the audio review (no audio): per recording code, captions A-D and their disputed phrases."""
     by_item = _phrases_by_item(phrases)
     lines = [
-        "# Audio review sheet (E19)",
+        "# Audio review sheet (E18)",
         "",
         "Text of the audio review. Listen in `audio_review.html` (local only), follow `audio_review_guidelines.md`, "
         "and enter labels in `audio_annotations_reviewer_1.csv` and `disputed_verification_reviewer_1.csv`.",
@@ -150,7 +150,7 @@ def review_page_html(review: list[dict[str, str]], phrases: list[dict[str, str]]
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Audio review (E19)</title>
+<title>Audio review (E18)</title>
 <style>
 :root {{ color-scheme: light dark; --fg: #1d1d1f; --bg: #fafaf8; --muted: #6b6b6b; --line: #ddd; }}
 @media (prefers-color-scheme: dark) {{ :root {{ --fg: #e8e8e6; --bg: #18181a; --muted: #9a9a9a; --line: #333; }} }}
@@ -165,7 +165,7 @@ ul.phrases, p.none {{ color: var(--muted); font-size: 0.9rem; margin-top: -0.5re
 </style>
 </head>
 <body>
-<h1>Audio review (E19)</h1>
+<h1>Audio review (E18)</h1>
 <p>Listen to each recording in full, then rate every caption and check each disputed phrase, following
 <code>audio_review_guidelines.md</code>. Enter labels in <code>audio_annotations_reviewer_1.csv</code> and
 <code>disputed_verification_reviewer_1.csv</code>.</p>
@@ -220,10 +220,10 @@ def check_labels(
 def unblind_audio(
     e18: list[dict[str, Any]], audio: list[dict[str, str]], phrases: list[dict[str, str]]
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Checked audio and phrase labels joined with the unblinded E18 rows (sample, model, category), in review order.
+    """Checked audio and phrase labels joined with the unblinded E17 rows (sample, model, category), in review order.
     Returns one row per caption (with its phrase verdicts) and one row per phrase."""
     if [row["item_id"] for row in audio] != [row["item_id"] for row in e18]:
-        raise ValueError("The audio template and the E18 annotations do not cover the same items in the same order")
+        raise ValueError("The audio template and the E17 annotations do not cover the same items in the same order")
     by_item = {row["item_id"]: row for row in e18}
     ratings = {row["item_id"]: int(float(row["audio_rating"])) for row in audio}
     verdicts: dict[str, list[str]] = {}
@@ -310,7 +310,7 @@ def unsupported_summary(captions: list[dict[str, Any]], models: list[str], confi
 def crosstab(
     captions: list[dict[str, Any]], models: list[str], categories: list[int], ratings: list[int]
 ) -> list[dict[str, Any]]:
-    """Caption counts per E18 category and audio rating, per model and pooled (zero cells included)."""
+    """Caption counts per E17 category and audio rating, per model and pooled (zero cells included)."""
     return [
         {
             "model_key": model,
@@ -325,7 +325,7 @@ def crosstab(
 
 
 def mismatch_split(captions: list[dict[str, Any]], models: list[str]) -> list[dict[str, Any]]:
-    """E18 category-6 captions per model and pooled: rated 3 (real mismatch) or 1-2 (references incomplete)."""
+    """E17 category-6 captions per model and pooled: rated 3 (real mismatch) or 1-2 (references incomplete)."""
     out = []
     for model, items in _groups(captions, models).items():
         weak = [row["audio_rating"] for row in items if row["category"] == MISMATCH_CATEGORY]
@@ -344,9 +344,9 @@ def rating_conflicts(captions: list[dict[str, Any]], accurate: int = 1) -> list[
 AUDIO_LIMITATIONS = [
     "One reviewer rated every caption, so inter-annotator agreement cannot be estimated; more reviewers are left for "
     "future work.",
-    "The reviewer had read the references and assigned the E18 categories before listening, so the audio judgements "
-    "may be anchored on them; captions also carry model style cues (E17).",
-    "Only the phrases E18 marked as unsupported by every reference were verified one by one; the verdict shares are "
+    "The reviewer had read the references and assigned the E17 categories before listening, so the audio judgements "
+    "may be anchored on them; captions also carry model style cues (E16).",
+    "Only the phrases E17 marked as unsupported by every reference were verified one by one; the verdict shares are "
     "therefore not error rates for all caption content.",
     "Ratings record what one listener hears in the recording; Clotho has no ground-truth source labels.",
     "With 50 captions per model, proportions are coarse (one caption is 2 percentage points) and the Wilson intervals "
@@ -368,7 +368,7 @@ def audio_report_markdown(report: dict[str, Any]) -> str:
     head = "| " + " | ".join(label[m] for m in scopes) + " |"
     rule = "|---|" + "---|" * len(scopes)
     lines = [
-        "# Audio-grounded review (E19)",
+        "# Audio-grounded review (E18)",
         "",
         f"Generated by `scripts/analyze_audio_review.py` at commit `{run_info['git_commit']}` "
         f"(dirty: {run_info['git_dirty']}), {run_info['timestamp_utc']}.",
@@ -399,7 +399,7 @@ def audio_report_markdown(report: dict[str, Any]) -> str:
         "",
         "## Disputed phrases against the audio",
         "",
-        "Verdicts on the phrases that E18 found in no reference, as a share of the model's disputed phrases.",
+        "Verdicts on the phrases that E17 found in no reference, as a share of the model's disputed phrases.",
         "",
         "| Verdict " + head,
         rule,
@@ -419,9 +419,9 @@ def audio_report_markdown(report: dict[str, Any]) -> str:
             for r in report["unsupported_summary"]
         ],
         "",
-        "## E18 category against audio rating",
+        "## E17 category against audio rating",
         "",
-        "Caption counts; rows are the reference-only E18 categories, columns the audio ratings.",
+        "Caption counts; rows are the reference-only E17 categories, columns the audio ratings.",
         "",
     ]
     cells = {(r["model_key"], r["category"], r["audio_rating"]): r["count"] for r in report["crosstab"]}
@@ -441,7 +441,7 @@ def audio_report_markdown(report: dict[str, Any]) -> str:
     lines += [
         "## Category 6: real mismatches and incomplete references",
         "",
-        f"E18 category-6 captions rated {MAJOR_RATING} against the audio are real mismatches; those rated 1 or 2 "
+        f"E17 category-6 captions rated {MAJOR_RATING} against the audio are real mismatches; those rated 1 or 2 "
         "describe the recording correctly enough and point to incomplete references.",
         "",
         "| Model | Category 6 | Real mismatch (rated 3) | References incomplete (rated 1-2) |",
@@ -459,7 +459,7 @@ def audio_report_markdown(report: dict[str, Any]) -> str:
         "",
         "## Five-reference scores by audio rating",
         "",
-        "Mean item score (E12) of the captions with each audio rating, pooled over models; descriptive only.",
+        "Mean item score (E11) of the captions with each audio rating, pooled over models; descriptive only.",
         "",
         "| Rating | Items | " + " | ".join(report["metric_labels"][m] for m in report["metrics"]) + " |",
         "|---|---|" + "---|" * len(report["metrics"]),

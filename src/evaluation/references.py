@@ -1,10 +1,10 @@
-"""Evaluation conditions and reference subsets (E12-E14).
+"""Evaluation conditions and reference subsets (E11-E13).
 
 - five_reference: each model caption against all five references (subset `all`).
 - four_reference: each model caption against subset `drop_k`, the four references left after removing CSV position k.
 - human_loo: the human caption at position k against subset `drop_k`, the other four.
 
-`drop_k` is the same reference set in E13 and E14, so model and human scores are compared under identical references.
+`drop_k` is the same reference set in E12 and E13, so model and human scores are compared under identical references.
 Positions are 1-based and follow the original Clotho CSV order kept in the references file.
 """
 

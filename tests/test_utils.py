@@ -29,7 +29,6 @@ def test_dataset_config_uses_full_evaluation_split():
     config = load_config("dataset")
     assert config["version"] == "2.1"
     assert config["evaluation"]["expected_recordings"] == 1045
-    assert config["pilot"]["split"] != config["evaluation"]["split"]
 
 
 def test_models_config_lists_four_models_with_unique_outputs():

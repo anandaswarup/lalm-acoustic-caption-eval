@@ -1,12 +1,12 @@
-# Audio review guidelines: captions against the recordings (E19)
+# Audio review guidelines: captions against the recordings (E18)
 
-These guidelines describe the second pass over the qualitative sample: the same 50 recordings and 200 captions as in E17–E18, this time judged against the audio. One reviewer reviews every item.
+These guidelines describe the second pass over the qualitative sample: the same 50 recordings and 200 captions as in E16–E17, this time judged against the audio. One reviewer reviews every item.
 
 ## 1. What is being judged
 
-The question is **whether a generated caption is correct about its recording**. The references are not used here. E18 asked how well a caption agrees with the references; a caption can disagree with them and still describe the recording correctly, or agree with them and still be wrong. The two passes are reported separately.
+The question is **whether a generated caption is correct about its recording**. The references are not used here. E17 asked how well a caption agrees with the references; a caption can disagree with them and still describe the recording correctly, or agree with them and still be wrong. The two passes are reported separately.
 
-Judge each caption on its own against the audio. Do not compare captions A–D with each other, do not try to remember the references or your E18 category for an item, and do not try to work out which model wrote a caption.
+Judge each caption on its own against the audio. Do not compare captions A–D with each other, do not try to remember the references or your E17 category for an item, and do not try to work out which model wrote a caption.
 
 ## 2. Materials
 
@@ -15,7 +15,7 @@ Judge each caption on its own against the audio. Do not compare captions A–D w
 | `audio_review.html` | Listening page: for each recording code, an audio player and captions A–D with their disputed phrases. Open it in a browser; it plays the copies in `audio/`. Local only, never committed. |
 | `audio_review_sheet.md` | The same text without audio |
 | `audio_annotations_reviewer_1.csv` | Where caption ratings are entered (one row per caption, 200 rows) |
-| `disputed_verification_reviewer_1.csv` | Where disputed phrases are checked (one row per phrase from E18 `disputed_details`) |
+| `disputed_verification_reviewer_1.csv` | Where disputed phrases are checked (one row per phrase from E17 `disputed_details`) |
 
 Do not open `review_items.csv`, `review_sheet.md`, `annotations_reviewer_1.csv`, `blinding_key.csv`, `qualitative_annotations.csv`, the metric score tables or the evaluation reports while reviewing. Do not change the `item_id`, `recording_code`, `caption_label`, `caption`, `phrase_id` or `phrase` columns; the analysis checks that they are unchanged.
 
@@ -23,7 +23,7 @@ Do not open `review_items.csv`, `review_sheet.md`, `annotations_reviewer_1.csv`,
 
 - Listen to each recording **in full** before rating its captions, with headphones, at a comfortable fixed volume. Replay as often as needed.
 - Judge only what can be heard. A caption element is audible if a careful listener would recognise it in the recording; it does not need to be loud or in the foreground.
-- As in E18, ignore style: framing ("The audio features…"), length, wording, and hedges (a hedged claim counts as a claim). A more general term is correct if the specific sound is consistent with it ("a vehicle" for a truck).
+- As in E17, ignore style: framing ("The audio features…"), length, wording, and hedges (a hedged claim counts as a claim). A more general term is correct if the specific sound is consistent with it ("a vehicle" for a truck).
 - The **principal** sound source and event are the ones a listener would name first to describe the recording: the dominant or most salient sound, or the sound the recording is evidently about. **Secondary** sounds are the rest (background, brief or incidental sounds).
 
 ## 4. Overall rating
@@ -44,7 +44,7 @@ Assign exactly one rating per caption.
 
 ## 5. Disputed phrases
 
-Each row of `disputed_verification_reviewer_1.csv` is one phrase that E18 marked as unsupported by every reference. Check it against the recording and enter one verdict.
+Each row of `disputed_verification_reviewer_1.csv` is one phrase that E17 marked as unsupported by every reference. Check it against the recording and enter one verdict.
 
 | Code | Verdict | Use when |
 |---|---|---|
@@ -95,4 +95,4 @@ Recording (invented): a small dog barks repeatedly in the foreground; cars pass 
 
 - Work through the recordings in code order. For each recording, listen, rate all four captions, then check their disputed phrases, before moving on.
 - Save both templates as CSV in UTF-8. Do not add, remove or reorder rows or columns.
-- When every caption has a rating and every phrase a verdict, the labels are final: the analysis (`make audio-review`) checks both templates, unblinds them with the key and summarises them per model and against the E18 categories. Labels are not changed after unblinding.
+- When every caption has a rating and every phrase a verdict, the labels are final: the analysis (`make audio-review`) checks both templates, unblinds them with the key and summarises them per model and against the E17 categories. Labels are not changed after unblinding.

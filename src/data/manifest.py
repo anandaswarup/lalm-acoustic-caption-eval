@@ -1,4 +1,4 @@
-"""Build, check and checksum the frozen evaluation and pilot manifests (E03)."""
+"""Build, check and checksum the frozen evaluation manifests (E03), and draw seeded samples of recordings."""
 
 from __future__ import annotations
 
@@ -43,53 +43,10 @@ def build_eval_manifest(
     return manifest, references
 
 
-# Clotho metadata uses "Not found" when the Freesound source is unknown.
-UNKNOWN_SOUND_IDS = {"", "Not found"}
-
-
-def known_sound_id(sound_id: str | None) -> str | None:
-    """Return the Freesound ID, or None for Clotho's unknown-source placeholders."""
-    return None if sound_id is None or sound_id.strip() in UNKNOWN_SOUND_IDS else sound_id
-
-
-def _sound_id(record: dict[str, Any]) -> str | None:
-    return known_sound_id((record.get("metadata") or {}).get("sound_id"))
-
-
-def exclude_shared_sources(
-    candidates: list[dict[str, Any]], held_out: list[dict[str, Any]]
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Split `candidates` into those sharing no Freesound source or file name with `held_out`, and the rest.
-
-    Clotho cuts some Freesound sounds into excerpts that land in different splits, so file names alone miss overlap.
-    Records whose source is unknown can only be matched by file name.
-    """
-    held_ids = {_sound_id(record) for record in held_out} - {None}
-    held_names = {record["file_name"] for record in held_out}
-    kept, excluded = [], []
-    for record in candidates:
-        sound_id = _sound_id(record)
-        shared = (sound_id is not None and sound_id in held_ids) or record["file_name"] in held_names
-        (excluded if shared else kept).append(record)
-    return kept, excluded
-
-
-def select_pilot(file_names: Iterable[str], num_recordings: int, seed: int) -> list[str]:
-    """Draw `num_recordings` file names with a seeded RNG; independent of input order."""
+def select_sample(file_names: Iterable[str], num_recordings: int, seed: int) -> list[str]:
+    """Draw `num_recordings` names with a seeded RNG; independent of input order."""
     population = sorted(file_names)
     return sorted(random.Random(seed).sample(population, num_recordings))
-
-
-def build_pilot_manifest(
-    records: list[dict[str, Any]], split: str = "validation", prefix: str = "clotho_pilot"
-) -> list[dict[str, Any]]:
-    """Pilot records carry their captions inline; the pilot has no separate references file."""
-    records = sorted(records, key=lambda record: record["file_name"])
-    width = max(2, len(str(len(records) - 1)))
-    return [
-        {**_manifest_record(f"{prefix}_{index:0{width}d}", split, record), "captions": list(record["captions"])}
-        for index, record in enumerate(records)
-    ]
 
 
 def check_manifest(

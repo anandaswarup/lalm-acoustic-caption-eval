@@ -1,4 +1,4 @@
-"""Metric arithmetic and parsing (E11) that needs no Java, models or downloads."""
+"""Metric arithmetic and parsing (E10) that needs no Java, models or downloads."""
 
 import math
 

@@ -1,7 +1,7 @@
-# Qualitative review (E17-E20, RQ3). E17 draws a simple random sample of evaluation recordings, independent of model
+# Qualitative review (E16-E19, RQ3). E16 draws a simple random sample of evaluation recordings, independent of model
 # scores (proposal 5.4), and writes blinded review sheets: each recording gets its own random order of the four models
 # (labels A-D) and the recordings are presented in random order. Reviewers see the five references and each caption as
-# scored, never file names, model names or metric scores. The blinding key stays out of git until the E18 labels are final;
+# scored, never file names, model names or metric scores. The blinding key stays out of git until the E17 labels are final;
 # its SHA-256 is recorded in the sample manifest.
 sample:
   num_recordings: 50
@@ -9,7 +9,7 @@ sample:
 reviewers: 1  # one reviewer (decided 2026-11-05); more reviewers are left for future work
 output_dir: outputs/qualitative
 
-# Primary agreement category per generated caption (E18). Reviewers compare the caption with the references only,
+# Primary agreement category per generated caption (E17). Reviewers compare the caption with the references only,
 # without the audio.
 categories:
   - code: 1
@@ -31,14 +31,14 @@ categories:
     name: Weak agreement or sound-source/event mismatch
     description: Differs substantially from the references or appears to describe a different source or event.
 
-# Annotation analysis (E18): category shares per model with Wilson intervals, and the mean five-reference item score
-# (E12) of each category, pooled over models (descriptive).
+# Annotation analysis (E17): category shares per model with Wilson intervals, and the mean five-reference item score
+# (E11) of each category, pooled over models (descriptive).
 annotation:
   confidence: 0.95
   score_metrics: [cider_d, spice, fense, bertscore_f1_rescaled, clap_similarity, mace]
 
-# Audio-grounded review (E19): after the E18 labels are final, the reviewer listens to each recording and rates every
-# caption against the audio, and checks each E18 disputed phrase. References, E18 categories, model names, file names
+# Audio-grounded review (E18): after the E17 labels are final, the reviewer listens to each recording and rates every
+# caption against the audio, and checks each E17 disputed phrase. References, E17 categories, model names, file names
 # and scores are not shown. Category 6 is not asked directly: a category-6 caption rated 3 is a real mismatch, one
 # rated 1 or 2 means the references are incomplete.
 audio_review:
@@ -65,9 +65,9 @@ audio_review:
   confidence: 0.95
   score_metrics: [cider_d, spice, fense, bertscore_f1_rescaled, clap_similarity, mace]
 
-# Representative caption comparisons (E20): one recording per pattern, chosen by the rules in src/analysis/examples.py
+# Representative caption comparisons (E19): one recording per pattern, chosen by the rules in src/analysis/examples.py
 # (deterministic; ties broken by a shuffle seeded with `seed`), plus every sampled recording as a supplementary table.
-# Figures: E18 categories and E19 ratings per model, and the E18 x E19 heatmap.
+# Figures: E17 categories and E18 ratings per model, and the E17 x E18 heatmap.
 examples:
   seed: 42
   tables_dir: outputs/tables

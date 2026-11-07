@@ -1,4 +1,4 @@
-"""Write the completion report for one model's caption run (E06-E09).
+"""Write the completion report for one model's caption run (E05-E08).
 
 Reads the run's captions JSONL (latest record per sample_id) and its meta file, checks them against the run's
 manifest and the frozen prompt, and writes `<model>_<run>_completion.{json,md}`. Reports hold counts and

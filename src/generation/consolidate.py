@@ -1,6 +1,6 @@
-"""Merge the four models' captions into one frozen, aligned caption dataset (E10).
+"""Merge the four models' captions into one frozen, aligned caption dataset (E09).
 
-Normalization (decided in E05 and after E06): leading and trailing whitespace is stripped; a caption that is exactly
+Normalization (decided before and after E05): leading and trailing whitespace is stripped; a caption that is exactly
 {"<text>"} is unwrapped to <text>; any other JSON-like caption is kept unchanged and flagged as malformed. Malformed
 captions are scored as returned; nothing is excluded.
 """
@@ -156,7 +156,7 @@ def consolidate(
 
 def report_markdown(report: dict[str, Any], checksums: dict[str, str]) -> str:
     """Caption validation report: counts and sample_ids only, never caption text."""
-    lines = ["# Caption validation report (E10)", ""]
+    lines = ["# Caption validation report (E09)", ""]
     if report["errors"]:
         lines += ["## Errors (dataset not frozen)", ""] + [f"- {error}" for error in report["errors"]] + [""]
         return "\n".join(lines)

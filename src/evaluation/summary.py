@@ -1,4 +1,4 @@
-"""Model-level summaries of one reference condition (E12, reused in E13-E14): bootstrap CIs, paired model differences
+"""Model-level summaries of one reference condition (E11, reused in E12-E13): bootstrap CIs, paired model differences
 (and differences from a baseline scored on the same references) and the sensitivity check on a subset of recordings.
 
 Everything works on per-item scores that are already computed, so a subset of recordings needs no rescoring. On a
@@ -21,7 +21,7 @@ from src.metrics.registry import BY_NAME, METRICS, Score
 
 ALL_RECORDINGS = "all"
 VALID_FOR_ALL = "valid_for_all_models"
-POSITION_MEAN = "mean_drop_1_5"  # the five drop_k subsets averaged (E13-E14)
+POSITION_MEAN = "mean_drop_1_5"  # the five drop_k subsets averaged (E12-E13)
 
 SUMMARY_COLUMNS = (
     "system", "condition", "subset", "sample", "num_items", "metric", "corpus", "item_mean", "ci_low", "ci_high"
@@ -81,7 +81,7 @@ def average_subsets(score_sets: list[ScoreSet], subset: str = POSITION_MEAN) -> 
 
 
 def masked_average(score_sets: list[ScoreSet], keep: dict[str, np.ndarray], subset: str = POSITION_MEAN) -> ScoreSet:
-    """`average_subsets` over the kept (recording, subset) scores only (E13-E14 near-paraphrase sensitivity).
+    """`average_subsets` over the kept (recording, subset) scores only (E12-E13 near-paraphrase sensitivity).
 
     `keep[subset]` is a boolean array over the recordings. Each recording's score is the mean of its kept subsets;
     recordings with none kept are dropped. Corpus-statistic metrics (BLEU, METEOR) get no corpus value, as in
@@ -179,7 +179,7 @@ def difference_rows(
 def matched_difference_rows(
     score_sets: list[ScoreSet], baseline: ScoreSet, sample: str, num_resamples: int, confidence: float, seed: int
 ) -> list[dict[str, Any]]:
-    """Paired item-mean differences of every system minus `baseline`, with the summary's resamples (E14).
+    """Paired item-mean differences of every system minus `baseline`, with the summary's resamples (E13).
 
     The baseline may come from another condition (the human leave-one-out captions) but must be on the same subset,
     recordings and metrics, so both sides are scored against the same references.
@@ -287,7 +287,7 @@ def report_markdown(report: dict[str, Any]) -> str:
         f"({inputs['references_per_recording']} references per recording); audio-aware metrics included.",
         f"- Captions: `{inputs['captions']['path']}` (sha256 `{inputs['captions']['sha256']}`); references: "
         f"`{inputs['references']['path']}` (sha256 `{inputs['references']['sha256']}`).",
-        "- Every caption is scored as returned after the E10 normalization; no recording is excluded.",
+        "- Every caption is scored as returned after the E09 normalization; no recording is excluded.",
         "",
         "| Model | Key | Normalization |",
         "|---|---|---|",

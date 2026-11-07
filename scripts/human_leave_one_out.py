@@ -1,10 +1,10 @@
 """Human leave-one-out calibration: score each held-out caption against the other four.
 
-E13: for k = 1..5, the human caption at CSV position k of every evaluation recording is scored against the other four
-(subset drop_k, shared with E14), with audio. The checks that each split is valid run before scoring. Writes the
+E12: for k = 1..5, the human caption at CSV position k of every evaluation recording is scored against the other four
+(subset drop_k, shared with E13), with audio. The checks that each split is valid run before scoring. Writes the
 per-recording, corpus and summary scores (per position and averaged over the five) to outputs/scores/human_loo_*.csv
 and outputs/reports/human_loo_evaluation.{json,md}. Near-paraphrase sensitivity: each held-out caption's word-set
-Jaccard with its closest reference is saved (human_loo_overlap.csv, for E14), and the averaged baseline is also
+Jaccard with its closest reference is saved (human_loo_overlap.csv, for E13), and the averaged baseline is also
 summarized on the held-out captions below each `leave_one_out.overlap_thresholds` value, without rescoring. CLAP audio
 embeddings come from outputs/cache/ (git-ignored). Run with .venv-metrics (make loo).
 """
@@ -50,6 +50,7 @@ def main() -> int:
         overlap_summary,
         report_markdown,
     )
+    from src.evaluation.metric_info import LIMITATIONS, package_versions
     from src.evaluation.pipeline import (
         AudioCache,
         clap_cache_key,
@@ -60,7 +61,6 @@ def main() -> int:
     )
     from src.evaluation.scoring import CORPUS_COLUMNS, SCORE_COLUMNS, Evaluator, corpus_rows, score_rows, write_csv
     from src.evaluation.summary import ALL_RECORDINGS, SUMMARY_COLUMNS, average_subsets, masked_average, summary_rows
-    from src.evaluation.validation import LIMITATIONS, package_versions
     from src.metrics.preprocess import ptb_tokenize
     from src.metrics.registry import check_scores
 
@@ -144,7 +144,7 @@ def main() -> int:
 
     report = {
         "run_info": run_info,
-        "task": "E13",
+        "task": "E12",
         "condition": condition,
         "subsets": subsets,
         "smoke_test_limit": args.limit,

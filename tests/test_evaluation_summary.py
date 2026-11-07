@@ -1,4 +1,4 @@
-"""Model summaries, paired differences, the sensitivity check and the CLAP audio cache (E12). No Java or models."""
+"""Model summaries, paired differences, the sensitivity check and the CLAP audio cache (E11). No Java or models."""
 
 import math
 
@@ -111,7 +111,7 @@ def test_report_markdown_has_no_missing_cells():
     )  # fmt: skip
     report = {
         "run_info": {"git_commit": "abc", "git_dirty": False, "timestamp_utc": "now"},
-        "task": "E12",
+        "task": "E11",
         "condition": "five_reference",
         "subset": "all",
         "smoke_test_limit": None,

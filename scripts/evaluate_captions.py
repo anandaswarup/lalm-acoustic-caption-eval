@@ -1,16 +1,16 @@
 """Score model captions against human references (five- and four-reference conditions).
 
-E12 (`condition: five_reference` in configs/metrics.yaml): every model caption against all five references, with audio,
+E11 (`condition: five_reference` in configs/metrics.yaml): every model caption against all five references, with audio,
 on every evaluation recording; malformed captions are scored as returned. Writes per-recording and corpus scores,
 bootstrap CIs, paired differences between models and the sensitivity check (the recordings where every model's caption
 is valid) to outputs/scores/, and outputs/reports/<condition>_evaluation.{json,md}. CLAP audio embeddings are cached in
-outputs/cache/ (git-ignored) for E13-E14. Run with .venv-metrics (make evaluate).
+outputs/cache/ (git-ignored) for E12-E13. Run with .venv-metrics (make evaluate).
 
-E14 (`condition: four_reference`, make evaluate-four-ref): every model caption against each subset drop_k (k = 1..5),
-the same four references as the held-out human captions of E13, averaged over the five subsets. The human baseline is
-read from E13's tables (outputs/scores/human_loo_*.csv), checked against E13's report. Adds paired model-minus-human
+E13 (`condition: four_reference`, make evaluate-four-ref): every model caption against each subset drop_k (k = 1..5),
+the same four references as the held-out human captions of E12, averaged over the five subsets. The human baseline is
+read from E12's tables (outputs/scores/human_loo_*.csv), checked against E12's report. Adds paired model-minus-human
 differences (matched_human_model_comparison.csv) and two sensitivity checks: the recordings where every model's caption
-is valid, and E13's near-paraphrase masks applied to model and human scores alike. Per-recording scores are gzipped.
+is valid, and E12's near-paraphrase masks applied to model and human scores alike. Per-recording scores are gzipped.
 """
 
 import json
@@ -28,7 +28,7 @@ from src.utils.config import load_config  # noqa: E402
 from src.utils.paths import OUTPUT_DIR, resolve_path  # noqa: E402
 from src.utils.run_info import collect_run_info  # noqa: E402
 
-TASKS = {"five_reference": "E12", "four_reference": "E14"}
+TASKS = {"five_reference": "E11", "four_reference": "E13"}
 CAPTIONS = OUTPUT_DIR / "captions" / "all_model_captions.jsonl"
 CAPTION_REPORT = OUTPUT_DIR / "reports" / "caption_validation.json"
 HUMAN_LOO = {
@@ -58,6 +58,7 @@ def main() -> int:
     from src.evaluation.inputs import load_model_captions
     from src.evaluation.matched import COMPARABILITY, MATCHED_SENSITIVITY_COLUMNS, matched_tables
     from src.evaluation.matched import report_markdown as matched_report_markdown
+    from src.evaluation.metric_info import LIMITATIONS, package_versions
     from src.evaluation.pipeline import (
         AudioCache,
         clap_cache_key,
@@ -79,7 +80,6 @@ def main() -> int:
         sensitivity_rows,
         summary_rows,
     )
-    from src.evaluation.validation import LIMITATIONS, package_versions
     from src.metrics.registry import check_scores
 
     four = condition == conditions.FOUR_REFERENCE

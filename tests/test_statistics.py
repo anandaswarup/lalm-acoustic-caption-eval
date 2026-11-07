@@ -1,4 +1,4 @@
-"""Permutation tests, Holm correction, effect sizes and ranking stability (E16). No Java or models."""
+"""Permutation tests, Holm correction, effect sizes and ranking stability (E15). No Java or models."""
 
 import math
 

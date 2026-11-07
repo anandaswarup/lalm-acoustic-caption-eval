@@ -1,4 +1,4 @@
-"""Download and verify the external tools the caption metrics need (E11).
+"""Download and verify the external tools the caption metrics need (E10).
 
 Installs, under `tools.dir` of configs/metrics.yaml (git-ignored): a JDK 11 for METEOR, SPICE and the PTB tokenizer
 (aac-metrics rejects Java > 13 and SPICE needs Nashorn); CoreNLP 3.6.0 from Stanford's mirror; the jars and models

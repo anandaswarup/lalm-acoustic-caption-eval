@@ -1,4 +1,4 @@
-"""CLAP similarity and MACE (E11).
+"""CLAP similarity and MACE (E10).
 
 MACE follows the paper (Dixit et al., arXiv 2411.00321): 0.5 * (audio-text + mean text-text CLAP cosine), multiplied by
 (1 - penalty * error) where error flags a fluency error (probability > threshold). aac-metrics 0.5.5 differs: its

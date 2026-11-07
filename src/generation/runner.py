@@ -1,4 +1,4 @@
-"""Resumable caption generation over a frozen manifest (E04-E09)."""
+"""Resumable caption generation over a frozen manifest (E04-E08)."""
 
 from __future__ import annotations
 

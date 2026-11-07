@@ -1,4 +1,4 @@
-"""Shared setup for the scoring scripts (E12-E14): output paths, input verification, evaluation inputs, the CLAP audio
+"""Shared setup for the scoring scripts (E11-E13): output paths, input verification, evaluation inputs, the CLAP audio
 cache and the timing block of a report.
 
 Nothing here imports a model library, but the scripts still call `src.metrics.tools.activate` first (see its docstring).

@@ -1,9 +1,9 @@
 """Check, unblind and summarize the audio-grounded review.
 
-E19 Part 3: run once both templates (audio_annotations_reviewer_1.csv, disputed_verification_reviewer_1.csv) are final.
+E18 Part 3: run once both templates (audio_annotations_reviewer_1.csv, disputed_verification_reviewer_1.csv) are final.
 Checks that every caption has a rating and every disputed phrase a verdict and that no fixed column was changed,
 verifies the blinding key against sample_manifest.json and the review inputs against audio_review_manifest.json, then
-writes the unblinded captions and phrases, the rating and verdict shares per model (Wilson intervals), the E18 category
+writes the unblinded captions and phrases, the rating and verdict shares per model (Wilson intervals), the E17 category
 x audio rating cross-tab, the category-6 split and the mean five-reference scores per rating to outputs/qualitative/,
 and outputs/reports/audio_review.{json,md}. Labels are not changed after unblinding.
 """
@@ -118,7 +118,7 @@ def main() -> int:
 
     review, annotations = read_table(paths["review"]), read_table(paths["annotations"])
     if errors := check_annotations(annotations, review, set(categories)):
-        logger.error("The E18 annotations do not check (%d problems, first: %s)", len(errors), errors[0])
+        logger.error("The E17 annotations do not check (%d problems, first: %s)", len(errors), errors[0])
         return 1
     audio, phrases = read_table(paths["audio_annotations"]), read_table(paths["phrase_verdicts"])
     errors = check_labels(
@@ -134,7 +134,7 @@ def main() -> int:
     if errors:
         for error in errors[:50]:
             logger.error("%s", error)
-        logger.error("%d problems in the E19 templates; nothing unblinded", len(errors))
+        logger.error("%d problems in the E18 templates; nothing unblinded", len(errors))
         return 1
     captions, phrase_rows = unblind_audio(unblind(annotations, read_table(key_path)), audio, phrases)
     logger.info("%d captions and %d phrases checked and unblinded", len(captions), len(phrase_rows))
@@ -174,7 +174,7 @@ def main() -> int:
         logger.warning("%d captions rated 1 have an unsupported phrase (reported, not changed)", len(conflicts))
     report = {
         "run_info": run_info,
-        "task": "E19",
+        "task": "E18",
         "display_names": {key: model["display_name"] for key, model in models.items()},
         "categories": config["categories"],
         "ratings": settings["ratings"],

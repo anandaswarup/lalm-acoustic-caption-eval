@@ -1,11 +1,11 @@
 """Blinded audio-grounded review material for the qualitative sample.
 
-E19 Part 1: run once the E18 labels are final. Verifies the blinding key against sample_manifest.json and the E18
+E18 Part 1: run once the E17 labels are final. Verifies the blinding key against sample_manifest.json and the E17
 template against review_items.csv, copies each sampled recording (checked against its manifest SHA-256) to
 `output_dir`/audio/<code>.wav, and writes the local listening page audio_review.html (git-ignored, like the audio), the
 text view audio_review_sheet.md, a template with one row per caption (audio rating and notes), a template with one row
-per E18 disputed phrase (verdict and note) and audio_review_manifest.json. The material keeps the E17 codes and
-labels and holds no references, E18 categories, model names, file names or scores. Templates that hold labels are
+per E17 disputed phrase (verdict and note) and audio_review_manifest.json. The material keeps the E16 codes and
+labels and holds no references, E17 categories, model names, file names or scores. Templates that hold labels are
 never overwritten.
 """
 
@@ -88,7 +88,7 @@ def main() -> int:
     if errors := check_annotations(annotations, review, codes):
         for error in errors[:20]:
             logger.error("%s", error)
-        logger.error("The E18 template is not complete; finish E18 first")
+        logger.error("The E17 template is not complete; finish E17 first")
         return 1
 
     dataset, models = load_config("dataset", args.overrides), load_config("models", args.overrides)["models"]
@@ -131,7 +131,7 @@ def main() -> int:
     write_csv(audio_rows, outputs["audio_template"], AUDIO_COLUMNS)
     write_csv(phrase_rows, outputs["phrase_template"], PHRASE_COLUMNS)
     manifest = {
-        "task": "E19",
+        "task": "E18",
         "num_recordings": len(code_to_sample),
         "num_items": len(audio_rows),
         "num_phrases": len(phrase_rows),

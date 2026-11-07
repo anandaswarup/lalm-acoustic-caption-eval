@@ -15,7 +15,6 @@ Evaluating Large Audio Language Model (LALM)-generated acoustic captions against
 | Item | Setting |
 |---|---|
 | Dataset | Clotho v2.1, complete evaluation split: 1,045 recordings × 5 human captions |
-| Pilot | 20 recordings from the validation split (seed 42), excluding recordings that share a Freesound source with the evaluation split; technical validation only |
 | Models | GPT-Audio-1.5, Gemini 3.8 Flash, Qwen2.5-Omni-7B, Audio Flamingo 3 |
 | Prompt | One fixed prompt for all models (`configs/generation.yaml`) |
 | Metrics | BLEU-1–4, METEOR, CIDEr-D, SPICE, SPIDEr, SPIDEr-FL, FENSE, BERTScore-F1 (raw and rescaled); CLAP similarity and MACE reported separately |
@@ -46,17 +45,17 @@ Credentials go in `.env` (git-ignored; see `.env.example`). Only caption generat
 
 | Variable | Needed for |
 |---|---|
-| `CLOTHO_ROOT` | Every step that reads the dataset: download, manifests, generation, audio-aware metrics, E19 audio review |
-| `OPENAI_API_KEY` | GPT-Audio-1.5 captions (E05, E06) |
-| `GEMINI_API_KEY` | Gemini 3.8 Flash captions (E05, E07) |
-| `HF_TOKEN` | Hugging Face Jobs and the private bucket for Qwen2.5-Omni-7B and Audio Flamingo 3 captions (E05, E08, E09) |
+| `CLOTHO_ROOT` | Every step that reads the dataset: download, manifests, generation, audio-aware metrics, E18 audio review |
+| `OPENAI_API_KEY` | GPT-Audio-1.5 captions (E05) |
+| `GEMINI_API_KEY` | Gemini 3.8 Flash captions (E06) |
+| `HF_TOKEN` | Hugging Face Jobs and the private bucket for Qwen2.5-Omni-7B and Audio Flamingo 3 captions (E07, E08) |
 
 ### Dataset
 
 Clotho v2.1 ([Zenodo 4783391](https://zenodo.org/records/4783391)) is kept outside the repository, in the folder `CLOTHO_ROOT` (set in `.env`) points to. `make download-data` builds that folder:
 
 1. It saves a snapshot of the Zenodo record (file list, sizes, MD5) to `provenance/zenodo-record-4783391.json`, or reuses the snapshot already there, and checks that the record is version 2.1.
-2. It downloads every caption and metadata CSV, the licence and the audio archives of the evaluation and validation splits (about 2.5 GB; `python scripts/download_clotho.py --splits evaluation validation development` adds the 4.5 GB development split). Downloads resume after interruption and every file is checked against the record's size and MD5.
+2. It downloads every caption and metadata CSV, the licence and the evaluation audio archive (about 1.25 GB; `--splits` adds the validation or development audio). Downloads resume after interruption and every file is checked against the record's size and MD5.
 3. It extracts the archives with `bsdtar` into `audio/{split}/` and writes `manifests/{split}.jsonl` (one record per recording: the five captions, audio properties and metadata row, after checking that captions, metadata and audio files align and that no WAV is truncated) and `provenance/validation.json`.
 
 `python scripts/download_clotho.py --check` rebuilds the manifests from the files present and compares them with the existing ones. The resulting layout is `audio/{split}/*.wav`, `captions/clotho_captions_{split}.csv`, `metadata/clotho_metadata_{split}.csv`, `manifests/{split}.jsonl`, `provenance/` and `LICENSE`. Audio and raw dataset files are never committed.
@@ -69,7 +68,6 @@ Clotho v2.1 ([Zenodo 4783391](https://zenodo.org/records/4783391)) is kept outsi
 |---|---|
 | `clotho_eval_manifest.jsonl` | 1,045 evaluation recordings sorted by file name (case-sensitive code-point order), with stable IDs `clotho_eval_0000`–`clotho_eval_1044`, audio properties, audio SHA-256 and Freesound licence |
 | `clotho_eval_references.json` | `sample_id` → five human captions, in their original order (5,225 in total) |
-| `clotho_pilot_manifest.jsonl` | 20 pilot recordings from the validation split, with captions |
 | `CLOTHO_LICENSE` | Clotho caption copyright notice, which must accompany every copy of the captions |
 | `SHA256SUMS` | Checksums of the files above |
 
@@ -82,11 +80,11 @@ Validation and manifest reports are in `outputs/reports/`. The script does not o
 | API inference (GPT-Audio-1.5, Gemini 3.8 Flash), all caption metrics (CPU), analysis, figures | Local laptop |
 | Open-weight inference (Qwen2.5-Omni-7B, Audio Flamingo 3) | Hugging Face Jobs |
 
-The `compute` field for each model is set in `configs/models.yaml`. The E11 validation estimates about 2 hours of CPU time for all metrics on all evaluation conditions (E12–E14), so the metrics run on the laptop.
+The `compute` field for each model is set in `configs/models.yaml`. Scoring all evaluation conditions (E11–E13) takes about 2 hours of CPU time, so the metrics run on the laptop.
 
-### Caption generation (E04–E10)
+### Caption generation (E04–E09)
 
-One fixed prompt (`configs/generation.yaml`, version v3, frozen after the E05 pilot) is sent with each recording, audio before text, with deterministic decoding where the provider supports it (temperature 0, top-p 1; seed 42 for the two API models). Audio is never cropped; any resampling or channel conversion a provider needs is recorded per request.
+One fixed prompt (`configs/generation.yaml`, frozen before caption generation) is sent with each recording, audio before text, with deterministic decoding where the provider supports it (temperature 0, top-p 1; seed 42 for the two API models). Audio is never cropped; any resampling or channel conversion a provider needs is recorded per request.
 
 | Model | Identifier (`configs/models.yaml`) | Access | Runs on | Licence |
 |---|---|---|---|---|
@@ -95,10 +93,10 @@ One fixed prompt (`configs/generation.yaml`, version v3, frozen after the E05 pi
 | Qwen2.5-Omni-7B | `Qwen/Qwen2.5-Omni-7B` @ `ae9e1690543ffd5c0221dc27f79834d0294cba00` | Open weights | Hugging Face Jobs (A100) | Apache-2.0 |
 | Audio Flamingo 3 | `nvidia/audio-flamingo-3-hf` @ `7d4bae64ee29878af6504ae6f6bb3e40492838ad` | Open weights | Hugging Face Jobs (A100) | NVIDIA OneWay Noncommercial |
 
-- `make pilot` captions the 20 pilot recordings with every model (E05); `make generate` (or `make generate-<model>`) captions the 1,045 evaluation recordings (E06–E09). Runs are resumable: a rerun requests only recordings without an `ok` record made with the current prompt. A JSON-like answer instead of a sentence is requested again, up to three requests in total, for every model; rejected answers are kept in the record.
+- `make generate` (or `make generate-<model>`) captions the 1,045 evaluation recordings (E05–E08). Runs are resumable: a rerun requests only recordings without an `ok` record made with the current prompt. A JSON-like answer instead of a sentence is requested again, up to three requests in total, for every model; rejected answers are kept in the record.
 - The open-weight models run on Hugging Face Jobs: upload the manifest WAVs once with `make hf-upload-audio`, and each `make generate-<model>` then snapshots the committed code and submits a detached job (`hf_jobs:` in `configs/models.yaml`: private bucket, `a100-large`, 4 h timeout). When the jobs finish, `make fetch-hf` copies their captions into `outputs/captions/`. A collaborator needs their own bucket, set in `hf_jobs.bucket`.
 - `python scripts/caption_report.py --model <key>` writes a completion report per model and run (`outputs/reports/<model>_evaluation_completion.{json,md}`).
-- `make consolidate` (E10) checks that every model has one `ok` caption per evaluation recording, produced with the frozen prompt, normalizes the captions (a plain sentence wrapped as `{"..."}` is unwrapped; any other JSON-like answer is flagged as malformed and scored as returned) and freezes them in `outputs/captions/all_model_captions.jsonl`, with `outputs/captions/SHA256SUMS` covering it and the per-model files. The report is `outputs/reports/caption_validation.{json,md}`; `python scripts/consolidate_captions.py --check` verifies the frozen files.
+- `make consolidate` (E09) checks that every model has one `ok` caption per evaluation recording, produced with the frozen prompt, normalizes the captions (a plain sentence wrapped as `{"..."}` is unwrapped; any other JSON-like answer is flagged as malformed and scored as returned) and freezes them in `outputs/captions/all_model_captions.jsonl`, with `outputs/captions/SHA256SUMS` covering it and the per-model files. The report is `outputs/reports/caption_validation.{json,md}`; `python scripts/consolidate_captions.py --check` verifies the frozen files.
 
 The API models are not reproducible at temperature 0, so the reported results rest on the committed caption files, not on regenerating them.
 
@@ -110,20 +108,19 @@ The caption metrics run in their own environment, `.venv-metrics` (`requirements
 make venv-metrics install-metrics   # .venv-metrics from requirements-metrics.txt
 make metric-tools       # JDK 11, metric jars and model checkpoints into tools/ (about 4.5 GB, git-ignored)
 make test-metrics       # integration tests with the real jars and checkpoints
-make validate-metrics   # pilot validation; writes outputs/reports/metric_implementation.{json,md}
 ```
 
 - `make metric-tools` checks every download against the SHA-256 or commit pinned in `configs/metrics.yaml` (`tools:`) and records the SHA-256 of every file in `tools/MANIFEST.json`; `python scripts/setup_metric_tools.py --check` verifies them again. CoreNLP 3.6.0 (for SPICE) comes from Stanford's mirror `downloads.cs.stanford.edu`, because the URL aac-metrics uses is unreachable.
 - Scoring runs offline: models load only from `tools/` at the pinned revisions.
 - Every text metric scores PTB-tokenized text (lowercased, punctuation removed), as in aac-metrics and DCASE. Each scoring call covers a whole condition at once, because CIDEr-D and the BLEU and METEOR corpus statistics depend on every reference in the call.
 - Metric parameters are in `configs/metrics.yaml` (`settings:`). Implementation notes:
-  - BLEU, METEOR, CIDEr-D, SBERT similarity, the fluency-error detector and BERTScore come from aac-metrics 0.5.5.
+  - BLEU, METEOR, CIDEr-D, SBERT similarity and the fluency-error detector come from aac-metrics 0.5.5.
   - SPICE runs without its parse cache, whose native library is x86-only; scores are unchanged.
-  - BERTScore uses roberta-large's last layer (24), as aac-metrics does, with `max_length` 128. The rescaled F1 uses the layer-24 baseline.
+  - BERTScore uses roberta-large's last layer (24), as aac-metrics does, with `max_length` 128, but is computed by `src/metrics/bertscore.py`: torchmetrics 1.9.0, which aac-metrics calls, pairs captions with the wrong references in batched calls, so the same steps are run with the order restored correctly. The rescaled F1 uses the layer-24 baseline.
   - CLAP similarity and MACE use MS-CLAP 2023 on the whole clip (7 s chunks, duration-weighted), and MACE combines audio–text and text–text similarity, as in the MACE paper.
-- The implementation report covers versions, pins, determinism, truncation, timings, and the interpretation and limitations of each metric.
+- The evaluation reports record the package versions and the interpretation and limitations of each metric.
 
-#### Five-reference evaluation (E12)
+#### Five-reference evaluation (E11)
 
 `make evaluate` scores every model caption against all five references, with audio, on all 1,045 evaluation recordings (about 25 minutes on a laptop CPU). Malformed captions are scored as returned. It writes to `outputs/scores/`:
 
@@ -137,9 +134,9 @@ make validate-metrics   # pilot validation; writes outputs/reports/metric_implem
 
 The report is `outputs/reports/five_reference_evaluation.{json,md}`. CLAP audio embeddings are cached in `outputs/cache/clap_audio.npz` (git-ignored) and reused by later tasks.
 
-#### Human leave-one-out calibration (E13)
+#### Human leave-one-out calibration (E12)
 
-`make loo` holds out the human caption at each CSV position k = 1–5 and scores it against the other four references (subset `drop_k`, the same reference sets the models are scored against in E14), with audio, on all 1,045 recordings (about 16 minutes with the audio cache). Before scoring it checks, by position, that no held-out caption is in its own reference set and that the five held-out captions of each recording are exactly its references. The baseline averages the five positions: per recording, the mean of its position scores; the corpus value, the mean of the five per-position corpus values. Bootstrap resamples are the same as in E12 and E14.
+`make loo` holds out the human caption at each CSV position k = 1–5 and scores it against the other four references (subset `drop_k`, the same reference sets the models are scored against in E13), with audio, on all 1,045 recordings (about 16 minutes with the audio cache). Before scoring it checks, by position, that no held-out caption is in its own reference set and that the five held-out captions of each recording are exactly its references. The baseline averages the five positions: per recording, the mean of its position scores; the corpus value, the mean of the five per-position corpus values. Bootstrap resamples are the same as in E11 and E13.
 
 Clotho's five captions of a recording often include near-paraphrase pairs, so a held-out caption can have a near-copy among its references, which a model caption never has. For each held-out caption the script records the word-set Jaccard (PTB tokens) with its closest other reference, and also reports the baseline on the held-out captions whose closest reference is below 0.6 and below 0.8 (`leave_one_out.overlap_thresholds` in `configs/metrics.yaml`), from the per-item scores without rescoring.
 
@@ -152,9 +149,9 @@ Clotho's five captions of a recording often include near-paraphrase pairs, so a 
 
 The report is `outputs/reports/human_loo_evaluation.{json,md}`.
 
-#### Matched four-reference evaluation (E14)
+#### Matched four-reference evaluation (E13)
 
-`make evaluate-four-ref` scores every model caption against each subset `drop_k`, the same four references as the held-out human captions of E13, with audio, on all 1,045 recordings (20 scoring calls, about 72 minutes with the audio cache), and averages the five subsets as E13 does. The human baseline is read from E13's tables, not rescored; the script checks that they reproduce E13's report exactly. Model and human scores share references, metrics, aggregation and bootstrap resamples, so their differences are paired. Two sensitivity checks recompute the comparison without rescoring: on the 1,024 recordings where every model's caption is valid, and with E13's near-paraphrase masks (0.6 and 0.8) applied to model and human scores alike.
+`make evaluate-four-ref` scores every model caption against each subset `drop_k`, the same four references as the held-out human captions of E12, with audio, on all 1,045 recordings (20 scoring calls, about 72 minutes with the audio cache), and averages the five subsets as E12 does. The human baseline is read from E12's tables, not rescored; the script checks that they reproduce E12's report exactly. Model and human scores share references, metrics, aggregation and bootstrap resamples, so their differences are paired. Two sensitivity checks recompute the comparison without rescoring: on the 1,024 recordings where every model's caption is valid, and with E12's near-paraphrase masks (0.6 and 0.8) applied to model and human scores alike.
 
 | File | Contents |
 |---|---|
@@ -167,9 +164,9 @@ The report is `outputs/reports/human_loo_evaluation.{json,md}`.
 
 The report, including the model-minus-human calibration table, is `outputs/reports/four_reference_evaluation.{json,md}`.
 
-#### Caption-length analysis (E15)
+#### Caption-length analysis (E14)
 
-`make lengths` counts the words (whitespace tokens) of every scored model caption and human reference and reports, per system, the mean, SD, quartiles and range. For each model it gives the ratio of its mean length to the human mean and the per-recording difference from the mean length of the recording's five references, with bootstrap CIs over recordings (the same resamples as E12–E14), and the share of captions longer than the reference mean and than every reference. It also reports Spearman correlations between caption length and per-item score, using the five-reference model scores (E12) and the held-out human scores (E13, all five positions pooled, resampled by recording), for the metrics in `lengths.association_metrics` (`configs/metrics.yaml`). Everything is repeated on the 1,024 recordings where every model's caption is valid. It reads frozen files only and runs in seconds in `.venv`.
+`make lengths` counts the words (whitespace tokens) of every scored model caption and human reference and reports, per system, the mean, SD, quartiles and range. For each model it gives the ratio of its mean length to the human mean and the per-recording difference from the mean length of the recording's five references, with bootstrap CIs over recordings (the same resamples as E11–E13), and the share of captions longer than the reference mean and than every reference. It also reports Spearman correlations between caption length and per-item score, using the five-reference model scores (E11) and the held-out human scores (E12, all five positions pooled, resampled by recording), for the metrics in `lengths.association_metrics` (`configs/metrics.yaml`). Everything is repeated on the 1,024 recordings where every model's caption is valid. It reads frozen files only and runs in seconds in `.venv`.
 
 | File | Contents |
 |---|---|
@@ -179,9 +176,9 @@ The report, including the model-minus-human calibration table, is `outputs/repor
 
 The report is `outputs/reports/caption_length_analysis.{json,md}`.
 
-#### Statistical comparison (E16)
+#### Statistical comparison (E15)
 
-`make stats` adds formal tests to the comparisons of E12–E15, from the committed per-item tables (no rescoring; about 7 minutes in `.venv`). Each comparison is paired over recordings and tested with a two-sided sign-flip permutation test of the mean difference (10,000 permutations), with a 95% bootstrap CI (10,000 resamples) and a paired effect size (d_z). Holm–Bonferroni correction is applied within four families fixed in `statistics` (`configs/metrics.yaml`), on all recordings: model pairs on the 14 main metrics (E12, 84 tests), models minus human on the matched four-reference scores (E14, 56 tests), model minus reference caption length (E15, 4 tests), and length–score Spearman correlations (E15, 35 tests, permutation over recordings). The E12–E14 sensitivity samples are reported uncorrected. Ranking stability is the share of bootstrap resamples in which each system takes each rank. The report documents the statistical assumptions and lists every decision that differs from the uncorrected marks of E12 and E14.
+`make stats` adds formal tests to the comparisons of E11–E14, from the committed per-item tables (no rescoring; about 7 minutes in `.venv`). Each comparison is paired over recordings and tested with a two-sided sign-flip permutation test of the mean difference (10,000 permutations), with a 95% bootstrap CI (10,000 resamples) and a paired effect size (d_z). Holm–Bonferroni correction is applied within four families fixed in `statistics` (`configs/metrics.yaml`), on all recordings: model pairs on the 14 main metrics (E11, 84 tests), models minus human on the matched four-reference scores (E13, 56 tests), model minus reference caption length (E14, 4 tests), and length–score Spearman correlations (E14, 35 tests, permutation over recordings). The E11–E13 sensitivity samples are reported uncorrected. Ranking stability is the share of bootstrap resamples in which each system takes each rank. The report documents the statistical assumptions and lists every decision that differs from the uncorrected marks of E11 and E13.
 
 | File | Contents |
 |---|---|
@@ -192,9 +189,9 @@ The report is `outputs/reports/caption_length_analysis.{json,md}`.
 
 The report is `outputs/reports/statistical_analysis.{json,md}`.
 
-#### Qualitative review sample (E17)
+#### Qualitative review sample (E16)
 
-`make qualitative-sample` draws 50 evaluation recordings at random (seed 42, `configs/qualitative.yaml`), independently of model scores, and prepares blinded review material for the 200 model captions. Each recording has its own random order of the four models behind the labels A–D, and the recordings are presented in random order under anonymous codes. The review sheets show the five references and each caption as scored, without file names (Clotho file names describe the content), model names or scores. The blinding key was committed only with the final E18 labels; its SHA-256, recorded in the sample manifest when the sample was drawn, is checked before every unblinding.
+`make qualitative-sample` draws 50 evaluation recordings at random (seed 42, `configs/qualitative.yaml`), independently of model scores, and prepares blinded review material for the 200 model captions. Each recording has its own random order of the four models behind the labels A–D, and the recordings are presented in random order under anonymous codes. The review sheets show the five references and each caption as scored, without file names (Clotho file names describe the content), model names or scores. The blinding key was committed only with the final E17 labels; its SHA-256, recorded in the sample manifest when the sample was drawn, is checked before every unblinding.
 
 | File (`outputs/qualitative/`) | Contents |
 |---|---|
@@ -203,13 +200,13 @@ The report is `outputs/reports/statistical_analysis.{json,md}`.
 | `review_sheet.md` | Reading view of the review items, one section per recording |
 | `annotations_reviewer_1.csv` | Annotation template: agreement category, disputed caption phrases and notes (one reviewer; more are left for future work). `prepare_qualitative.py` never overwrites a template that holds labels |
 | `categories.csv` | The six agreement categories |
-| `blinding_key.csv` | Item to recording and model (git-ignored; force-added with the final E18 labels) |
+| `blinding_key.csv` | Item to recording and model (git-ignored; force-added with the final E17 labels) |
 
 The report, with a descriptive comparison of the sample with all recordings, is `outputs/reports/qualitative_sample.{json,md}`.
 
-#### Qualitative annotation (E18)
+#### Qualitative annotation (E17)
 
-One reviewer labels each of the 200 captions with one of six agreement categories, following `outputs/qualitative/annotation_guidelines.md`: the caption is compared with the five references only, without audio, and principal content is what at least two references mention. Caption phrases that no reference supports are listed in `disputed_details`; after the labels are final, every caption is also rated against the audio in E19. Once the labels are final, `make annotations` checks the template (every item labelled, review columns unchanged), verifies the blinding key against the SHA-256 in the sample manifest, unblinds the labels and writes:
+One reviewer labels each of the 200 captions with one of six agreement categories, following `outputs/qualitative/annotation_guidelines.md`: the caption is compared with the five references only, without audio, and principal content is what at least two references mention. Caption phrases that no reference supports are listed in `disputed_details`; after the labels are final, every caption is also rated against the audio in E18. Once the labels are final, `make annotations` checks the template (every item labelled, review columns unchanged), verifies the blinding key against the SHA-256 in the sample manifest, unblinds the labels and writes:
 
 | File (`outputs/qualitative/`) | Contents |
 |---|---|
@@ -220,15 +217,15 @@ One reviewer labels each of the 200 captions with one of six agreement categorie
 
 The report is `outputs/reports/qualitative_annotation.{json,md}`.
 
-#### Audio-grounded review (E19)
+#### Audio-grounded review (E18)
 
-After the E18 labels are final, the same reviewer listens to each of the 50 recordings and judges every caption against the audio, following `outputs/qualitative/audio_review_guidelines.md`. Each caption gets one rating: 1 accurate, 2 minor errors (principal source and event right), or 3 major error or wrong sound source (principal source or event wrong, invented, or the dominant sound omitted). Each E18 disputed phrase is marked supported, unsupported, or ambiguous/unverifiable. The material keeps the E17 recording codes and caption labels and shows no references, E18 categories, model names, file names or scores. `make audio-review-sheet` verifies the blinding key and the E18 template, copies the recordings (checked against their manifest SHA-256) under code names, and writes:
+After the E17 labels are final, the same reviewer listens to each of the 50 recordings and judges every caption against the audio, following `outputs/qualitative/audio_review_guidelines.md`. Each caption gets one rating: 1 accurate, 2 minor errors (principal source and event right), or 3 major error or wrong sound source (principal source or event wrong, invented, or the dominant sound omitted). Each E17 disputed phrase is marked supported, unsupported, or ambiguous/unverifiable. The material keeps the E16 recording codes and caption labels and shows no references, E17 categories, model names, file names or scores. `make audio-review-sheet` verifies the blinding key and the E17 template, copies the recordings (checked against their manifest SHA-256) under code names, and writes:
 
 | File (`outputs/qualitative/`) | Contents |
 |---|---|
 | `audio_review_sheet.md` | Text of the review: per recording code, captions A–D and their disputed phrases |
 | `audio_annotations_reviewer_1.csv` | One row per caption: audio rating and notes |
-| `disputed_verification_reviewer_1.csv` | One row per E18 disputed phrase: verdict and note |
+| `disputed_verification_reviewer_1.csv` | One row per E17 disputed phrase: verdict and note |
 | `audio_review_manifest.json` | Counts, templates and input checksums |
 | `audio/`, `audio_review.html` | Audio copies named by recording code and the local listening page (git-ignored, never committed) |
 
@@ -238,41 +235,41 @@ Once both templates are complete, `make audio-review` checks them (every caption
 
 | File (`outputs/qualitative/`) | Contents |
 |---|---|
-| `audio_review_annotations.csv` | Unblinded captions: model, E18 category, audio rating, phrase verdicts and notes |
+| `audio_review_annotations.csv` | Unblinded captions: model, E17 category, audio rating, phrase verdicts and notes |
 | `disputed_verification.csv` | Unblinded disputed phrases with their verdicts |
 | `audio_rating_summary.csv`, `verdict_summary.csv` | Count and share of each rating and verdict per model and pooled, with Wilson 95% intervals |
 | `unsupported_summary.csv` | Captions with at least one unsupported phrase per model |
-| `category_by_audio_rating.csv`, `category_6_split.csv` | E18 category x audio rating cross-tab; category-6 captions split into real mismatches (rated 3) and incomplete references (rated 1-2) |
+| `category_by_audio_rating.csv`, `category_6_split.csv` | E17 category x audio rating cross-tab; category-6 captions split into real mismatches (rated 3) and incomplete references (rated 1-2) |
 | `scores_by_audio_rating.csv` | Mean five-reference item score per audio rating (descriptive) |
 
 The report is `outputs/reports/audio_review.{json,md}`; it also lists captions rated accurate that have an unsupported phrase (reported, labels unchanged).
 
-#### Representative caption comparisons (E20)
+#### Representative caption comparisons (E19)
 
-`make examples` illustrates the qualitative findings with whole recordings from the sample: the five references and all four model captions, each with its E18 category, E19 audio rating and disputed-phrase verdicts. One recording is chosen per pattern by rule (`src/analysis/examples.py`): strong agreement (category 1–2, rated 1); reference-absent detail supported by the audio (category 3 or 5 with a supported phrase); detail unsupported by the audio (an unsupported phrase); omission (category 4); sound-source or event mismatch (category 6, rated 3); correct caption with incomplete references (category 6, rated 1). For each pattern the recording with the most qualifying captions is chosen, preferring recordings not chosen for another pattern, with ties broken by a seeded shuffle; the manifest lists every eligible recording.
+`make examples` illustrates the qualitative findings with whole recordings from the sample: the five references and all four model captions, each with its E17 category, E18 audio rating and disputed-phrase verdicts. One recording is chosen per pattern by rule (`src/analysis/examples.py`): strong agreement (category 1–2, rated 1); reference-absent detail supported by the audio (category 3 or 5 with a supported phrase); detail unsupported by the audio (an unsupported phrase); omission (category 4); sound-source or event mismatch (category 6, rated 3); correct caption with incomplete references (category 6, rated 1). For each pattern the recording with the most qualifying captions is chosen, preferring recordings not chosen for another pattern, with ties broken by a seeded shuffle; the manifest lists every eligible recording.
 
 | File | Contents |
 |---|---|
 | `outputs/tables/representative_examples.{md,tex}` | One table per selected recording, with the selection rules and counts |
 | `outputs/tables/qualitative_sample_all.{md,tex}` | Every sampled recording (supplementary) |
-| `outputs/figures/e18_categories_by_model.{pdf,png}` | E18 categories per model |
-| `outputs/figures/e19_ratings_by_model.{pdf,png}` | E19 audio ratings per model |
-| `outputs/figures/e18_e19_heatmap.{pdf,png}` | E18 category x E19 rating, pooled |
+| `outputs/figures/e17_categories_by_model.{pdf,png}` | E17 categories per model |
+| `outputs/figures/e18_ratings_by_model.{pdf,png}` | E18 audio ratings per model |
+| `outputs/figures/e17_e18_heatmap.{pdf,png}` | E17 category x E18 rating, pooled |
 | `outputs/qualitative/example_manifest.json` | Selection rules, eligible and selected recordings, sample IDs, file names, item IDs, input checksums |
 
 The LaTeX tables need `\usepackage{booktabs,tabularx}`. Figures are saved without creation dates, so reruns give identical files.
 
-#### Cross-metric and model comparison (E21)
+#### Cross-metric and model comparison (E20)
 
-`make compare` relates the metrics to each other and to the two reviews, from the committed per-item scores (E12), the E16 ranking stability and the unblinded E18/E19 labels (no rescoring; about a minute). It uses the ten metrics in `comparison.metrics` (`configs/metrics.yaml`), which leave out near-duplicates (BLEU-2/3, SPIDEr-FL, raw BERTScore). It writes:
+`make compare` relates the metrics to each other and to the two reviews, from the committed per-item scores (E11), the E15 ranking stability and the unblinded E17/E18 labels (no rescoring; about a minute). It uses the ten metrics in `comparison.metrics` (`configs/metrics.yaml`), which leave out near-duplicates (BLEU-2/3, SPIDEr-FL, raw BERTScore). It writes:
 
 | File | Contents |
 |---|---|
 | `outputs/scores/cross_metric_correlations.csv` | Spearman correlation of every metric pair over captions, pooled and per model, with bootstrap CIs over recordings |
-| `outputs/scores/model_rankings.csv`, `ranking_kendall_tau.csv` | Models ranked by every main metric, by the E18 share in categories 1–3 and by the E19 share rated accurate, with order stability; Kendall's tau-b between rankings |
-| `outputs/scores/audio_rating_concordance.csv` | Within-recording concordance: for sampled caption pairs of the same recording with different E19 ratings, how often each metric scores the better-rated caption higher (bootstrap CI and sign-flip test over recordings, Holm across metrics) |
+| `outputs/scores/model_rankings.csv`, `ranking_kendall_tau.csv` | Models ranked by every main metric, by the E17 share in categories 1–3 and by the E18 share rated accurate, with order stability; Kendall's tau-b between rankings |
+| `outputs/scores/audio_rating_concordance.csv` | Within-recording concordance: for sampled caption pairs of the same recording with different E18 ratings, how often each metric scores the better-rated caption higher (bootstrap CI and sign-flip test over recordings, Holm across metrics) |
 
-The report is `outputs/reports/cross_metric_comparison.{json,md}`. `make figures` draws the E12 scores by model and the E14 model − human differences (one panel per metric, 95% CIs) to `outputs/figures/e12_scores_by_model` and `e14_model_minus_human` (`.pdf`, `.png`).
+The report is `outputs/reports/cross_metric_comparison.{json,md}`. `make figures` draws the E11 scores by model and the E13 model − human differences (one panel per metric, 95% CIs) to `outputs/figures/e11_scores_by_model` and `e13_model_minus_human` (`.pdf`, `.png`).
 
 ## Complete workflow
 
@@ -281,11 +278,11 @@ The report is `outputs/reports/cross_metric_comparison.{json,md}`. `make figures
 | Stage | Target | Steps |
 |---|---|---|
 | 1 | `make data` | `download-data`, `prepare-data` (E02–E03) |
-| 2 | `make captions` | `pilot`, `generate` (E05–E09). Local API models finish in the run; the two open-weight models are submitted to Hugging Face Jobs |
+| 2 | `make captions` | `generate` (E05–E08). Local API models finish in the run; the two open-weight models are submitted to Hugging Face Jobs |
 | | (pause) | Wait for the jobs, then `make fetch-hf` |
-| 3 | `make scores` | `consolidate`, `validate-metrics`, `evaluate`, `loo`, `evaluate-four-ref`, `lengths`, `stats`, `figures` (E10–E16, E21 figures; about 2 hours on a laptop CPU, needs the metric tools) |
-| | (pause) | `make qualitative-sample` (E17); label `outputs/qualitative/annotations_reviewer_1.csv` following `annotation_guidelines.md` (E18); `make audio-review-sheet`; listen and label `audio_annotations_reviewer_1.csv` and `disputed_verification_reviewer_1.csv` following `audio_review_guidelines.md` (E19) |
-| 4 | `make qualitative` | `annotations`, `audio-review`, `examples`, `compare` (E18–E21 analyses) |
+| 3 | `make scores` | `consolidate`, `evaluate`, `loo`, `evaluate-four-ref`, `lengths`, `stats`, `figures` (E09–E15, E20 figures; about 2 hours on a laptop CPU, needs the metric tools) |
+| | (pause) | `make qualitative-sample` (E16); label `outputs/qualitative/annotations_reviewer_1.csv` following `annotation_guidelines.md` (E17); `make audio-review-sheet`; listen and label `audio_annotations_reviewer_1.csv` and `disputed_verification_reviewer_1.csv` following `audio_review_guidelines.md` (E18) |
+| 4 | `make qualitative` | `annotations`, `audio-review`, `examples`, `compare` (E17–E20 analyses) |
 
 This is the order for a fresh project. In this repository every step has already been run and its outputs are committed: the scripts refuse to overwrite frozen manifests, captions, scores and labelled templates unless given `--force` (labelled templates are never overwritten). The frozen experimental results are tagged `results-frozen-2026-11-07`.
 
@@ -299,21 +296,20 @@ Run `make help` for the full list. Main targets (task IDs are listed under [Task
 | `make test` / `make test-metrics` / `make lint` | Test suite, metric integration tests, lint and format check |
 | `make download-data` | Download, verify and index Clotho v2.1 |
 | `make prepare-data` | E02–E03: validate Clotho, build frozen manifests |
-| `make pilot` | E05: pilot generation |
-| `make generate` / `make generate-<model>` | E06–E09: caption generation |
-| `make hf-upload-audio` / `make fetch-hf` | E08–E09: audio upload to, and captions from, Hugging Face Jobs |
-| `make consolidate` | E10: merge and freeze captions |
-| `make metric-tools` / `make validate-metrics` | E11: metric tools and validation report |
-| `make evaluate` | E12: five-reference evaluation |
-| `make loo` | E13: human leave-one-out calibration |
-| `make evaluate-four-ref` | E14: matched four-reference evaluation |
-| `make lengths` | E15: caption-length analysis |
-| `make stats` | E16: formal tests, bootstrap CIs and ranking stability |
-| `make qualitative-sample` | E17: blinded qualitative review sample |
-| `make annotations` | E18: check, unblind and summarize the annotations |
-| `make audio-review-sheet` / `make audio-review` | E19: audio-review material; check, unblind and summarize the audio review |
-| `make examples` | E20: representative caption comparisons, tables and qualitative figures |
-| `make compare` / `make figures` | E21: metric correlations, rankings and concordance; E12 and E14 figures |
+| `make generate` / `make generate-<model>` | E05–E08: caption generation |
+| `make hf-upload-audio` / `make fetch-hf` | E07–E08: audio upload to, and captions from, Hugging Face Jobs |
+| `make consolidate` | E09: merge and freeze captions |
+| `make metric-tools` | E10: metric tools (JDK 11, jars, checkpoints) |
+| `make evaluate` | E11: five-reference evaluation |
+| `make loo` | E12: human leave-one-out calibration |
+| `make evaluate-four-ref` | E13: matched four-reference evaluation |
+| `make lengths` | E14: caption-length analysis |
+| `make stats` | E15: formal tests, bootstrap CIs and ranking stability |
+| `make qualitative-sample` | E16: blinded qualitative review sample |
+| `make annotations` | E17: check, unblind and summarize the annotations |
+| `make audio-review-sheet` / `make audio-review` | E18: audio-review material; check, unblind and summarize the audio review |
+| `make examples` | E19: representative caption comparisons, tables and qualitative figures |
+| `make compare` / `make figures` | E20: metric correlations, rankings and concordance; E11 and E13 figures |
 | `make data` / `make captions` / `make scores` / `make qualitative` | Workflow stages 1–4 |
 | `make all` | Stages 1–2, then the remaining commands |
 | `make paper` | Build the manuscript (once added) |
@@ -334,7 +330,7 @@ manuscript/   LaTeX manuscript (added when writing the paper)
 
 ## Tasks
 
-Tasks are numbered E01–E25. Configs, scripts, Makefile targets and commit messages refer to these numbers.
+Tasks are numbered E01–E24. Configs, scripts, Makefile targets and commit messages refer to these numbers.
 
 | Phase | ID | Task | Status |
 |---|---|---|---|
@@ -342,24 +338,23 @@ Tasks are numbered E01–E25. Configs, scripts, Makefile targets and commit mess
 | | E02 | Download, validate and index Clotho v2.1 | Done |
 | | E03 | Create and freeze the evaluation manifest | Done |
 | 2. Caption generation | E04 | Unified LALM inference interfaces | Done |
-| | E05 | Pilot generation and configuration freeze | Done |
-| | E06 | Captions: GPT-Audio-1.5 | Done |
-| | E07 | Captions: Gemini 3.8 Flash | Done |
-| | E08 | Captions: Qwen2.5-Omni-7B | Done |
-| | E09 | Captions: Audio Flamingo 3 | Done |
-| | E10 | Consolidate and freeze model captions | Done |
-| 3. Automatic evaluation | E11 | Implement and validate caption metrics | Done |
-| | E12 | Five-reference model evaluation | Done |
-| 4. Human calibration | E13 | Human leave-one-out calibration | Done |
-| | E14 | Matched four-reference model evaluation | Done |
-| | E15 | Caption-length analysis | Done |
-| | E16 | Statistical comparison and uncertainty | Done |
-| 5. Qualitative analysis | E17 | Select qualitative review sample | Done |
-| | E18 | Annotate model–reference agreement | Done |
-| | E19 | Audio-grounded review of the qualitative sample | Done |
-| | E20 | Representative caption comparisons | Done |
-| 6. Synthesis and repository | E21 | Cross-metric and model comparison | Done |
-| | E22 | Finalize research repository | Done |
-| 7. Manuscript and release | E23 | Draft manuscript | — |
-| | E24 | Final validation, public release and submission | — |
-| | E25 | Camera-ready and versioned release after acceptance | — |
+| | E05 | Captions: GPT-Audio-1.5 | Done |
+| | E06 | Captions: Gemini 3.8 Flash | Done |
+| | E07 | Captions: Qwen2.5-Omni-7B | Done |
+| | E08 | Captions: Audio Flamingo 3 | Done |
+| | E09 | Consolidate and freeze model captions | Done |
+| 3. Automatic evaluation | E10 | Implement and validate caption metrics | Done |
+| | E11 | Five-reference model evaluation | Done |
+| 4. Human calibration | E12 | Human leave-one-out calibration | Done |
+| | E13 | Matched four-reference model evaluation | Done |
+| | E14 | Caption-length analysis | Done |
+| | E15 | Statistical comparison and uncertainty | Done |
+| 5. Qualitative analysis | E16 | Select qualitative review sample | Done |
+| | E17 | Annotate model–reference agreement | Done |
+| | E18 | Audio-grounded review of the qualitative sample | Done |
+| | E19 | Representative caption comparisons | Done |
+| 6. Synthesis and repository | E20 | Cross-metric and model comparison | Done |
+| | E21 | Finalize research repository | Done |
+| 7. Manuscript and release | E22 | Draft manuscript | — |
+| | E23 | Final validation, public release and submission | — |
+| | E24 | Camera-ready and versioned release after acceptance | — |

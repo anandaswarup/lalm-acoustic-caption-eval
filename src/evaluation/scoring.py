@@ -1,4 +1,4 @@
-"""Score one system under one reference subset, and write and read long-format score tables (E11-E14).
+"""Score one system under one reference subset, and write and read long-format score tables (E10-E13).
 
 A scoring call covers every recording of the condition at once (see `src.metrics.reference_based`). Candidates and
 references are PTB-tokenized together in one Java call; audio-aware metrics are added when audio paths are given.

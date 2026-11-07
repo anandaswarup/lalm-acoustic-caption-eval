@@ -1,22 +1,16 @@
-# Caption-generation settings (E04-E09). Frozen at the end of the E05 pilot.
-frozen: true   # frozen at the end of E05 (2026-11-01); do not change for E06-E09
+# Caption-generation settings (E04-E08). Frozen before caption generation.
+frozen: true   # frozen on 2026-11-01; do not change for E05-E08
 
-# Which manifest to caption; override with --run or --set run=pilot.
+# Which manifest to caption (override with --run).
 run: evaluation
 runs:
   evaluation:
     manifest: data/manifests/clotho_eval_manifest.jsonl
     output_dir: outputs/captions/evaluation
-  pilot:
-    manifest: data/manifests/clotho_pilot_manifest.jsonl
-    output_dir: outputs/captions/pilot
 
-# E05 pilot history (GPT-Audio-1.5 returned JSON objects instead of a sentence):
-#   v1  JSON in 17/20 captions, often with the prompt's three items as keys
-#   v2  v1 plus the plain-text sentence: JSON in 10/20
-#   v3  the three items become a clause of the first sentence; every adapter sends the audio before the text.
-#       Frozen. 2/20 GPT captions were still a plain sentence wrapped as {"..."}; E10 normalization unwraps
-#       exactly that form (raw text kept) and flags any other JSON-like output.
+# Every adapter sends the audio before the text. The prompt asks for plain text because GPT-Audio-1.5 tends to
+# answer with JSON objects; a plain sentence wrapped as {"..."} is unwrapped by the E09 normalization (raw text kept)
+# and any other JSON-like output is flagged.
 prompt:
   version: v3
   text: >-
@@ -45,9 +39,8 @@ audio:
 # requests_overrides. Requests are independent, so it changes run time only, never the captions.
 # format_attempts: an ok caption that is JSON-like (starts with { or [) instead of a sentence is requested again,
 # up to this many requests in total, for every model; rejected responses are kept in the record (format_rejected).
-# Added in E05: GPT-Audio-1.5 output varies at temperature 0 and returned a multi-field JSON object for ~1 in 20
-# pilot recordings even with prompt v3. A plain sentence wrapped as {"..."} after the last attempt is handled by
-# the E10 normalization.
+# GPT-Audio-1.5 output varies at temperature 0 and occasionally is a multi-field JSON object even with this prompt.
+# A plain sentence wrapped as {"..."} after the last attempt is handled by the E09 normalization.
 requests:
   concurrency: 1
   format_attempts: 3

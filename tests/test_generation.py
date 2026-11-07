@@ -252,7 +252,7 @@ def test_generate_script_fails_on_errors(clotho, manifest, tmp_path):
 
 def test_generate_script_rejects_consolidate(clotho, manifest, tmp_path):
     result = run_script(clotho, manifest, tmp_path, "--run", "consolidate")
-    assert result.returncode == 1 and "E10" in result.stderr
+    assert result.returncode == 1 and "E09" in result.stderr
 
 
 # --- audio --------------------------------------------------------------------
@@ -591,7 +591,7 @@ SETTINGS = {"bucket": "user/bucket", "mount": "/mnt", "image": "astral/uv:tag", 
 
 def test_submit_command(hf_jobs):
     model = {"hf_jobs": {"flavor": "a100-large"}}
-    command = hf_jobs.submit_command(SETTINGS, "qwen2_5_omni", model, "pilot", "abc123" * 7, ["--limit", "1"])
+    command = hf_jobs.submit_command(SETTINGS, "qwen2_5_omni", model, "evaluation", "abc123" * 7, ["--limit", "1"])
     assert command[:4] == ["hf", "jobs", "run", "--detach"]
     joined = " ".join(command[:-1])
     for expected in (
@@ -607,13 +607,13 @@ def test_submit_command(hf_jobs):
     script = command[-1]
     assert command[-3:-1] == ["bash", "-c"] and f"cd /mnt/code/{'abc123' * 7}" in script
     assert "uv pip install --system --index-strategy unsafe-best-match -r requirements-hf.txt" in script
-    assert "--output-dir /mnt/outputs/pilot --no-log-file --limit 1" in script
+    assert "--output-dir /mnt/outputs/evaluation --no-log-file --limit 1" in script
 
 
 def test_submit_command_output_prefix(hf_jobs):
     model = {"hf_jobs": {"flavor": "a100-large"}}
-    command = hf_jobs.submit_command(SETTINGS, "qwen2_5_omni", model, "pilot", "abc", [], prefix="smoke")
-    assert "--output-dir /mnt/smoke/pilot" in command[-1] and "/mnt/outputs" not in command[-1]
+    command = hf_jobs.submit_command(SETTINGS, "qwen2_5_omni", model, "evaluation", "abc", [], prefix="smoke")
+    assert "--output-dir /mnt/smoke/evaluation" in command[-1] and "/mnt/outputs" not in command[-1]
     assert "prefix=smoke" in command
 
 
@@ -639,11 +639,11 @@ def test_stage_audio_only_listed_files(hf_jobs, clotho, tmp_path):
 def test_submit_refuses_uncommitted_changes(hf_jobs, monkeypatch):
     monkeypatch.setattr(hf_jobs, "git", lambda *args: " M src/x.py" if args[0] == "status" else "abc")
     monkeypatch.setattr(sys, "argv", ["hf_jobs.py", "--no-log-file", "submit", "--model", "qwen2_5_omni",
-                                      "--run", "pilot", "--dry-run"])  # fmt: skip
+                                      "--run", "evaluation", "--dry-run"])  # fmt: skip
     assert hf_jobs.main() == 1
 
 
 def test_submit_refuses_local_models(hf_jobs, monkeypatch):
     monkeypatch.setattr(sys, "argv", ["hf_jobs.py", "--no-log-file", "submit", "--model", "gpt_audio_1_5",
-                                      "--run", "pilot", "--dry-run"])  # fmt: skip
+                                      "--run", "evaluation", "--dry-run"])  # fmt: skip
     assert hf_jobs.main() == 1

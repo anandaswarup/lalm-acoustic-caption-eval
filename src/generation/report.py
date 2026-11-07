@@ -1,4 +1,4 @@
-"""Completion report for one model's caption run (E06-E09): counts and identifiers only, never caption text."""
+"""Completion report for one model's caption run (E05-E08): counts and identifiers only, never caption text."""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ def _display(path: str | Path) -> str:
 
 
 def is_wrapped_sentence(caption: str | None) -> bool:
-    """True for a caption that is exactly {"<text>"}: the form the E10 normalization unwraps."""
+    """True for a caption that is exactly {"<text>"}: the form the E09 normalization unwraps."""
     text = (caption or "").strip()
     return len(text) > 4 and text.startswith('{"') and text.endswith('"}') and '"' not in text[2:-2]
 
@@ -82,7 +82,7 @@ def completion_report(
     """Check the latest record per manifest sample against the frozen prompt and summarize the run.
 
     `complete` is True when every manifest sample has an `ok` record produced with `prompt_text`. JSON-like captions
-    do not make a run incomplete: E10 unwraps exactly {"<text>"} and flags any other JSON-like output.
+    do not make a run incomplete: E09 unwraps exactly {"<text>"} and flags any other JSON-like output.
     """
     manifest_records = read_jsonl(manifest)
     sample_ids = [record["sample_id"] for record in manifest_records]
@@ -200,7 +200,7 @@ def report_markdown(report: dict[str, Any], title: str) -> str:
                 ("Fixed by a retry", fmt["fixed_by_retry"]),
                 ("Rejected responses", fmt["rejected_responses"]),
                 ("Still JSON-like", _ids(fmt["json_like"])),
-                ('Of which exactly {"…"} (E10 unwraps)', _ids(fmt["json_like_unwrappable"])),
+                ('Of which exactly {"…"} (E09 unwraps)', _ids(fmt["json_like_unwrappable"])),
                 ("Multi-line captions", _ids(fmt["multiline"])),
                 ("Finish reasons", _fmt(report["finish_reasons"])),
                 ("Caption words", _fmt(report["caption_words"])),

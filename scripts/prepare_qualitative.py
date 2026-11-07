@@ -1,10 +1,10 @@
 """Blinded qualitative review sample and annotation templates.
 
-E17: draws `sample.num_recordings` evaluation recordings at random (configs/qualitative.yaml, independent of model
+E16: draws `sample.num_recordings` evaluation recordings at random (configs/qualitative.yaml, independent of model
 scores), then writes to `output_dir` the blinded review sheet (one row per model caption: recording code, label A-D,
 the five references and the caption as scored) and a Markdown reading view of it, one blank annotation template per
 reviewer, the category list, the
-sample manifest and the blinding key (git-ignored until the E18 labels are final; its SHA-256 is in the manifest).
+sample manifest and the blinding key (git-ignored until the E17 labels are final; its SHA-256 is in the manifest).
 Also writes outputs/reports/qualitative_sample.{json,md} with a descriptive comparison of the sample with all
 recordings.
 """
@@ -117,7 +117,7 @@ def main() -> int:
     write_csv(config["categories"], outputs["categories"], CATEGORY_COLUMNS)
     write_csv(full_key, outputs["key"], KEY_COLUMNS)
     sample_manifest = {
-        "task": "E17",
+        "task": "E16",
         "seed": seed,
         "population": len(population),
         "num_recordings": len(sample),
@@ -149,7 +149,7 @@ def main() -> int:
         }
     report = {
         "run_info": run_info,
-        "task": "E17",
+        "task": "E16",
         "models": list(models),
         "manifest": sample_manifest,
         "normalization": dict(Counter(row["normalization"] for row in full_key)),

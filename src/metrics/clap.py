@@ -1,4 +1,4 @@
-"""MS-CLAP 2023 embeddings for CLAP similarity and MACE (E11).
+"""MS-CLAP 2023 embeddings for CLAP similarity and MACE (E10).
 
 MS-CLAP 2023 takes 7 s of 44.1 kHz audio; msclap itself scores one random 7 s crop of a longer clip. As in the MACE
 paper, the whole clip is embedded instead: it is cut into consecutive 7 s chunks, a short final chunk is filled by

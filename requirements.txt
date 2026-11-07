@@ -1,5 +1,5 @@
 # Laptop and CI dependencies. Model, metric and plotting dependencies are added
-# and pinned in the experiments that introduce them (E04, E11, E12).
+# and pinned in the experiments that introduce them (E04, E10, E11).
 # GPU inference dependencies for Hugging Face Jobs are in requirements-hf.txt.
 # Install with: uv pip install -r requirements.txt
 numpy==2.5.4
@@ -15,7 +15,7 @@ huggingface_hub==2.4.0
 openai==3.42.0
 soxr==1.1.0
 
-# Qualitative figures (E20)
+# Qualitative figures (E19)
 matplotlib==3.11.2
 
 # Development

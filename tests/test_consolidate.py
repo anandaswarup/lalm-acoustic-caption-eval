@@ -1,4 +1,4 @@
-"""E10: caption consolidation, normalization and checksums on a synthetic four-model run."""
+"""E09: caption consolidation, normalization and checksums on a synthetic four-model run."""
 
 import json
 

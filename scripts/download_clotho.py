@@ -33,8 +33,8 @@ from src.utils.paths import resolve_path  # noqa: E402
 def main() -> int:
     parser = base_parser(__doc__.splitlines()[0])
     parser.add_argument("--root", help="dataset folder (default: CLOTHO_ROOT via configs/dataset.yaml)")
-    parser.add_argument("--splits", nargs="+", default=["evaluation", "validation"], choices=list(EXPECTED),
-                        help="audio splits to download and index (default: the two the experiments use)")  # fmt: skip
+    parser.add_argument("--splits", nargs="+", default=["evaluation"], choices=list(EXPECTED),
+                        help="audio splits to download and index (default: evaluation)")  # fmt: skip
     parser.add_argument("--check", action="store_true", help="only compare rebuilt manifests with the existing ones")
     args = parser.parse_args()
     logger = init_run(Path(__file__).stem, args)

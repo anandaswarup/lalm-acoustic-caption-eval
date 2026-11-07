@@ -1,11 +1,13 @@
-"""Metric integration tests (E11): the real jars, JDK and checkpoints.
+"""Metric integration tests (E10): the real jars, JDK and checkpoints.
 
 Run with `make test-metrics` (.venv-metrics and `make metric-tools`). Skipped elsewhere, including CI. The golden values
-were measured in the E11 metric check with aac-metrics 0.5.5 on Temurin 11.0.32.1 and reproduced by this pipeline.
+were measured in the E10 metric check with aac-metrics 0.5.5 on Temurin 11.0.32.1 and reproduced by this pipeline.
 """
 
 import importlib.util
+import json
 import os
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -63,7 +65,7 @@ GOLDEN_CORPUS = {
     "sbert_similarity": 0.8325,
     "fluency_error": 0.3333,
     "fense": 0.5792,
-    "bertscore_f1": 0.9849,  # 0.9817 before the E21 fix (torchmetrics paired captions with other references)
+    "bertscore_f1": 0.9849,  # 0.9817 before the E20 fix (torchmetrics paired captions with other references)
 }
 GOLDEN_SPICE_ITEMS = [0.2609, 0.4211, 0.3158]
 IDS = list(CANDIDATES)
@@ -159,21 +161,26 @@ def test_four_reference_subset_changes_only_reference_dependent_scores(evaluator
 
 
 @pytest.fixture(scope="module")
-def pilot_audio():
+def eval_audio():
+    """The first three evaluation recordings, with their five human captions."""
     from src.data.clotho import read_jsonl
     from src.evaluation.inputs import audio_paths
 
     load_env()
     if not os.environ.get("CLOTHO_ROOT"):
         pytest.skip("CLOTHO_ROOT is not set")
-    manifest = read_jsonl("data/manifests/clotho_pilot_manifest.jsonl")[:3]
+    references = json.loads(Path("data/manifests/clotho_eval_references.json").read_text(encoding="utf-8"))
+    manifest = [
+        {**r, "captions": references[r["sample_id"]]}
+        for r in read_jsonl("data/manifests/clotho_eval_manifest.jsonl")[:3]
+    ]
     return manifest, audio_paths(manifest, os.environ["CLOTHO_ROOT"])
 
 
-def test_audio_aware_scores_match_aac_metrics_text_mace(evaluator, pilot_audio):
+def test_audio_aware_scores_match_aac_metrics_text_mace(evaluator, eval_audio):
     from aac_metrics.functional import mace
 
-    manifest, audio = pilot_audio
+    manifest, audio = eval_audio
     ids = [record["sample_id"] for record in manifest]
     candidates = {record["sample_id"]: record["captions"][0] for record in manifest}
     references = {record["sample_id"]: record["captions"][1:] for record in manifest}
@@ -195,10 +202,10 @@ def test_audio_aware_scores_match_aac_metrics_text_mace(evaluator, pilot_audio):
     assert scores["mace_text"].corpus == pytest.approx(float(corpus["mace"]), abs=1e-5)
 
 
-def test_clap_audio_embedding_covers_the_clip(evaluator, pilot_audio):
+def test_clap_audio_embedding_covers_the_clip(evaluator, eval_audio):
     from src.metrics.clap import chunk_audio, read_mono
 
-    manifest, audio = pilot_audio
+    manifest, audio = eval_audio
     record = manifest[0]
     samples = read_mono(audio[record["sample_id"]], 44100)
     assert samples.size == record["num_frames"]
@@ -210,7 +217,7 @@ def test_clap_audio_embedding_covers_the_clip(evaluator, pilot_audio):
 
 
 def test_bertscore_does_not_depend_on_the_other_pairs_in_the_call(evaluator):
-    """Regression (E21): torchmetrics 1.9.0 reorders embeddings with the sort permutation instead of its inverse, so a
+    """Regression (E20): torchmetrics 1.9.0 reorders embeddings with the sort permutation instead of its inverse, so a
     batched call scored candidates against other pairs' references. Each pair must score as it does alone."""
     from aac_metrics.functional.bert_score_mrefs import bert_score_mrefs
 

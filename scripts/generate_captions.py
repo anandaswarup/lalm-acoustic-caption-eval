@@ -1,4 +1,4 @@
-"""Generate one caption per recording with a selected LALM (E04-E09).
+"""Generate one caption per recording with a selected LALM (E04-E08).
 
 Resumable: samples that already have an `ok` record in the output JSONL are skipped, so an interrupted run is
 continued by running the same command again. Every attempt is appended; the last record per sample_id counts.
@@ -35,7 +35,7 @@ def main() -> int:
     dataset = load_config("dataset")
     run = args.run or generation["run"]
     if run not in generation["runs"]:
-        hint = " (consolidation is E10: scripts/consolidate_captions.py)" if run == "consolidate" else ""
+        hint = " (consolidation is E09: scripts/consolidate_captions.py)" if run == "consolidate" else ""
         logger.error("Unknown run %r; expected one of %s%s", run, sorted(generation["runs"]), hint)
         return 1
     if args.model not in models:
@@ -54,7 +54,7 @@ def main() -> int:
     decoding = merge_decoding(generation, model)
     requests_config = {**generation["requests"], **(model.get("requests_overrides") or {})}
     if not generation.get("frozen"):
-        logger.warning("generation.yaml is not frozen yet (frozen at the end of E05)")
+        logger.warning("generation.yaml is not frozen yet (it is frozen before caption generation)")
 
     meta = {
         "run_info": collect_run_info(Path(__file__).stem, seed=args.seed),

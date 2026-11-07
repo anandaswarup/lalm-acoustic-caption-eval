@@ -1,4 +1,4 @@
-"""Paired percentile bootstrap over recordings (E11, used in E12-E16).
+"""Paired percentile bootstrap over recordings (E10, used in E11-E15).
 
 Every system is resampled with the same recording indices, so per-system CIs and the CIs of differences between systems
 come from the same resamples. The statistic is the mean of per-item scores; for BLEU and METEOR, whose corpus value is

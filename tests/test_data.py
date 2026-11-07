@@ -7,10 +7,8 @@ import sys
 from src.data.clotho import check_audio, load_split, validate_split
 from src.data.manifest import (
     build_eval_manifest,
-    build_pilot_manifest,
     check_manifest,
-    exclude_shared_sources,
-    select_pilot,
+    select_sample,
     verify_checksums,
     write_checksums,
 )
@@ -100,43 +98,12 @@ def test_check_manifest_detects_problems(clotho):
     assert any("14 reference captions" in error for error in errors)
 
 
-def test_exclude_shared_sources():
-    held_out = [{"file_name": "a.wav", "metadata": {"sound_id": "1"}}]
-    candidates = [
-        {"file_name": "a.wav", "metadata": {"sound_id": "9"}},
-        {"file_name": "b.wav", "metadata": {"sound_id": "1"}},
-        {"file_name": "c.wav", "metadata": {"sound_id": "2"}},
-    ]
-    kept, excluded = exclude_shared_sources(candidates, held_out)
-    assert [r["file_name"] for r in kept] == ["c.wav"]
-    assert [r["file_name"] for r in excluded] == ["a.wav", "b.wav"]
-
-
-def test_exclude_shared_sources_ignores_unknown_placeholder():
-    held_out = [{"file_name": "a.wav", "metadata": {"sound_id": "Not found"}}]
-    candidates = [
-        {"file_name": "b.wav", "metadata": {"sound_id": "Not found"}},
-        {"file_name": "c.wav", "metadata": {"sound_id": ""}},
-        {"file_name": "a.wav", "metadata": {"sound_id": "Not found"}},
-    ]
-    kept, excluded = exclude_shared_sources(candidates, held_out)
-    assert [r["file_name"] for r in kept] == ["b.wav", "c.wav"]
-    assert [r["file_name"] for r in excluded] == ["a.wav"]
-
-
-def test_select_pilot_is_deterministic():
+def test_select_sample_is_deterministic():
     names = [f"file_{i:03d}.wav" for i in range(100)]
-    chosen = select_pilot(names, 20, 42)
-    assert chosen == select_pilot(reversed(names), 20, 42)
-    assert chosen != select_pilot(names, 20, 43)
+    chosen = select_sample(names, 20, 42)
+    assert chosen == select_sample(reversed(names), 20, 42)
+    assert chosen != select_sample(names, 20, 43)
     assert len(set(chosen)) == 20 and chosen == sorted(chosen)
-
-
-def test_build_pilot_manifest(clotho):
-    records = [record for record in validate(clotho, "validation", None).records if record["file_name"] != "v3.wav"]
-    pilot = build_pilot_manifest(records)
-    assert [record["sample_id"] for record in pilot] == ["clotho_pilot_00", "clotho_pilot_01", "clotho_pilot_02"]
-    assert pilot[0]["split"] == "validation" and len(pilot[0]["captions"]) == 5
 
 
 def test_checksums_roundtrip(tmp_path):
@@ -156,8 +123,6 @@ def run_prepare(clotho, tmp_path, *extra):
         "evaluation.expected_recordings": 3,
         "evaluation.manifest": manifests / "eval.jsonl",
         "evaluation.references": manifests / "refs.json",
-        "pilot.num_recordings": 2,
-        "pilot.manifest": manifests / "pilot.jsonl",
     }
     args = [arg for key, value in overrides.items() for arg in ("--set", f"{key}={value}")]
     command = [sys.executable, "scripts/prepare_dataset.py", "--no-log-file", "--report-dir", str(tmp_path / "reports")]
@@ -171,11 +136,9 @@ def test_prepare_dataset_end_to_end(clotho, tmp_path):
         "CLOTHO_LICENSE",
         "SHA256SUMS",
         "eval.jsonl",
-        "pilot.jsonl",
         "refs.json",
     ]
     assert len(json.loads((manifests / "refs.json").read_text(encoding="utf-8"))) == 3
-    assert len((manifests / "pilot.jsonl").read_text(encoding="utf-8").splitlines()) == 2
     for name in ("dataset_validation.json", "dataset_validation.md", "manifest_report.json", "manifest_report.md"):
         assert (tmp_path / "reports" / name).is_file()
     assert "caption 1." not in (tmp_path / "reports" / "dataset_validation.json").read_text(encoding="utf-8")
@@ -198,16 +161,3 @@ def test_prepare_dataset_fails_without_writing(clotho, tmp_path):
     assert result.returncode == 1 and "no manifests written" in result.stderr
     assert not manifests.exists()
     assert (tmp_path / "reports" / "dataset_validation.json").is_file()
-
-
-def test_prepare_dataset_excludes_shared_sources_from_pilot(clotho, tmp_path):
-    path = clotho / "metadata" / "clotho_metadata_validation.csv"
-    path.write_text(path.read_text(encoding="utf-8").replace("validation-1", "evaluation-0"), encoding="utf-8")
-    write_zenodo_record(clotho)
-    result, manifests = run_prepare(clotho, tmp_path, "--set", "pilot.num_recordings=3")
-    assert result.returncode == 0, result.stderr
-    pilot = [json.loads(line) for line in (manifests / "pilot.jsonl").read_text(encoding="utf-8").splitlines()]
-    assert [record["file_name"] for record in pilot] == ["v1.wav", "v3.wav", "v4.wav"]
-    report = json.loads((tmp_path / "reports" / "dataset_validation.json").read_text(encoding="utf-8"))
-    assert report["pilot"]["pool"] == 3
-    assert report["pilot"]["excluded_shared_with_evaluation"] == [{"file_name": "v2.wav", "sound_id": "evaluation-0"}]

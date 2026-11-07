@@ -1,4 +1,4 @@
-"""Blinded audio-review material (E19). Synthetic captions, labels and WAV files only."""
+"""Blinded audio-review material (E18). Synthetic captions, labels and WAV files only."""
 
 import struct
 
@@ -40,7 +40,7 @@ MODELS = ["gpt_audio_1_5", "gemini_3_8_flash", "qwen2_5_omni", "audio_flamingo_3
 
 
 def sample(with_key: bool = False) -> tuple[list[dict], ...]:
-    """Review rows and an E18 template with synthetic disputed details on every third item (and the key)."""
+    """Review rows and an E17 template with synthetic disputed details on every third item (and the key)."""
     references = {sid: [f"ref {k} of {sid}" for k in range(5)] for sid in IDS}
     captions = {
         m: {sid: {"caption": f"caption <{i}> & {sid}", "normalization": "none"} for sid in IDS}
@@ -55,7 +55,7 @@ def sample(with_key: bool = False) -> tuple[list[dict], ...]:
 
 
 def labelled() -> tuple[list[dict], ...]:
-    """Review rows, E18 annotations, key and completed E19 templates: ratings cycle 1, 2, 3 over the items; the first
+    """Review rows, E17 annotations, key and completed E18 templates: ratings cycle 1, 2, 3 over the items; the first
     phrase of a caption is unsupported (lower case "u"), the second supported."""
     review, filled, key = sample(with_key=True)
     audio = audio_template(review)

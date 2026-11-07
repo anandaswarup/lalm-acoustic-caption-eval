@@ -1,4 +1,4 @@
-"""E06-E09: completion report over a synthetic caption run."""
+"""E05-E08: completion report over a synthetic caption run."""
 
 import json
 

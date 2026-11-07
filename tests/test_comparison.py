@@ -1,4 +1,4 @@
-"""Cross-metric and model comparison (E21). Synthetic scores and ratings only."""
+"""Cross-metric and model comparison (E20). Synthetic scores and ratings only."""
 
 import math
 
@@ -62,8 +62,8 @@ def test_ranks_tau_and_stability():
     noisy = np.random.default_rng(0).integers(0, 2, size=(50, 2)).astype(float)
     assert 0 < order_stability(noisy, bootstrap_indices(50, 500, 0)) < 1
     rankers = {
-        "m1": {"source": "E12", "values": {"s1": 0.1, "s2": 0.2, "s3": 0.3}, "stability": 0.9},
-        "m2": {"source": "E19", "values": {"s1": 0.9, "s2": 0.2, "s3": 0.3}, "stability": 0.4},
+        "m1": {"source": "E11", "values": {"s1": 0.1, "s2": 0.2, "s3": 0.3}, "stability": 0.9},
+        "m2": {"source": "E18", "values": {"s1": 0.9, "s2": 0.2, "s3": 0.3}, "stability": 0.4},
     }
     rows, taus = ranking_rows(rankers, SYSTEMS)
     assert [(r["system"], r["rank"]) for r in rows if r["ranker"] == "m2"] == [("s1", 1), ("s2", 3), ("s3", 2)]
@@ -101,10 +101,10 @@ def test_concordance():
 
 def test_report_markdown():
     sets = score_sets()
-    rankers = {m: {"source": "E12", "values": {s.system: float(s.scores[m].items.mean()) for s in sets},
+    rankers = {m: {"source": "E11", "values": {s.system: float(s.scores[m].items.mean()) for s in sets},
                    "stability": 1.0} for m in ("a", "b")}  # fmt: skip
-    rankers["e18"] = {"source": "E18", "values": {"s1": 0.5, "s2": 0.3, "s3": 0.4}, "stability": 0.8}
-    rankers["e19"] = {"source": "E19", "values": {"s1": 0.9, "s2": 0.3, "s3": 0.4}, "stability": 0.3}
+    rankers["e18"] = {"source": "E17", "values": {"s1": 0.5, "s2": 0.3, "s3": 0.4}, "stability": 0.8}
+    rankers["e19"] = {"source": "E18", "values": {"s1": 0.9, "s2": 0.3, "s3": 0.4}, "stability": 0.3}
     rankings, taus = ranking_rows(rankers, SYSTEMS)
     ratings = np.random.default_rng(1).integers(1, 4, size=(10, 3))
     scores = {m: score_matrix(sets, m)[:10] for m in ("a", "b")}
@@ -113,7 +113,7 @@ def test_report_markdown():
         "display_names": {s: s.upper() for s in SYSTEMS},
         "metrics": ["a", "b"],
         "metric_labels": {"a": "A", "b": "B"},
-        "ranker_labels": {"a": "A", "b": "B", "e18": "E18 share", "e19": "E19 share"},
+        "ranker_labels": {"a": "A", "b": "B", "e18": "E17 share", "e19": "E18 share"},
         "review_rankers": ["e18", "e19"],
         "confidence": 0.95,
         "inputs": {"x": {"path": "x.csv", "sha256": "0" * 64}},
@@ -125,12 +125,12 @@ def test_report_markdown():
         "outputs": {"kendall_tau": "tau.csv", "correlations": "corr.csv"},
     }
     text = report_markdown(report)
-    assert "| E19 share | 0.900 (1) | 0.300 (3) | 0.400 (2) | 30% |" in text
+    assert "| E18 share | 0.900 (1) | 0.300 (3) | 0.400 (2) | 30% |" in text
     assert "**Pairs rated 1 vs 3**" in text and "| B | 0.9" in text
 
 
 def test_figure_panels(tmp_path):
-    from src.analysis.figures import dot_panels, e12_panels, e14_panels
+    from src.analysis.figures import dot_panels, e11_panels, e13_panels
     from src.analysis.qualitative_figures import save
 
     summary = [{"sample": sample, "metric": "a", "system": s, "item_mean": "0.5", "ci_low": "0.4", "ci_high": "0.6"}
@@ -138,9 +138,9 @@ def test_figure_panels(tmp_path):
     tests = [{"family": family, "sample": "all", "metric": "a", "system_a": s, "difference": "-0.1", "ci_low": "-0.2",
               "ci_high": "0.0", "significant": str(s != "s3")}
              for s in SYSTEMS for family in ("rq2_model_vs_human", "rq1_model_pairs")]  # fmt: skip
-    [e12] = e12_panels(summary, ["a"], {"a": "A"})
+    [e12] = e11_panels(summary, ["a"], {"a": "A"})
     assert e12 == {"label": "A", "rows": {s: (0.5, 0.4, 0.6, True) for s in SYSTEMS}}
-    [e14] = e14_panels(tests, ["a"], {"a": "A"})
+    [e14] = e13_panels(tests, ["a"], {"a": "A"})
     assert [e14["rows"][s][3] for s in SYSTEMS] == [True, True, False]
     names = {s: s.upper() for s in SYSTEMS}
     first = save(dot_panels([e14] * 6, SYSTEMS, names, "T", zero_line=True), tmp_path / "f", ["png"], 50)

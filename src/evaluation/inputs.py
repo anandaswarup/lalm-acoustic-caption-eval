@@ -1,4 +1,4 @@
-"""Load and check evaluation inputs (E11-E14): model captions, human references and audio."""
+"""Load and check evaluation inputs (E10-E13): model captions, human references and audio."""
 
 from __future__ import annotations
 

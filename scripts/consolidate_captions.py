@@ -1,4 +1,4 @@
-"""Consolidate and freeze the four models' evaluation captions (E10).
+"""Consolidate and freeze the four models' evaluation captions (E09).
 
 Checks that every model has one `ok` caption per evaluation recording, produced with the frozen prompt, normalizes
 the captions (unwraps exactly {"<text>"}, flags other JSON-like output as malformed, scored as returned) and writes

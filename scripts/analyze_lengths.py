@@ -1,12 +1,12 @@
 """Caption-length statistics for model and human captions.
 
-E15: word counts (whitespace tokens) of the 4,180 scored model captions and the 5,225 human references; statistics per
+E14: word counts (whitespace tokens) of the 4,180 scored model captions and the 5,225 human references; statistics per
 system; model-to-human mean length ratios and per-recording differences from the reference mean, with bootstrap CIs;
-and Spearman correlations between length and score, from the per-item five-reference model scores (E12) and human
-leave-one-out scores (E13), for `lengths.association_metrics`. Everything is also computed on the 1,024 recordings
+and Spearman correlations between length and score, from the per-item five-reference model scores (E11) and human
+leave-one-out scores (E12), for `lengths.association_metrics`. Everything is also computed on the 1,024 recordings
 where every model caption is valid. Reads frozen files only (no rescoring, no Java or models). Writes
 outputs/scores/caption_lengths_{per_caption,summary,associations}.csv and
-outputs/reports/caption_length_analysis.{json,md}. Figures are drawn in E21 from the per-caption table.
+outputs/reports/caption_length_analysis.{json,md}. Figures are drawn in E20 from the per-caption table.
 """
 
 import json
@@ -139,7 +139,7 @@ def main() -> int:
     write_csv(associations, outputs["associations"], ASSOCIATION_COLUMNS)
     report = {
         "run_info": run_info,
-        "task": "E15",
+        "task": "E14",
         "display_names": {key: model["display_name"] for key, model in models.items()},
         "word_definition": WORD_DEFINITION,
         "samples": {"all": ALL_RECORDINGS, "valid": VALID_FOR_ALL},

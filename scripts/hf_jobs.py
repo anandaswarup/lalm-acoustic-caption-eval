@@ -1,8 +1,8 @@
-"""Run open-weight caption generation on Hugging Face Jobs (E04, E08, E09).
+"""Run open-weight caption generation on Hugging Face Jobs (E04, E07, E08).
 
 All data lives in one private bucket (configs/models.yaml `hf_jobs.bucket`), mounted read-write in the job:
 
-    clotho/audio/{evaluation,validation}/*.wav   the manifest WAVs only (upload-audio)
+    clotho/audio/evaluation/*.wav                the manifest WAVs only (upload-audio)
     code/<commit>/                               snapshot of the committed code (submit)
     outputs/<run>/<model>_captions.jsonl         caption outputs, resumable (fetch pulls them back)
     <prefix>/<run>/<model>_captions.jsonl        test runs kept apart with --output-prefix (e.g. smoke)

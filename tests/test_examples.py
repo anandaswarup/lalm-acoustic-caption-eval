@@ -1,4 +1,4 @@
-"""Representative caption comparisons and qualitative figures (E20). Synthetic labels only."""
+"""Representative caption comparisons and qualitative figures (E19). Synthetic labels only."""
 
 import pytest
 

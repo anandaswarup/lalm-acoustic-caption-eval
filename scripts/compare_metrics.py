@@ -1,8 +1,8 @@
 """Cross-metric and model comparison.
 
-E21: from the committed per-item scores (E12), the E16 ranking stability and the unblinded E18/E19 labels, writes the
+E20: from the committed per-item scores (E11), the E15 ranking stability and the unblinded E17/E18 labels, writes the
 metric x metric correlations, the model rankings by every metric and by the two reviews (with Kendall's tau-b between
-rankings), and the within-recording concordance of each metric with the E19 audio ratings to outputs/scores/, and
+rankings), and the within-recording concordance of each metric with the E18 audio ratings to outputs/scores/, and
 outputs/reports/cross_metric_comparison.{json,md}. Nothing is rescored. Settings: `comparison` in configs/metrics.yaml.
 """
 
@@ -48,8 +48,8 @@ INPUTS = {
     "statistics_orders": SCORES / "statistics_orders.csv",
     "audio_review": QUALITATIVE / "audio_review_annotations.csv",
 }
-E18, E19 = "e18_categories_1_3", "e19_rated_accurate"
-AGREEING_CATEGORIES = {1, 2, 3}  # agreement with the references' main content (E18)
+E17, E18 = "e17_categories_1_3", "e18_rated_accurate"
+AGREEING_CATEGORIES = {1, 2, 3}  # agreement with the references' main content (E17)
 
 
 def main() -> int:
@@ -99,7 +99,7 @@ def main() -> int:
                          orders[metric]["observed_order"])  # fmt: skip
             return 1
         stability = float(orders[metric]["share_observed_order"])
-        rankers[metric] = {"source": "E12", "values": values, "stability": stability}
+        rankers[metric] = {"source": "E11", "values": values, "stability": stability}
 
     review = read_table(INPUTS["audio_review"])
     codes = list(dict.fromkeys(row["recording_code"] for row in review))
@@ -110,10 +110,10 @@ def main() -> int:
     category = np.array([[int(cell[(c, s)]["category"]) for s in systems] for c in codes])
     rating = np.array([[int(cell[(c, s)]["audio_rating"]) for s in systems] for c in codes])
     indices = bootstrap_indices(len(codes), settings["num_resamples"], seed)
-    for name, indicator in ((E18, np.isin(category, list(AGREEING_CATEGORIES))), (E19, rating == 1)):
+    for name, indicator in ((E17, np.isin(category, list(AGREEING_CATEGORIES))), (E18, rating == 1)):
         per_recording = indicator.astype(np.float64)
         values = dict(zip(systems, per_recording.mean(axis=0).tolist(), strict=True))
-        rankers[name] = {"source": "E18" if name == E18 else "E19", "values": values,
+        rankers[name] = {"source": "E17" if name == E17 else "E18", "values": values,
                          "stability": order_stability(per_recording, indices)}  # fmt: skip
     rankings, taus = ranking_rows(rankers, systems)
 
@@ -134,14 +134,14 @@ def main() -> int:
     labels = {metric: BY_NAME[metric].label for metric in MAIN_METRICS}
     report = {
         "run_info": run_info,
-        "task": "E21",
+        "task": "E20",
         "settings": settings,
         "confidence": confidence,
         "display_names": {key: model["display_name"] for key, model in models.items()},
         "metrics": metrics,
         "metric_labels": {metric: BY_NAME[metric].label for metric in MAIN_METRICS},
-        "ranker_labels": {**labels, E18: "E18: categories 1-3 (sample)", E19: "E19: rated accurate (sample)"},
-        "review_rankers": [E18, E19],
+        "ranker_labels": {**labels, E17: "E17: categories 1-3 (sample)", E18: "E18: rated accurate (sample)"},
+        "review_rankers": [E17, E18],
         "num_recordings": len(sample_ids),
         "num_sampled_recordings": len(codes),
         "inputs": {name: {"path": relative(path), "sha256": sha256sum(path)} for name, path in INPUTS.items()},

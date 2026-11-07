@@ -1,4 +1,4 @@
-"""Reference-based caption metrics (E11): BLEU-1..4, METEOR, CIDEr-D, SPICE, SPIDEr, SPIDEr-FL, FENSE, BERTScore.
+"""Reference-based caption metrics (E10): BLEU-1..4, METEOR, CIDEr-D, SPICE, SPIDEr, SPIDEr-FL, FENSE, BERTScore.
 
 Inputs are PTB-tokenized (`src.metrics.preprocess`). BLEU, METEOR, CIDEr-D, SBERT similarity and the fluency-error
 detector come from aac-metrics 0.5.5; SPICE runs through `src.metrics.spice`; BERTScore through `src.metrics.bertscore`

@@ -1,4 +1,4 @@
-"""Caption-length statistics, model-human comparison and length-score associations (E15). No Java or models."""
+"""Caption-length statistics, model-human comparison and length-score associations (E14). No Java or models."""
 
 import math
 

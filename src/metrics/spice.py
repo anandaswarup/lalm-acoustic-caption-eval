@@ -1,4 +1,4 @@
-"""SPICE without its parse cache (E11).
+"""SPICE without its parse cache (E10).
 
 aac-metrics always passes `-cache`, and SPICE's LMDB cache loads a native library that ships for x86 only, so it
 fails on arm64. The cache only stores parses; scores are the same without it. Input and output follow aac-metrics:

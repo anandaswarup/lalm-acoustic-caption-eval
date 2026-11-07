@@ -1,4 +1,4 @@
-# Caption-evaluation metric dependencies (E11-E14), installed into .venv-metrics.
+# Caption-evaluation metric dependencies (E10-E13), installed into .venv-metrics.
 # Separate from requirements.txt because msclap (CLAP similarity, MACE) needs numpy<2, pandas<3 and transformers<5.
 # The JDK, jars and model checkpoints are not Python packages: `make metric-tools` downloads them into tools/.
 # Install with: make venv-metrics install-metrics

@@ -1,4 +1,4 @@
-# Caption-evaluation metrics (E11-E14). Implementations and versions are verified in E11.
+# Caption-evaluation metrics (E10-E13). Implementations and versions are verified in E10.
 reference_based:
   lexical:
     - bleu_1
@@ -17,9 +17,9 @@ reference_based:
 # Reported separately from reference-based scores.
 audio_aware:
   - clap_similarity
-  - mace  # retained only if four-reference evaluation is supported (checked in E11)
+  - mace  # retained only if four-reference evaluation is supported (checked in E10)
 
-# Metric parameters (E11). Recorded in the metric implementation report.
+# Metric parameters (E10). Recorded in the metric implementation report.
 settings:
   device: cpu  # CPU only, for reproducibility
   batch_size: 32
@@ -36,34 +36,34 @@ settings:
   spider_fl: {error_threshold: 0.9, penalty: 0.9}
   # aac-metrics BERTScore: last layer (24) of roberta-large, no IDF, max over references. The rescaled F1 (secondary)
   # uses the layer-24 row of the pinned bert_score baseline. max_length is 128, not aac-metrics' 64: two GPT captions
-  # (malformed three-field JSON) are 65-72 subwords after PTB tokenization (E11 measurement).
+  # (malformed three-field JSON) are 65-72 subwords after PTB tokenization (E10 measurement).
   bertscore: {model: roberta-large, baseline_layer: 24, idf: false, reduction: max, max_length: 128}
   # MS-CLAP 2023 (44.1 kHz, 7 s input): the whole clip is embedded in 7 s chunks, averaged weighted by duration.
   clap: {version: "2023", sample_rate: 44100, chunk_seconds: 7}
   # MACE as in the paper (arXiv 2411.00321): 0.5 * (audio-text + mean text-text CLAP cosine) * (1 - penalty * error).
   mace: {error_threshold: 0.97, penalty: 0.3}
 
-# Reference condition scored by scripts/evaluate_captions.py; the Makefile sets it per task (E12 five_reference, E14
+# Reference condition scored by scripts/evaluate_captions.py; the Makefile sets it per task (E11 five_reference, E13
 # four_reference).
 condition: five_reference
 
 leave_one_out:
   num_positions: 5
   references_per_subset: 4
-  # Near-paraphrase sensitivity (E13-E14, decided 2026-11-04): Clotho references often come in near-paraphrase pairs.
+  # Near-paraphrase sensitivity (E12-E13, decided 2026-11-04): Clotho references often come in near-paraphrase pairs.
   # For each held-out caption, the word-set Jaccard with its closest reference (PTB tokens); the baseline is also
   # reported on the held-out captions whose closest reference is below each threshold, without rescoring.
   overlap_thresholds: [0.6, 0.8]
 
-# Caption-length analysis (E15, decided 2026-11-05): words = whitespace tokens of the scored caption. Length-score
-# Spearman correlations use the five-reference model scores (E12) and the human leave-one-out scores (E13).
+# Caption-length analysis (E14, decided 2026-11-05): words = whitespace tokens of the scored caption. Length-score
+# Spearman correlations use the five-reference model scores (E11) and the human leave-one-out scores (E12).
 lengths:
   association_metrics: [cider_d, spice, spider, fense, bertscore_f1_rescaled, clap_similarity, mace]
 
-# Statistical tests (E16, decided 2026-11-05): paired sign-flip permutation tests (two-sided) and bootstrap CIs with
+# Statistical tests (E15, decided 2026-11-05): paired sign-flip permutation tests (two-sided) and bootstrap CIs with
 # 10,000 resamples each, Holm-Bonferroni within each family below on the full-recording sample; sensitivity samples are
-# reported uncorrected. Families: rq1_model_pairs (E12, 6 model pairs x main metrics), rq2_model_vs_human (E14
-# five-subset mean, 4 models x main metrics), length_vs_human (E15, 4 models), length_score_correlation (E15, 5 systems x
+# reported uncorrected. Families: rq1_model_pairs (E11, 6 model pairs x main metrics), rq2_model_vs_human (E13
+# five-subset mean, 4 models x main metrics), length_vs_human (E14, 4 models), length_score_correlation (E14, 5 systems x
 # lengths.association_metrics, raw length).
 statistics:
   num_resamples: 10000
@@ -71,9 +71,9 @@ statistics:
   seed: 42
   alpha: 0.05
 
-# Cross-metric and model comparison (E21, decided 2026-11-07): metric x metric Spearman correlations over captions
-# (bootstrap CIs over recordings, `correlation_resamples`), model rankings by every main metric and by the E18/E19
-# review shares with order stability (`num_resamples`), and within-recording concordance of each metric with the E19
+# Cross-metric and model comparison (E20, decided 2026-11-07): metric x metric Spearman correlations over captions
+# (bootstrap CIs over recordings, `correlation_resamples`), model rankings by every main metric and by the E17/E18
+# review shares with order stability (`num_resamples`), and within-recording concordance of each metric with the E18
 # audio ratings (bootstrap CI and sign-flip test, `num_resamples` / `num_permutations`, Holm across metrics).
 # `metrics` drops near-duplicates (BLEU-2/3, SPIDEr-FL, raw BERTScore, which ranks like the rescaled one); the ranking
 # table covers every main metric.
@@ -86,7 +86,7 @@ comparison:
   alpha: 0.05
   seed: 42
 
-# Manuscript figures from frozen artifacts (E21): E12 scores by model and E14 model - human differences.
+# Manuscript figures from frozen artifacts (E20): E11 scores by model and E13 model - human differences.
 figures:
   dir: outputs/figures
   formats: [pdf, png]

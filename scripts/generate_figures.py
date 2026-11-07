@@ -1,8 +1,8 @@
 """Regenerate manuscript figures from frozen result artifacts.
 
-E21: E12 scores by model (item means and 95% bootstrap CIs, five references) and E14 model - human differences
-(matched four references, 95% CIs, Holm significance from E16), one panel per metric of `comparison.metrics` in
-configs/metrics.yaml, written to `figures.dir`. The qualitative figures (E18, E19) come from make examples (E20).
+E20: E11 scores by model (item means and 95% bootstrap CIs, five references) and E13 model - human differences
+(matched four references, 95% CIs, Holm significance from E15), one panel per metric of `comparison.metrics` in
+configs/metrics.yaml, written to `figures.dir`. The qualitative figures (E17, E18) come from make examples (E19).
 """
 
 import sys
@@ -11,7 +11,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src.analysis.annotations import read_table  # noqa: E402
-from src.analysis.figures import dot_panels, e12_panels, e14_panels  # noqa: E402
+from src.analysis.figures import dot_panels, e11_panels, e13_panels  # noqa: E402
 from src.analysis.qualitative_figures import save  # noqa: E402
 from src.evaluation.pipeline import existing_outputs, relative  # noqa: E402
 from src.metrics.registry import BY_NAME  # noqa: E402
@@ -23,7 +23,7 @@ INPUTS = {
     "summary": OUTPUT_DIR / "scores" / "five_reference_summary.csv",
     "tests": OUTPUT_DIR / "scores" / "statistics_tests.csv",
 }
-FIGURES = ("e12_scores_by_model", "e14_model_minus_human")
+FIGURES = ("e11_scores_by_model", "e13_model_minus_human")
 SHORT_LABELS = {"bertscore_f1_rescaled": "BERTScore (resc.)"}  # panel titles are about 20 characters wide
 
 
@@ -47,15 +47,15 @@ def main() -> int:
     labels = {metric: SHORT_LABELS.get(metric, BY_NAME[metric].label) for metric in metrics}
 
     figures_dir.mkdir(parents=True, exist_ok=True)
-    e12 = e12_panels(read_table(INPUTS["summary"]), metrics, labels)
-    e14 = e14_panels(read_table(INPUTS["tests"]), metrics, labels)
-    if any(set(panel["rows"]) != set(systems) for panel in e12 + e14):
+    e11 = e11_panels(read_table(INPUTS["summary"]), metrics, labels)
+    e13 = e13_panels(read_table(INPUTS["tests"]), metrics, labels)
+    if any(set(panel["rows"]) != set(systems) for panel in e11 + e13):
         logger.error("Every panel needs one row per model in models.yaml")
         return 1
-    title = "Scores by model, five references (E12): item mean and 95% CI over 1,045 recordings"
-    save(dot_panels(e12, systems, names, title), figures_dir / FIGURES[0], settings["formats"], settings["dpi"])
-    title = "Model minus human, matched four references (E14): 95% CI; hollow = n.s. after Holm"
-    save(dot_panels(e14, systems, names, title, zero_line=True), figures_dir / FIGURES[1], settings["formats"],
+    title = "Scores by model, five references (E11): item mean and 95% CI over 1,045 recordings"
+    save(dot_panels(e11, systems, names, title), figures_dir / FIGURES[0], settings["formats"], settings["dpi"])
+    title = "Model minus human, matched four references (E13): 95% CI; hollow = n.s. after Holm"
+    save(dot_panels(e13, systems, names, title, zero_line=True), figures_dir / FIGURES[1], settings["formats"],
          settings["dpi"])  # fmt: skip
     logger.info("Wrote %s", sorted(relative(path) for path in outputs.values()))
     return 0

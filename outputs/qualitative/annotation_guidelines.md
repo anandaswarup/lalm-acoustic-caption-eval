@@ -1,10 +1,10 @@
-# Annotation guidelines: model–reference agreement (E18)
+# Annotation guidelines: model–reference agreement (E17)
 
-These guidelines describe how each generated caption in the qualitative sample is labelled. The sample has 50 recordings and 4 captions per recording, 200 items in total (E17). One reviewer labels every item.
+These guidelines describe how each generated caption in the qualitative sample is labelled. The sample has 50 recordings and 4 captions per recording, 200 items in total (E16). One reviewer labels every item.
 
 ## 1. What is being judged
 
-The question is **how well a generated caption agrees with the five human references** of its recording. It is not whether the caption is correct about the audio. Audio is not used here: a caption can disagree with the references and still be right about the recording, and that distinction is examined separately in E19.
+The question is **how well a generated caption agrees with the five human references** of its recording. It is not whether the caption is correct about the audio. Audio is not used here: a caption can disagree with the references and still be right about the recording, and that distinction is examined separately in E18.
 
 Judge each caption on its own against the references. Do not compare captions A–D with each other, and do not try to work out which model wrote a caption.
 
@@ -86,7 +86,7 @@ Assign exactly one primary category per caption.
 | Column | Content |
 |---|---|
 | `category` | One code, 1–6 |
-| `disputed_details` | The caption's additional or contradicting phrases, as short quotes from the caption, separated by `;` (for example `metallic clanking; distant thunder`). Leave empty for categories 1 and 4 unless something is disputed. These are checked against the audio in E19. |
+| `disputed_details` | The caption's additional or contradicting phrases, as short quotes from the caption, separated by `;` (for example `metallic clanking; distant thunder`). Leave empty for categories 1 and 4 unless something is disputed. These are checked against the audio in E18. |
 | `notes_sources` | Agreement or disagreement about sound sources |
 | `notes_attributes` | Agreement or disagreement about acoustic attributes |
 | `notes_temporal` | Agreement or disagreement about order, overlap or change over time |

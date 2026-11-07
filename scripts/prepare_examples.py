@@ -1,9 +1,9 @@
 """Representative caption comparisons, tables and qualitative figures.
 
-E20: run after E19 (make audio-review). Joins the review items (references and captions) with the unblinded E18/E19
+E19: run after E18 (make audio-review). Joins the review items (references and captions) with the unblinded E17/E18
 labels, selects one recording per pattern by the rules in src/analysis/examples.py, and writes the example tables and
-a supplementary table of every sampled recording (Markdown and LaTeX) to outputs/tables/, the figures (E18 categories
-and E19 ratings per model, E18 x E19 heatmap) to outputs/figures/, and the selection manifest
+a supplementary table of every sampled recording (Markdown and LaTeX) to outputs/tables/, the figures (E17 categories
+and E18 ratings per model, E17 x E18 heatmap) to outputs/figures/, and the selection manifest
 outputs/qualitative/example_manifest.json with every eligible recording and the input checksums.
 """
 
@@ -32,7 +32,7 @@ from src.utils.config import load_config  # noqa: E402
 from src.utils.paths import resolve_path  # noqa: E402
 from src.utils.run_info import collect_run_info  # noqa: E402
 
-FIGURES = ("e18_categories_by_model", "e19_ratings_by_model", "e18_e19_heatmap")
+FIGURES = ("e17_categories_by_model", "e18_ratings_by_model", "e17_e18_heatmap")
 
 
 def main() -> int:
@@ -104,7 +104,7 @@ def main() -> int:
     examples = list({e["recording_code"]: e for e in examples}.values())
 
     legend = (
-        "E18: reference-agreement category (1 strong agreement ... 6 weak agreement or mismatch); E19: audio rating "
+        "E17: reference-agreement category (1 strong agreement ... 6 weak agreement or mismatch); E18: audio rating "
         "(1 accurate, 2 minor errors, 3 major error or wrong sound source); disputed phrases are the caption phrases "
         "no reference supports, verified against the audio as S supported, U unsupported, A ambiguous."
     )
@@ -126,12 +126,12 @@ def main() -> int:
     ]
     tables_dir.mkdir(parents=True, exist_ok=True)
     outputs["examples_md"].write_text(
-        examples_markdown("Representative caption comparisons (E20)", intro, examples, names, headings),
+        examples_markdown("Representative caption comparisons (E19)", intro, examples, names, headings),
         encoding="utf-8",
     )
     all_intro = [f"Every recording of the qualitative sample (supplementary). {legend}"]
     outputs["all_md"].write_text(
-        examples_markdown("Qualitative sample: all recordings (E20)", all_intro, every, names, headings),
+        examples_markdown("Qualitative sample: all recordings (E19)", all_intro, every, names, headings),
         encoding="utf-8",
     )
     table_captions = {e["recording_code"]: f"{headings[e['recording_code']]} (recording {e['recording_code']}, "
@@ -154,7 +154,7 @@ def main() -> int:
             {names[m]: [sum(r["category"] == c for r in rows) for c in categories] for m, rows in per_model.items()},
             [f"{c} {label}" for c, label in zip(categories, short_c, strict=True)],
             CATEGORY_COLORS,
-            "Reference agreement (E18)",
+            "Reference agreement (E17)",
             f"Captions (of {n} per model)",
         ),
         figures_dir / FIGURES[0], formats, dpi,
@@ -164,7 +164,7 @@ def main() -> int:
             {names[m]: [sum(r["audio_rating"] == c for r in rows) for c in ratings] for m, rows in per_model.items()},
             [f"{c} {label}" for c, label in zip(ratings, short_r, strict=True)],
             RATING_COLORS,
-            "Audio-grounded rating (E19)",
+            "Audio-grounded rating (E18)",
             f"Captions (of {n} per model)",
         ),
         figures_dir / FIGURES[1], formats, dpi,
@@ -175,15 +175,15 @@ def main() -> int:
              for c in categories],  # fmt: skip
             [f"{c} {label}" for c, label in zip(categories, short_c, strict=True)],
             [f"{g} {label}" for g, label in zip(ratings, short_r, strict=True)],
-            f"E18 category by E19 audio rating ({len(records)} captions, all models)",
-            "Audio-grounded rating (E19)",
+            f"E17 category by E18 audio rating ({len(records)} captions, all models)",
+            "Audio-grounded rating (E18)",
         ),
         figures_dir / FIGURES[2], formats, dpi,
     )  # fmt: skip
 
     manifest = {
         "run_info": run_info,
-        "task": "E20",
+        "task": "E19",
         "seed": settings["seed"],
         "selection_method": (
             "Per pattern, the recording with the most qualifying captions, preferring recordings not chosen for "

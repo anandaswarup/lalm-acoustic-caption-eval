@@ -1,4 +1,4 @@
-"""Metric tool helpers (E11): Java checks, pinned revisions and the tools manifest. No JDK or downloads needed."""
+"""Metric tool helpers (E10): Java checks, pinned revisions and the tools manifest. No JDK or downloads needed."""
 
 import json
 import os

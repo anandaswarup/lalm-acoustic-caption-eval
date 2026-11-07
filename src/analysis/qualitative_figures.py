@@ -1,6 +1,6 @@
-"""Qualitative-analysis figures (E20): E18 categories and E19 audio ratings per model, and the E18 x E19 heatmap.
+"""Qualitative-analysis figures (E19): E17 categories and E18 audio ratings per model, and the E17 x E18 heatmap.
 
-Light-mode print figures. E18 categories use the first six categorical slots in fixed order; E19 ratings, which are
+Light-mode print figures. E17 categories use the first six categorical slots in fixed order; E18 ratings, which are
 ordinal, a three-step blue ramp; the heatmap a sequential blue ramp. Both palettes were checked with the dataviz
 validator (categorical: adjacent CVD and normal-vision separation pass, three slots are below 3:1 contrast, so every
 segment carries its count; ordinal: monotone lightness and visible steps). Saved without creation dates so reruns

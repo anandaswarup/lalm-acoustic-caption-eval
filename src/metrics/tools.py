@@ -1,4 +1,4 @@
-"""External tools for the caption metrics: the JDK, aac-metrics jars and model checkpoints under `tools/` (E11).
+"""External tools for the caption metrics: the JDK, aac-metrics jars and model checkpoints under `tools/` (E10).
 
 `configs/metrics.yaml` (`tools:`) pins every download by URL, commit or SHA-256; `scripts/setup_metric_tools.py`
 fetches them and writes `MANIFEST.json`, the SHA-256 of every file the metrics use.

@@ -1,4 +1,4 @@
-"""Blinded qualitative review sample (E17). No Java or models."""
+"""Blinded qualitative review sample (E16). No Java or models."""
 
 import numpy as np
 import pytest

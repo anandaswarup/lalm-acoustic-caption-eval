@@ -1,4 +1,4 @@
-"""Checking, unblinding and summarizing qualitative annotations (E18). Synthetic labels only."""
+"""Checking, unblinding and summarizing qualitative annotations (E17). Synthetic labels only."""
 
 import pytest
 

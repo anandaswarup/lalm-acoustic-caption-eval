@@ -1,4 +1,4 @@
-"""Text preprocessing shared by every text metric (E11): PTB tokenization, as in aac-metrics and DCASE.
+"""Text preprocessing shared by every text metric (E10): PTB tokenization, as in aac-metrics and DCASE.
 
 The PTB tokenizer lowercases, splits off and removes punctuation, and returns tokens joined by spaces. It works line by
 line, so each distinct string is tokenized once and the result mapped back.

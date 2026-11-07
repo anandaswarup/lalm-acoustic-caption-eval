@@ -20,11 +20,9 @@ data/raw/
 # Run logs and test (smoke) caption outputs
 outputs/logs/
 outputs/smoke/
-# Pilot review: quotes Clotho captions and model outputs
-outputs/reports/pilot_review.md
-# Qualitative blinding key: committed only once the E18 labels are final (its SHA-256 is in sample_manifest.json)
+# Qualitative blinding key: committed only once the E17 labels are final (its SHA-256 is in sample_manifest.json)
 outputs/qualitative/blinding_key.csv
-# E19 audio copies (named by recording code) and the local listening page that links them: never committed
+# E18 audio copies (named by recording code) and the local listening page that links them: never committed
 outputs/qualitative/audio/
 outputs/qualitative/audio_review.html
 
@@ -45,12 +43,7 @@ manuscript/*.synctex.gz
 
 # Planning documents (kept locally, not pushed)
 docs/
-# E05 prompt-development and repeatability runs (counts are reported in the E05 notes)
-outputs/captions/pilot_prompt_v1/
-outputs/captions/pilot_prompt_v2/
-outputs/captions/pilot_repeat/
-outputs/captions/repeat_hf/
 # Metric tools (JDK 11, jars, checkpoints): downloaded and verified by `make metric-tools`
 tools/
-# CLAP audio embeddings reused across E12-E14 (keyed by audio SHA-256 and CLAP settings)
+# CLAP audio embeddings reused across E11-E13 (keyed by audio SHA-256 and CLAP settings)
 outputs/cache/

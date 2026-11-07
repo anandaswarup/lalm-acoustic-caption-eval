@@ -1,4 +1,4 @@
-"""Averaging over held-out positions, the leave-one-out checks and the calibration report (E13). No Java or models."""
+"""Averaging over held-out positions, the leave-one-out checks and the calibration report (E12). No Java or models."""
 
 import numpy as np
 import pytest
