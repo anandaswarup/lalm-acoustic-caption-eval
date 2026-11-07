@@ -1,9 +1,9 @@
 {
   "run_info": {
     "experiment": "prepare_qualitative",
-    "timestamp_utc": "2026-11-05T07:59:41+00:00",
-    "git_commit": "7be0c75c3bee30d4512a3e943efca672f5511d22",
-    "git_dirty": false,
+    "timestamp_utc": "2026-11-07T09:34:11+00:00",
+    "git_commit": "c095ae4867fb0568c40a518d68f7e205014ff4c0",
+    "git_dirty": true,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
@@ -148,10 +148,10 @@
     {
       "group": "GPT-Audio-1.5",
       "quantity": "bertscore_f1_rescaled",
-      "sample_mean": 0.22188745969077775,
-      "population_mean": 0.2275595775754656,
-      "population_sd": 0.08085196467682507,
-      "standardized_difference": -0.07015436059420431
+      "sample_mean": 0.2575379865527221,
+      "population_mean": 0.2539523681759922,
+      "population_sd": 0.10345922436947547,
+      "standardized_difference": 0.034657309665543756
     },
     {
       "group": "GPT-Audio-1.5",
@@ -204,10 +204,10 @@
     {
       "group": "Gemini 3.8 Flash",
       "quantity": "bertscore_f1_rescaled",
-      "sample_mean": 0.22548579532809426,
-      "population_mean": 0.22924001728699342,
-      "population_sd": 0.08102163664458037,
-      "standardized_difference": -0.046336042005271944
+      "sample_mean": 0.2644441465365162,
+      "population_mean": 0.23760135622143938,
+      "population_sd": 0.10968748153772764,
+      "standardized_difference": 0.24472063665573449
     },
     {
       "group": "Gemini 3.8 Flash",
@@ -260,10 +260,10 @@
     {
       "group": "Qwen2.5-Omni-7B",
       "quantity": "bertscore_f1_rescaled",
-      "sample_mean": 0.2704015284279879,
-      "population_mean": 0.27506747128972453,
-      "population_sd": 0.08616440434532488,
-      "standardized_difference": -0.05415162905364842
+      "sample_mean": 0.3267749645882852,
+      "population_mean": 0.3310677528672777,
+      "population_sd": 0.12011603080206458,
+      "standardized_difference": -0.03573867909493644
     },
     {
       "group": "Qwen2.5-Omni-7B",
@@ -316,10 +316,10 @@
     {
       "group": "Audio Flamingo 3",
       "quantity": "bertscore_f1_rescaled",
-      "sample_mean": 0.2981387276466551,
-      "population_mean": 0.2793311530656362,
-      "population_sd": 0.10145439320146361,
-      "standardized_difference": 0.185379597546571
+      "sample_mean": 0.35674096331775423,
+      "population_mean": 0.3524554887881646,
+      "population_sd": 0.13601235675630338,
+      "standardized_difference": 0.03150797936152264
     },
     {
       "group": "Audio Flamingo 3",
