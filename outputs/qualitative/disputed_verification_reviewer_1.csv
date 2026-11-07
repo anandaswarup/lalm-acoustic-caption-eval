@@ -1,263 +1,263 @@
 phrase_id,item_id,recording_code,caption_label,phrase,verdict,note
-R01B-1,R01B,R01,B,poured,,
-R01C-1,R01C,R01,C,pills,,
-R01D-1,R01D,R01,D,Playing cards,,
-R01D-2,R01D,R01,D,"shuffled, rifled, and bent",,
-R02A-1,R02A,R02,A,distant,,
-R02B-1,R02B,R02,B,rain falling,,
-R02B-2,R02B,R02,B,water hitting surfaces,,
-R02C-1,R02C,R02,C,A motor is running,,
-R02D-1,R02D,R02,D,heavy rain,,
-R02D-2,R02D,R02,D,thunder rumbles,,
-R02D-3,R02D,R02,D,metal door shutting,,
-R03B-1,R03B,R03,B,heavy rainfall,,
-R03B-2,R03B,R03,B,raindrops,,
-R03C-1,R03C,R03,C,rapidly,,
-R03C-2,R03C,R03,C,rushing and splashing,,
-R03D-1,R03D,R03,D,bubbling,,
-R04A-1,R04A,R04,A,both men and women,,
-R04B-1,R04B,R04,B,laughter,,
-R04B-2,R04B,R04,B,female speech closer to the microphone,,
-R04C-1,R04C,R04,C,occasional louder voices,,
-R04C-2,R04C,R04,C,bursts of laughter,,
-R04D-1,R04D,R04,D,reverberant space,,
-R04D-2,R04D,R04,D,a woman speaking prominently at the end,,
-R05A-1,R05A,R05,A,ocean waves crash and rumble against the shoreline,,
-R05B-1,R05B,R05,B,gentle wind or rustling leaves,,
-R05C-1,R05C,R05,C,intermittently,,
-R05D-1,R05D,R05,D,single,,
-R06A-1,R06A,R06,A,Footsteps,,
-R06A-2,R06A,R06,A,walking cane,,
-R06B-1,R06B,R06,B,wooden tapping and knocking,,
-R06C-1,R06C,R06,C,cracking of bones or breaking of twigs,,
-R06C-2,R06C,R06,C,electronic beep,,
-R07A-1,R07A,R07,A,mechanical fan,,
-R07B-1,R07B,R07,B,drilling,,
-R07B-2,R07B,R07,B,high-pitched whirring,,
-R07C-1,R07C,R07,C,large motor vehicle,,
-R07C-2,R07C,R07,C,hissing,,
-R07C-3,R07C,R07,C,high-pitched whine,,
-R07D-1,R07D,R07,D,"metallic rattling, scraping, and squeaking",,
-R07D-2,R07D,R07,D,faint clicking,,
-R08A-1,R08A,R08,A,sawing a piece of wood,,
-R08A-2,R08A,R08,A,striking the wood with a hammer,,
-R08B-1,R08B,R08,B,stapler,,
-R08C-1,R08C,R08,C,paper being crumpled,,
-R08C-2,R08C,R08,C,a ball being dropped,,
-R08D-1,R08D,R08,D,footsteps on gravel,,
-R09A-1,R09A,R09,A,laughing,,
-R09A-2,R09A,R09,A,voices echo,,
-R09A-3,R09A,R09,A,followed by clacking sounds,,
-R09B-1,R09B,R09,B,neutral tones and moderate pace,,
-R09B-2,R09B,R09,B,contacting someone,,
-R09B-3,R09B,R09,B,'motorzinho',,
-R09B-4,R09B,R09,B,Portuguese,,
-R09D-1,R09D,R09,D,Portuguese,,
-R10A-1,R10A,R10,A,handling of a flexible material,,
-R10B-1,R10B,R10,B,brushing sounds scrape continuously back and forth,,
-R10C-1,R10C,R10,C,dragging a heavy object,,
-R10D-1,R10D,R10,D,distant hum of a boat engine,,
-R11A-1,R11A,R11,A,rhythmic and consistent,,
-R11A-2,R11A,R11,A,faint hum,,
-R11B-1,R11B,R11,B,faucet being turned off,,
-R11C-1,R11C,R11,C,drumming,,
-R11C-2,R11C,R11,C,percussive strikes,,
-R11D-1,R11D,R11,D,Plastic clatters,,
-R12A-1,R12A,R12,A,distant waterfall,,
-R12B-1,R12B,R12,B,rushing stream,,
-R12C-1,R12C,R12,C,continuous and heavy,,
-R13A-1,R13A,R13,A,acoustic feedback tone,,
-R13A-2,R13A,R13,A,high-frequency white noise,,
-R13B-1,R13B,R13,B,steady pitch,,
-R13B-2,R13B,R13,B,no other distinct events or variations,,
-R13C-1,R13C,R13,C,high-pitched,,
-R13C-2,R13C,R13,C,"steady, unchanging tone",,
-R13C-3,R13C,R13,C,no background noise,,
-R13D-1,R13D,R13,D,high-pitched,,
-R14A-1,R14A,R14,A,train,,
-R14A-2,R14A,R14,A,wheels squealing,,
-R14B-1,R14B,R14,B,train,,
-R14B-2,R14B,R14,B,blasts of its horn,,
-R14C-1,R14C,R14,C,train,,
-R14C-2,R14C,R14,C,wheels squealing,,
-R14D-1,R14D,R14,D,machinery or engines,,
-R14D-2,R14D,R14,D,intermittent beeping tones,,
-R14D-3,R14D,R14,D,metallic clatter,,
-R15A-1,R15A,R15,A,ocean waves,,
-R15A-2,R15A,R15,A,no distinct interruptions or additional sounds,,
-R15B-1,R15B,R15,B,machine or vehicle,,
-R15C-1,R15C,R15,C,large waterfall,,
-R15D-1,R15D,R15,D,revs with an intermittent squeak before idling,,
-R15D-2,R15D,R15,D,water splashes against a shore,,
-R16B-1,R16B,R16,B,mechanical whirring sound,,
-R16B-2,R16B,R16,B,soft hiss,,
-R16C-1,R16C,R16,C,into a microphone,,
-R16D-1,R16D,R16,D,Plastic crates,,
-R16D-2,R16D,R16,D,hums and rubbing noises,,
-R17A-1,R17A,R17,A,no other discernible sounds or events,,
-R17B-1,R17B,R17,B,high-pitched mechanical whirring,,
-R17C-1,R17C,R17,C,rain,,
-R17C-2,R17C,R17,C,windshield wipers,,
-R17D-1,R17D,R17,D,jet engine running at idle,,
-R18A-1,R18A,R18,A,door opening and closing,,
-R18B-1,R18B,R18,B,footsteps,,
-R18B-2,R18B,R18,B,echoing in a large space,,
-R18C-1,R18C,R18,C,young,,
-R18C-2,R18C,R18,C,neutrally and at a moderate pace,,
-R18C-3,R18C,R18,C,'Thank you',,
-R18C-4,R18C,R18,C,bustling restaurant,,
-R18D-1,R18D,R18,D,echoing,,
-R19A-1,R19A,R19,A,distant,,
-R19B-1,R19B,R19,B,river,,
-R19C-1,R19C,R19,C,rhythmic,,
-R19C-2,R19C,R19,C,occasional louder splashes,,
-R19D-1,R19D,R19,D,echoes inside a hollow enclosure,,
-R20B-1,R20B,R20,B,neutral tone,,
-R20B-2,R20B,R20,B,moderate pace,,
-R20C-1,R20C,R20,C,footsteps,,
-R20C-2,R20C,R20,C,distant train horn,,
-R20D-1,R20D,R20,D,reverberant,,
-R20D-2,R20D,R20,D,laughter,,
-R20D-3,R20D,R20,D,a man shouting,,
-R21A-1,R21A,R21,A,gravel,,
-R21C-1,R21C,R21,C,gravel,,
-R21C-2,R21C,R21,C,small stones,,
-R21D-1,R21D,R21,D,slicing and scraping,,
-R22A-1,R22A,R22,A,low,,
-R22A-2,R22A,R22,A,vacuum cleaner or a distant engine,,
-R22B-1,R22B,R22,B,low-frequency,,
-R22B-2,R22B,R22,B,no other distinct sounds or events,,
-R22D-1,R22D,R22,D,"intermittent, brief, high-pitched beeps",,
-R23B-1,R23B,R23,B,soft thuds and scraping sounds,,
-R23C-1,R23C,R23,C,Pages,,
-R23D-1,R23D,R23,D,scratching sounds,,
-R23D-2,R23D,R23,D,brief periods of silence,,
-R24A-1,R24A,R24,A,background hiss,,
-R24B-1,R24B,R24,B,into a container,,
-R24C-1,R24C,R24,C,gurgling,,
-R24C-2,R24C,R24,C,faint background hum,,
-R24D-1,R24D,R24,D,moist surface,,
-R25A-1,R25A,R25,A,distant hum of a motor vehicle engine,,
-R25B-1,R25B,R25,B,zipper,,
-R25C-1,R25C,R25,C,"briefly interrupted by a long, deep creaking sound",,
-R25D-1,R25D,R25,D,A male voice says 'Thank you',,
-R26A-1,R26A,R26,A,large motor vehicle engine,,
-R26A-2,R26A,R26,A,train horn,,
-R26B-1,R26B,R26,B,wind,,
-R26C-1,R26C,R26,C,running water,,
-R26C-2,R26C,R26,C,rustling and shuffling,,
-R27A-1,R27A,R27,A,A male voice sings a thank you message in English,,
-R27B-1,R27B,R27,B,skidding,,
-R27C-1,R27C,R27,C,squeaking sounds caused by friction against a smooth surface,,
-R27D-1,R27D,R27,D,screeching of tires,,
-R28A-1,R28A,R28,A,cannon or artillery fire,,
-R28B-1,R28B,R28,B,truck,,
-R28B-2,R28B,R28,B,idles,,
-R28B-3,R28B,R28,B,revving intermittently,,
-R28B-4,R28B,R28,B,distant voice speaks briefly,,
-R28C-1,R28C,R28,C,heavy object is repeatedly dropped onto a hard surface,,
-R28D-1,R28D,R28,D,revving and gear shifts,,
-R28D-2,R28D,R28,D,bursts of acceleration,,
-R29A-1,R29A,R29,A,air or steam being released,,
-R29B-1,R29B,R29,B,high-pitched,,
-R29B-2,R29B,R29,B,no other distinguishable sounds present,,
-R29C-1,R29C,R29,C,cicadas,,
-R29C-2,R29C,R29,C,outdoor atmosphere,,
-R29D-1,R29D,R29,D,high-pitched whine,,
-R29D-2,R29D,R29,D,rhythmic whirring,,
-R30A-1,R30A,R30,A,young male,,
-R30A-2,R30A,R30,A,cutting meat,,
-R30C-1,R30C,R30,C,consistent tempo,,
-R30D-1,R30D,R30,D,"claps, slaps, and taps",,
-R31B-1,R31B,R31,B,ocean waves,,
-R31B-2,R31B,R31,B,wind hiss,,
-R32A-1,R32A,R32,A,footsteps,,
-R32B-1,R32B,R32,B,Russian,,
-R32B-2,R32B,R32,B,varying pitch and speed,,
-R32B-3,R32B,R32,B,a man speaks over a loudspeaker,,
-R32C-1,R32C,R32,C,metallic rattling,,
-R32C-2,R32C,R32,C,footsteps,,
-R32C-3,R32C,R32,C,echoing indoor space,,
-R33A-1,R33A,R33,A,louder and more frequently,,
-R33C-1,R33C,R33,C,High-pitched,,
-R33C-2,R33C,R33,C,steady background hiss,,
-R34A-1,R34A,R34,A,Adhesive tape,,
-R34A-2,R34A,R34,A,pulled and dispensed,,
-R34B-1,R34B,R34,B,tapping or clicking,,
-R34B-2,R34B,R34,B,static-like crackling,,
-R34C-1,R34C,R34,C,gradually increasing in volume and intensity,,
-R35D-1,R35D,R35,D,wind is blowing,,
-R36C-1,R36C,R36,C,cricket chirps,,
-R36D-1,R36D,R36,D,louder than others,,
-R37A-1,R37A,R37,A,distant chirping of birds,,
-R37B-1,R37B,R37,B,regular intervals,,
-R37C-1,R37C,R37,C,birds chirping,,
-R37D-1,R37D,R37,D,hollow,,
-R37D-2,R37D,R37,D,steady tempo,,
-R38A-1,R38A,R38,A,cutting paper with scissors,,
-R38B-1,R38B,R38,B,small metal objects are being handled or dropped,,
-R38C-1,R38C,R38,C,hand clapping,,
-R38C-2,R38C,R38,C,playing cards being riffled and shuffled,,
-R38D-1,R38D,R38,D,camera,,
-R38D-2,R38D,R38,D,crinkling of plastic,,
-R39A-1,R39A,R39,A,neutral tone and moderate pace,,
-R39A-2,R39A,R39,A,English,,
-R39A-3,R39A,R39,A,encouraging them to contribute to a collection,,
-R39B-1,R39B,R39,B,microphone,,
-R39B-2,R39B,R39,B,outdoor setting,,
-R39D-1,R39D,R39,D,groans,,
-R39D-2,R39D,R39,D,amplifier,,
-R40B-1,R40B,R40,B,power tool,,
-R40C-1,R40C,R40,C,power tool or saw,,
-R40C-2,R40C,R40,C,cuts through material,,
-R40D-1,R40D,R40,D,Water droplets splatter continuously,,
-R40D-2,R40D,R40,D,wet surface,,
-R41A-1,R41A,R41,A,gurgles,,
-R41B-1,R41B,R41,B,wind blows,,
-R41C-1,R41C,R41,C,gently,,
-R41C-2,R41C,R41,C,softly,,
-R41D-1,R41D,R41,D,reverberate,,
-R41D-2,R41D,R41,D,background hiss and rumble,,
-R42A-1,R42A,R42,A,metal object,,
-R42B-1,R42B,R42,B,metal objects,,
-R42C-1,R42C,R42,C,Wood blocks,,
-R42C-2,R42C,R42,C,soft speech,,
-R42C-3,R42C,R42,C,high-frequency hiss,,
-R42D-1,R42D,R42,D,metal object,,
-R42D-2,R42D,R42,D,ticking clock,,
-R43B-1,R43B,R43,B,mechanical whirring,,
-R43B-2,R43B,R43,B,background hum,,
-R44A-1,R44A,R44,A,in an accent,,
-R44A-2,R44A,R44,A,wind blows,,
-R44B-1,R44B,R44,B,gusts of wind,,
-R44C-1,R44C,R44,C,neutral tone and moderate pace,,
-R44C-2,R44C,R44,C,"introduces a West Bay, Dorset, UK sea cliff ambience recording",,
-R44C-3,R44C,R44,C,wind blowing,,
-R44D-1,R44D,R44,D,wind,,
-R45C-1,R45C,R45,C,A male voice sings a thank you message,,
-R46A-1,R46A,R46,A,single,,
-R46A-2,R46A,R46,A,echoes,,
-R46A-3,R46A,R46,A,"quiet, open space",,
-R46B-1,R46B,R46,B,echoing,,
-R46B-2,R46B,R46,B,regular intervals,,
-R46C-1,R46C,R46,C,echoes steadily,,
-R46D-1,R46D,R46,D,footsteps,,
-R47A-1,R47A,R47,A,hitting the ground,,
-R47B-1,R47B,R47,B,rushing stream,,
-R47B-2,R47B,R47,B,bird chirps,,
-R47D-1,R47D,R47,D,"distant, indistinct voices",,
-R48A-1,R48A,R48,A,wind rustling,,
-R48B-1,R48B,R48,B,accelerates,,
-R48D-1,R48D,R48,D,wind buffeting,,
-R49A-1,R49A,R49,A,high-powered,,
-R49B-1,R49B,R49,B,drone,,
-R49B-2,R49B,R49,B,maneuvers in flight,,
-R49C-1,R49C,R49,C,motorcycle,,
-R49D-1,R49D,R49,D,motorcycle,,
-R49D-2,R49D,R49,D,accelerates,,
-R50A-1,R50A,R50,A,walking on dry leaves,,
-R50A-2,R50A,R50,A,vehicle passing by,,
-R50B-1,R50B,R50,B,walking through leaves,,
-R50C-1,R50C,R50,C,Plastic items,,
-R50C-2,R50C,R50,C,mechanical hum,,
-R50D-1,R50D,R50,D,paper or plastic is being crinkled and rustled,,
+R01B-1,R01B,R01,B,poured,S,"The sound includes a clear pouring motion of the metal objects, supporting the claim of them being poured."
+R01C-1,R01C,R01,C,pills,S,The audio contains a rattling sound that is consistent with pills shaking in a container.
+R01D-1,R01D,R01,D,Playing cards,S,The audio consists of sounds consistent with playing cards being handled.
+R01D-2,R01D,R01,D,"shuffled, rifled, and bent",S,"The repeated rustling and snapping suggest shuffling, riffling, and bending motions."
+R02A-1,R02A,R02,A,distant,A,The 'distant' descriptor for the chirping birds is ambiguous since birds are not heard; the distance cannot be determined from the audio.
+R02B-1,R02B,R02,B,rain falling,S,Rain falling is clearly audible throughout the recording.
+R02B-2,R02B,R02,B,water hitting surfaces,S,The sound of water hitting surfaces is present as the rain impacts the environment.
+R02C-1,R02C,R02,C,A motor is running,S,A steady motor sound is clearly audible.
+R02D-1,R02D,R02,D,heavy rain,S,Heavy rain is clearly audible throughout the recording.
+R02D-2,R02D,R02,D,thunder rumbles,U,No thunder rumbles can be heard in the recording.
+R02D-3,R02D,R02,D,metal door shutting,U,No sound resembling a metal door shutting is audible.
+R03B-1,R03B,R03,B,heavy rainfall,S,Heavy rainfall is clearly heard throughout the recording.
+R03B-2,R03B,R03,B,raindrops,S,The sound of raindrops is audible in the continuous rain.
+R03C-1,R03C,R03,C,rapidly,S,"The water flow sounds rapid, consistent with 'rapidly'."
+R03C-2,R03C,R03,C,rushing and splashing,S,The sound of water rushing and splashing is clearly audible.
+R03D-1,R03D,R03,D,bubbling,S,"There is a bubbling quality in the water sound, so bubbling is supported."
+R04A-1,R04A,R04,A,both men and women,S,"Both male and female voices seem present in the crowd, supporting this phrase. "
+R04B-1,R04B,R04,B,laughter,U,No distinct laughter is heard amidst the crowd chatter. 
+R04B-2,R04B,R04,B,female speech closer to the microphone,S,There is occasional clearer female speech among the general crowd noise. 
+R04C-1,R04C,R04,C,occasional louder voices,S,
+R04C-2,R04C,R04,C,bursts of laughter,S,
+R04D-1,R04D,R04,D,reverberant space,S,
+R04D-2,R04D,R04,D,a woman speaking prominently at the end,S,
+R05A-1,R05A,R05,A,ocean waves crash and rumble against the shoreline,U,There is no audible ocean wave crashing or rumbling; only birds chirping are present. 
+R05B-1,R05B,R05,B,gentle wind or rustling leaves,U,No gentle wind or rustling leaves audible; background is minimal. 
+R05C-1,R05C,R05,C,intermittently,U,"The buzzing is steady, not intermittent. "
+R05D-1,R05D,R05,D,single,A,The recording does not confirm whether the buzzing is from only one insect or multiple sources; this cannot be resolved by sound alone. 
+R06A-1,R06A,R06,A,Footsteps,S,
+R06A-2,R06A,R06,A,walking cane,S,
+R06B-1,R06B,R06,B,wooden tapping and knocking,S,
+R06C-1,R06C,R06,C,cracking of bones or breaking of twigs,S,
+R06C-2,R06C,R06,C,electronic beep,U,
+R07A-1,R07A,R07,A,mechanical fan,U,There is no mechanical fan sound present in the recording. 
+R07B-1,R07B,R07,B,drilling,S,
+R07B-2,R07B,R07,B,high-pitched whirring,S,
+R07C-1,R07C,R07,C,large motor vehicle,S,
+R07C-2,R07C,R07,C,hissing,S,
+R07C-3,R07C,R07,C,high-pitched whine,S,
+R07D-1,R07D,R07,D,"metallic rattling, scraping, and squeaking",S,
+R07D-2,R07D,R07,D,faint clicking,U,No distinct clicking sound is detectable in the recording. 
+R08A-1,R08A,R08,A,sawing a piece of wood,S,
+R08A-2,R08A,R08,A,striking the wood with a hammer,U,
+R08B-1,R08B,R08,B,stapler,S,
+R08C-1,R08C,R08,C,paper being crumpled,S,
+R08C-2,R08C,R08,C,a ball being dropped,U,
+R08D-1,R08D,R08,D,footsteps on gravel,S,
+R09A-1,R09A,R09,A,laughing,U,There is no clear laughter audible. 
+R09A-2,R09A,R09,A,voices echo,U,Voices do not have a noticeable echo. 
+R09A-3,R09A,R09,A,followed by clacking sounds,U,Clacking sounds are not heard following the speech. 
+R09B-1,R09B,R09,B,neutral tones and moderate pace,S,The speakers maintain neutral tones and moderate pace. 
+R09B-2,R09B,R09,B,contacting someone,S,They mention contacting someone by phone. 
+R09B-3,R09B,R09,B,'motorzinho',U,The word 'motorzinho' is not heard; 'motorista' is mentioned instead. 
+R09B-4,R09B,R09,B,Portuguese,S,The conversation is clearly in Portuguese. 
+R09D-1,R09D,R09,D,Portuguese,S,
+R10A-1,R10A,R10,A,handling of a flexible material,S,The crinkling/rustling sound is consistent with handling a flexible material. 
+R10B-1,R10B,R10,B,brushing sounds scrape continuously back and forth,S,
+R10C-1,R10C,R10,C,dragging a heavy object,A,"There is a scraping sound that could be dragging, but its heaviness cannot be confirmed from the audio. "
+R10D-1,R10D,R10,D,distant hum of a boat engine,U,No boat engine hum is audible in the recording. 
+R11A-1,R11A,R11,A,rhythmic and consistent,U,"The sound is fast tapping, not rhythmic water-like dripping. "
+R11A-2,R11A,R11,A,faint hum,U,There is no faint hum audible in the background. 
+R11B-1,R11B,R11,B,faucet being turned off,U,No audible faucet being turned off can be heard. 
+R11C-1,R11C,R11,C,drumming,S,
+R11C-2,R11C,R11,C,percussive strikes,S,
+R11D-1,R11D,R11,D,Plastic clatters,S,
+R12A-1,R12A,R12,A,distant waterfall,U,No waterfall sound is audible in the recording. 
+R12B-1,R12B,R12,B,rushing stream,U,"There is only rainfall and footsteps, no rushing stream. "
+R12C-1,R12C,R12,C,continuous and heavy,S,
+R13A-1,R13A,R13,A,acoustic feedback tone,S,The continuous high-pitched tone matches an acoustic feedback tone. 
+R13A-2,R13A,R13,A,high-frequency white noise,S,The background contains high-frequency noise consistent with white noise. 
+R13B-1,R13B,R13,B,steady pitch,S,The pitch of the whirring remains steady throughout the recording. 
+R13B-2,R13B,R13,B,no other distinct events or variations,S,There are no other distinct sounds or variations aside from the continuous whirring. 
+R13C-1,R13C,R13,C,high-pitched,S,
+R13C-2,R13C,R13,C,"steady, unchanging tone",S,
+R13C-3,R13C,R13,C,no background noise,S,
+R13D-1,R13D,R13,D,high-pitched,S,
+R14A-1,R14A,R14,A,train,S,
+R14A-2,R14A,R14,A,wheels squealing,S,
+R14B-1,R14B,R14,B,train,S,
+R14B-2,R14B,R14,B,blasts of its horn,U,
+R14C-1,R14C,R14,C,train,S,The sound of the train passing is clearly audible. 
+R14C-2,R14C,R14,C,wheels squealing,S,The wheels' squealing is distinctly heard during the train's movement. 
+R14D-1,R14D,R14,D,machinery or engines,S,
+R14D-2,R14D,R14,D,intermittent beeping tones,S,
+R14D-3,R14D,R14,D,metallic clatter,S,
+R15A-1,R15A,R15,A,ocean waves,A,The sound could be ocean waves or wind; it is not distinguishable by audio alone. 
+R15A-2,R15A,R15,A,no distinct interruptions or additional sounds,S,
+R15B-1,R15B,R15,B,machine or vehicle,A,"The source could be a machine or a vehicle, but the audio alone does not confirm which. "
+R15C-1,R15C,R15,C,large waterfall,S,"The audio features a continuous, strong water flow that is consistent with a large waterfall. "
+R15D-1,R15D,R15,D,revs with an intermittent squeak before idling,U,No revving or squeaking motor sound is present. 
+R15D-2,R15D,R15,D,water splashes against a shore,S,Continuous water sound could be interpreted as splashes against a shore. 
+R16B-1,R16B,R16,B,mechanical whirring sound,S,
+R16B-2,R16B,R16,B,soft hiss,S,
+R16C-1,R16C,R16,C,into a microphone,S,Wind sounds consistent with blowing into a microphone are clearly audible. 
+R16D-1,R16D,R16,D,Plastic crates,A,"The sound suggests crates or boxes, but the material being plastic cannot be confirmed by audio alone. "
+R16D-2,R16D,R16,D,hums and rubbing noises,U,Distinct hums and rubbing noises are not clearly audible in the recording. 
+R17A-1,R17A,R17,A,no other discernible sounds or events,S,"No other sounds or events can be heard in the recording, matching the phrase. "
+R17B-1,R17B,R17,B,high-pitched mechanical whirring,S,
+R17C-1,R17C,R17,C,rain,S,
+R17C-2,R17C,R17,C,windshield wipers,S,
+R17D-1,R17D,R17,D,jet engine running at idle,U,"The audio contains a continuous hissing, but there's no distinctive jet engine sound to confirm this. "
+R18A-1,R18A,R18,A,door opening and closing,U,No door opening or closing sound is audible in the recording. 
+R18B-1,R18B,R18,B,footsteps,U,No distinct footsteps can be heard. 
+R18B-2,R18B,R18,B,echoing in a large space,A,"Echo characteristics suggest some reverberation, but it's not clear enough to confirm a large space. "
+R18C-1,R18C,R18,C,young,A,The age of the speaker cannot be determined reliably from the audio alone. 
+R18C-2,R18C,R18,C,neutrally and at a moderate pace,S,
+R18C-3,R18C,R18,C,'Thank you',A,The exact words spoken are unclear; the speech is audible but the specific phrase cannot be confirmed. 
+R18C-4,R18C,R18,C,bustling restaurant,S,
+R18D-1,R18D,R18,D,echoing,S,There is a reverberant quality consistent with 'echoing'. 
+R19A-1,R19A,R19,A,distant,S,
+R19B-1,R19B,R19,B,river,S,The flowing and splashing water aligns with the idea of a river. 
+R19C-1,R19C,R19,C,rhythmic,S,
+R19C-2,R19C,R19,C,occasional louder splashes,S,
+R19D-1,R19D,R19,D,echoes inside a hollow enclosure,U,No distinct echo or hollow enclosure resonance is audible. 
+R20B-1,R20B,R20,B,neutral tone,A,Tone cannot be confirmed solely from the audio. 
+R20B-2,R20B,R20,B,moderate pace,S,
+R20C-1,R20C,R20,C,footsteps,A,"Possible subtle footfalls, but indistinct under crowd chatter. "
+R20C-2,R20C,R20,C,distant train horn,U,
+R20D-1,R20D,R20,D,reverberant,S,
+R20D-2,R20D,R20,D,laughter,U,
+R20D-3,R20D,R20,D,a man shouting,U,
+R21A-1,R21A,R21,A,gravel,U,No distinct gravel sound is audible; the surface sounds like leaves. 
+R21C-1,R21C,R21,C,gravel,S,
+R21C-2,R21C,R21,C,small stones,S,
+R21D-1,R21D,R21,D,slicing and scraping,S,
+R22A-1,R22A,R22,A,low,S,
+R22A-2,R22A,R22,A,vacuum cleaner or a distant engine,S,
+R22B-1,R22B,R22,B,low-frequency,S,
+R22B-2,R22B,R22,B,no other distinct sounds or events,S,
+R22D-1,R22D,R22,D,"intermittent, brief, high-pitched beeps",S,
+R23B-1,R23B,R23,B,soft thuds and scraping sounds,S,
+R23C-1,R23C,R23,C,Pages,S,
+R23D-1,R23D,R23,D,scratching sounds,S,
+R23D-2,R23D,R23,D,brief periods of silence,S,
+R24A-1,R24A,R24,A,background hiss,S,There is a continuous background hiss-like sound accompanying the running water. 
+R24B-1,R24B,R24,B,into a container,S,
+R24C-1,R24C,R24,C,gurgling,S,Gurgling can be heard in the water sounds. 
+R24C-2,R24C,R24,C,faint background hum,S,There is a faint background hum audible alongside the water sounds. 
+R24D-1,R24D,R24,D,moist surface,A,The audio cannot confirm the moisture of the surface from sound alone. 
+R25A-1,R25A,R25,A,distant hum of a motor vehicle engine,U,No motor vehicle hum audible. 
+R25B-1,R25B,R25,B,zipper,S,
+R25C-1,R25C,R25,C,"briefly interrupted by a long, deep creaking sound",S,
+R25D-1,R25D,R25,D,A male voice says 'Thank you',U,No male voice saying 'Thank you' is heard; the recording contains only footsteps and a door closing. 
+R26A-1,R26A,R26,A,large motor vehicle engine,U,"The sound is of a train, not a separate large motor vehicle engine. "
+R26A-2,R26A,R26,A,train horn,U,No train horn is audible in the recording. 
+R26B-1,R26B,R26,B,wind,S,The ambient rushing sound could reasonably be interpreted as wind. 
+R26C-1,R26C,R26,C,running water,U,"No running water sound is present, only traffic noises. "
+R26C-2,R26C,R26,C,rustling and shuffling,U,"No rustling or shuffling is audible, just vehicle sounds. "
+R27A-1,R27A,R27,A,A male voice sings a thank you message in English,U,No male voice or singing is audible in the recording. 
+R27B-1,R27B,R27,B,skidding,S,
+R27C-1,R27C,R27,C,squeaking sounds caused by friction against a smooth surface,S,The high-pitched squeaks are consistent with friction against a smooth surface. 
+R27D-1,R27D,R27,D,screeching of tires,S,Screeching of tires is audible during the recording. 
+R28A-1,R28A,R28,A,cannon or artillery fire,U,The recording does not contain cannon or artillery fire; it is continuous engine noise. 
+R28B-1,R28B,R28,B,truck,S,
+R28B-2,R28B,R28,B,idles,S,
+R28B-3,R28B,R28,B,revving intermittently,S,
+R28B-4,R28B,R28,B,distant voice speaks briefly,U,
+R28C-1,R28C,R28,C,heavy object is repeatedly dropped onto a hard surface,A,"There are repeated impact sounds, but it is unclear if they come from a heavy object being dropped or mechanical activity. "
+R28D-1,R28D,R28,D,revving and gear shifts,S,The engine sound includes variations that correspond to revving and shifting. 
+R28D-2,R28D,R28,D,bursts of acceleration,S,The sound includes noticeable changes in intensity that match bursts of acceleration. 
+R29A-1,R29A,R29,A,air or steam being released,S,
+R29B-1,R29B,R29,B,high-pitched,U,The pitch does not sound distinctly high; it seems more mid-range. 
+R29B-2,R29B,R29,B,no other distinguishable sounds present,U,There is a faint background hiss distinguishable aside from the main whirring sound. 
+R29C-1,R29C,R29,C,cicadas,S,
+R29C-2,R29C,R29,C,outdoor atmosphere,A,"We cannot confirm the location as outdoor from audio alone, although it is plausible. "
+R29D-1,R29D,R29,D,high-pitched whine,S,
+R29D-2,R29D,R29,D,rhythmic whirring,S,
+R30A-1,R30A,R30,A,young male,U,No vocals or other cues to confirm a young male is present. 
+R30A-2,R30A,R30,A,cutting meat,U,The sound is consistent with vegetables being chopped; cutting meat cannot be heard. 
+R30C-1,R30C,R30,C,consistent tempo,S,
+R30D-1,R30D,R30,D,"claps, slaps, and taps",U,"The recording features knife chopping, not claps, slaps, or taps by a person. "
+R31B-1,R31B,R31,B,ocean waves,S,
+R31B-2,R31B,R31,B,wind hiss,S,
+R32A-1,R32A,R32,A,footsteps,U,No distinct footsteps are audible in the recording. 
+R32B-1,R32B,R32,B,Russian,U,"The conversation appears to be in Italian, not Russian. "
+R32B-2,R32B,R32,B,varying pitch and speed,S,
+R32B-3,R32B,R32,B,a man speaks over a loudspeaker,U,No loudspeaker speech is heard. 
+R32C-1,R32C,R32,C,metallic rattling,U,No metallic rattling is clearly audible. 
+R32C-2,R32C,R32,C,footsteps,U,No distinct footsteps are heard; only voices and background hum. 
+R32C-3,R32C,R32,C,echoing indoor space,A,"There may be some reverberation, but it's not clearly echoing. Ambiguous from audio alone. "
+R33A-1,R33A,R33,A,louder and more frequently,S,Some birds are indeed louder and more frequent in their singing. 
+R33C-1,R33C,R33,C,High-pitched,S,
+R33C-2,R33C,R33,C,steady background hiss,U,
+R34A-1,R34A,R34,A,Adhesive tape,S,
+R34A-2,R34A,R34,A,pulled and dispensed,S,
+R34B-1,R34B,R34,B,tapping or clicking,S,
+R34B-2,R34B,R34,B,static-like crackling,S,
+R34C-1,R34C,R34,C,gradually increasing in volume and intensity,U,The creaks do not noticeably increase in volume or intensity. 
+R35D-1,R35D,R35,D,wind is blowing,U,There is no audible wind in the recording. 
+R36C-1,R36C,R36,C,cricket chirps,S,
+R36D-1,R36D,R36,D,louder than others,S,
+R37A-1,R37A,R37,A,distant chirping of birds,U,No bird chirping is audible in the recording. 
+R37B-1,R37B,R37,B,regular intervals,S,
+R37C-1,R37C,R37,C,birds chirping,U,No birds chirping can be heard in the recording. 
+R37D-1,R37D,R37,D,hollow,S,
+R37D-2,R37D,R37,D,steady tempo,S,
+R38A-1,R38A,R38,A,cutting paper with scissors,S,
+R38B-1,R38B,R38,B,small metal objects are being handled or dropped,S,
+R38C-1,R38C,R38,C,hand clapping,U,No hand clapping sounds are audible. 
+R38C-2,R38C,R38,C,playing cards being riffled and shuffled,S,The sound of cards being riffled and shuffled is clearly audible. 
+R38D-1,R38D,R38,D,camera,S,
+R38D-2,R38D,R38,D,crinkling of plastic,S,
+R39A-1,R39A,R39,A,neutral tone and moderate pace,S,
+R39A-2,R39A,R39,A,English,S,
+R39A-3,R39A,R39,A,encouraging them to contribute to a collection,S,
+R39B-1,R39B,R39,B,microphone,A,The audio does not provide enough information to confirm or deny microphone use. 
+R39B-2,R39B,R39,B,outdoor setting,A,The setting cannot be determined from the audio alone; no distinct outdoor sounds are heard. 
+R39D-1,R39D,R39,D,groans,U,No groans are heard; the man speaks clearly. 
+R39D-2,R39D,R39,D,amplifier,S,
+R40B-1,R40B,R40,B,power tool,S,A power tool motor is clearly audible. 
+R40C-1,R40C,R40,C,power tool or saw,S,
+R40C-2,R40C,R40,C,cuts through material,S,
+R40D-1,R40D,R40,D,Water droplets splatter continuously,U,No distinct water droplet splatter is heard; the sound is tire noise. 
+R40D-2,R40D,R40,D,wet surface,A,"Tire noise suggests a wet surface, but this cannot be confirmed purely from sound. "
+R41A-1,R41A,R41,A,gurgles,S,
+R41B-1,R41B,R41,B,wind blows,U,No wind blowing sound can be identified in the recording. 
+R41C-1,R41C,R41,C,gently,S,
+R41C-2,R41C,R41,C,softly,S,
+R41D-1,R41D,R41,D,reverberate,U,There is barking but no clear reverberation is audible. 
+R41D-2,R41D,R41,D,background hiss and rumble,A,There is some faint ambient sound; it is unclear if it can be classified specifically as hiss and rumble. 
+R42A-1,R42A,R42,A,metal object,S,The sound has the characteristic timbre of a metal object being tapped. 
+R42B-1,R42B,R42,B,metal objects,S,
+R42C-1,R42C,R42,C,Wood blocks,S,
+R42C-2,R42C,R42,C,soft speech,U,
+R42C-3,R42C,R42,C,high-frequency hiss,U,
+R42D-1,R42D,R42,D,metal object,S,
+R42D-2,R42D,R42,D,ticking clock,U,
+R43B-1,R43B,R43,B,mechanical whirring,S,
+R43B-2,R43B,R43,B,background hum,S,
+R44A-1,R44A,R44,A,in an accent,A,The speaker's accent cannot be determined from the audio. 
+R44A-2,R44A,R44,A,wind blows,U,No distinct wind blowing sound is evident apart from the waves. 
+R44B-1,R44B,R44,B,gusts of wind,S,
+R44C-1,R44C,R44,C,neutral tone and moderate pace,S,
+R44C-2,R44C,R44,C,"introduces a West Bay, Dorset, UK sea cliff ambience recording",S,
+R44C-3,R44C,R44,C,wind blowing,S,
+R44D-1,R44D,R44,D,wind,S,
+R45C-1,R45C,R45,C,A male voice sings a thank you message,U,No male voice or singing is present in the audio. 
+R46A-1,R46A,R46,A,single,U,"Multiple clangs occur, not a single one. "
+R46A-2,R46A,R46,A,echoes,S,
+R46A-3,R46A,R46,A,"quiet, open space",S,
+R46B-1,R46B,R46,B,echoing,S,
+R46B-2,R46B,R46,B,regular intervals,S,
+R46C-1,R46C,R46,C,echoes steadily,S,"The metallic clicking is steady and has a reverberant echo throughout, supporting the phrase. "
+R46D-1,R46D,R46,D,footsteps,U,No footsteps are discernible in the recording. 
+R47A-1,R47A,R47,A,hitting the ground,S,
+R47B-1,R47B,R47,B,rushing stream,S,
+R47B-2,R47B,R47,B,bird chirps,U,
+R47D-1,R47D,R47,D,"distant, indistinct voices",U,No voices are audible in the recording. 
+R48A-1,R48A,R48,A,wind rustling,S,
+R48B-1,R48B,R48,B,accelerates,S,
+R48D-1,R48D,R48,D,wind buffeting,S,Distinct fluctuations in wind noise consistent with buffeting are audible throughout. 
+R49A-1,R49A,R49,A,high-powered,S,"The engine sounds strong and powerful, supporting the descriptor 'high-powered'. "
+R49B-1,R49B,R49,B,drone,U,The sound is not a drone; it resembles a ground vehicle engine. 
+R49B-2,R49B,R49,B,maneuvers in flight,U,There is no indication of flight maneuvers; the pitch changes correspond to engine revving. 
+R49C-1,R49C,R49,C,motorcycle,S,
+R49D-1,R49D,R49,D,motorcycle,S,
+R49D-2,R49D,R49,D,accelerates,S,
+R50A-1,R50A,R50,A,walking on dry leaves,S,
+R50A-2,R50A,R50,A,vehicle passing by,U,
+R50B-1,R50B,R50,B,walking through leaves,S,"Footsteps in leaves are clearly audible, supporting the phrase. "
+R50C-1,R50C,R50,C,Plastic items,S,
+R50C-2,R50C,R50,C,mechanical hum,U,There is no audible mechanical hum in the background. 
+R50D-1,R50D,R50,D,paper or plastic is being crinkled and rustled,S,
