@@ -1,8 +1,8 @@
 {
   "run_info": {
     "experiment": "evaluate_captions",
-    "timestamp_utc": "2026-11-07T12:45:00+00:00",
-    "git_commit": "75951b4cc4832b2fb5656032be16e9fb310c2165",
+    "timestamp_utc": "2026-11-07T14:13:26+00:00",
+    "git_commit": "a07cb7c6e0bbb2df0a6bb0fe933e38d2d131831a",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
@@ -5395,16 +5395,16 @@
   },
   "timing": {
     "seconds": {
-      "ptb_tokenize": 1.92,
-      "bleu": 0.95,
-      "meteor": 27.7,
-      "cider_d": 3.68,
-      "spice": 191.94,
-      "fluency_error": 67.11,
-      "sbert": 68.21,
-      "bertscore": 378.24,
-      "clap_text": 263.37,
-      "clap_audio": 0.02
+      "ptb_tokenize": 1.79,
+      "bleu": 0.9,
+      "meteor": 26.14,
+      "cider_d": 3.43,
+      "spice": 167.41,
+      "fluency_error": 61.05,
+      "sbert": 61.03,
+      "bertscore": 358.33,
+      "clap_text": 234.57,
+      "clap_audio": 0.01
     },
     "calls": {
       "load_models": 4,
@@ -5419,8 +5419,8 @@
       "clap_text": 4,
       "clap_audio": 4
     },
-    "load_models_seconds": 8.0,
-    "scoring_seconds": 1003.1,
+    "load_models_seconds": 5.7,
+    "scoring_seconds": 914.7,
     "clap_cache_hits": 1045
   },
   "outputs": {
@@ -5433,7 +5433,7 @@
     "report_md": "outputs/reports/five_reference_evaluation.md"
   },
   "limitations": [
-    "CIDEr-D, SPICE, SPIDEr and SPIDEr-FL depend on the reference set (CIDEr-D's document frequencies come from the references of each call), so five-reference (E12) and four-reference (E13/E14) scores are not directly comparable.",
+    "CIDEr-D, SPICE, SPIDEr and SPIDEr-FL depend on the reference set (CIDEr-D's document frequencies come from the references of each call), so five-reference (E11) and four-reference (E12/E13) scores are not directly comparable.",
     "BLEU and METEOR corpus values are computed from corpus statistics, not as the mean of per-item scores; bootstrap intervals are on the per-item mean and are reported next to the corpus value.",
     "BERTScore follows aac-metrics: roberta-large's last layer (24), no IDF, the maximum over references. Raw F1 is compressed near 1; the rescaled F1 (layer-24 baseline) is reported as a secondary column.",
     "FENSE, SPIDEr-FL and MACE multiply a caption's score by a fixed factor when the fluency-error detector flags it (probability above 0.9, or 0.97 for MACE). The detector also flags some short, plain captions, and its input is cut at 64 subwords.",
