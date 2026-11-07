@@ -121,18 +121,22 @@ def category_summary(
 
 
 def scores_by_category(
-    rows: list[dict[str, Any]], scores: dict[tuple[str, str], dict[str, float]], metrics: list[str], codes: list[int]
+    rows: list[dict[str, Any]],
+    scores: dict[tuple[str, str], dict[str, float]],
+    metrics: list[str],
+    codes: list[int],
+    field: str = "category",
 ) -> list[dict[str, Any]]:
-    """Mean and SD of each metric's five-reference item score per category, pooled over models (None when there are
-    too few items). `scores` maps (model, sample_id) to {metric: score}."""
+    """Mean and SD of each metric's five-reference item score per code of `field`, pooled over models (None when
+    there are too few items). `scores` maps (model, sample_id) to {metric: score}."""
     out = []
     for code in codes:
-        items = [row for row in rows if row["category"] == code]
+        items = [row for row in rows if row[field] == code]
         for metric in metrics:
             values = np.array([scores[(row["model_key"], row["sample_id"])][metric] for row in items])
             out.append(
                 {
-                    "category": code,
+                    field: code,
                     "metric": metric,
                     "num_items": len(values),
                     "mean": float(values.mean()) if len(values) else None,

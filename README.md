@@ -200,6 +200,19 @@ After the E18 labels are final, the same reviewer listens to each of the 50 reco
 
 `prepare_audio_review.py` never overwrites a template that holds labels.
 
+Once both templates are complete, `make audio-review` checks them (every caption rated, every phrase given a verdict, fixed columns unchanged), verifies the blinding key and the review inputs against the two manifests, unblinds the labels and writes:
+
+| File (`outputs/qualitative/`) | Contents |
+|---|---|
+| `audio_review_annotations.csv` | Unblinded captions: model, E18 category, audio rating, phrase verdicts and notes |
+| `disputed_verification.csv` | Unblinded disputed phrases with their verdicts |
+| `audio_rating_summary.csv`, `verdict_summary.csv` | Count and share of each rating and verdict per model and pooled, with Wilson 95% intervals |
+| `unsupported_summary.csv` | Captions with at least one unsupported phrase per model |
+| `category_by_audio_rating.csv`, `category_6_split.csv` | E18 category x audio rating cross-tab; category-6 captions split into real mismatches (rated 3) and incomplete references (rated 1-2) |
+| `scores_by_audio_rating.csv` | Mean five-reference item score per audio rating (descriptive) |
+
+The report is `outputs/reports/audio_review.{json,md}`; it also lists captions rated accurate that have an unsupported phrase (reported, labels unchanged).
+
 ## Running tasks
 
 Run `make help` for the full list. Main targets (task IDs are listed under [Tasks](#tasks)):
@@ -220,6 +233,7 @@ Run `make help` for the full list. Main targets (task IDs are listed under [Task
 | `make qualitative-sample` | E17: blinded qualitative review sample |
 | `make annotations` | E18: check, unblind and summarize the annotations |
 | `make audio-review-sheet` | E19: blinded audio-review material and templates |
+| `make audio-review` | E19: check, unblind and summarize the audio review |
 | `make figures` | Tables and figures |
 | `make paper` | Build the manuscript (once added) |
 | `make all` | Complete workflow |
