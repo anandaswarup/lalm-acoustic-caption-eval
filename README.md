@@ -213,6 +213,21 @@ Once both templates are complete, `make audio-review` checks them (every caption
 
 The report is `outputs/reports/audio_review.{json,md}`; it also lists captions rated accurate that have an unsupported phrase (reported, labels unchanged).
 
+#### Representative caption comparisons (E20)
+
+`make examples` illustrates the qualitative findings with whole recordings from the sample: the five references and all four model captions, each with its E18 category, E19 audio rating and disputed-phrase verdicts. One recording is chosen per pattern by rule (`src/analysis/examples.py`): strong agreement (category 1–2, rated 1); reference-absent detail supported by the audio (category 3 or 5 with a supported phrase); detail unsupported by the audio (an unsupported phrase); omission (category 4); sound-source or event mismatch (category 6, rated 3); correct caption with incomplete references (category 6, rated 1). For each pattern the recording with the most qualifying captions is chosen, preferring recordings not chosen for another pattern, with ties broken by a seeded shuffle; the manifest lists every eligible recording.
+
+| File | Contents |
+|---|---|
+| `outputs/tables/representative_examples.{md,tex}` | One table per selected recording, with the selection rules and counts |
+| `outputs/tables/qualitative_sample_all.{md,tex}` | Every sampled recording (supplementary) |
+| `outputs/figures/e18_categories_by_model.{pdf,png}` | E18 categories per model |
+| `outputs/figures/e19_ratings_by_model.{pdf,png}` | E19 audio ratings per model |
+| `outputs/figures/e18_e19_heatmap.{pdf,png}` | E18 category x E19 rating, pooled |
+| `outputs/qualitative/example_manifest.json` | Selection rules, eligible and selected recordings, sample IDs, file names, item IDs, input checksums |
+
+The LaTeX tables need `\usepackage{booktabs,tabularx}`. Figures are saved without creation dates, so reruns give identical files.
+
 ## Running tasks
 
 Run `make help` for the full list. Main targets (task IDs are listed under [Tasks](#tasks)):
@@ -234,6 +249,7 @@ Run `make help` for the full list. Main targets (task IDs are listed under [Task
 | `make annotations` | E18: check, unblind and summarize the annotations |
 | `make audio-review-sheet` | E19: blinded audio-review material and templates |
 | `make audio-review` | E19: check, unblind and summarize the audio review |
+| `make examples` | E20: representative caption comparisons, tables and qualitative figures |
 | `make figures` | Tables and figures |
 | `make paper` | Build the manuscript (once added) |
 | `make all` | Complete workflow |

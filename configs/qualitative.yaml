@@ -64,3 +64,21 @@ audio_review:
       description: Listening can neither confirm nor rule it out (masked, too faint, or not decidable from sound alone).
   confidence: 0.95
   score_metrics: [cider_d, spice, fense, bertscore_f1_rescaled, clap_similarity, mace]
+
+# Representative caption comparisons (E20): one recording per pattern, chosen by the rules in src/analysis/examples.py
+# (deterministic; ties broken by a shuffle seeded with `seed`), plus every sampled recording as a supplementary table.
+# Figures: E18 categories and E19 ratings per model, and the E18 x E19 heatmap.
+examples:
+  seed: 42
+  tables_dir: outputs/tables
+  figures_dir: outputs/figures
+  figure_formats: [pdf, png]
+  dpi: 300
+  short_categories:  # figure legends, in code order
+    - Strong agreement
+    - Mostly aligned
+    - Aligned + extra detail
+    - Partial, missing detail
+    - Partial + extra detail
+    - Weak or mismatch
+  short_ratings: [Accurate, Minor errors, Major error]
