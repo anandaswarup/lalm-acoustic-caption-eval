@@ -1,0 +1,1115 @@
+{
+  "run_info": {
+    "experiment": "prepare_examples",
+    "timestamp_utc": "2026-11-07T07:06:58+00:00",
+    "git_commit": "53cc79901767a28c3a39ca99ef09b75ab11222c7",
+    "git_dirty": false,
+    "python": "3.13.12",
+    "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+    "seed": 42
+  },
+  "task": "E20",
+  "seed": 42,
+  "selection_method": "Per pattern, the recording with the most qualifying captions, preferring recordings not chosen for another pattern; ties broken by a shuffle seeded with '<seed>:<pattern>'; patterns with fewer eligible recordings choose first.",
+  "num_recordings": 50,
+  "num_captions": 200,
+  "selection": [
+    {
+      "pattern": "strong_agreement",
+      "name": "Strong agreement",
+      "rule": "E18 category 1 or 2 and E19 rating 1",
+      "recording_code": "R31",
+      "qualifying_items": [
+        "R31A",
+        "R31C",
+        "R31D"
+      ],
+      "num_eligible_recordings": 17,
+      "num_qualifying_captions": 28,
+      "eligible": {
+        "R01": [
+          "R01A"
+        ],
+        "R16": [
+          "R16A",
+          "R16C"
+        ],
+        "R17": [
+          "R17A"
+        ],
+        "R18": [
+          "R18D"
+        ],
+        "R19": [
+          "R19A",
+          "R19C"
+        ],
+        "R23": [
+          "R23A",
+          "R23C"
+        ],
+        "R24": [
+          "R24A",
+          "R24D"
+        ],
+        "R26": [
+          "R26D"
+        ],
+        "R30": [
+          "R30B"
+        ],
+        "R31": [
+          "R31A",
+          "R31C",
+          "R31D"
+        ],
+        "R33": [
+          "R33A",
+          "R33B",
+          "R33D"
+        ],
+        "R35": [
+          "R35A"
+        ],
+        "R36": [
+          "R36B",
+          "R36D"
+        ],
+        "R37": [
+          "R37B"
+        ],
+        "R41": [
+          "R41A",
+          "R41C"
+        ],
+        "R48": [
+          "R48B",
+          "R48C"
+        ],
+        "R49": [
+          "R49A"
+        ]
+      },
+      "sample_id": "clotho_eval_0859"
+    },
+    {
+      "pattern": "supported_extra_detail",
+      "name": "Reference-absent detail supported by the audio",
+      "rule": "E18 category 3 or 5 with at least one disputed phrase verified as supported (S)",
+      "recording_code": "R07",
+      "qualifying_items": [
+        "R07B",
+        "R07C",
+        "R07D"
+      ],
+      "num_eligible_recordings": 24,
+      "num_qualifying_captions": 39,
+      "eligible": {
+        "R01": [
+          "R01B"
+        ],
+        "R03": [
+          "R03C"
+        ],
+        "R04": [
+          "R04B",
+          "R04C",
+          "R04D"
+        ],
+        "R07": [
+          "R07B",
+          "R07C",
+          "R07D"
+        ],
+        "R09": [
+          "R09B",
+          "R09D"
+        ],
+        "R13": [
+          "R13B",
+          "R13C"
+        ],
+        "R15": [
+          "R15A",
+          "R15D"
+        ],
+        "R16": [
+          "R16B"
+        ],
+        "R18": [
+          "R18C"
+        ],
+        "R20": [
+          "R20D"
+        ],
+        "R22": [
+          "R22A",
+          "R22D"
+        ],
+        "R23": [
+          "R23B"
+        ],
+        "R24": [
+          "R24B",
+          "R24C"
+        ],
+        "R25": [
+          "R25B"
+        ],
+        "R26": [
+          "R26B"
+        ],
+        "R27": [
+          "R27B",
+          "R27D"
+        ],
+        "R28": [
+          "R28B",
+          "R28D"
+        ],
+        "R29": [
+          "R29D"
+        ],
+        "R32": [
+          "R32B"
+        ],
+        "R33": [
+          "R33C"
+        ],
+        "R36": [
+          "R36C"
+        ],
+        "R39": [
+          "R39A",
+          "R39D"
+        ],
+        "R44": [
+          "R44B",
+          "R44C",
+          "R44D"
+        ],
+        "R48": [
+          "R48A",
+          "R48D"
+        ]
+      },
+      "sample_id": "clotho_eval_0326"
+    },
+    {
+      "pattern": "unsupported_detail",
+      "name": "Detail unsupported by the audio",
+      "rule": "At least one disputed phrase verified as unsupported (U)",
+      "recording_code": "R32",
+      "qualifying_items": [
+        "R32A",
+        "R32B",
+        "R32C"
+      ],
+      "num_eligible_recordings": 40,
+      "num_qualifying_captions": 61,
+      "eligible": {
+        "R02": [
+          "R02D"
+        ],
+        "R04": [
+          "R04B"
+        ],
+        "R05": [
+          "R05A",
+          "R05B",
+          "R05C"
+        ],
+        "R06": [
+          "R06C"
+        ],
+        "R07": [
+          "R07A",
+          "R07D"
+        ],
+        "R08": [
+          "R08A",
+          "R08C"
+        ],
+        "R09": [
+          "R09A",
+          "R09B"
+        ],
+        "R10": [
+          "R10D"
+        ],
+        "R11": [
+          "R11A",
+          "R11B"
+        ],
+        "R12": [
+          "R12A",
+          "R12B"
+        ],
+        "R14": [
+          "R14B"
+        ],
+        "R15": [
+          "R15D"
+        ],
+        "R16": [
+          "R16D"
+        ],
+        "R17": [
+          "R17D"
+        ],
+        "R18": [
+          "R18A",
+          "R18B"
+        ],
+        "R19": [
+          "R19D"
+        ],
+        "R20": [
+          "R20C",
+          "R20D"
+        ],
+        "R21": [
+          "R21A"
+        ],
+        "R25": [
+          "R25A",
+          "R25D"
+        ],
+        "R26": [
+          "R26A",
+          "R26C"
+        ],
+        "R27": [
+          "R27A"
+        ],
+        "R28": [
+          "R28A",
+          "R28B"
+        ],
+        "R29": [
+          "R29B"
+        ],
+        "R30": [
+          "R30A",
+          "R30D"
+        ],
+        "R32": [
+          "R32A",
+          "R32B",
+          "R32C"
+        ],
+        "R33": [
+          "R33C"
+        ],
+        "R34": [
+          "R34C"
+        ],
+        "R35": [
+          "R35D"
+        ],
+        "R37": [
+          "R37A",
+          "R37C"
+        ],
+        "R38": [
+          "R38C"
+        ],
+        "R39": [
+          "R39D"
+        ],
+        "R40": [
+          "R40D"
+        ],
+        "R41": [
+          "R41B",
+          "R41D"
+        ],
+        "R42": [
+          "R42C",
+          "R42D"
+        ],
+        "R44": [
+          "R44A"
+        ],
+        "R45": [
+          "R45C"
+        ],
+        "R46": [
+          "R46A",
+          "R46D"
+        ],
+        "R47": [
+          "R47B",
+          "R47D"
+        ],
+        "R49": [
+          "R49B"
+        ],
+        "R50": [
+          "R50A",
+          "R50C"
+        ]
+      },
+      "sample_id": "clotho_eval_0740"
+    },
+    {
+      "pattern": "omission",
+      "name": "Omission of referenced content",
+      "rule": "E18 category 4",
+      "recording_code": "R46",
+      "qualifying_items": [
+        "R46A",
+        "R46B",
+        "R46C"
+      ],
+      "num_eligible_recordings": 20,
+      "num_qualifying_captions": 26,
+      "eligible": {
+        "R03": [
+          "R03D"
+        ],
+        "R04": [
+          "R04A"
+        ],
+        "R06": [
+          "R06D"
+        ],
+        "R09": [
+          "R09C"
+        ],
+        "R12": [
+          "R12C",
+          "R12D"
+        ],
+        "R13": [
+          "R13D"
+        ],
+        "R20": [
+          "R20A"
+        ],
+        "R21": [
+          "R21B"
+        ],
+        "R22": [
+          "R22B",
+          "R22C"
+        ],
+        "R25": [
+          "R25C"
+        ],
+        "R30": [
+          "R30C"
+        ],
+        "R32": [
+          "R32D"
+        ],
+        "R35": [
+          "R35B"
+        ],
+        "R37": [
+          "R37D"
+        ],
+        "R39": [
+          "R39C"
+        ],
+        "R40": [
+          "R40A"
+        ],
+        "R43": [
+          "R43A"
+        ],
+        "R45": [
+          "R45A",
+          "R45B",
+          "R45D"
+        ],
+        "R46": [
+          "R46A",
+          "R46B",
+          "R46C"
+        ],
+        "R47": [
+          "R47C"
+        ]
+      },
+      "sample_id": "clotho_eval_0696"
+    },
+    {
+      "pattern": "real_mismatch",
+      "name": "Sound-source or event mismatch",
+      "rule": "E18 category 6 and E19 rating 3",
+      "recording_code": "R38",
+      "qualifying_items": [
+        "R38C"
+      ],
+      "num_eligible_recordings": 8,
+      "num_qualifying_captions": 8,
+      "eligible": {
+        "R07": [
+          "R07A"
+        ],
+        "R12": [
+          "R12B"
+        ],
+        "R15": [
+          "R15C"
+        ],
+        "R26": [
+          "R26C"
+        ],
+        "R28": [
+          "R28A"
+        ],
+        "R30": [
+          "R30D"
+        ],
+        "R38": [
+          "R38C"
+        ],
+        "R49": [
+          "R49B"
+        ]
+      },
+      "sample_id": "clotho_eval_0919"
+    },
+    {
+      "pattern": "incomplete_references",
+      "name": "Correct caption, incomplete references",
+      "rule": "E18 category 6 and E19 rating 1",
+      "recording_code": "R14",
+      "qualifying_items": [
+        "R14A",
+        "R14C",
+        "R14D"
+      ],
+      "num_eligible_recordings": 24,
+      "num_qualifying_captions": 42,
+      "eligible": {
+        "R01": [
+          "R01C",
+          "R01D"
+        ],
+        "R02": [
+          "R02B",
+          "R02C"
+        ],
+        "R03": [
+          "R03B"
+        ],
+        "R06": [
+          "R06A",
+          "R06B"
+        ],
+        "R08": [
+          "R08B",
+          "R08D"
+        ],
+        "R10": [
+          "R10A",
+          "R10B"
+        ],
+        "R11": [
+          "R11C",
+          "R11D"
+        ],
+        "R13": [
+          "R13A"
+        ],
+        "R14": [
+          "R14A",
+          "R14C",
+          "R14D"
+        ],
+        "R15": [
+          "R15B"
+        ],
+        "R17": [
+          "R17B",
+          "R17C"
+        ],
+        "R19": [
+          "R19B"
+        ],
+        "R21": [
+          "R21C",
+          "R21D"
+        ],
+        "R23": [
+          "R23D"
+        ],
+        "R27": [
+          "R27C"
+        ],
+        "R29": [
+          "R29A",
+          "R29C"
+        ],
+        "R31": [
+          "R31B"
+        ],
+        "R34": [
+          "R34A",
+          "R34B",
+          "R34D"
+        ],
+        "R38": [
+          "R38A",
+          "R38B"
+        ],
+        "R40": [
+          "R40B",
+          "R40C"
+        ],
+        "R42": [
+          "R42A",
+          "R42B"
+        ],
+        "R43": [
+          "R43B"
+        ],
+        "R49": [
+          "R49C",
+          "R49D"
+        ],
+        "R50": [
+          "R50B",
+          "R50D"
+        ]
+      },
+      "sample_id": "clotho_eval_0569"
+    }
+  ],
+  "recordings": {
+    "R01": {
+      "sample_id": "clotho_eval_0191",
+      "file_name": "Coins Moving in Jar.wav",
+      "items": {
+        "R01A": "audio_flamingo_3",
+        "R01B": "gpt_audio_1_5",
+        "R01C": "qwen2_5_omni",
+        "R01D": "gemini_3_8_flash"
+      }
+    },
+    "R02": {
+      "sample_id": "clotho_eval_0198",
+      "file_name": "Creacking Oak 6bft  SHORT 130418_00.wav",
+      "items": {
+        "R02A": "audio_flamingo_3",
+        "R02B": "gpt_audio_1_5",
+        "R02C": "qwen2_5_omni",
+        "R02D": "gemini_3_8_flash"
+      }
+    },
+    "R03": {
+      "sample_id": "clotho_eval_0088",
+      "file_name": "A creek in a forest.wav",
+      "items": {
+        "R03A": "qwen2_5_omni",
+        "R03B": "gpt_audio_1_5",
+        "R03C": "audio_flamingo_3",
+        "R03D": "gemini_3_8_flash"
+      }
+    },
+    "R04": {
+      "sample_id": "clotho_eval_0206",
+      "file_name": "Crowd at a British wedding reception venue.wav",
+      "items": {
+        "R04A": "audio_flamingo_3",
+        "R04B": "gemini_3_8_flash",
+        "R04C": "gpt_audio_1_5",
+        "R04D": "qwen2_5_omni"
+      }
+    },
+    "R05": {
+      "sample_id": "clotho_eval_0013",
+      "file_name": "070821_flsp_bog01.wav",
+      "items": {
+        "R05A": "gemini_3_8_flash",
+        "R05B": "gpt_audio_1_5",
+        "R05C": "qwen2_5_omni",
+        "R05D": "audio_flamingo_3"
+      }
+    },
+    "R06": {
+      "sample_id": "clotho_eval_0501",
+      "file_name": "Rocks - hits.wav",
+      "items": {
+        "R06A": "gemini_3_8_flash",
+        "R06B": "gpt_audio_1_5",
+        "R06C": "qwen2_5_omni",
+        "R06D": "audio_flamingo_3"
+      }
+    },
+    "R07": {
+      "sample_id": "clotho_eval_0326",
+      "file_name": "Hallway Room Tone with shower in background.wav",
+      "items": {
+        "R07A": "audio_flamingo_3",
+        "R07B": "gpt_audio_1_5",
+        "R07C": "qwen2_5_omni",
+        "R07D": "gemini_3_8_flash"
+      }
+    },
+    "R08": {
+      "sample_id": "clotho_eval_0051",
+      "file_name": "20090105.slicing.wav",
+      "items": {
+        "R08A": "audio_flamingo_3",
+        "R08B": "gpt_audio_1_5",
+        "R08C": "qwen2_5_omni",
+        "R08D": "gemini_3_8_flash"
+      }
+    },
+    "R09": {
+      "sample_id": "clotho_eval_0451",
+      "file_name": "People talking while waiting the bus.wav",
+      "items": {
+        "R09A": "gemini_3_8_flash",
+        "R09B": "audio_flamingo_3",
+        "R09C": "qwen2_5_omni",
+        "R09D": "gpt_audio_1_5"
+      }
+    },
+    "R10": {
+      "sample_id": "clotho_eval_0447",
+      "file_name": "Pebbles_Scrape_Drag_Foot.wav",
+      "items": {
+        "R10A": "gpt_audio_1_5",
+        "R10B": "gemini_3_8_flash",
+        "R10C": "audio_flamingo_3",
+        "R10D": "qwen2_5_omni"
+      }
+    },
+    "R11": {
+      "sample_id": "clotho_eval_0541",
+      "file_name": "Shower Driping Fast to Slow.wav",
+      "items": {
+        "R11A": "audio_flamingo_3",
+        "R11B": "qwen2_5_omni",
+        "R11C": "gpt_audio_1_5",
+        "R11D": "gemini_3_8_flash"
+      }
+    },
+    "R12": {
+      "sample_id": "clotho_eval_0778",
+      "file_name": "crossing the river.wav",
+      "items": {
+        "R12A": "audio_flamingo_3",
+        "R12B": "gemini_3_8_flash",
+        "R12C": "qwen2_5_omni",
+        "R12D": "gpt_audio_1_5"
+      }
+    },
+    "R13": {
+      "sample_id": "clotho_eval_0865",
+      "file_name": "lama2.wav",
+      "items": {
+        "R13A": "gemini_3_8_flash",
+        "R13B": "gpt_audio_1_5",
+        "R13C": "audio_flamingo_3",
+        "R13D": "qwen2_5_omni"
+      }
+    },
+    "R14": {
+      "sample_id": "clotho_eval_0569",
+      "file_name": "St Pauls Bells 1.wav",
+      "items": {
+        "R14A": "qwen2_5_omni",
+        "R14B": "gemini_3_8_flash",
+        "R14C": "audio_flamingo_3",
+        "R14D": "gpt_audio_1_5"
+      }
+    },
+    "R15": {
+      "sample_id": "clotho_eval_0209",
+      "file_name": "Cruiseship - outside, night.wav",
+      "items": {
+        "R15A": "gpt_audio_1_5",
+        "R15B": "audio_flamingo_3",
+        "R15C": "qwen2_5_omni",
+        "R15D": "gemini_3_8_flash"
+      }
+    },
+    "R16": {
+      "sample_id": "clotho_eval_0228",
+      "file_name": "Door.wav",
+      "items": {
+        "R16A": "audio_flamingo_3",
+        "R16B": "gpt_audio_1_5",
+        "R16C": "qwen2_5_omni",
+        "R16D": "gemini_3_8_flash"
+      }
+    },
+    "R17": {
+      "sample_id": "clotho_eval_1034",
+      "file_name": "whiteNoise.wav",
+      "items": {
+        "R17A": "audio_flamingo_3",
+        "R17B": "gpt_audio_1_5",
+        "R17C": "gemini_3_8_flash",
+        "R17D": "qwen2_5_omni"
+      }
+    },
+    "R18": {
+      "sample_id": "clotho_eval_0163",
+      "file_name": "Cafeteria Ambience.wav",
+      "items": {
+        "R18A": "qwen2_5_omni",
+        "R18B": "gemini_3_8_flash",
+        "R18C": "audio_flamingo_3",
+        "R18D": "gpt_audio_1_5"
+      }
+    },
+    "R19": {
+      "sample_id": "clotho_eval_0940",
+      "file_name": "sea_water_passing_through_pier_hole_01.wav",
+      "items": {
+        "R19A": "qwen2_5_omni",
+        "R19B": "audio_flamingo_3",
+        "R19C": "gpt_audio_1_5",
+        "R19D": "gemini_3_8_flash"
+      }
+    },
+    "R20": {
+      "sample_id": "clotho_eval_0393",
+      "file_name": "Marrakech Walking.wav",
+      "items": {
+        "R20A": "gpt_audio_1_5",
+        "R20B": "audio_flamingo_3",
+        "R20C": "qwen2_5_omni",
+        "R20D": "gemini_3_8_flash"
+      }
+    },
+    "R21": {
+      "sample_id": "clotho_eval_0285",
+      "file_name": "Footsteps_Leaves_Walking.wav",
+      "items": {
+        "R21A": "audio_flamingo_3",
+        "R21B": "gpt_audio_1_5",
+        "R21C": "qwen2_5_omni",
+        "R21D": "gemini_3_8_flash"
+      }
+    },
+    "R22": {
+      "sample_id": "clotho_eval_0704",
+      "file_name": "ambienten.wav",
+      "items": {
+        "R22A": "audio_flamingo_3",
+        "R22B": "gpt_audio_1_5",
+        "R22C": "gemini_3_8_flash",
+        "R22D": "qwen2_5_omni"
+      }
+    },
+    "R23": {
+      "sample_id": "clotho_eval_0440",
+      "file_name": "Paper Blowing.wav",
+      "items": {
+        "R23A": "audio_flamingo_3",
+        "R23B": "gpt_audio_1_5",
+        "R23C": "gemini_3_8_flash",
+        "R23D": "qwen2_5_omni"
+      }
+    },
+    "R24": {
+      "sample_id": "clotho_eval_0061",
+      "file_name": "20100320.fountain.wav",
+      "items": {
+        "R24A": "gpt_audio_1_5",
+        "R24B": "audio_flamingo_3",
+        "R24C": "qwen2_5_omni",
+        "R24D": "gemini_3_8_flash"
+      }
+    },
+    "R25": {
+      "sample_id": "clotho_eval_0689",
+      "file_name": "Wood Floor.wav",
+      "items": {
+        "R25A": "qwen2_5_omni",
+        "R25B": "gpt_audio_1_5",
+        "R25C": "gemini_3_8_flash",
+        "R25D": "audio_flamingo_3"
+      }
+    },
+    "R26": {
+      "sample_id": "clotho_eval_0747",
+      "file_name": "bus pass.wav",
+      "items": {
+        "R26A": "qwen2_5_omni",
+        "R26B": "gpt_audio_1_5",
+        "R26C": "gemini_3_8_flash",
+        "R26D": "audio_flamingo_3"
+      }
+    },
+    "R27": {
+      "sample_id": "clotho_eval_0318",
+      "file_name": "Grand Prix 2.wav",
+      "items": {
+        "R27A": "audio_flamingo_3",
+        "R27B": "qwen2_5_omni",
+        "R27C": "gemini_3_8_flash",
+        "R27D": "gpt_audio_1_5"
+      }
+    },
+    "R28": {
+      "sample_id": "clotho_eval_0142",
+      "file_name": "Bobcat moving pallets etc Part 2 080320.wav",
+      "items": {
+        "R28A": "gemini_3_8_flash",
+        "R28B": "qwen2_5_omni",
+        "R28C": "audio_flamingo_3",
+        "R28D": "gpt_audio_1_5"
+      }
+    },
+    "R29": {
+      "sample_id": "clotho_eval_0189",
+      "file_name": "CoffeeGrinder_111212.wav",
+      "items": {
+        "R29A": "gpt_audio_1_5",
+        "R29B": "audio_flamingo_3",
+        "R29C": "gemini_3_8_flash",
+        "R29D": "qwen2_5_omni"
+      }
+    },
+    "R30": {
+      "sample_id": "clotho_eval_0178",
+      "file_name": "Chopping pieces of mushrooms vigorously.wav",
+      "items": {
+        "R30A": "audio_flamingo_3",
+        "R30B": "qwen2_5_omni",
+        "R30C": "gpt_audio_1_5",
+        "R30D": "gemini_3_8_flash"
+      }
+    },
+    "R31": {
+      "sample_id": "clotho_eval_0859",
+      "file_name": "kijjaz - Bangkok Rain and Thunder 01.wav",
+      "items": {
+        "R31A": "qwen2_5_omni",
+        "R31B": "gemini_3_8_flash",
+        "R31C": "gpt_audio_1_5",
+        "R31D": "audio_flamingo_3"
+      }
+    },
+    "R32": {
+      "sample_id": "clotho_eval_0740",
+      "file_name": "bologna_street1.wav",
+      "items": {
+        "R32A": "qwen2_5_omni",
+        "R32B": "audio_flamingo_3",
+        "R32C": "gemini_3_8_flash",
+        "R32D": "gpt_audio_1_5"
+      }
+    },
+    "R33": {
+      "sample_id": "clotho_eval_0735",
+      "file_name": "birds in dunes sunset NL 150510_06.wav",
+      "items": {
+        "R33A": "audio_flamingo_3",
+        "R33B": "qwen2_5_omni",
+        "R33C": "gemini_3_8_flash",
+        "R33D": "gpt_audio_1_5"
+      }
+    },
+    "R34": {
+      "sample_id": "clotho_eval_0775",
+      "file_name": "creeeeek-GAIN_01.wav",
+      "items": {
+        "R34A": "gemini_3_8_flash",
+        "R34B": "gpt_audio_1_5",
+        "R34C": "audio_flamingo_3",
+        "R34D": "qwen2_5_omni"
+      }
+    },
+    "R35": {
+      "sample_id": "clotho_eval_0864",
+      "file_name": "lakefountain.wav",
+      "items": {
+        "R35A": "audio_flamingo_3",
+        "R35B": "gpt_audio_1_5",
+        "R35C": "gemini_3_8_flash",
+        "R35D": "qwen2_5_omni"
+      }
+    },
+    "R36": {
+      "sample_id": "clotho_eval_0563",
+      "file_name": "Spring Birds Raw (New Jersey).wav",
+      "items": {
+        "R36A": "qwen2_5_omni",
+        "R36B": "gpt_audio_1_5",
+        "R36C": "gemini_3_8_flash",
+        "R36D": "audio_flamingo_3"
+      }
+    },
+    "R37": {
+      "sample_id": "clotho_eval_0600",
+      "file_name": "Tapping two metal objects .wav",
+      "items": {
+        "R37A": "qwen2_5_omni",
+        "R37B": "gpt_audio_1_5",
+        "R37C": "audio_flamingo_3",
+        "R37D": "gemini_3_8_flash"
+      }
+    },
+    "R38": {
+      "sample_id": "clotho_eval_0919",
+      "file_name": "quacking-squirt-bottle.wav",
+      "items": {
+        "R38A": "audio_flamingo_3",
+        "R38B": "gpt_audio_1_5",
+        "R38C": "gemini_3_8_flash",
+        "R38D": "qwen2_5_omni"
+      }
+    },
+    "R39": {
+      "sample_id": "clotho_eval_0407",
+      "file_name": "Money in the bag.wav",
+      "items": {
+        "R39A": "audio_flamingo_3",
+        "R39B": "gpt_audio_1_5",
+        "R39C": "qwen2_5_omni",
+        "R39D": "gemini_3_8_flash"
+      }
+    },
+    "R40": {
+      "sample_id": "clotho_eval_0928",
+      "file_name": "rios_barney_alta_fidelidad_avenida_ciudad_intermedia.wav",
+      "items": {
+        "R40A": "audio_flamingo_3",
+        "R40B": "qwen2_5_omni",
+        "R40C": "gpt_audio_1_5",
+        "R40D": "gemini_3_8_flash"
+      }
+    },
+    "R41": {
+      "sample_id": "clotho_eval_0065",
+      "file_name": "20100801.wharf.silence.night.wav",
+      "items": {
+        "R41A": "audio_flamingo_3",
+        "R41B": "qwen2_5_omni",
+        "R41C": "gpt_audio_1_5",
+        "R41D": "gemini_3_8_flash"
+      }
+    },
+    "R42": {
+      "sample_id": "clotho_eval_0457",
+      "file_name": "Popcorn Popping.wav",
+      "items": {
+        "R42A": "audio_flamingo_3",
+        "R42B": "gpt_audio_1_5",
+        "R42C": "gemini_3_8_flash",
+        "R42D": "qwen2_5_omni"
+      }
+    },
+    "R43": {
+      "sample_id": "clotho_eval_0476",
+      "file_name": "Rain A. Sample Bank 2. 14-4-2010.wav",
+      "items": {
+        "R43A": "audio_flamingo_3",
+        "R43B": "gpt_audio_1_5",
+        "R43C": "qwen2_5_omni",
+        "R43D": "gemini_3_8_flash"
+      }
+    },
+    "R44": {
+      "sample_id": "clotho_eval_0161",
+      "file_name": "CFX-20130331-UK-DorsetSeaCliff02.wav",
+      "items": {
+        "R44A": "gemini_3_8_flash",
+        "R44B": "gpt_audio_1_5",
+        "R44C": "audio_flamingo_3",
+        "R44D": "qwen2_5_omni"
+      }
+    },
+    "R45": {
+      "sample_id": "clotho_eval_0093",
+      "file_name": "Afternoon Suburb Calm.wav",
+      "items": {
+        "R45A": "qwen2_5_omni",
+        "R45B": "gpt_audio_1_5",
+        "R45C": "audio_flamingo_3",
+        "R45D": "gemini_3_8_flash"
+      }
+    },
+    "R46": {
+      "sample_id": "clotho_eval_0696",
+      "file_name": "a flag is waving at the pole.wav",
+      "items": {
+        "R46A": "audio_flamingo_3",
+        "R46B": "gpt_audio_1_5",
+        "R46C": "gemini_3_8_flash",
+        "R46D": "qwen2_5_omni"
+      }
+    },
+    "R47": {
+      "sample_id": "clotho_eval_0592",
+      "file_name": "Swim Meet.wav",
+      "items": {
+        "R47A": "audio_flamingo_3",
+        "R47B": "gemini_3_8_flash",
+        "R47C": "gpt_audio_1_5",
+        "R47D": "qwen2_5_omni"
+      }
+    },
+    "R48": {
+      "sample_id": "clotho_eval_0466",
+      "file_name": "R09_0005 bird ambience.wav",
+      "items": {
+        "R48A": "gpt_audio_1_5",
+        "R48B": "qwen2_5_omni",
+        "R48C": "audio_flamingo_3",
+        "R48D": "gemini_3_8_flash"
+      }
+    },
+    "R49": {
+      "sample_id": "clotho_eval_0054",
+      "file_name": "20090712.engine.00.wav",
+      "items": {
+        "R49A": "gpt_audio_1_5",
+        "R49B": "gemini_3_8_flash",
+        "R49C": "qwen2_5_omni",
+        "R49D": "audio_flamingo_3"
+      }
+    },
+    "R50": {
+      "sample_id": "clotho_eval_0255",
+      "file_name": "FISCHER_ZOE-2016_2017_forest-walk.wav",
+      "items": {
+        "R50A": "qwen2_5_omni",
+        "R50B": "audio_flamingo_3",
+        "R50C": "gemini_3_8_flash",
+        "R50D": "gpt_audio_1_5"
+      }
+    }
+  },
+  "inputs": {
+    "review": {
+      "path": "outputs/qualitative/review_items.csv",
+      "sha256": "fa4daa5af2dea529a306a9cd8eb2507fe2574cffa0fa053f97239786da269f24"
+    },
+    "captions": {
+      "path": "outputs/qualitative/audio_review_annotations.csv",
+      "sha256": "9049b09323d45fad291b7752510dec3538d1c538b983e87af95572f24e0c5701"
+    },
+    "phrases": {
+      "path": "outputs/qualitative/disputed_verification.csv",
+      "sha256": "21000b1485877af861288f369dc56bc715655e8cbbea5d516eb9fb4b8a1261c9"
+    },
+    "audio_review_manifest": {
+      "path": "outputs/qualitative/audio_review_manifest.json",
+      "sha256": "58d7ef80492b5682ccc60466f0b98b72b37dab45a0cbf08bd4e7766c49785e41"
+    }
+  },
+  "outputs": {
+    "examples_md": "outputs/tables/representative_examples.md",
+    "examples_tex": "outputs/tables/representative_examples.tex",
+    "all_md": "outputs/tables/qualitative_sample_all.md",
+    "all_tex": "outputs/tables/qualitative_sample_all.tex",
+    "e18_categories_by_model_pdf": "outputs/figures/e18_categories_by_model.pdf",
+    "e18_categories_by_model_png": "outputs/figures/e18_categories_by_model.png",
+    "e19_ratings_by_model_pdf": "outputs/figures/e19_ratings_by_model.pdf",
+    "e19_ratings_by_model_png": "outputs/figures/e19_ratings_by_model.png",
+    "e18_e19_heatmap_pdf": "outputs/figures/e18_e19_heatmap.pdf",
+    "e18_e19_heatmap_png": "outputs/figures/e18_e19_heatmap.png",
+    "manifest": "outputs/qualitative/example_manifest.json"
+  }
+}

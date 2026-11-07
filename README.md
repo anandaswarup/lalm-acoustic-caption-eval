@@ -293,7 +293,7 @@ Tasks are numbered E01–E26. Configs, scripts, Makefile targets and commit mess
 | 5. Qualitative analysis | E17 | Select qualitative review sample | Done |
 | | E18 | Annotate model–reference agreement | Done |
 | | E19 | Audio-grounded review of the qualitative sample | Done |
-| | E20 | Representative caption comparisons | — |
+| | E20 | Representative caption comparisons | Done |
 | 6. Synthesis and reproducibility | E21 | Cross-metric and model comparison | — |
 | | E22 | Reproduce results from frozen artifacts | — |
 | | E23 | Finalize research repository | — |
