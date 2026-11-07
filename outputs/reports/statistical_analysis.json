@@ -1,14 +1,14 @@
 {
   "run_info": {
     "experiment": "analyze_results",
-    "timestamp_utc": "2026-11-07T09:26:27+00:00",
-    "git_commit": "81c3d227288eb88c6524f6e6c748999a24d28bf8",
+    "timestamp_utc": "2026-11-07T14:04:11+00:00",
+    "git_commit": "c6da9c2a5a8e4991662edd2104fce63da9d9c11b",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
   },
-  "task": "E16",
+  "task": "E15",
   "display_names": {
     "gpt_audio_1_5": "GPT-Audio-1.5",
     "gemini_3_8_flash": "Gemini 3.8 Flash",
@@ -23,10 +23,10 @@
     "confidence": 0.95
   },
   "families": {
-    "rq1_model_pairs": "Every pair of models on every main metric, five references (E12).",
-    "rq2_model_vs_human": "Every model minus the human baseline on every main metric, matched four references, five-subset mean (E14).",
-    "length_vs_human": "Every model's caption length minus its recording's mean reference length (E15).",
-    "length_score_correlation": "Spearman correlation of raw caption length with score, every system and association metric (E15)."
+    "rq1_model_pairs": "Every pair of models on every main metric, five references (E11).",
+    "rq2_model_vs_human": "Every model minus the human baseline on every main metric, matched four references, five-subset mean (E13).",
+    "length_vs_human": "Every model's caption length minus its recording's mean reference length (E14).",
+    "length_score_correlation": "Spearman correlation of raw caption length with score, every system and association metric (E14)."
   },
   "counts": {
     "rq1_model_pairs": 84,
@@ -108,12 +108,12 @@
   },
   "assumptions": [
     "The unit of analysis is the recording. Recordings are treated as exchangeable draws from the population Clotho's evaluation split represents; captions of the same recording are never treated as independent (human captions are averaged over the five held-out positions, or resampled together for correlations).",
-    "Every comparison is paired: both systems are scored on the same recordings with the same references, metric implementations and aggregation. Five-reference (E12) and four-reference (E13-E14) scores are never compared with each other, because CIDEr-D, SPIDEr and SPIDEr-FL depend on the reference set.",
+    "Every comparison is paired: both systems are scored on the same recordings with the same references, metric implementations and aggregation. Five-reference (E11) and four-reference (E12-E13) scores are never compared with each other, because CIDEr-D, SPIDEr and SPIDEr-FL depend on the reference set.",
     "The tested statistic is the mean of per-recording scores. For BLEU and METEOR the published corpus value comes from corpus n-gram statistics and is reported separately; their tests and CIs are on the per-item mean (D5).",
     "The sign-flip test assumes that, under the null hypothesis, the two systems' scores of a recording are exchangeable; it tests the mean difference, not a difference in distribution. Bootstrap CIs are percentile intervals, which can be slightly narrow for skewed metrics such as CIDEr-D.",
     "Multiple comparisons: Holm-Bonferroni within each family, on every recording only (the families are fixed in configs/metrics.yaml before testing). Sensitivity samples and the second length predictor are uncorrected checks.",
     "Effect sizes (paired d_z) are reported because with 1,045 recordings very small differences, such as raw BERTScore-F1 gaps of about 0.002, can be significant without being meaningful.",
-    "API models (GPT-Audio-1.5, Gemini 3.8 Flash) are not reproducible at temperature 0 (E05); every test is conditional on the frozen captions and does not include run-to-run variation."
+    "API models (GPT-Audio-1.5, Gemini 3.8 Flash) are not reproducible at temperature 0; every test is conditional on the frozen captions and does not include run-to-run variation."
   ],
   "tests": [
     {
@@ -30651,17 +30651,17 @@
     [
       "five_reference",
       "all",
-      "Models, five references (E12)"
+      "Models, five references (E11)"
     ],
     [
       "four_reference",
       "mean_drop_1_5",
-      "Models and human, matched four references (E14)"
+      "Models and human, matched four references (E13)"
     ]
   ],
   "earlier": {
-    "rq1_model_pairs": "`outputs/scores/five_reference_differences.csv` (E12)",
-    "rq2_model_vs_human": "`outputs/scores/matched_human_model_comparison.csv` (E14)"
+    "rq1_model_pairs": "`outputs/scores/five_reference_differences.csv` (E11)",
+    "rq2_model_vs_human": "`outputs/scores/matched_human_model_comparison.csv` (E13)"
   },
   "decision_changes": {
     "rq1_model_pairs": [
