@@ -1,8 +1,8 @@
 {
   "run_info": {
     "experiment": "evaluate_captions",
-    "timestamp_utc": "2026-11-07T13:15:14+00:00",
-    "git_commit": "b13bcf9c4a283ce5929d0b1170cc57470324c88c",
+    "timestamp_utc": "2026-11-07T14:42:47+00:00",
+    "git_commit": "e487594316a34f0994d6c44273e064f4232d367d",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
@@ -93,7 +93,7 @@
         "sha256": "c4cc09bc2af192b7aebc630b8034b864d144b7ff1c3486ef44a02351509bd851"
       },
       "report": "outputs/reports/human_loo_evaluation.json",
-      "git_commit": "c89122d4411e8da5b6a1255f3eea973c34d709b0"
+      "git_commit": "9b92046182d9c7cbe621351c5b23a583a08a4bc0"
     }
   },
   "bootstrap": {
@@ -21496,16 +21496,16 @@
   },
   "timing": {
     "seconds": {
-      "ptb_tokenize": 8.77,
-      "bleu": 3.09,
-      "meteor": 123.24,
-      "cider_d": 14.92,
-      "spice": 742.83,
-      "fluency_error": 59.52,
-      "sbert": 255.76,
-      "bertscore": 1439.0,
-      "clap_text": 227.21,
-      "clap_audio": 0.06
+      "ptb_tokenize": 9.06,
+      "bleu": 3.18,
+      "meteor": 127.29,
+      "cider_d": 15.38,
+      "spice": 795.04,
+      "fluency_error": 64.18,
+      "sbert": 274.87,
+      "bertscore": 1571.82,
+      "clap_text": 234.52,
+      "clap_audio": 0.08
     },
     "calls": {
       "load_models": 4,
@@ -21520,8 +21520,8 @@
       "clap_text": 20,
       "clap_audio": 20
     },
-    "load_models_seconds": 5.5,
-    "scoring_seconds": 2874.4,
+    "load_models_seconds": 5.7,
+    "scoring_seconds": 3095.4,
     "clap_cache_hits": 1045
   },
   "outputs": {
@@ -21538,7 +21538,7 @@
     "Model and human captions are scored against the same four references (subset drop_k, the references left after removing CSV position k) and averaged over the five subsets in the same way; only these matched scores are compared. Four-reference scores are not comparable with the five-reference model scores of E11.",
     "Reference-free scores (CLAP similarity, MACE audio-only, fluency-error rates) do not depend on the references: a model's value is the same in every subset and equals its E11 value, while the human value averages five different captions.",
     "A model caption is never among its references, but a held-out human caption may have a near-paraphrase among its four (E12). The near-paraphrase samples keep, for model and human alike, only the (recording, subset) pairs whose held-out caption has closest-reference overlap below the threshold.",
-    "CIDEr-D, SPICE, SPIDEr and SPIDEr-FL depend on the reference set (CIDEr-D's document frequencies come from the references of each call), so five-reference (E12) and four-reference (E13/E14) scores are not directly comparable.",
+    "CIDEr-D, SPICE, SPIDEr and SPIDEr-FL depend on the reference set (CIDEr-D's document frequencies come from the references of each call), so five-reference (E11) and four-reference (E12/E13) scores are not directly comparable.",
     "BLEU and METEOR corpus values are computed from corpus statistics, not as the mean of per-item scores; bootstrap intervals are on the per-item mean and are reported next to the corpus value.",
     "BERTScore follows aac-metrics: roberta-large's last layer (24), no IDF, the maximum over references. Raw F1 is compressed near 1; the rescaled F1 (layer-24 baseline) is reported as a secondary column.",
     "FENSE, SPIDEr-FL and MACE multiply a caption's score by a fixed factor when the fluency-error detector flags it (probability above 0.9, or 0.97 for MACE). The detector also flags some short, plain captions, and its input is cut at 64 subwords.",
