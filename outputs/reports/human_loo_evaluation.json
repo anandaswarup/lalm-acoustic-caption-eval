@@ -1,14 +1,14 @@
 {
   "run_info": {
     "experiment": "human_leave_one_out",
-    "timestamp_utc": "2026-11-07T08:23:19+00:00",
-    "git_commit": "00223647dbe6d69fc8683253a0cd7662a0a4993a",
+    "timestamp_utc": "2026-11-07T13:02:02+00:00",
+    "git_commit": "c89122d4411e8da5b6a1255f3eea973c34d709b0",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
     "seed": 42
   },
-  "task": "E13",
+  "task": "E12",
   "condition": "human_loo",
   "subsets": [
     "drop_1",
@@ -2107,15 +2107,15 @@
   ],
   "timing": {
     "seconds": {
-      "ptb_tokenize": 2.07,
-      "bleu": 0.83,
-      "meteor": 29.07,
-      "cider_d": 3.19,
-      "spice": 134.03,
-      "fluency_error": 75.05,
-      "sbert": 57.22,
-      "bertscore": 325.36,
-      "clap_text": 127.86,
+      "ptb_tokenize": 2.15,
+      "bleu": 0.87,
+      "meteor": 34.1,
+      "cider_d": 3.28,
+      "spice": 136.01,
+      "fluency_error": 76.84,
+      "sbert": 59.11,
+      "bertscore": 331.88,
+      "clap_text": 130.99,
       "clap_audio": 0.02
     },
     "calls": {
@@ -2131,8 +2131,8 @@
       "clap_text": 5,
       "clap_audio": 5
     },
-    "load_models_seconds": 6.0,
-    "scoring_seconds": 754.7,
+    "load_models_seconds": 6.2,
+    "scoring_seconds": 775.2,
     "clap_cache_hits": 1045
   },
   "outputs": {
@@ -2144,8 +2144,8 @@
     "report_md": "outputs/reports/human_loo_evaluation.md"
   },
   "limitations": [
-    "Human captions are scored against four references, so their reference-based scores are compared only with model captions scored against the same drop_k subsets (E14), never with the five-reference model scores (E12).",
-    "Reference-free scores (CLAP similarity, MACE audio-only, fluency-error rates) do not depend on the references and can be compared directly with the E12 model scores.",
+    "Human captions are scored against four references, so their reference-based scores are compared only with model captions scored against the same drop_k subsets (E13), never with the five-reference model scores (E11).",
+    "Reference-free scores (CLAP similarity, MACE audio-only, fluency-error rates) do not depend on the references and can be compared directly with the E11 model scores.",
     "A CSV position is not a fixed annotator: Clotho's captions for one recording come from different annotators, in an arbitrary order. Differences between positions show the spread of the baseline, not annotator effects.",
     "CIDEr-D, SPICE, SPIDEr and SPIDEr-FL depend on the reference set (CIDEr-D's document frequencies come from the references of each call), so five-reference (E12) and four-reference (E13/E14) scores are not directly comparable.",
     "BLEU and METEOR corpus values are computed from corpus statistics, not as the mean of per-item scores; bootstrap intervals are on the per-item mean and are reported next to the corpus value.",
