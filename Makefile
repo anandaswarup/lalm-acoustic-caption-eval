@@ -12,7 +12,7 @@ MODELS      := gpt_audio_1_5 gemini_3_8_flash qwen2_5_omni audio_flamingo_3
 .DEFAULT_GOAL := help
 .PHONY: help venv install check-env test test-metrics validate-metrics lint format venv-metrics install-metrics metric-tools \
         prepare-data pilot generate hf-upload-audio fetch-hf consolidate \
-        evaluate loo evaluate-four-ref lengths stats qualitative-sample annotations audio-review-sheet audio-review examples figures all paper paper-clean clean
+        evaluate loo evaluate-four-ref lengths stats qualitative-sample annotations audio-review-sheet audio-review examples compare figures all paper paper-clean clean
 
 help: ## List available targets
 	@grep -E '^[a-zA-Z0-9_%-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-24s\033[0m %s\n", $$1, $$2}'
@@ -115,6 +115,9 @@ audio-review: ## Check, unblind and summarize the audio-grounded review (E19)
 
 examples: ## Representative caption comparisons, tables and qualitative figures (E20)
 	$(PYTHON) scripts/prepare_examples.py
+
+compare: ## Cross-metric correlations, model rankings and audio-rating concordance (E21)
+	$(PYTHON) scripts/compare_metrics.py
 
 figures: ## Regenerate manuscript tables and figures
 	$(PYTHON) scripts/generate_figures.py

@@ -5,8 +5,8 @@ configs/metrics.yaml, bootstrap CIs and paired effect sizes for the model pairs 
 E14 (with its sensitivity samples), the model-human length differences and the length-score correlations of E15, and
 the ranking stability of E12 and E14. Reads the committed per-item tables only (no rescoring, no Java or models).
 Writes outputs/scores/statistics_{tests,correlations,ranks,orders}.csv and
-outputs/reports/statistical_analysis.{json,md}. Figures are drawn in E21. E21's cross-metric comparisons will be added
-here.
+outputs/reports/statistical_analysis.{json,md}. E21's cross-metric comparisons are in compare_metrics.py and its
+figures in generate_figures.py.
 """
 
 import json

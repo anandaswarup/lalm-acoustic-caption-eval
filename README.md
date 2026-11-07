@@ -228,6 +228,18 @@ The report is `outputs/reports/audio_review.{json,md}`; it also lists captions r
 
 The LaTeX tables need `\usepackage{booktabs,tabularx}`. Figures are saved without creation dates, so reruns give identical files.
 
+#### Cross-metric and model comparison (E21)
+
+`make compare` relates the metrics to each other and to the two reviews, from the committed per-item scores (E12), the E16 ranking stability and the unblinded E18/E19 labels (no rescoring; about a minute). It uses the ten metrics in `comparison.metrics` (`configs/metrics.yaml`), which leave out near-duplicates (BLEU-2/3, SPIDEr-FL, raw BERTScore). It writes:
+
+| File | Contents |
+|---|---|
+| `outputs/scores/cross_metric_correlations.csv` | Spearman correlation of every metric pair over captions, pooled and per model, with bootstrap CIs over recordings |
+| `outputs/scores/model_rankings.csv`, `ranking_kendall_tau.csv` | Models ranked by every main metric, by the E18 share in categories 1–3 and by the E19 share rated accurate, with order stability; Kendall's tau-b between rankings |
+| `outputs/scores/audio_rating_concordance.csv` | Within-recording concordance: for sampled caption pairs of the same recording with different E19 ratings, how often each metric scores the better-rated caption higher (bootstrap CI and sign-flip test over recordings, Holm across metrics) |
+
+The report is `outputs/reports/cross_metric_comparison.{json,md}`. `make figures` draws the E12 scores by model and the E14 model − human differences (one panel per metric, 95% CIs) to `outputs/figures/e12_scores_by_model` and `e14_model_minus_human` (`.pdf`, `.png`).
+
 ## Running tasks
 
 Run `make help` for the full list. Main targets (task IDs are listed under [Tasks](#tasks)):
@@ -244,13 +256,14 @@ Run `make help` for the full list. Main targets (task IDs are listed under [Task
 | `make loo` | E13: human leave-one-out calibration |
 | `make evaluate-four-ref` | E14: matched four-reference evaluation |
 | `make lengths` | E15: caption-length analysis |
-| `make stats` | E16, E21: bootstrap CIs and cross-metric comparison |
+| `make stats` | E16: formal tests, bootstrap CIs and ranking stability |
+| `make compare` | E21: metric correlations, model rankings and concordance with the audio ratings |
 | `make qualitative-sample` | E17: blinded qualitative review sample |
 | `make annotations` | E18: check, unblind and summarize the annotations |
 | `make audio-review-sheet` | E19: blinded audio-review material and templates |
 | `make audio-review` | E19: check, unblind and summarize the audio review |
 | `make examples` | E20: representative caption comparisons, tables and qualitative figures |
-| `make figures` | Tables and figures |
+| `make figures` | E21: E12 and E14 result figures |
 | `make paper` | Build the manuscript (once added) |
 | `make all` | Complete workflow |
 

@@ -71,6 +71,26 @@ statistics:
   seed: 42
   alpha: 0.05
 
+# Cross-metric and model comparison (E21, decided 2026-11-07): metric x metric Spearman correlations over captions
+# (bootstrap CIs over recordings, `correlation_resamples`), model rankings by every main metric and by the E18/E19
+# review shares with order stability (`num_resamples`), and within-recording concordance of each metric with the E19
+# audio ratings (bootstrap CI and sign-flip test, `num_resamples` / `num_permutations`, Holm across metrics).
+# `metrics` drops near-duplicates (BLEU-2/3, SPIDEr-FL, raw BERTScore, which ranks like the rescaled one); the ranking
+# table covers every main metric.
+comparison:
+  metrics: [bleu_1, bleu_4, meteor, cider_d, spice, spider, fense, bertscore_f1_rescaled, clap_similarity, mace]
+  correlation_resamples: 1000
+  num_resamples: 10000
+  num_permutations: 10000
+  confidence: 0.95
+  alpha: 0.05
+  seed: 42
+
+# Manuscript figures from frozen artifacts (E21): E12 scores by model and E14 model - human differences.
+figures:
+  dir: outputs/figures
+  formats: [pdf, png]
+  dpi: 300
 bootstrap:
   num_resamples: 1000
   confidence: 0.95
