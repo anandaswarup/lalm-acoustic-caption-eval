@@ -119,12 +119,13 @@ similarity with a fluency penalty. Both measure global similarity; neither verif
 Our approach transfers two analyses from image captioning evaluation to audio. First, image captioning calibrates
 reference-based scores with human agreement: for the COCO captions, each human caption is scored against the
 remaining references, which shows how well a human scores on the same metrics~\cite{chen2015coco}. A model score can
-then be read relative to human performance rather than in isolation. Second, image captioning separates agreement
+then be read relative to human performance. Second, image captioning separates agreement
 with the references from correctness about the image: CHAIR checks the objects a caption mentions against the
 objects annotated in the image, and showed that captions can score well on reference-based metrics while describing
 objects that are not present~\cite{rohrbach2018chair}. In AAC, metric studies have compared scores with human
 preferences between caption pairs, judged on description accuracy and fluency~\cite{zhou2022fense,dixit2025mace},
-but neither analysis has been applied to LALM captions. We adapt both: a matched human leave-one-out baseline
+but the combination of human calibration and audio-grounded assessment remains underexplored for LALM captions.
+We adapt both: a matched human leave-one-out baseline
 calibrates the model scores (RQ2), and, since audio has no object annotations, a manual review checks sampled
 captions and their reference-unsupported phrases against the recording (RQ3).
 
@@ -266,7 +267,7 @@ Across all 14 metrics, 76 of the 84 model-pair differences are Holm-significant.
 The audio-aware metrics order the models differently: CLAP similarity and MACE score \gpt\ close to \qwen\ (0.466 and
 0.462; 0.573 and 0.575), and \gem\ last. Per caption, the text metrics correlate with each other (Spearman $\rho$ =
 0.41--0.88), and CLAP and MACE correlate 0.89 with each other but only 0.28--0.67 with the text metrics. These
-correlations show how the metrics vary together, not agreement with the audio.
+correlations show how the metrics covary, not agreement with the audio.
 
 \subsection{RQ2: Comparison with held-out human captions}
 \label{ssec:rq2}
@@ -311,7 +312,7 @@ reference-unsupported phrases.}
 2 Minor errors & 3 & 18 & 20 & 16 \\
 3 Major error & 0 & 9 & 5 & 7 \\
 Category 6 with major error & 0 & 6 & 1 & 1 \\
-Inaudible / ref.-unsupported & 1/59 & 34/80 & 20/58 & 19/65 \\
+Inaudible / reference-unsupported & 1/59 & 34/80 & 20/58 & 19/65 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -331,7 +332,8 @@ by listening) for the 200 sampled captions of all four models, single reviewer.}
 The sample was similar to the full set on the measured summary statistics (standardized differences $\le 0.37$).
 The reference-only and audio-grounded assessments produced substantially different model rankings
 (Table~\ref{tab:review}). Against the references, \af\ and \qwen\ are most often aligned and \gem\ least often, and
-\gpt\ has the most captions with missing detail. Against the audio, \gpt\ moves from third to first: it was rated
+\gpt\ has the most captions with missing detail. Against the audio, \gpt\ ranks first despite placing third or fourth on the
+reference-based metrics: it was rated
 accurate for 47 of 50 recordings (94\%, 95\% CI 84--98\%) with no major error, while the other models were rated
 accurate for 23 to 27 (46--54\%, intervals within 33--67\%) and had 5 to 9 major errors (single-reviewer
 ratings; the other three keep their unstable order). Two further analyses examine these differences:
@@ -358,21 +360,20 @@ analysis can neither confirm nor exclude useful discrimination.
 \label{sec:discussion}
 
 Reference agreement and acoustic correctness are different evaluation targets, and in the reviewed sample they
-diverged. \gpt\ illustrates the divergence, not a general superiority. Its departures from the references were mostly of kinds
-the rubric does not count as errors: 10 of its captions omit reference content, and 55 of its 59 reference-unsupported
+diverged. \gpt\ illustrates the divergence, not a general superiority. Most of its departures from the references are not errors under the rubric: 10 of its captions omit reference content, and 55 of its 59 reference-unsupported
 phrases were audible. Omissions and additional audible details can reduce reference agreement without reducing acoustic
 correctness, while errors about principal sound sources affect acoustic correctness regardless of their agreement
 with the references; reference-based scores cannot tell these cases apart.
 
 The human baseline should be read in the same light: that every model falls below it means lower agreement with
-Clotho's references, not less correct captions. Longer captions and audible content
-missing from the references are both associated with the gap, although neither was isolated as a cause.
+Clotho's references, not less correct captions. Longer captions and audible content missing from the
+references are associated with the gap, but neither was isolated as a cause.
 
 Audio-aware metrics are at best a partial remedy. CLAP similarity is the only metric on which a model was not
 significantly below the human baseline, and its model order came closest to the audio review, but neither it nor
 MACE showed significant within-recording concordance. For LALM captions we therefore recommend
 reporting audio-aware metrics alongside reference-based ones, and checking a sample of captions against the audio
-before reading score differences as differences in acoustic correctness.
+before reading score differences as differences in correctness.
 
 \section{Limitations}
 \label{sec:limitations}
@@ -381,9 +382,9 @@ before reading score differences as differences in acoustic correctness.
 independently established ground truth, and the reviewer had read the references before listening.
 \emph{Statistical precision.} The audio review covers 50 recordings: the order of \af, \qwen\ and \gem\ in it is not
 stable (33\% of resamples), and the concordance analysis (156 pairs from 42 recordings) has little power, so its null
-result does not show that metrics cannot track acoustic correctness. \emph{Generalizability.} Each model was run with
-one prompt and one decoding setting, overlap of the API models' undisclosed training data with Clotho cannot be ruled
-out, and the findings are limited to Clotho's everyday sounds.
+result does not show that metrics cannot track acoustic correctness. \emph{Generalizability.} Each model was run with one prompt and decoding
+setting, the undisclosed training data of the API models may overlap with Clotho, and the findings are limited to
+Clotho's everyday sounds.
 
 \section{Conclusion}
 \label{sec:conclusion}
