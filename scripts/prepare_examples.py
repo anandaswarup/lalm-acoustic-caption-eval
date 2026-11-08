@@ -175,7 +175,7 @@ def main() -> int:
              for c in categories],  # fmt: skip
             [f"{c} {label}" for c, label in zip(categories, short_c, strict=True)],
             [f"{g} {label}" for g, label in zip(ratings, short_r, strict=True)],
-            f"Reference-agreement category by audio rating ({len(records)} captions, all models)",
+            None,  # the paper caption carries the title
             "Audio-grounded rating",
         ),
         figures_dir / FIGURES[2], formats, dpi,

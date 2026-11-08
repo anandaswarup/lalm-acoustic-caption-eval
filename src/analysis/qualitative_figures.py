@@ -9,6 +9,7 @@ give identical files.
 
 from __future__ import annotations
 
+import textwrap
 from pathlib import Path
 
 import matplotlib
@@ -69,28 +70,34 @@ def stacked_bars(
 
 
 def heatmap(
-    counts: list[list[int]], row_labels: list[str], column_labels: list[str], title: str, xlabel: str
+    counts: list[list[int]], row_labels: list[str], column_labels: list[str], title: str | None, xlabel: str
 ) -> plt.Figure:
-    """Annotated count heatmap (rows x columns), 2 px gaps between cells."""
+    """Annotated count heatmap (rows x columns), 2 px gaps between cells.
+
+    Drawn at its printed size, one 3.4 in column of a two-column paper, with 9 pt text, so it is never scaled down;
+    labels wrap onto two lines. With `title` None the figure has no title (the paper caption has one).
+    """
     cmap = LinearSegmentedColormap.from_list("sequential_blue", SEQUENTIAL)
     peak = max(max(row) for row in counts)
-    fig, ax = plt.subplots(figsize=(5.2, 0.42 * len(row_labels) + 1.3), facecolor=SURFACE)
+    fig, ax = plt.subplots(figsize=(3.4, 0.36 * len(row_labels) + 0.8), facecolor=SURFACE)
     for i, row in enumerate(counts):
         for j, value in enumerate(row):
             color = cmap(value / peak if peak else 0)
             ax.add_patch(plt.Rectangle((j, i), 1, 1, facecolor=color, edgecolor=SURFACE, linewidth=2))
             hex_color = matplotlib.colors.to_hex(color)
-            ax.text(j + 0.5, i + 0.5, str(value), ha="center", va="center", fontsize=8, color=_ink_on(hex_color))
+            ax.text(j + 0.5, i + 0.5, str(value), ha="center", va="center", fontsize=9, color=_ink_on(hex_color))
     ax.set_xlim(0, len(column_labels))
     ax.set_ylim(len(row_labels), 0)
-    ax.set_xticks([j + 0.5 for j in range(len(column_labels))], column_labels)
-    ax.set_yticks([i + 0.5 for i in range(len(row_labels))], row_labels)
+    ax.set_xticks([j + 0.5 for j in range(len(column_labels))], [textwrap.fill(c, 10) for c in column_labels])
+    ax.set_yticks([i + 0.5 for i in range(len(row_labels))], [textwrap.fill(r, 14) for r in row_labels])
     ax.xaxis.tick_top()
     ax.xaxis.set_label_position("top")
-    ax.set_xlabel(xlabel, color=TEXT_SECONDARY, fontsize=8)
+    ax.set_xlabel(xlabel, color=TEXT_SECONDARY, fontsize=9)
     _style(ax)
+    ax.tick_params(labelsize=9)
     ax.spines["bottom"].set_visible(False)
-    fig.suptitle(title, x=0.02, ha="left", color=TEXT, fontsize=9.5)
+    if title:
+        fig.suptitle(title, x=0.02, ha="left", color=TEXT, fontsize=9.5)
     fig.tight_layout()
     return fig
 
