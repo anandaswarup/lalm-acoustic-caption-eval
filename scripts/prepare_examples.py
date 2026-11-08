@@ -104,7 +104,7 @@ def main() -> int:
     examples = list({e["recording_code"]: e for e in examples}.values())
 
     legend = (
-        "E17: reference-agreement category (1 strong agreement ... 6 weak agreement or mismatch); E18: audio rating "
+        "Ref.: reference-agreement category (1 strong agreement ... 6 weak agreement or mismatch); Audio: audio rating "
         "(1 accurate, 2 minor errors, 3 major error or wrong sound source); disputed phrases are the caption phrases "
         "no reference supports, verified against the audio as S supported, U unsupported, A ambiguous."
     )
@@ -126,12 +126,12 @@ def main() -> int:
     ]
     tables_dir.mkdir(parents=True, exist_ok=True)
     outputs["examples_md"].write_text(
-        examples_markdown("Representative caption comparisons (E19)", intro, examples, names, headings),
+        examples_markdown("Representative caption comparisons", intro, examples, names, headings),
         encoding="utf-8",
     )
     all_intro = [f"Every recording of the qualitative sample (supplementary). {legend}"]
     outputs["all_md"].write_text(
-        examples_markdown("Qualitative sample: all recordings (E19)", all_intro, every, names, headings),
+        examples_markdown("Qualitative sample: all recordings", all_intro, every, names, headings),
         encoding="utf-8",
     )
     table_captions = {e["recording_code"]: f"{headings[e['recording_code']]} (recording {e['recording_code']}, "
@@ -154,7 +154,7 @@ def main() -> int:
             {names[m]: [sum(r["category"] == c for r in rows) for c in categories] for m, rows in per_model.items()},
             [f"{c} {label}" for c, label in zip(categories, short_c, strict=True)],
             CATEGORY_COLORS,
-            "Reference agreement (E17)",
+            "Reference agreement",
             f"Captions (of {n} per model)",
         ),
         figures_dir / FIGURES[0], formats, dpi,
@@ -164,7 +164,7 @@ def main() -> int:
             {names[m]: [sum(r["audio_rating"] == c for r in rows) for c in ratings] for m, rows in per_model.items()},
             [f"{c} {label}" for c, label in zip(ratings, short_r, strict=True)],
             RATING_COLORS,
-            "Audio-grounded rating (E18)",
+            "Audio-grounded rating",
             f"Captions (of {n} per model)",
         ),
         figures_dir / FIGURES[1], formats, dpi,
@@ -175,8 +175,8 @@ def main() -> int:
              for c in categories],  # fmt: skip
             [f"{c} {label}" for c, label in zip(categories, short_c, strict=True)],
             [f"{g} {label}" for g, label in zip(ratings, short_r, strict=True)],
-            f"E17 category by E18 audio rating ({len(records)} captions, all models)",
-            "Audio-grounded rating (E18)",
+            f"Reference-agreement category by audio rating ({len(records)} captions, all models)",
+            "Audio-grounded rating",
         ),
         figures_dir / FIGURES[2], formats, dpi,
     )  # fmt: skip

@@ -52,9 +52,9 @@ def main() -> int:
     if any(set(panel["rows"]) != set(systems) for panel in e11 + e13):
         logger.error("Every panel needs one row per model in models.yaml")
         return 1
-    title = "Scores by model, five references (E11): item mean and 95% CI over 1,045 recordings"
+    title = "Scores by model, five references: item mean and 95% CI over 1,045 recordings"
     save(dot_panels(e11, systems, names, title), figures_dir / FIGURES[0], settings["formats"], settings["dpi"])
-    title = "Model minus human, matched four references (E13): 95% CI; hollow = n.s. after Holm"
+    title = "Model minus human, matched four references: 95% CI; hollow = n.s. after Holm"
     save(dot_panels(e13, systems, names, title, zero_line=True), figures_dir / FIGURES[1], settings["formats"],
          settings["dpi"])  # fmt: skip
     logger.info("Wrote %s", sorted(relative(path) for path in outputs.values()))
