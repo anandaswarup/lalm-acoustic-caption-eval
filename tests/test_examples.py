@@ -130,7 +130,7 @@ def test_figures_are_written_and_reproducible(tmp_path):
     again = save(stacked_bars(counts, labels, CATEGORY_COLORS, "Title", "Captions"), tmp_path / "b", ["pdf", "png"], 72)
     assert [p.name for p in first] == ["a.pdf", "a.png"]
     assert [p.read_bytes() for p in first] == [p.read_bytes() for p in again]
-    fig = heatmap([[10, 3, 2], [0, 0, 0]], ["1 x", "2 y"], ["1", "2", "3"], "Title", "Rating")
+    fig = heatmap([[10, 3, 2], [0, 0, 0]], ["1 x", "2 y"], ["1", "2", "3"], "Title", "Rating", "Category")
     assert save(fig, tmp_path / "h", ["png"], 72)[0].stat().st_size > 0
     with pytest.raises(ValueError):
         stacked_bars({"M": [1, 2]}, ["a", "b"], RATING_COLORS, "T", "C")  # three colours for two codes

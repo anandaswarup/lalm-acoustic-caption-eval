@@ -70,7 +70,12 @@ def stacked_bars(
 
 
 def heatmap(
-    counts: list[list[int]], row_labels: list[str], column_labels: list[str], title: str | None, xlabel: str
+    counts: list[list[int]],
+    row_labels: list[str],
+    column_labels: list[str],
+    title: str | None,
+    xlabel: str,
+    ylabel: str | None = None,
 ) -> plt.Figure:
     """Annotated count heatmap (rows x columns), 2 px gaps between cells.
 
@@ -93,6 +98,8 @@ def heatmap(
     ax.xaxis.tick_top()
     ax.xaxis.set_label_position("top")
     ax.set_xlabel(xlabel, color=TEXT_SECONDARY, fontsize=9)
+    if ylabel:
+        ax.set_ylabel(ylabel, color=TEXT_SECONDARY, fontsize=9)
     _style(ax)
     ax.tick_params(labelsize=9)
     ax.spines["bottom"].set_visible(False)

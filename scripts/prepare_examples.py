@@ -177,6 +177,7 @@ def main() -> int:
             [f"{g} {label}" for g, label in zip(ratings, short_r, strict=True)],
             None,  # the paper caption carries the title
             "Audio-grounded rating",
+            "Reference-agreement category",
         ),
         figures_dir / FIGURES[2], formats, dpi,
     )  # fmt: skip
