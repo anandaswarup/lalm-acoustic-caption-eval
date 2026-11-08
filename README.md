@@ -93,6 +93,8 @@ One fixed prompt (`configs/generation.yaml`, frozen before caption generation) i
 | Qwen2.5-Omni-7B | `Qwen/Qwen2.5-Omni-7B` @ `ae9e1690543ffd5c0221dc27f79834d0294cba00` | Open weights | Hugging Face Jobs (A100) | Apache-2.0 |
 | Audio Flamingo 3 | `nvidia/audio-flamingo-3-hf` @ `7d4bae64ee29878af6504ae6f6bb3e40492838ad` | Open weights | Hugging Face Jobs (A100) | NVIDIA OneWay Noncommercial |
 
+All four runs took place on 2026-11-02 (UTC); start and end times, library versions (openai 3.42.0, google-genai 2.34.0, transformers 5.22.1, torch 2.14.1) and hardware are in `outputs/reports/<model>_evaluation_completion.md`.
+
 - `make generate` (or `make generate-<model>`) captions the 1,045 evaluation recordings (E05–E08). Runs are resumable: a rerun requests only recordings without an `ok` record made with the current prompt. A JSON-like answer instead of a sentence is requested again, up to three requests in total, for every model; rejected answers are kept in the record.
 - The open-weight models run on Hugging Face Jobs: upload the manifest WAVs once with `make hf-upload-audio`, and each `make generate-<model>` then snapshots the committed code and submits a detached job (`hf_jobs:` in `configs/models.yaml`: private bucket, `a100-large`, 4 h timeout). When the jobs finish, `make fetch-hf` copies their captions into `outputs/captions/`. A collaborator needs their own bucket, set in `hf_jobs.bucket`.
 - `python scripts/caption_report.py --model <key>` writes a completion report per model and run (`outputs/reports/<model>_evaluation_completion.{json,md}`).
