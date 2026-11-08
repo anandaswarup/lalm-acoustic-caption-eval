@@ -30,10 +30,10 @@ examine this gap for large audio language models (LALMs). Captions from \gpt, \g
 recordings of the Clotho v2.1 evaluation split are scored with twelve reference-based and two audio-aware metrics and
 compared with a matched human leave-one-out baseline. Every model scores below the human baseline on every
 reference-based metric, and the two open-weight models score highest. A single-reviewer assessment of 200 sampled
-captions, first against the references and then against the audio, reverses this order: \gpt, ranked third or fourth
-by the text metrics, was rated accurate for 47 of 50 recordings, and 56 of the 64 captions with weak reference
-agreement had no major acoustic error. Within recordings, no evaluated metric showed significantly above-chance
-concordance with the audio ratings, although the intervals are wide. Reference agreement is therefore insufficient on
+captions, first against the references and then against the audio, ranks the models differently: \gpt, third or
+fourth on the text metrics, was rated accurate for 47 of 50 recordings, the most of any model, and 56 of the 64
+captions with weak reference agreement had no major acoustic error. Within recordings, none of the ten metrics tested
+showed significantly above-chance concordance with the audio ratings, although the intervals are wide. Reference agreement is therefore insufficient on
 its own to establish acoustic correctness.
 \end{abstract}
 
@@ -58,21 +58,19 @@ reference-based score alone cannot tell whether low agreement marks an acoustic 
 the references do not cover. The problem is sharper for LALMs, whose captions differ from the references in length
 and style.
 
-We study this problem for four LALMs on Clotho v2.1~\cite{drossos2020clotho} with three research questions, each
-building on the previous one:
+We study this problem for four LALMs on Clotho v2.1~\cite{drossos2020clotho} with three complementary research
+questions:
 
 \begin{enumerate}
 \item \textbf{RQ1: How closely do model captions agree with the five human reference captions?} This establishes the
-degree of reference agreement under twelve reference-based and two audio-aware metrics.
+degree of reference agreement under twelve reference-based metrics, with two audio-aware metrics for comparison.
 \item \textbf{RQ2: How do model captions compare with held-out human captions in metric scores and caption length?}
 This calibrates that agreement against human captions scored against the same references.
 \item \textbf{RQ3: What patterns of agreement, additional detail, omission and mismatch appear in model captions?}
-This relates reference agreement to acoustic correctness through a review of sampled captions against the references
-and then against the audio.
+This relates reference agreement to acoustic correctness as judged by a single reviewer, who assessed sampled
+captions first against the references and then by listening.
 \end{enumerate}
 
-In the reviewed sample, the metrics follow the reference-only review, but we find no statistical evidence that they
-follow the audio-grounded ratings.
 
 \section{Related Work}
 \label{sec:related}
@@ -85,8 +83,7 @@ crowdsourced captions per evaluation recording, and the DCASE challenge has made
 In Clotho, annotators write captions, other annotators correct or rephrase them, and the five captions rated highest
 for accuracy and fluency are kept~\cite{lipping2019crowdsourcing}. Each Clotho reference is a single sentence of 8--20
 words, so it describes a selection of the sounds, typically the most salient, rather than the whole recording.
-Pre-training on larger, weakly labelled collections such as WavCaps~\cite{mei2024wavcaps} keeps trained systems close
-to this caption style. When a captioner describes more of a recording than its references do, the references no
+Larger, weakly labelled collections such as WavCaps~\cite{mei2024wavcaps} support pre-training. When a captioner describes more of a recording than its references do, the references no
 longer bound what a correct caption may contain.
 
 \subsection{Large audio language models}
@@ -95,8 +92,8 @@ longer bound what a correct caption may contain.
 LALMs couple a pre-trained audio encoder with a large language model and follow free-form instructions about
 audio~\cite{deshmukh2023pengi,gong2024ltu,tang2024salmonn,chu2023qwenaudio}. Recent models are either general
 multimodal assistants, such as Qwen2.5-Omni~\cite{xu2025qwen25omni}, or audio specialists, such as Audio Flamingo
-3~\cite{ghosh2025af3}. Unlike AAC systems trained on reference captions, they are not tuned to the length or
-vocabulary of a benchmark, so their captions can contain correct detail that no reference mentions. They can also
+3~\cite{ghosh2025af3}. Unlike AAC systems trained on reference captions, they are not necessarily constrained to a
+benchmark's caption length or vocabulary, so their captions can contain correct detail that no reference mentions. They can also
 describe sounds that are absent from the recording~\cite{kuan2024hallucination}. Deciding whether an added detail is
 correct or hallucinated therefore requires the audio, not the references.
 
@@ -153,9 +150,9 @@ labels or other formatting.
 \smallskip
 
 Decoding used temperature 0, top-$p$ 1 and a seed of 42 where supported; \gem\ ran at its lowest thinking level
-(\texttt{low}), as thinking cannot be disabled. This gave one caption per model and recording (4,180 in total). Of
-\gpt's captions, 85 were sentences wrapped in JSON and were unwrapped, and 21 malformed ones were scored as returned;
-excluding their recordings changes no model order and no significance decision. The API models are not deterministic
+(\texttt{low}), as thinking cannot be disabled. This gave one caption per model and recording (4,180 in total). \gpt\
+returned 106 captions as JSON (85 wrapped sentences, unwrapped; 21 malformed, scored as returned); excluding their
+recordings changes no model order or significance decision. The API models are not deterministic
 at temperature 0, so all results are conditional on the released captions; checkpoint hashes, API run dates and
 library versions are listed in the repository.
 
@@ -176,8 +173,8 @@ identical references. Scores are averaged over $j$ per recording; corpus-level m
 averaged. This baseline measures inter-reference agreement, not caption quality or acoustic correctness. Because
 CIDEr-D, and hence SPIDEr and SPIDEr-FL, depend on the reference set, five-reference (RQ1) and four-reference (RQ2)
 scores are never compared with each other. Clotho's protocol keeps original and rephrased captions without
-deduplication, and 33\% of held-out captions have a word-set Jaccard overlap of at least 0.6 (an operational
-threshold, not a test of paraphrase) with a reference; as a sensitivity analysis, we repeat RQ2 without them.
+deduplication, and 33\% of held-out captions have a word-set Jaccard overlap of at least 0.6 with a reference. This
+threshold is operational, not a test of paraphrase; as a sensitivity analysis, we repeat RQ2 without these captions.
 
 \emph{Reproducibility note.} BERTScore (RoBERTa-large, last layer, no IDF) uses corrected batching: torchmetrics
 1.9.0, called by aac-metrics, pairs batched captions with other items' references. The fix and a test are in the
@@ -195,8 +192,8 @@ assigned one of six reference-agreement categories: aligned (1 strong agreement,
 with additional details), partially aligned (4 with missing details, 5 with additional details), or 6 weak agreement
 or source/event mismatch. Phrases that no reference mentions (\emph{reference-unsupported phrases}) were listed.
 
-\emph{Stage 2, audio-grounded.} After the stage-1 labels were final, the reviewer listened to each recording and rated
-each caption: (1) accurate, where omitting a secondary sound alone does not lower the rating; (2) minor errors:
+\emph{Stage 2, audio-grounded.} After the stage-1 labels were final, the reviewer listened to each recording and assigned
+each caption one of three ratings: (1) accurate, where omitting a secondary sound alone does not lower the rating; (2) minor errors:
 principal source and event correct, but a wrong attribute or order or an unsupported secondary detail; or (3) major
 error: principal source or event wrong or invented, or the dominant sound omitted. Each reference-unsupported phrase
 was judged audible, inaudible or unverifiable in the recording.
@@ -215,7 +212,8 @@ small differences are significant. Ranking stability is the share of bootstrap r
 model order. To relate a metric to the audio ratings within recordings, we take every pair of captions of the same
 recording with different ratings and compute the share in which the metric scores the better-rated caption higher,
 counting ties as one half (\emph{concordance}; 0.5 is chance). Its intervals and tests resample or sign-flip whole
-recordings, with Holm correction over the ten metrics shown in Table~\ref{tab:scores}. Review proportions carry Wilson
+recordings, with Holm correction over the ten metrics of Table~\ref{tab:scores} (not BLEU-2, BLEU-3, SPIDEr-FL or
+raw BERTScore). Review proportions carry Wilson
 95\% intervals.
 
 \section{Results}
@@ -261,20 +259,20 @@ Caption length (words) & 21.0 & 16.4 & 17.0 & 19.0 & 11.3 & $+$2.40 & $+$1.30 & 
 \af\ scores highest and \qwen\ second on every reference-based metric, and the two API models take the third and
 fourth places (Table~\ref{tab:scores}, left). The order is stable: at least 99\% of bootstrap resamples reproduce it for nine of
 the twelve metrics, and only the order of the two API models varies for BLEU-3 (87\%), SPIDEr and SPIDEr-FL (55\%).
-After Holm correction, 76 of the 84 model-pair differences are significant.
+Across all 14 metrics, 76 of the 84 model-pair differences are Holm-significant.
 
 The audio-aware metrics order the models differently: CLAP similarity and MACE score \gpt\ close to \qwen\ (0.466 and
 0.462; 0.573 and 0.575), and \gem\ last. Per caption, the text metrics correlate with each other (Spearman $\rho$ =
 0.41--0.88), and CLAP and MACE correlate 0.89 with each other but only 0.28--0.67 with the text metrics. These
-correlations describe how the metrics vary together, not which of them agrees with the audio.
+correlations show how the metrics vary together, not agreement with the audio.
 
 \subsection{RQ2: Comparison with held-out human captions}
 \label{ssec:rq2}
 
 Under the same four references, every model scores below the held-out human captions on every reference-based metric,
 and all of these differences are Holm-significant (Table~\ref{tab:scores}, right). Because the baseline measures how
-closely one human caption follows the other four, this shows that the models match Clotho's reference conventions less
-closely, not that their captions are less correct. The effect sizes ($d_z$ from $-0.48$ to $-2.55$) are standardized
+closely one human caption agrees with the other four, this shows that the models agree less with the held-out human
+references, not that their captions are less correct. The effect sizes ($d_z$ from $-0.48$ to $-2.55$) are standardized
 differences in metric scores, not in caption quality.
 
 The audio-aware metrics are the exception: on CLAP similarity, \af\ is not significantly different from the human
@@ -328,47 +326,48 @@ by listening) for the 200 sampled captions of all four models, single reviewer.}
 \label{fig:heatmap}
 \end{figure}
 
-The sample was similar to the full set on the measured summary statistics (standardized differences of at most 0.37).
-\emph{Two reviews.} Against the references, \af\ and \qwen\ are most often aligned and \gem\ least often, and \gpt\
-has the most captions with missing detail (Table~\ref{tab:review}). Against the audio, the order reverses. \gpt\ was rated accurate for 47 of 50 recordings (94\%, 95\% CI
-84--98\%) with no major error, while the other models were rated accurate for 23 to 27 (46--54\%, intervals within
-33--67\%) and had 5 to 9 major errors (single-reviewer ratings).
+The sample was similar to the full set on the measured summary statistics (standardized differences $\le 0.37$).
+The reference-only and audio-grounded assessments produced substantially different model rankings
+(Table~\ref{tab:review}). Against the references, \af\ and \qwen\ are most often aligned and \gem\ least often, and
+\gpt\ has the most captions with missing detail. Against the audio, \gpt\ moves from third to first: it was rated
+accurate for 47 of 50 recordings (94\%, 95\% CI 84--98\%) with no major error, while the other models were rated
+accurate for 23 to 27 (46--54\%, intervals within 33--67\%) and had 5 to 9 major errors (single-reviewer
+ratings; the other three keep their unstable order).
 
 \emph{Details absent from the references.} The 200 captions contain 262 reference-unsupported phrases. Of these, 64\%
-were audible in the recording, 28\% inaudible and 8\% unverifiable (95\% CI for audible 58--70\%, too narrow because
-phrases of a caption are not independent). Inaudible phrases occur in 26 of \gem's captions, 19 of \qwen's and 15 of
+were audible in the recording, 28\% inaudible and 8\% unverifiable; these proportions are descriptive, because phrases
+of a caption are not independent. Inaudible phrases occur in 26 of \gem's captions, 19 of \qwen's and 15 of
 \af's, but in only one of \gpt's. At the caption level (Fig.~\ref{fig:heatmap}), 56 of the 64 captions in category~6
 had no major error (42 accurate, 14 minor errors), and 23 of the 26 category-4 captions were rated accurate. In this
-sample, weak reference agreement therefore did not imply an incorrect description. Incomplete reference coverage is
-a plausible explanation consistent with these results; reference errors, ambiguous sounds and reviewer judgement may
-also contribute.
+sample, weak reference agreement therefore did not imply an incorrect description. Conversely, agreement did not
+guarantee correctness: 7 of the 70 captions in categories 1--3 had a major error, 2 of them in category~1. Incomplete reference coverage is
+a plausible explanation, alongside reference errors, ambiguous sounds and reviewer judgement.
 
 \emph{Metrics and the two reviews.} Across models, the metrics follow the reference-only review: Kendall's $\tau$
 between each metric's model order and the reference-review order is 0.67--1.00, but with the audio-review order it is
-0--0.33 for every metric except CLAP similarity (0.67). Mean scores fall from category~1 to category~6 on every
-metric, but are flat or reversed across audio ratings (rescaled BERTScore 0.29, 0.31 and 0.34 for ratings 1--3). Within recordings, across 156 caption pairs from 42 recordings, concordance with the
+0--0.33 for every metric except CLAP similarity (0.67). Mean scores fall from category~1 to 6 on every
+metric but are flat or reversed across audio ratings (rescaled BERTScore 0.29, 0.31, 0.34 for ratings 1--3). Within recordings, across 156 caption pairs from 42 recordings, concordance with the
 audio ratings ranges from 0.39 (rescaled BERTScore) to 0.58 (MACE, 95\% CI [0.46, 0.69]; CLAP similarity 0.56 [0.45,
-0.66]), and no metric differs significantly from chance after Holm correction. The intervals are wide, so this
+0.66]), and none of the ten metrics differs significantly from chance after Holm correction. The intervals are wide, so this
 analysis can neither confirm nor exclude useful discrimination.
 
 \section{Discussion}
 \label{sec:discussion}
 
 Reference agreement and acoustic correctness are different evaluation targets, and in the reviewed sample they
-diverged. \gpt\ illustrates the divergence rather than a general superiority: it ranks third or fourth on every text
-metric, yet 47 of its 50 sampled captions were rated accurate. Its departures from the references were mostly of kinds
+diverged. \gpt\ illustrates the divergence, not a general superiority. Its departures from the references were mostly of kinds
 the rubric does not count as errors: 10 of its captions omit reference content, and 55 of its 59 reference-unsupported
-phrases were audible. Omitting a secondary sound and adding audible detail lower reference agreement but not acoustic
-correctness, whereas misnaming or inventing the principal source lowers both; reference-based scores cannot tell
-these cases apart.
+phrases were audible. Omissions and additional audible details can reduce reference agreement without reducing acoustic
+correctness, while errors about principal sound sources affect acoustic correctness regardless of their agreement
+with the references; reference-based scores cannot tell these cases apart.
 
-The human baseline should be read in the same light: that every model falls below it means that the models write
-differently from Clotho's annotators, not that their captions are less correct. Longer captions and audible content
+The human baseline should be read in the same light: that every model falls below it means lower agreement with
+Clotho's references, not less correct captions. Longer captions and audible content
 missing from the references are both associated with the gap, although neither was isolated as a cause.
 
 Audio-aware metrics are at best a partial remedy. CLAP similarity is the only metric on which a model was not
-significantly below the human baseline, and its model order came closest to the audio review, but neither CLAP nor MACE
-showed significant within-recording concordance with the audio ratings. For LALM captions we therefore recommend
+significantly below the human baseline, and its model order came closest to the audio review, but neither it nor
+MACE showed significant within-recording concordance. For LALM captions we therefore recommend
 reporting audio-aware metrics alongside reference-based ones, and checking a sample of captions against the audio
 before reading score differences as differences in acoustic correctness.
 
