@@ -3,6 +3,7 @@
 \documentclass{article}
 \usepackage{spconf,amsmath,graphicx,booktabs,multirow,url}
 \usepackage[hidelinks]{hyperref}
+\graphicspath{{../outputs/figures/}}
 
 \emergencystretch=1em  % avoids overfull lines in the narrow columns
 \newcommand{\gpt}{GPT-Audio-1.5}
@@ -257,6 +258,15 @@ Unreferenced phrases unsupported & 1/59 & 34/80 & 20/58 & 19/65 \\
 \subsection{RQ3: Agreement patterns and acoustic correctness}
 \label{ssec:rq3}
 
+% Figure source: outputs/figures/e17_e18_heatmap.pdf (scripts/prepare_examples.py); counts as in audio_review.md.
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{e17_e18_heatmap.pdf}
+\caption{Reference-agreement category (rows, judged against the references only) by audio-grounded rating (columns,
+judged against the recording) for the 200 sampled captions of all four models.}
+\label{fig:heatmap}
+\end{figure}
+
 The sample is representative of the full set: no recording, length or score statistic differs from the population
 mean by more than 0.37 standard deviations. Against the references, \af\ and \qwen\ agree most often with the main
 content and \gem\ least often (Table~\ref{tab:review}). \gpt's most frequent deviation is omission: it has the most
@@ -264,7 +274,7 @@ captions in category~4.
 
 Against the audio, the order changes. \gpt\ describes 47 of 50 recordings accurately and makes no major error, while
 the other three models are accurate for 23 to 27 recordings and make 5 to 9 major errors. Most disagreement with the
-references is not an acoustic error: of the 64 captions in category~6, only 8 have a major error, and the other 56
+references is not an acoustic error (Fig.~\ref{fig:heatmap}): of the 64 captions in category~6, only 8 have a major error, and the other 56
 describe the recording correctly or with minor errors, which means that the references are incomplete. Of the 262
 phrases that no reference supports, 64\% are audible in the recording, 28\% are not and 8\% cannot be verified.
 Unsupported phrases occur in 26 of \gem's captions, 19 of \qwen's and 15 of \af's, but in only one of \gpt's. In
