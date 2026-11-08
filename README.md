@@ -2,7 +2,7 @@
 
 Evaluating Large Audio Language Model (LALM)-generated acoustic captions against human references on Clotho v2.1.
 
-> **Private repository.** It remains private until the paper is submitted. It is then made public and linked from the paper, so that reviewers can inspect the code, experiments and artifacts.
+> **Public repository.** It accompanies the paper below and is linked from it, so that readers and reviewers can inspect the code, experiments and artifacts.
 
 ## Paper
 
@@ -290,7 +290,7 @@ The report is `outputs/reports/cross_metric_comparison.{json,md}`. `make figures
 | | (pause) | `make qualitative-sample` (E16); label `outputs/qualitative/annotations_reviewer_1.csv` following `annotation_guidelines.md` (E17); `make audio-review-sheet`; listen and label `audio_annotations_reviewer_1.csv` and `disputed_verification_reviewer_1.csv` following `audio_review_guidelines.md` (E18) |
 | 4 | `make qualitative` | `annotations`, `audio-review`, `examples`, `compare` (E17–E20 analyses) |
 
-This is the order for a fresh project. In this repository every step has already been run and its outputs are committed: the scripts refuse to overwrite frozen manifests, captions, scores and labelled templates unless given `--force` (labelled templates are never overwritten). The release that accompanies the paper will be published as a GitHub release.
+This is the order for a fresh project. In this repository every step has already been run and its outputs are committed: the scripts refuse to overwrite frozen manifests, captions, scores and labelled templates unless given `--force` (labelled templates are never overwritten).
 
 ## Running tasks
 
@@ -348,7 +348,7 @@ In short: the code may be used for any purpose under MIT; the data and results i
 
 ## Tasks
 
-Tasks are numbered E01–E24. Configs, scripts, Makefile targets and commit messages refer to these numbers.
+Tasks are numbered E01–E23. Configs, scripts, Makefile targets and commit messages refer to these numbers.
 
 | Phase | ID | Task | Status |
 |---|---|---|---|
@@ -373,6 +373,5 @@ Tasks are numbered E01–E24. Configs, scripts, Makefile targets and commit mess
 | | E19 | Representative caption comparisons | Done |
 | 6. Synthesis and repository | E20 | Cross-metric and model comparison | Done |
 | | E21 | Finalize research repository | Done |
-| 7. Manuscript and release | E22 | Draft manuscript | Done |
-| | E23 | Final validation, public release and submission | — |
-| | E24 | Camera-ready and versioned release after acceptance | — |
+| 7. Manuscript and submission | E22 | Draft manuscript | Done |
+| | E23 | Final validation, public repository and submission | — |
