@@ -4,6 +4,10 @@ Evaluating Large Audio Language Model (LALM)-generated acoustic captions against
 
 > **Private repository.** It remains private until the paper is submitted. It is then made public and linked from the paper, so that reviewers can inspect the code, experiments and artifacts.
 
+## Paper
+
+*Reference Agreement Is Not Acoustic Correctness: Evaluating Large Audio Language Model Captions on Clotho*, Anandaswarup Vadapalli (IIIT Hyderabad). The manuscript is final and its review is complete: LaTeX sources in `manuscript/` (`main.tex`, `refs.bib`; ICASSP template with `spconf.sty` and `IEEEbib.bst`), built PDF `manuscript/main.pdf`. Every number in the paper comes from a committed report in `outputs/reports/`, and Fig. 1 is `outputs/figures/e17_e18_heatmap.pdf`. Rebuild with `make paper`; CI builds it on every push.
+
 ## Research questions
 
 - **RQ1:** How closely do model-generated captions agree with the five human reference captions?
@@ -38,7 +42,7 @@ Other requirements:
 
 - A separate metrics environment and pinned tools (JDK 11, jars, checkpoints) for the caption metrics; see [Metrics](#metrics).
 - `curl` and `bsdtar` for `make download-data`.
-- **LaTeX** (`latexmk`, `pdflatex`) for `make paper`, once the manuscript is added.
+- **LaTeX** (`latexmk`, `pdflatex`) for `make paper`.
 - **Hugging Face CLI** (`hf`) and `HF_TOKEN` for HF Jobs.
 
 Credentials go in `.env` (git-ignored; see `.env.example`). Only caption generation needs them; everything from consolidation onwards runs from the committed captions without any key. `make check-env` warns about missing credentials (`--strict` makes them errors).
@@ -314,7 +318,7 @@ Run `make help` for the full list. Main targets (task IDs are listed under [Task
 | `make compare` / `make figures` | E20: metric correlations, rankings and concordance; E11 and E13 figures |
 | `make data` / `make captions` / `make scores` / `make qualitative` | Workflow stages 1–4 |
 | `make all` | Stages 1–2, then the remaining commands |
-| `make paper` | Build the manuscript (once added) |
+| `make paper` | Build the manuscript (`manuscript/main.pdf`) |
 
 Every script accepts `--seed`, `--log-level`, `--no-log-file` and repeatable `--set key=value` config overrides. Run logs, including the git commit and environment details, go to `outputs/logs/`.
 
@@ -327,7 +331,7 @@ scripts/      standalone entry points, run from the repository root
 tests/        pytest suite
 data/         frozen manifests (no audio); the dataset itself lives in CLOTHO_ROOT
 outputs/      captions, scores, qualitative annotations, tables, figures
-manuscript/   LaTeX manuscript (added when writing the paper)
+manuscript/   LaTeX manuscript (main.tex, refs.bib, template files) and the built main.pdf
 ```
 
 ## Licences
@@ -369,6 +373,6 @@ Tasks are numbered E01–E24. Configs, scripts, Makefile targets and commit mess
 | | E19 | Representative caption comparisons | Done |
 | 6. Synthesis and repository | E20 | Cross-metric and model comparison | Done |
 | | E21 | Finalize research repository | Done |
-| 7. Manuscript and release | E22 | Draft manuscript | — |
+| 7. Manuscript and release | E22 | Draft manuscript | Done |
 | | E23 | Final validation, public release and submission | — |
 | | E24 | Camera-ready and versioned release after acceptance | — |
