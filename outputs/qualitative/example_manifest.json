@@ -1,8 +1,8 @@
 {
   "run_info": {
     "experiment": "prepare_examples",
-    "timestamp_utc": "2026-11-07T14:11:19+00:00",
-    "git_commit": "e6b1099851cc5c523f8ea00cd70ddd099e790c12",
+    "timestamp_utc": "2026-11-08T04:46:45+00:00",
+    "git_commit": "f3cfc6985bb3463a82eea2f57059a65b4e0c18a2",
     "git_dirty": false,
     "python": "3.13.12",
     "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
@@ -17,7 +17,7 @@
     {
       "pattern": "strong_agreement",
       "name": "Strong agreement",
-      "rule": "E17 category 1 or 2 and E18 rating 1",
+      "rule": "reference category 1 or 2 and audio rating 1",
       "recording_code": "R31",
       "qualifying_items": [
         "R31A",
@@ -95,7 +95,7 @@
     {
       "pattern": "supported_extra_detail",
       "name": "Reference-absent detail supported by the audio",
-      "rule": "E17 category 3 or 5 with at least one disputed phrase verified as supported (S)",
+      "rule": "reference category 3 or 5 with at least one disputed phrase verified as supported (S)",
       "recording_code": "R07",
       "qualifying_items": [
         "R07B",
@@ -355,7 +355,7 @@
     {
       "pattern": "omission",
       "name": "Omission of referenced content",
-      "rule": "E17 category 4",
+      "rule": "reference category 4",
       "recording_code": "R46",
       "qualifying_items": [
         "R46A",
@@ -437,7 +437,7 @@
     {
       "pattern": "real_mismatch",
       "name": "Sound-source or event mismatch",
-      "rule": "E17 category 6 and E18 rating 3",
+      "rule": "reference category 6 and audio rating 3",
       "recording_code": "R38",
       "qualifying_items": [
         "R38C"
@@ -475,7 +475,7 @@
     {
       "pattern": "incomplete_references",
       "name": "Correct caption, incomplete references",
-      "rule": "E17 category 6 and E18 rating 1",
+      "rule": "reference category 6 and audio rating 1",
       "recording_code": "R14",
       "qualifying_items": [
         "R14A",
