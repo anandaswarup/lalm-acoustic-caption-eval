@@ -5,6 +5,7 @@
 \usepackage[hyphens]{url}
 \usepackage[hidelinks]{hyperref}
 \usepackage{enumitem,xcolor}
+\usepackage{cite}  % sorts (and compresses) the numbers within each citation
 \graphicspath{{../outputs/figures/}}
 \setlist{nosep,leftmargin=*}
 
@@ -115,15 +116,17 @@ similarity with a fluency penalty. Both measure global similarity; neither verif
 \subsection{Reference agreement and acoustic grounding}
 \label{ssec:rw-grounding}
 
-Interpreting a reference-based score requires answering two separate questions: how well humans agree with each
-other, and whether the caption is right about the recording. The first is answered by scoring human captions against
-the remaining references, as for COCO image captions~\cite{chen2015coco}; such a baseline measures inter-reference
-agreement, not correctness. The second needs the signal itself, as in measures of object hallucination that check
-captions against the image~\cite{rohrbach2018chair}. AAC metric studies have compared scores with human preferences
-between caption pairs, judged on description accuracy and fluency~\cite{zhou2022fense,dixit2025mace}, but did not
-rate each caption on a categorical correctness rubric or assess the details that no reference mentions. We combine a
-matched human leave-one-out baseline with a manual audio-grounded assessment of sampled LALM captions and of their
-reference-unsupported phrases.
+Our approach transfers two analyses from image captioning evaluation to audio. First, image captioning calibrates
+reference-based scores with human agreement: for the COCO captions, each human caption is scored against the
+remaining references, which shows how well a human scores on the same metrics~\cite{chen2015coco}. A model score can
+then be read relative to human performance rather than in isolation. Second, image captioning separates agreement
+with the references from correctness about the image: CHAIR checks the objects a caption mentions against the
+objects annotated in the image, and showed that captions can score well on reference-based metrics while describing
+objects that are not present~\cite{rohrbach2018chair}. In AAC, metric studies have compared scores with human
+preferences between caption pairs, judged on description accuracy and fluency~\cite{zhou2022fense,dixit2025mace},
+but neither analysis has been applied to LALM captions. We adapt both: a matched human leave-one-out baseline
+calibrates the model scores (RQ2), and, since audio has no object annotations, a manual review checks sampled
+captions and their reference-unsupported phrases against the recording (RQ3).
 
 \section{Methodology}
 \label{sec:method}
@@ -150,22 +153,24 @@ labels or other formatting.
 \smallskip
 
 Decoding used temperature 0, top-$p$ 1 and a seed of 42 where supported; \gem\ ran at its lowest thinking level
-(\texttt{low}), as thinking cannot be disabled. This gave one caption per model and recording (4,180 in total). \gpt\
-returned 106 captions as JSON (85 wrapped sentences, unwrapped; 21 malformed, scored as returned); excluding their
-recordings changes no model order or significance decision. The API models are not deterministic
-at temperature 0, so all results are conditional on the released captions; checkpoint hashes, API run dates and
-library versions are listed in the repository.
+(\texttt{low}). This gave one caption per model and recording (4,180 in total).
 
 \subsection{Metrics and human leave-one-out calibration}
 \label{ssec:metrics}
 
-\emph{Metrics.} The twelve reference-based metrics are BLEU-1 to BLEU-4, METEOR, CIDEr-D, SPICE, SPIDEr, SPIDEr-FL,
+\subsubsection{Metrics}
+\label{sssec:metrics}
+
+The twelve reference-based metrics are BLEU-1 to BLEU-4, METEOR, CIDEr-D, SPICE, SPIDEr, SPIDEr-FL,
 FENSE, and the raw and baseline-rescaled F1 of BERTScore, computed on PTB-tokenized text with the aac-metrics
 package~\cite{labbe2025aacmetrics}. The two audio-aware metrics are CLAP similarity, the cosine between the audio and
 caption embeddings of MS-CLAP 2023~\cite{elizalde2024msclap} (each clip embedded whole as the duration-weighted mean of
 7\,s chunks), and MACE~\cite{dixit2025mace}.
 
-\emph{Matched human calibration.} A model's score against the references is hard to interpret without knowing how well
+\subsubsection{Matched human calibration}
+\label{sssec:calibration}
+
+A model's score against the references is hard to interpret without knowing how well
 a human caption agrees with the other references. We therefore hold out each human caption $h_j$ of a recording in turn
 and score it against the remaining four, $R_{-j}=H\setminus\{h_j\}$, where $H=\{h_1,\dots,h_5\}$. Each model caption
 is scored against the same five four-reference subsets $R_{-1},\dots,R_{-5}$, so model and human captions face
@@ -176,30 +181,27 @@ scores are never compared with each other. Clotho's protocol keeps original and 
 deduplication, and 33\% of held-out captions have a word-set Jaccard overlap of at least 0.6 with a reference. This
 threshold is operational, not a test of paraphrase; as a sensitivity analysis, we repeat RQ2 without these captions.
 
-\emph{Reproducibility note.} BERTScore (RoBERTa-large, last layer, no IDF) uses corrected batching: torchmetrics
-1.9.0, called by aac-metrics, pairs batched captions with other items' references. The fix and a test are in the
-repository.
-
 \subsection{Caption length and qualitative review}
 \label{ssec:review}
 
 Caption length is the number of whitespace-separated words; we relate it to each score with Spearman correlations
 over captions. For RQ3, we drew 50 recordings at random (seed 42), independently of the scores, and reviewed the four
-model captions of each, 200 in total. The review had two stages.
+model captions of each, 200 in total. The review had two stages:
 
-\emph{Stage 1, reference-only.} Without audio, the reviewer compared each caption with the five references and
+\begin{enumerate}
+\item \emph{Stage 1, reference-only.} Without audio, the reviewer compared each caption with the five references and
 assigned one of six reference-agreement categories: aligned (1 strong agreement, 2 mostly aligned, 3 mostly aligned
 with additional details), partially aligned (4 with missing details, 5 with additional details), or 6 weak agreement
 or source/event mismatch. Phrases that no reference mentions (\emph{reference-unsupported phrases}) were listed.
-
-\emph{Stage 2, audio-grounded.} After the stage-1 labels were final, the reviewer listened to each recording and assigned
+\item \emph{Stage 2, audio-grounded.} After the stage-1 labels were final, the reviewer listened to each recording and assigned
 each caption one of three ratings: (1) accurate, where omitting a secondary sound alone does not lower the rating; (2) minor errors:
 principal source and event correct, but a wrong attribute or order or an unsupported secondary detail; or (3) major
 error: principal source or event wrong or invented, or the dominant sound omitted. Each reference-unsupported phrase
 was judged audible, inaudible or unverifiable in the recording.
+\end{enumerate}
 
-One reviewer performed both stages by hand; no AI system assigned or suggested labels. Captions were blinded to model
-identity under per-recording random labels, but the reviewer had seen the references before listening.
+A single reviewer performed both stages by hand; no AI system assigned or suggested labels. Captions were blinded to
+model identity.
 
 \subsection{Statistical analysis}
 \label{ssec:stats}
@@ -332,24 +334,25 @@ The reference-only and audio-grounded assessments produced substantially differe
 \gpt\ has the most captions with missing detail. Against the audio, \gpt\ moves from third to first: it was rated
 accurate for 47 of 50 recordings (94\%, 95\% CI 84--98\%) with no major error, while the other models were rated
 accurate for 23 to 27 (46--54\%, intervals within 33--67\%) and had 5 to 9 major errors (single-reviewer
-ratings; the other three keep their unstable order).
+ratings; the other three keep their unstable order). Two further analyses examine these differences:
 
-\emph{Details absent from the references.} The 200 captions contain 262 reference-unsupported phrases. Of these, 64\%
+\begin{enumerate}
+\item \emph{Details absent from the references.} The 200 captions contain 262 reference-unsupported phrases. Of these, 64\%
 were audible in the recording, 28\% inaudible and 8\% unverifiable; these proportions are descriptive, because phrases
 of a caption are not independent. Inaudible phrases occur in 26 of \gem's captions, 19 of \qwen's and 15 of
 \af's, but in only one of \gpt's. At the caption level (Fig.~\ref{fig:heatmap}), 56 of the 64 captions in category~6
 had no major error (42 accurate, 14 minor errors), and 23 of the 26 category-4 captions were rated accurate. In this
-sample, weak reference agreement therefore did not imply an incorrect description. Conversely, agreement did not
-guarantee correctness: 7 of the 70 captions in categories 1--3 had a major error, 2 of them in category~1. Incomplete reference coverage is
-a plausible explanation, alongside reference errors, ambiguous sounds and reviewer judgement.
-
-\emph{Metrics and the two reviews.} Across models, the metrics follow the reference-only review: Kendall's $\tau$
+sample, weak reference agreement therefore did not imply an incorrect description; incomplete reference coverage is a
+plausible explanation, alongside reference errors, ambiguous sounds and reviewer judgement. Conversely, agreement did
+not guarantee correctness: 7 of the 70 captions in categories 1--3 had a major error, 2 of them in category~1.
+\item \emph{Metrics and the two reviews.} Across models, the metrics follow the reference-only review: Kendall's $\tau$
 between each metric's model order and the reference-review order is 0.67--1.00, but with the audio-review order it is
 0--0.33 for every metric except CLAP similarity (0.67). Mean scores fall from category~1 to 6 on every
 metric but are flat or reversed across audio ratings (rescaled BERTScore 0.29, 0.31, 0.34 for ratings 1--3). Within recordings, across 156 caption pairs from 42 recordings, concordance with the
 audio ratings ranges from 0.39 (rescaled BERTScore) to 0.58 (MACE, 95\% CI [0.46, 0.69]; CLAP similarity 0.56 [0.45,
 0.66]), and none of the ten metrics differs significantly from chance after Holm correction. The intervals are wide, so this
 analysis can neither confirm nor exclude useful discrimination.
+\end{enumerate}
 
 \section{Discussion}
 \label{sec:discussion}
