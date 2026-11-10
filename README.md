@@ -6,7 +6,7 @@ Evaluating Large Audio Language Model (LALM)-generated acoustic captions against
 
 ## Paper
 
-*Reference Agreement Is Not Acoustic Correctness: Evaluating Large Audio Language Model Captions on Clotho*, Anandaswarup Vadapalli (IIIT Hyderabad). The manuscript was submitted to ICASSP 2027 on 2026-11-10: LaTeX sources in `manuscript/` (`main.tex`, `refs.bib`; ICASSP template with `spconf.sty` and `IEEEbib.bst`), built PDF `manuscript/main.pdf`. Every number in the paper comes from a committed report in `outputs/reports/`, and Fig. 1 is `outputs/figures/e17_e18_heatmap.pdf`. Rebuild with `make paper`; CI builds it on every push.
+*Reference Agreement Is Not Acoustic Correctness: Evaluating Large Audio Language Model Captions on Clotho*, Anandaswarup Vadapalli (IIIT Hyderabad). The manuscript was submitted on 2026-11-10 to the [ERC-LM Workshop](https://erc-lm-workshop.github.io/) (Explainability, Robustness, and Controllability of Language Modeling for Speech and Audio) at ICASSP 2027: LaTeX sources in `manuscript/` (`main.tex`, `refs.bib`; ICASSP template with `spconf.sty` and `IEEEbib.bst`), built PDF `manuscript/main.pdf`. Every number in the paper comes from a committed report in `outputs/reports/`, and Fig. 1 is `outputs/figures/e17_e18_heatmap.pdf`. Rebuild with `make paper`; CI builds it on every push.
 
 ## Research questions
 
