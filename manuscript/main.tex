@@ -116,11 +116,11 @@ verify individual sound events.
 \label{ssec:rw-grounding}
 
 Previous studies in image captioning have examined the limitations of reference-based evaluation using human
-agreement and image-grounded assessments. We draw on two such approaches in this work. First, for the COCO captions,
-each human caption is scored against the remaining references, which shows how well a human scores on the same
-metrics~\cite{chen2015coco}. Second, CHAIR checks the
-objects a caption mentions against the objects annotated in the image, and showed that captions can score well on
-reference-based metrics while describing objects that are not present~\cite{rohrbach2018chair}. Previous studies of AAC evaluation have compared automatic metric scores with human preferences based on caption
+agreement and image-grounded assessments. We draw on two such approaches in this work. First, Chen et
+al.~\cite{chen2015coco} scored each COCO human caption against the remaining references, giving a human baseline on
+the same metrics. Second, Rohrbach et al.~\cite{rohrbach2018chair} proposed CHAIR, which checks the objects a caption
+mentions against those annotated in the image, and showed that captions can score well on reference-based metrics
+while describing absent objects. Previous studies of AAC evaluation have compared automatic metric scores with human preferences based on caption
 accuracy and fluency~\cite{zhou2022fense,dixit2025mace}. However, the relationship between reference agreement and
 acoustic correctness has received relatively limited attention for LALM-generated captions. In this work, we use a
 matched human leave-one-out baseline to compare model and human reference agreement (RQ2). Since audio recordings
