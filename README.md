@@ -6,7 +6,7 @@ Evaluating Large Audio Language Model (LALM)-generated acoustic captions against
 
 ## Paper
 
-*Reference Agreement Is Not Acoustic Correctness: Evaluating Large Audio Language Model Captions on Clotho*, Anandaswarup Vadapalli (IIIT Hyderabad). The manuscript is final and its review is complete: LaTeX sources in `manuscript/` (`main.tex`, `refs.bib`; ICASSP template with `spconf.sty` and `IEEEbib.bst`), built PDF `manuscript/main.pdf`. Every number in the paper comes from a committed report in `outputs/reports/`, and Fig. 1 is `outputs/figures/e17_e18_heatmap.pdf`. Rebuild with `make paper`; CI builds it on every push.
+*Reference Agreement Is Not Acoustic Correctness: Evaluating Large Audio Language Model Captions on Clotho*, Anandaswarup Vadapalli (IIIT Hyderabad). The manuscript was submitted to ICASSP 2027 on 2026-11-10: LaTeX sources in `manuscript/` (`main.tex`, `refs.bib`; ICASSP template with `spconf.sty` and `IEEEbib.bst`), built PDF `manuscript/main.pdf`. Every number in the paper comes from a committed report in `outputs/reports/`, and Fig. 1 is `outputs/figures/e17_e18_heatmap.pdf`. Rebuild with `make paper`; CI builds it on every push.
 
 ## Research questions
 
@@ -374,4 +374,4 @@ Tasks are numbered E01–E23. Configs, scripts, Makefile targets and commit mess
 | 6. Synthesis and repository | E20 | Cross-metric and model comparison | Done |
 | | E21 | Finalize research repository | Done |
 | 7. Manuscript and submission | E22 | Draft manuscript | Done |
-| | E23 | Final validation, public repository and submission | — |
+| | E23 | Final validation, public repository and submission | Done |
