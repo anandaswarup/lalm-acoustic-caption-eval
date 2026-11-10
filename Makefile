@@ -17,7 +17,7 @@ MODELS      := gpt_audio_1_5 gemini_3_8_flash qwen2_5_omni audio_flamingo_3
 help: ## List available targets
 	@grep -E '^[a-zA-Z0-9_%-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-24s\033[0m %s\n", $$1, $$2}'
 
-# --- Environment (E01, E21) ---------------------------------------------------
+# --- Environment (E01) --------------------------------------------------------
 venv: ## Create .venv with uv from the Miniforge Python
 	uv venv --python $(BASE_PYTHON) $(VENV)
 
@@ -119,7 +119,7 @@ compare: ## Cross-metric correlations, model rankings and audio-rating concordan
 figures: ## E11 scores and E13 model - human figures (E20)
 	$(PYTHON) scripts/generate_figures.py
 
-# --- Complete workflow (E21) -------------------------------------------------
+# --- Complete workflow -------------------------------------------------------
 # Four stages with two pauses: Hugging Face Jobs run detached (wait for them, then `make fetch-hf`), and the
 # qualitative review needs human labels (E17, E18). Each stage runs its steps in the order listed.
 data: download-data prepare-data ## Stage 1: Clotho download and frozen manifests (E02-E03)
@@ -138,7 +138,7 @@ all: data captions ## Stages 1-2, then lists the remaining steps
 	@echo "                               make audio-review-sheet, label the two audio-review templates (E18),"
 	@echo "                               make qualitative"
 
-# --- Manuscript (E22-E23) ----------------------------------------------------
+# --- Manuscript --------------------------------------------------------------
 paper: ## Build the manuscript PDF (once manuscript/main.tex exists)
 	@test -f manuscript/main.tex || { echo "manuscript/main.tex not found; add the template first."; exit 1; }
 	cd manuscript && latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex

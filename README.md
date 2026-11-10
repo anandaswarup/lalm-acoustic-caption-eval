@@ -292,33 +292,32 @@ The report is `outputs/reports/cross_metric_comparison.{json,md}`. `make figures
 
 This is the order for a fresh project. In this repository every step has already been run and its outputs are committed: the scripts refuse to overwrite frozen manifests, captions, scores and labelled templates unless given `--force` (labelled templates are never overwritten).
 
-## Running tasks
+## Make targets
 
-Run `make help` for the full list. Main targets (task IDs are listed under [Tasks](#tasks)):
+Run `make help` for the full list. File names, docstrings, configs and commit messages refer to the analysis stages by an ID (E01–E20); the **Stage** column is the key.
 
-| Target | Task |
-|---|---|
-| `make check-env` | Environment validation |
-| `make test` / `make test-metrics` / `make lint` | Test suite, metric integration tests, lint and format check |
-| `make download-data` | Download, verify and index Clotho v2.1 |
-| `make prepare-data` | E02–E03: validate Clotho, build frozen manifests |
-| `make generate` / `make generate-<model>` | E05–E08: caption generation |
-| `make hf-upload-audio` / `make fetch-hf` | E07–E08: audio upload to, and captions from, Hugging Face Jobs |
-| `make consolidate` | E09: merge and freeze captions |
-| `make metric-tools` | E10: metric tools (JDK 11, jars, checkpoints) |
-| `make evaluate` | E11: five-reference evaluation |
-| `make loo` | E12: human leave-one-out calibration |
-| `make evaluate-four-ref` | E13: matched four-reference evaluation |
-| `make lengths` | E14: caption-length analysis |
-| `make stats` | E15: formal tests, bootstrap CIs and ranking stability |
-| `make qualitative-sample` | E16: blinded qualitative review sample |
-| `make annotations` | E17: check, unblind and summarize the annotations |
-| `make audio-review-sheet` / `make audio-review` | E18: audio-review material; check, unblind and summarize the audio review |
-| `make examples` | E19: representative caption comparisons, tables and qualitative figures |
-| `make compare` / `make figures` | E20: metric correlations, rankings and concordance; E11 and E13 figures |
-| `make data` / `make captions` / `make scores` / `make qualitative` | Workflow stages 1–4 |
-| `make all` | Stages 1–2, then the remaining commands |
-| `make paper` | Build the manuscript (`manuscript/main.pdf`) |
+| Target | Stage | What it does |
+|---|---|---|
+| `make check-env` | E01 | Environment validation |
+| `make test` / `make test-metrics` / `make lint` | | Test suite, metric integration tests, lint and format check |
+| `make download-data` / `make prepare-data` | E02–E03 | Download, validate and index Clotho v2.1; build the frozen manifests |
+| `make generate` / `make generate-<model>` | E04–E08 | Caption generation through one interface for all models (E05 GPT-Audio-1.5, E06 Gemini 3.8 Flash, E07 Qwen2.5-Omni-7B, E08 Audio Flamingo 3) |
+| `make hf-upload-audio` / `make fetch-hf` | E07–E08 | Audio upload to, and captions from, Hugging Face Jobs |
+| `make consolidate` | E09 | Merge and freeze captions |
+| `make metric-tools` | E10 | Metric implementations and tools (JDK 11, jars, checkpoints) |
+| `make evaluate` | E11 | Five-reference evaluation |
+| `make loo` | E12 | Human leave-one-out calibration |
+| `make evaluate-four-ref` | E13 | Matched four-reference evaluation |
+| `make lengths` | E14 | Caption-length analysis |
+| `make stats` | E15 | Formal tests, bootstrap CIs and ranking stability |
+| `make qualitative-sample` | E16 | Blinded qualitative review sample |
+| `make annotations` | E17 | Reference-only review: check, unblind and summarize the annotations |
+| `make audio-review-sheet` / `make audio-review` | E18 | Audio-grounded review: material; check, unblind and summarize |
+| `make examples` | E19 | Representative caption comparisons, tables and qualitative figures |
+| `make compare` / `make figures` | E20 | Metric correlations, rankings and concordance; score figures |
+| `make data` / `make captions` / `make scores` / `make qualitative` | | Workflow stages 1–4 |
+| `make all` | | Stages 1–2, then the remaining commands |
+| `make paper` | | Build the manuscript (`manuscript/main.pdf`) |
 
 Every script accepts `--seed`, `--log-level`, `--no-log-file` and repeatable `--set key=value` config overrides. Run logs, including the git commit and environment details, go to `outputs/logs/`.
 
@@ -345,33 +344,3 @@ manuscript/   LaTeX manuscript (main.tex, refs.bib, template files) and the buil
 | Scores, review labels, guidelines, reports, tables and figures in `outputs/` | Released with the code, but they quote or are derived from the material above, whose terms apply to those parts |
 
 In short: the code may be used for any purpose under MIT; the data and results in this repository are for non-commercial research.
-
-## Tasks
-
-Tasks are numbered E01–E23. Configs, scripts, Makefile targets and commit messages refer to these numbers.
-
-| Phase | ID | Task | Status |
-|---|---|---|---|
-| 1. Repository and dataset | E01 | Scaffold repository and execution environment | Done |
-| | E02 | Download, validate and index Clotho v2.1 | Done |
-| | E03 | Create and freeze the evaluation manifest | Done |
-| 2. Caption generation | E04 | Unified LALM inference interfaces | Done |
-| | E05 | Captions: GPT-Audio-1.5 | Done |
-| | E06 | Captions: Gemini 3.8 Flash | Done |
-| | E07 | Captions: Qwen2.5-Omni-7B | Done |
-| | E08 | Captions: Audio Flamingo 3 | Done |
-| | E09 | Consolidate and freeze model captions | Done |
-| 3. Automatic evaluation | E10 | Implement and validate caption metrics | Done |
-| | E11 | Five-reference model evaluation | Done |
-| 4. Human calibration | E12 | Human leave-one-out calibration | Done |
-| | E13 | Matched four-reference model evaluation | Done |
-| | E14 | Caption-length analysis | Done |
-| | E15 | Statistical comparison and uncertainty | Done |
-| 5. Qualitative analysis | E16 | Select qualitative review sample | Done |
-| | E17 | Annotate model–reference agreement | Done |
-| | E18 | Audio-grounded review of the qualitative sample | Done |
-| | E19 | Representative caption comparisons | Done |
-| 6. Synthesis and repository | E20 | Cross-metric and model comparison | Done |
-| | E21 | Finalize research repository | Done |
-| 7. Manuscript and submission | E22 | Draft manuscript | Done |
-| | E23 | Final validation, public repository and submission | Done |
